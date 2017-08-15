@@ -1,3 +1,8 @@
-import { HELLO } from './hello'
+import { Launcher} from './classes/launcher.js';
 
-document.write(HELLO)
+const launcher = new Launcher("Lost!", 800, 600);
+launcher.start();
+
+// import { HELLO } from './classes/launcher';
+//
+// document.write(HELLO);
