@@ -12,5 +12,3 @@ export class Launcher {
     this.game.start();
   }
 }
-//
-// export const HELLO = "HELLOOOO";

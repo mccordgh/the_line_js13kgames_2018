@@ -1,4 +1,4 @@
-// import 'display';
+import { Display } from './display/display';
 //   import 'state';
 //   import 'main-menu';
 //   import 'key-manager';
@@ -78,9 +78,9 @@ export class Game {
 
   init() {
     // handler = new Handler(_this);
-    // display = new Display(title, width, height);
+    display = new Display(this.title, this.width, this.height);
     // keyManager = new KeyManager();
-    // g = display.getGraphics();
+    g = display.getGraphics();
     // gameCamera = new GameCamera(handler, 0, 0);
     // gameState = new GameState(handler);
     // State.setState(gameState);
@@ -96,7 +96,9 @@ export class Game {
   }
 
   render(){
-    // g.clearRect(0,0,width,height);
+    g.clearRect(0,0,width,height);
+    g.fillStyle = 'white';
+    g.fillRect(200, 200, 500, 500);
     // if(State.getState() !== null){
     //   State.getState().render(g);
     // }
