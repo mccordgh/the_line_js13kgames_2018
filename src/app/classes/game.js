@@ -1,4 +1,5 @@
 import { Display } from './display/display';
+import { GameState } from './states/game-state';
 import { KeyManager } from './input/key-manager';
 import { State } from './states/state';
 
@@ -84,18 +85,18 @@ export class Game {
     g = display.getGraphics();
     state = new State();
     // gameCamera = new GameCamera(handler, 0, 0);
-    // gameState = new GameState(handler);
-    state.setState('pooop');
+    gameState = new GameState(handler);
+    state.setState(gameState);
     // mainMenu = new MainMenu(handler);
     // State.setState(mainMenu);
   }
 
   tick(_dt) {
     keyManager.tick();
-    // if (State.getState()) State.getState().tick(_dt);
+    if (state.getState()) state.getState().tick(_dt);
   }
 
   render(){
-    // if (State.getState()) State.getState().render(g);
+    if (state.getState()) state.getState().render(g);
   }
 }
