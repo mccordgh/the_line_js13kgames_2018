@@ -1,13 +1,12 @@
 import { Display } from './display/display';
 import { GameState } from './states/game-state';
+import { Handler } from './handler';
 import { KeyManager } from './input/key-manager';
 import { State } from './states/state';
 
 //   import 'main-menu';
-//  import 'handler';
 //   import 'game-camera';
 //   import 'sound-manager';
-
 
 let running = false;
 let title, width, height, g, display, keyManager, handler, gameCamera, soundManager;
@@ -79,7 +78,7 @@ export class Game {
   }
 
   init() {
-    // handler = new Handler(_this);
+    handler = new Handler(this);
     display = new Display(this.title, this.width, this.height);
     keyManager = new KeyManager();
     g = display.getGraphics();

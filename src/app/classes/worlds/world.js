@@ -3,8 +3,8 @@
 export class World {
   constructor(_path, _handler) {
     this.tiles = [];
-    // this.handler = _handler;
-    // _handler.setWorld(this);
+    this.handler = _handler;
+    _handler.setWorld(this);
     // this.entityManager = new EntityManager(_handler, new Player(_handler, 20, 20));
     // this.loadWorld( CURRENT_PATH + _path);
     // this.spatialGrid = new SpatialGrid(this.width * Tile.TILE_WIDTH, this.height * Tile.TILE_HEIGHT, 64);
