@@ -1,4 +1,5 @@
 import { Display } from './display/display';
+import { KeyManager } from './input/key-manager';
 //   import 'state';
 //   import 'main-menu';
 //   import 'key-manager';
@@ -79,7 +80,7 @@ export class Game {
   init() {
     // handler = new Handler(_this);
     display = new Display(this.title, this.width, this.height);
-    // keyManager = new KeyManager();
+    keyManager = new KeyManager();
     g = display.getGraphics();
     // gameCamera = new GameCamera(handler, 0, 0);
     // gameState = new GameState(handler);
@@ -89,7 +90,7 @@ export class Game {
   }
 
   tick(_dt) {
-    // keyManager.tick();
+    keyManager.tick();
     // if(State.getState() !== null){
     //   State.getState().tick(_dt);
     // }
