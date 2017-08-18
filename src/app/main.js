@@ -1,4 +1,5 @@
 import { Launcher} from './classes/launcher.js';
 
-const launcher = new Launcher("Lost!", 800, 600);
+// IF YOU CHANGE HEIGHT OR WIDTH DO IT IN CSS ALSO
+const launcher = new Launcher("Lost!", 512, 482);
 launcher.start();
