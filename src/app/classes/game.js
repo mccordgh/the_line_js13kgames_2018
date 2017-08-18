@@ -1,8 +1,8 @@
 import { Display } from './display/display';
 import { KeyManager } from './input/key-manager';
-//   import 'state';
+import { State } from './states/state';
+
 //   import 'main-menu';
-//   import 'key-manager';
 //  import 'handler';
 //   import 'game-camera';
 //   import 'sound-manager';
@@ -10,7 +10,7 @@ import { KeyManager } from './input/key-manager';
 
 let running = false;
 let title, width, height, g, display, keyManager, handler, gameCamera, soundManager;
-let gameState, menuState, settingsState;
+let state, gameState, menuState, settingsState;
 let dt;
 
 export class Game {
@@ -82,26 +82,20 @@ export class Game {
     display = new Display(this.title, this.width, this.height);
     keyManager = new KeyManager();
     g = display.getGraphics();
+    state = new State();
     // gameCamera = new GameCamera(handler, 0, 0);
     // gameState = new GameState(handler);
-    // State.setState(gameState);
+    state.setState('pooop');
     // mainMenu = new MainMenu(handler);
     // State.setState(mainMenu);
   }
 
   tick(_dt) {
     keyManager.tick();
-    // if(State.getState() !== null){
-    //   State.getState().tick(_dt);
-    // }
+    // if (State.getState()) State.getState().tick(_dt);
   }
 
   render(){
-    g.clearRect(0,0,width,height);
-    g.fillStyle = 'white';
-    g.fillRect(200, 200, 500, 500);
-    // if(State.getState() !== null){
-    //   State.getState().render(g);
-    // }
+    // if (State.getState()) State.getState().render(g);
   }
 }
