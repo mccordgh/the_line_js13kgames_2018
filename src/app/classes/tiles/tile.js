@@ -1,18 +1,11 @@
 import { Assets } from '../gfx/assets';
 
-const TILE_WIDTH = 16;
-const TILE_HEIGHT = 16;
-const tiles = [];
-
- export class Tile {
+export class Tile {
   constructor(_texture, _id) {
+    // console.log(`Tile constructor: _texture: ${_texture}, _id: ${_id}`);
     this.isSolid = false;
     this.texture = _texture;
     this.id = _id;
-    tiles[_id] = this;
-    this.tiles = tiles;
-    this.TILE_WIDTH = TILE_WIDTH;
-    this.TILE_HEIGHT = TILE_HEIGHT;
     this.assets = Assets.getAssets("tiles");
   }
 
@@ -21,11 +14,13 @@ const tiles = [];
   }
 
   render(_g, _x, _y) {
-    _g.myDrawImage(this.texture, _x, _y, TILE_WIDTH, TILE_HEIGHT);
+    // console.log(`tile rendering: _g: ${_g}, _x: ${_x}, _y: ${_y}`)
+    // console.log(_x, _y);
+    // console.log(this.texture);
+    _g.myDrawImage(this.texture, _x, _y, 16, 16);
   }
 
   getId() {
     return this.id;
   }
 }
-

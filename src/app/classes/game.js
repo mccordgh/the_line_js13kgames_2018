@@ -52,7 +52,7 @@ export class Game {
   }
 
   start() {
-    if(running)return;
+    if (running) return;
     running = true;
     this.run();
   }

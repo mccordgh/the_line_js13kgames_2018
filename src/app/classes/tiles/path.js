@@ -1,7 +1,8 @@
-import { Tile } from './tile'
+import { Assets } from '../gfx/assets';
+import { Tile } from './tile';
 
 export class Path extends Tile {
   constructor(_id) {
-    super(Tile.assets.path, _id);
+    super(Assets.getAssets('tiles').path, _id);
   }
 }

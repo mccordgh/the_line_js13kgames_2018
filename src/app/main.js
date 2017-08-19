@@ -1,5 +1,4 @@
-import { Launcher} from './classes/launcher.js';
-
+import { Game } from './classes/game';
 // IF YOU CHANGE HEIGHT OR WIDTH DO IT IN CSS ALSO
-const launcher = new Launcher("Lost!", 512, 482);
-launcher.start();
+const game = new Game('Lost!', 512, 480);
+game.start();

@@ -1,8 +1,9 @@
-import { Tile } from './tile'
+import { Assets } from '../gfx/assets';
+import { Tile } from './tile';
 
 export class Wall extends Tile {
   constructor(_id) {
-    super(Tile.assets.path, _id);
+    super(Assets.getAssets('tiles').wall, _id);
     this.isSolid = true;
   }
 }

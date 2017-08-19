@@ -1,13 +1,17 @@
 export class Utils {
   static loadFileAsString(_path) {
-    const reader = new FileReader();
+    return new Promise((resolve, reject) => {
+      const file = new XMLHttpRequest();
 
-    reader.onload = () => {
-      const text = reader.result;
-      console.log(text);
-      return text;
-    };
+      file.onreadystatechange = () => {
+        console.log('wtf', file);
+        const text = file.responseText;
+        console.log('loaded text', text);
+        resolve(text);
+      };
 
-    reader.readAsText(_path);
+      console.log('Utils', _path);
+      file.open('GET', _path, true);
+    });
   }
 }

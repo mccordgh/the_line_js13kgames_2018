@@ -1,8 +1,7 @@
 import { ImageLoader } from './image-loader';
 import { SpriteSheet } from './sprite-sheet';
-// define(['Class', 'ImageLoader', 'SpriteSheet', 'Animation'], function(Class,ImageLoader,SpriteSheet, Animation){
 
-const DEFAULT_WIDTH = 16, DEFAULT_HEIGHT = 16, assets = {};
+const assets = {};
 const PATH  = window.location.href;
 
 export class Assets {
@@ -33,10 +32,9 @@ export class Assets {
   }
 }
 
-const cropTile = (x, y) => tiles.sheet.crop(tiles.width * x, tiles.height * y, tiles.width, tiles.height);
+const cropTile = (x, y) => tiles.sheet.crop(16 * x, 16 * y, 16, 16);
 
-console.log(PATH + "res/tiles.png");
-const tiles = new Assets("tiles", PATH + "res/tiles.png", DEFAULT_WIDTH, DEFAULT_HEIGHT);
+const tiles = new Assets("tiles", PATH + "src/res/tiles.png", 16, 16);
+tiles.wall = cropTile(0, 0);
+tiles.path = cropTile(1, 0);
 
-tiles.path = cropTile(0, 0);
-tiles.wall = cropTile(0, 1);
