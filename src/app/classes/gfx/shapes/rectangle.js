@@ -6,8 +6,10 @@ export class Rectangle {
     this.height = _height;
   }
 
-  intersects = (_rect) => (this.x < _rect.x + _rect.width &&
+  intersects(_rect) {
+    return (this.x < _rect.x + _rect.width &&
       this.x + this.width > _rect.x &&
       this.y < _rect.y + _rect.height &&
       this.y + this.height > _rect.y);
+  }
 }

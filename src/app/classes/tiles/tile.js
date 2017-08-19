@@ -13,11 +13,11 @@ export class Tile {
     //
   }
 
-  render(_g, _x, _y) {
+  render(_g, _x, _y, _width, _height) {
     // console.log(`tile rendering: _g: ${_g}, _x: ${_x}, _y: ${_y}`)
     // console.log(_x, _y);
     // console.log(this.texture);
-    _g.myDrawImage(this.texture, _x, _y, 16, 16);
+    _g.myDrawImage(this.texture, _x, _y, _width, _height);
   }
 
   getId() {
