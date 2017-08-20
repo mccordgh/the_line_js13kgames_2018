@@ -32,13 +32,13 @@ export class Assets {
   }
 }
 
-const cropTile = (x, y) => tiles.sheet.crop(16 * x, 16 * y, 16, 16);
+const cropTile = (asset, x, y) => asset.sheet.crop(16 * x, 16 * y, 16, 16);
 
 //TILE ASSETS
 const tiles = new Assets("tiles", PATH + "tiles.png", 16, 16);
-tiles.wall = cropTile(0, 0);
-tiles.path = cropTile(1, 0);
+tiles.wall = cropTile(tiles, 0, 0);
+tiles.path = cropTile(tiles, 1, 0);
 
 //PLAYER TILE
 const player = new Assets("player", PATH + "player.png", 16, 16);
-player.idle = cropTile(0, 0);
+player.idle = cropTile(player, 0, 0);
