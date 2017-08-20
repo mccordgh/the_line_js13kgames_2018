@@ -3,8 +3,8 @@ import { SpriteSheet } from './sprite-sheet';
 
 const assets = {};
 const PATH  = window.location.href + 'src/res/',
-TILE_HEIGHT = 32,
-TILE_WIDTH = 32;
+TILE_HEIGHT = 64,
+TILE_WIDTH = 64;
 
 export class Assets {
   constructor(_name, _path, _width, _height) {

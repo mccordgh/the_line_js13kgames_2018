@@ -1,5 +1,5 @@
 import { Assets } from '../gfx/assets';
-const TILE_WIDTH = 32, TILE_HEIGHT = 32;
+const TILE_WIDTH = 64, TILE_HEIGHT = 64;
 
 export class Tile {
   constructor(_texture, _id) {

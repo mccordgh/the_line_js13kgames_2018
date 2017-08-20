@@ -3,10 +3,10 @@ import { Rectangle } from '../../gfx/shapes/rectangle';
 
 const DEFAULT_SPEED = 90,
   DEFAULT_HEALTH = 200,
-  DEFAULT_CREATURE_WIDTH = 16,
-  DEFAULT_CREATURE_HEIGHT = 16,
-  TILE_WIDTH = 32,
-  TILE_HEIGHT = 32;
+  DEFAULT_CREATURE_WIDTH = 64,
+  DEFAULT_CREATURE_HEIGHT = 64,
+  TILE_WIDTH = 64,
+  TILE_HEIGHT = 64;
   // dying = 0,
   // deathInterval = 0,
   // tempEntity = null;

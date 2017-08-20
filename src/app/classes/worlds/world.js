@@ -5,8 +5,8 @@ import { SpatialGrid } from '../utils/spatial-grid';
 import { TileManager } from '../tiles/tile-manager';
 // import { Utils } from '../utils/utils';
 const PATH = window.location.href;
-const TILE_WIDTH = 32;
-const TILE_HEIGHT = 32;
+const TILE_WIDTH = 64;
+const TILE_HEIGHT = 64;
 
 export class World {
   constructor(_path, _handler) {
