@@ -11,10 +11,10 @@ export class Player extends Creature {
     this.x = _x;
     this.y = _y;
     this.speed = 350;
-    this.bounds.x = 0;
-    this.bounds.y = 0;
-    this.bounds.width = TILE_WIDTH;
-    this.bounds.height = TILE_HEIGHT;
+    this.bounds.x = 6;
+    this.bounds.y = 24;
+    this.bounds.width = TILE_WIDTH - (this.bounds.x * 2);
+    this.bounds.height = TILE_HEIGHT - this.bounds.y;
     this.type = 'player';
     this.damage = 60;
     // this.portrait = Assets.getAssets('Portraits');

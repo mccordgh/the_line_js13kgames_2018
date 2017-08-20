@@ -1,5 +1,6 @@
 import { mapOne } from './maps/map-one';
 import { EntityManager } from '../entities/entity-manager';
+import { MazeGenerator } from './maze-generator';
 import { Player } from '../entities/creatures/player';
 import { SpatialGrid } from '../utils/spatial-grid';
 import { TileManager } from '../tiles/tile-manager';
@@ -33,18 +34,24 @@ export class World {
   }
 
   loadWorld(_path) {
-    const tokens = mapOne.split(' ');
-    this.width = tokens[0];
-    this.height = tokens[1];
-    this.spawnX = parseInt(tokens[2], 10) * TILE_WIDTH;
-    this.spawnY = parseInt(tokens[3], 10) * TILE_HEIGHT;
-    for(let y = 0; y < this.height; y++){
-      for(let x = 0; x < this.width; x++){
-        if(!this.tiles[x])
-          this.tiles[x] = [];
-        this.tiles[x][y] = parseInt(tokens[(x + (y * this.width)) + 4]);
+    // console.log(mapOne);
+    // const maze1 = mapOne.split(' ');
+    // console.log(maze1);
+    const maze = MazeGenerator.getRandomMaze(40, 40, 5, 5);
+    console.log(maze);
+    // throw new Error();
+    this.width = maze.width;
+    this.height = maze.height;
+    this.spawnX = maze.spawnX * TILE_WIDTH;
+    this.spawnY = maze.spawnY * TILE_HEIGHT;
+    for(let y = 0; y < maze.height; y++){
+      for(let x = 0; x < maze.width; x++){
+        if(!this.tiles[x]) this.tiles[x] = [];
+        this.tiles[x][y] = maze.pieces[x][y];// + (y * this.width)) + 4]);
       }
     }
+    // throw new Error();
+    // console.log(this.tiles);
   }
 
   tick(_dt) {
