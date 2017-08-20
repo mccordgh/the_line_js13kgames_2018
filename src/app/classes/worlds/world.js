@@ -5,8 +5,8 @@ import { SpatialGrid } from '../utils/spatial-grid';
 import { TileManager } from '../tiles/tile-manager';
 // import { Utils } from '../utils/utils';
 const PATH = window.location.href;
-const TILE_WIDTH = 16;
-const TILE_HEIGHT = 16;
+const TILE_WIDTH = 32;
+const TILE_HEIGHT = 32;
 
 export class World {
   constructor(_path, _handler) {
@@ -67,8 +67,8 @@ export class World {
         if (this.getTile(x,y) !== undefined)
           // console.log("INNNNNNNN");
           // console.log(this.getTile(x, y));
-          // this.getTile(x, y).render(_g, x * TILE_WIDTH - this.handler.getGameCamera().getxOffset(), y * TILE_HEIGHT -  this.handler.getGameCamera().getyOffset());
-          this.getTile(x, y).render(_g, x * 16, y * 16);
+          this.getTile(x, y).render(_g, x * TILE_WIDTH - this.handler.getGameCamera().getxOffset(), y * TILE_HEIGHT -  this.handler.getGameCamera().getyOffset());
+          // this.getTile(x, y).render(_g, x * 16, y * 16);
       }
     }
 

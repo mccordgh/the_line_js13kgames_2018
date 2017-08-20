@@ -2,6 +2,7 @@ import { Assets } from '../../gfx/assets';
 import { Creature } from './creature';
 import { Rectangle } from '../../gfx/shapes/rectangle';
 // var lastAnimation = "walk_down";//, attackCounter = 0, lastAttackCounter = 0;
+const TILE_HEIGHT = 32, TILE_WIDTH = 32;
 
 export class Player extends Creature {
   constructor(_handler, _x, _y){
@@ -9,11 +10,11 @@ export class Player extends Creature {
     this.assets = Assets.getAssets('player');
     this.x = _x;
     this.y = _y;
-    this.speed = 150;
+    this.speed = 350;
     this.bounds.x = 0;
     this.bounds.y = 0;
-    this.bounds.width = 16;
-    this.bounds.height = 16;
+    this.bounds.width = TILE_WIDTH;
+    this.bounds.height = TILE_HEIGHT;
     this.type = 'player';
     this.damage = 60;
     // this.portrait = Assets.getAssets('Portraits');

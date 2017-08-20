@@ -2,7 +2,9 @@ import { ImageLoader } from './image-loader';
 import { SpriteSheet } from './sprite-sheet';
 
 const assets = {};
-const PATH  = window.location.href + 'src/res/';
+const PATH  = window.location.href + 'src/res/',
+TILE_HEIGHT = 32,
+TILE_WIDTH = 32;
 
 export class Assets {
   constructor(_name, _path, _width, _height) {
@@ -32,13 +34,13 @@ export class Assets {
   }
 }
 
-const cropTile = (asset, x, y) => asset.sheet.crop(16 * x, 16 * y, 16, 16);
+const cropTile = (asset, x, y) => asset.sheet.crop(TILE_WIDTH * x, TILE_HEIGHT * y, TILE_WIDTH, TILE_HEIGHT);
 
 //TILE ASSETS
-const tiles = new Assets("tiles", PATH + "tiles.png", 16, 16);
+const tiles = new Assets("tiles", PATH + "tiles.png", TILE_WIDTH, TILE_HEIGHT);
 tiles.wall = cropTile(tiles, 0, 0);
 tiles.path = cropTile(tiles, 1, 0);
 
 //PLAYER TILE
-const player = new Assets("player", PATH + "player.png", 16, 16);
+const player = new Assets("player", PATH + "player.png", TILE_WIDTH, TILE_HEIGHT);
 player.idle = cropTile(player, 0, 0);
