@@ -36,9 +36,11 @@ export class Display {
 }
 
 CanvasRenderingContext2D.prototype.myDrawImage = (asset, _x, _y, _width, _height) => {
-  // console.log('myDrawImage', asset);
-  // console.log(this);
+  // console.log(asset);
+  // console.log(_x, _y, _width, _height);
   graphics.drawImage(asset.sheet, asset.x, asset.y, asset.width, asset.height, _x, _y, _width, _height);
+  // graphics.drawImage(asset.sheet, 0, 0, 16, 16, 9, 9, 16, 16);
+  // throw new Error();
 };
 
 CanvasRenderingContext2D.prototype.myDrawText = (_x, _y, _text) => {

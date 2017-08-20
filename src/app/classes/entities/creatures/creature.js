@@ -1,11 +1,15 @@
 import { Entity } from '../entity';
+import { Rectangle } from '../../gfx/shapes/rectangle';
+
 const DEFAULT_SPEED = 90,
   DEFAULT_HEALTH = 200,
-  DEFAULT_CREATURE_WIDTH = 32,
-  DEFAULT_CREATURE_HEIGHT = 32,
-  dying = 0,
-  tempEntity = null,
-  deathInterval = 0;
+  DEFAULT_CREATURE_WIDTH = 16,
+  DEFAULT_CREATURE_HEIGHT = 16,
+  TILE_WIDTH = 16,
+  TILE_HEIGHT = 16;
+  // dying = 0,
+  // deathInterval = 0,
+  // tempEntity = null;
 
 export class Creature extends Entity {
   constructor(_handler, _x, _y) {
@@ -31,20 +35,20 @@ export class Creature extends Entity {
   moveX() {
     var tempX;
     if (this.xMove > 0) {
-      tempX = parseInt((this.x + this.xMove + this.bounds.x + this.bounds.width) / Tile.TILE_WIDTH);
-      if(!this.collisionWithTile(tempX, parseInt((this.y + this.bounds.y) / Tile.TILE_HEIGHT)) &&
-        !this.collisionWithTile(tempX, parseInt((this.y + this.bounds.y + this.bounds.height) / Tile.TILE_HEIGHT))) {
+      tempX = parseInt((this.x + this.xMove + this.bounds.x + this.bounds.width) / TILE_WIDTH);
+      if(!this.collisionWithTile(tempX, parseInt((this.y + this.bounds.y) / TILE_HEIGHT)) &&
+        !this.collisionWithTile(tempX, parseInt((this.y + this.bounds.y + this.bounds.height) / TILE_HEIGHT))) {
         this.x += this.xMove;
       } else {
-        this.x = tempX * Tile.TILE_WIDTH - this.bounds.x - this.bounds.width - 1;
+        this.x = tempX * TILE_WIDTH - this.bounds.x - this.bounds.width - 1;
       }
     } else if (this.xMove < 0) {
-      tempX = parseInt((this.x + this.xMove + this.bounds.x) / Tile.TILE_WIDTH);
-      if(!this.collisionWithTile(tempX, parseInt((this.y + this.bounds.y) / Tile.TILE_HEIGHT)) &&
-        !this.collisionWithTile(tempX, parseInt((this.y + this.bounds.y + this.bounds.height) / Tile.TILE_HEIGHT))) {
+      tempX = parseInt((this.x + this.xMove + this.bounds.x) / TILE_WIDTH);
+      if(!this.collisionWithTile(tempX, parseInt((this.y + this.bounds.y) / TILE_HEIGHT)) &&
+        !this.collisionWithTile(tempX, parseInt((this.y + this.bounds.y + this.bounds.height) / TILE_HEIGHT))) {
         this.x += this.xMove;
       } else {
-        this.x = tempX * Tile.TILE_WIDTH + Tile.TILE_WIDTH - this.bounds.x;
+        this.x = tempX * TILE_WIDTH + TILE_WIDTH - this.bounds.x;
       }
     }
   }
@@ -52,26 +56,26 @@ export class Creature extends Entity {
   moveY() {
     var tempY;
     if (this.yMove > 0) {
-      tempY = parseInt((this.y + this.yMove + this.bounds.y + this.bounds.height) / Tile.TILE_HEIGHT);
-      if(!this.collisionWithTile(parseInt((this.x + this.bounds.x) / Tile.TILE_WIDTH), tempY) &&
-        !this.collisionWithTile(parseInt((this.x + this.bounds.x + this.bounds.width) / Tile.TILE_WIDTH), tempY)) {
+      tempY = parseInt((this.y + this.yMove + this.bounds.y + this.bounds.height) / TILE_HEIGHT);
+      if(!this.collisionWithTile(parseInt((this.x + this.bounds.x) / TILE_WIDTH), tempY) &&
+        !this.collisionWithTile(parseInt((this.x + this.bounds.x + this.bounds.width) / TILE_WIDTH), tempY)) {
         this.y += this.yMove;
       } else {
-        this.y = tempY * Tile.TILE_HEIGHT - this.bounds.y - this.bounds.height - 1;
+        this.y = tempY * TILE_HEIGHT - this.bounds.y - this.bounds.height - 1;
       }
     } else if (this.yMove < 0) {
-      tempY = parseInt((this.y + this.yMove + this.bounds.y) / Tile.TILE_HEIGHT);
-      if(!this.collisionWithTile(parseInt((this.x + this.bounds.x) / Tile.TILE_WIDTH), tempY) &&
-        !this.collisionWithTile(parseInt((this.x + this.bounds.x + this.bounds.width) / Tile.TILE_WIDTH), tempY)) {
+      tempY = parseInt((this.y + this.yMove + this.bounds.y) / TILE_HEIGHT);
+      if(!this.collisionWithTile(parseInt((this.x + this.bounds.x) / TILE_WIDTH), tempY) &&
+        !this.collisionWithTile(parseInt((this.x + this.bounds.x + this.bounds.width) / TILE_WIDTH), tempY)) {
         this.y += this.yMove;
       } else {
-        this.y = tempY * Tile.TILE_HEIGHT + Tile.TILE_HEIGHT - this.bounds.y;
+        this.y = tempY * TILE_HEIGHT + TILE_HEIGHT - this.bounds.y;
       }
     }
   }
 
   collisionWithTile(_x, _y) {
-    return this.handler.getWorld().getTile(_x, _y).isSolid();
+    return this.handler.getWorld().getTile(_x, _y).isSolid;
   }
 
   getHealth() {

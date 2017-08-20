@@ -1,5 +1,6 @@
 import { Display } from './display/display';
 import { GameState } from './states/game-state';
+import { GameCamera } from './gfx/game-camera';
 import { Handler } from './handler';
 import { KeyManager } from './input/key-manager';
 import { State } from './states/state';
@@ -66,14 +67,15 @@ export class Game {
   }
 
   getWidth() {
-    return width;
+    return this.width;
   }
 
   getHeight() {
-    return height;
+    return this.height;
   }
 
   getGameCamera() {
+    // console.log('returning', gameCamera);
     return gameCamera;
   }
 
@@ -83,7 +85,7 @@ export class Game {
     keyManager = new KeyManager();
     g = display.getGraphics();
     state = new State();
-    // gameCamera = new GameCamera(handler, 0, 0);
+    gameCamera = new GameCamera(handler, 0, 0);
     gameState = new GameState(handler);
     state.setState(gameState);
     // mainMenu = new MainMenu(handler);

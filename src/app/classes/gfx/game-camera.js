@@ -1,82 +1,82 @@
-let xOffset, yOffset, handler;
+const TILE_WIDTH = 16;
+const TILE_HEIGHT = 16;
 
 export class GameCamera {
   constructor(_handler, _xOffset, _yOffset){
-    xOffset = _xOffset;
-    yOffset = _yOffset;
-    handler = _handler;
+    this.xOffset = _xOffset;
+    this.yOffset = _yOffset;
+    this.handler = _handler;
   }
 
   centerOnEntity(entity) {
-    xOffset = entity.getX() - handler.getWidth() / 2 + entity.getWidth() / 2;
-    yOffset = entity.getY() - handler.getHeight() / 2 + entity.getHeight() / 2;
+    this.xOffset = entity.getX() - this.handler.getWidth() / 2 + entity.getWidth() / 2;
+    this.yOffset = entity.getY() - this.handler.getHeight() / 2 + entity.getHeight() / 2;
     this.checkBlankSpace();
   }
 
   slowCenterOnEntity(entity) {
-    let startX = xOffset,
-      startY = yOffset,
-      goalX = entity.getX() - handler.getWidth() / 2 + entity.getWidth() / 2,
-      goalY = entity.getY() - handler.getHeight() / 2 + entity.getHeight() / 2;
+    let startX = this.xOffset,
+      startY = this.yOffset,
+      goalX = entity.getX() - this.handler.getWidth() / 2 + entity.getWidth() / 2,
+      goalY = entity.getY() - this.handler.getHeight() / 2 + entity.getHeight() / 2;
 
-    // console.log({
-    // 	xOffset: xOffset,
-    // 	startX: startX,
-    // 	goalX: goalX,
-    // 	yOffset: yOffset,
-    // 	startY: startY,
-    // 	goalY: goalY
-    // });
-
-    if(startY > goalY && yOffset > goalY) {
-      yOffset -= 5;
+    if(startY > goalY && this.yOffset > goalY) {
+      this.yOffset -= 5;
     }
-    if (goalY > startY && yOffset < goalY) {
-      yOffset += 5;
+    if (goalY > startY && this.yOffset < goalY) {
+      this.yOffset += 5;
     }
-    if(startX > goalX && xOffset > goalX) {
-      xOffset -= 5;
+    if(startX > goalX && this.xOffset > goalX) {
+      this.xOffset -= 5;
     }
-    if (goalX > startX && xOffset < goalX) {
-      xOffset += 5;
+    if (goalX > startX && this.xOffset < goalX) {
+      this.xOffset += 5;
     }
 
     this.checkBlankSpace();
   }
 
   move(_xAmt, _yAmt) {
-    xOffset += _xAmt;
-    yOffset += _yAmt;
+    // console.log('game camera move');
+    this.xOffset += _xAmt;
+    this.yOffset += _yAmt;
     this.checkBlankSpace();
   }
 
   getxOffset() {
-    return parseInt(xOffset);
+    // console.log('getting', this.xOffset);
+    return parseInt(this.xOffset);
   }
 
   getyOffset() {
-    return parseInt(yOffset);
+    // console.log('getting', this.yOffset);
+    return parseInt(this.yOffset);
   }
 
   setxOffset(_offset) {
-    xOffset = _offset;
+    // console.log('setting xOffset');
+    throw new Error();
+    this.xOffset = _offset;
   }
 
   setyOffset(_offset) {
-    yOffset = _offset;
+    // console.log('setting yOffset');
+    throw new Error();
+    this.yOffset = _offset;
   }
 
   checkBlankSpace() {
-    if (xOffset < 0) {
-      xOffset = 0;
-    } else if (xOffset > handler.getWorld().getWidth() * Tile.TILE_WIDTH - handler.getWidth()) {
-      xOffset = handler.getWorld().getWidth() * Tile.TILE_WIDTH - handler.getWidth();
+    // console.log('checkBlankSpace');
+    if (this.xOffset < 0) {
+      this.xOffset = 0;
+    } else if (this.xOffset > this.handler.getWorld().getWidth() * TILE_WIDTH - this.handler.getWidth()) {
+      this.xOffset = this.handler.getWorld().getWidth() * TILE_WIDTH - this.handler.getWidth();
     }
 
-    if (yOffset < 0){
-      yOffset = 0;
-    } else if (yOffset > handler.getWorld().getHeight() * Tile.TILE_HEIGHT - handler.getHeight()) {
-      yOffset = handler.getWorld().getHeight() * Tile.TILE_HEIGHT - handler.getHeight();
+    if (this.yOffset < 0){
+      this.yOffset = 0;
+    } else if (this.yOffset > this.handler.getWorld().getHeight() * TILE_HEIGHT - this.handler.getHeight()) {
+      this.yOffset = this.handler.getWorld().getHeight() * TILE_HEIGHT - this.handler.getHeight();
     }
   }
 }

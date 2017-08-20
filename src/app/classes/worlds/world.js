@@ -52,14 +52,32 @@ export class World {
   }
 
   render(_g) {
-    let yStart = 0, yEnd = 30, xStart = 0, xEnd = 32;
+    var xStart = parseInt(Math.max(0, this.handler.getGameCamera().getxOffset() / TILE_WIDTH));
+    var xEnd = parseInt(Math.min(this.width, (this.handler.getGameCamera().getxOffset() + this.handler.getWidth()) / TILE_WIDTH + 1));
+    var yStart = parseInt(Math.max(0, this.handler.getGameCamera().getyOffset() / TILE_HEIGHT));
+    var yEnd = parseInt(Math.min(this.height, (this.handler.getGameCamera().getyOffset() + this.handler.getHeight()) / TILE_HEIGHT + 1));
+
+    // console.log({ xStart, xEnd, yStart, yEnd });
+    // throw new Error();
+
     for(let y = yStart; y < yEnd; y++){
+      // console.log("FOOOOR LOOOP");
       for(let x = xStart; x < xEnd; x++){
-        if (this.getTile(x,y) !== undefined) {
-          this.getTile(x, y).render(_g, x * TILE_WIDTH, y * TILE_HEIGHT);
-        }
+          // console.log(this.getTile(x, y));
+        if (this.getTile(x,y) !== undefined)
+          // console.log("INNNNNNNN");
+          // console.log(this.getTile(x, y));
+          // this.getTile(x, y).render(_g, x * TILE_WIDTH - this.handler.getGameCamera().getxOffset(), y * TILE_HEIGHT -  this.handler.getGameCamera().getyOffset());
+          this.getTile(x, y).render(_g, x * 16, y * 16);
       }
     }
+
+    // throw new Error();
+    // _g.fillstyle = 'white';
+    // _g.fillRect(100, 100, 200, 200);
+    // this.hud.render(_g);
+    this.entityManager.render(_g);
+    // tree.render(_g);
   }
 
   getTile(_x, _y) {

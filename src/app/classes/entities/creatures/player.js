@@ -51,55 +51,55 @@ export class Player extends Creature {
       this.getInput(_dt);
       this.move();
       this.handler.getGameCamera().centerOnEntity(this);
-      if (this.yMove < 0)
-        this.assets.animations.walk_up.tick();
-      if (this.yMove > 0)
-        this.assets.animations.walk_down.tick();
-      if (this.xMove > 0)
-        this.assets.animations.walk_right.tick();
-      if (this.xMove < 0)
-        this.assets.animations.walk_left.tick();
+      // if (this.yMove < 0)
+      //   this.assets.animations.walk_up.tick();
+      // if (this.yMove > 0)
+      //   this.assets.animations.walk_down.tick();
+      // if (this.xMove > 0)
+      //   this.assets.animations.walk_right.tick();
+      // if (this.xMove < 0)
+      //   this.assets.animations.walk_left.tick();
       // this.assets.animations.idle.tick();
-      if (this.health <= 0)
-        this.assets.animations.death.tick();
+      // if (this.health <= 0)
+      //   this.assets.animations.death.tick();
     // }
   }
 
   render(_g) {
     //DRAW SWORD BEFORE PLAYER IF WALKING UP OR LEFT
-    if (lastAnimation === 'walk_up'){
-      this.weapon.bounds.x = -6;
-      this.weapon.bounds.y = -32;
-      this.weapon.bounds.width = 25;
-      this.weapon.bounds.height = 50;
-      _g.myDrawImage(this.weapon.walk_up, this.x - this.handler.getGameCamera().getxOffset() - 9, this.y - this.handler.getGameCamera().getyOffset() - 33, 32, 64);
-    }
-    if (lastAnimation === 'walk_left'){
-      this.weapon.bounds.x = -37;
-      this.weapon.bounds.y = 15;
-      this.weapon.bounds.width = 50;
-      this.weapon.bounds.height = 25;
-      _g.myDrawImage(this.weapon.walk_left, this.x - this.handler.getGameCamera().getxOffset() - 40, this.y - this.handler.getGameCamera().getyOffset() + 11, 64, 32);
-    }
+    // if (lastAnimation === 'walk_up'){
+    //   this.weapon.bounds.x = -6;
+    //   this.weapon.bounds.y = -32;
+    //   this.weapon.bounds.width = 25;
+    //   this.weapon.bounds.height = 50;
+    //   _g.myDrawImage(this.weapon.walk_up, this.x - this.handler.getGameCamera().getxOffset() - 9, this.y - this.handler.getGameCamera().getyOffset() - 33, 32, 64);
+    // }
+    // if (lastAnimation === 'walk_left'){
+    //   this.weapon.bounds.x = -37;
+    //   this.weapon.bounds.y = 15;
+    //   this.weapon.bounds.width = 50;
+    //   this.weapon.bounds.height = 25;
+    //   _g.myDrawImage(this.weapon.walk_left, this.x - this.handler.getGameCamera().getxOffset() - 40, this.y - this.handler.getGameCamera().getyOffset() + 11, 64, 32);
+    // }
 
     //Draw PLAYER
     _g.myDrawImage(this.getCurrentAnimationFrame(), this.x - this.handler.getGameCamera().getxOffset(), this.y - this.handler.getGameCamera().getyOffset(), this.assets.width, this.assets.height);
 
     //DRAW SWORD AFTER PLAYER IF WALKING DOWN OR RIGHT
-    if (lastAnimation === 'walk_down'){
-      this.weapon.bounds.x = -5;
-      this.weapon.bounds.y = 35;
-      this.weapon.bounds.width = 25;
-      this.weapon.bounds.height = 50;
-      _g.myDrawImage(this.weapon.walk_down, this.x - this.handler.getGameCamera().getxOffset() - 9, this.y - this.handler.getGameCamera().getyOffset() + 25, 32, 64);
-    }
-    if (lastAnimation === 'walk_right'){
-      this.weapon.bounds.x = 19;
-      this.weapon.bounds.y = 15;
-      this.weapon.bounds.width = 50;
-      this.weapon.bounds.height = 25;
-      _g.myDrawImage(this.weapon.walk_right, this.x - this.handler.getGameCamera().getxOffset() + 7, this.y - this.handler.getGameCamera().getyOffset() + 11, 64, 32);
-    }
+    // if (lastAnimation === 'walk_down'){
+    //   this.weapon.bounds.x = -5;
+    //   this.weapon.bounds.y = 35;
+    //   this.weapon.bounds.width = 25;
+    //   this.weapon.bounds.height = 50;
+    //   _g.myDrawImage(this.weapon.walk_down, this.x - this.handler.getGameCamera().getxOffset() - 9, this.y - this.handler.getGameCamera().getyOffset() + 25, 32, 64);
+    // }
+    // if (lastAnimation === 'walk_right'){
+    //   this.weapon.bounds.x = 19;
+    //   this.weapon.bounds.y = 15;
+    //   this.weapon.bounds.width = 50;
+    //   this.weapon.bounds.height = 25;
+    //   _g.myDrawImage(this.weapon.walk_right, this.x - this.handler.getGameCamera().getxOffset() + 7, this.y - this.handler.getGameCamera().getyOffset() + 11, 64, 32);
+    // }
 
     // if (this.attacking){
     // 	attackCounter++;
@@ -134,48 +134,49 @@ export class Player extends Creature {
     if(this.handler.getKeyManager().space){
       console.log("SPACE: JUMP!!");
     }
-    if(this.handler.getKeyManager().up || this.handler.getKeyManager().upArrow) {
+    if(this.handler.getKeyManager().up || this.handler.getKeyManager().up) {
       this.yMove = -this.speed * _dt;
     }
-    if (this.handler.getKeyManager().down || this.handler.getKeyManager().downArrow) {
+    if (this.handler.getKeyManager().down || this.handler.getKeyManager().down) {
       this.yMove = this.speed * _dt;
     }
-    if(this.handler.getKeyManager().left || this.handler.getKeyManager().leftArrow) {
+    if(this.handler.getKeyManager().left || this.handler.getKeyManager().left) {
       this.xMove = -this.speed * _dt;
     }
-    if (this.handler.getKeyManager().right || this.handler.getKeyManager().rightArrow) {
+    if (this.handler.getKeyManager().right || this.handler.getKeyManager().right) {
       this.xMove = this.speed * _dt;
     }
   }
 
   getCurrentAnimationFrame() {
+    return this.assets.idle;
     // if (this.health <= 0){
     // 	return this.assets.animations.death.getCurrentFrame();
     // }
-    if (this.yMove < 0){
-      lastAnimation = "walk_up";
-      return this.assets.animations.walk_up.getCurrentFrame();
-    } else if (this.yMove > 0){
-      lastAnimation = "walk_down";
-      return this.assets.animations.walk_down.getCurrentFrame();
-    } else if (this.xMove < 0){
-      lastAnimation = "walk_left";
-      return this.assets.animations.walk_left.getCurrentFrame();
-    } else if (this.xMove > 0){
-      lastAnimation = "walk_right";
-      return this.assets.animations.walk_right.getCurrentFrame();
-    } else {
-      return this.assets.animations[lastAnimation].getCurrentFrame();
-    }
+    // if (this.yMove < 0){
+    //   lastAnimation = "walk_up";
+    //   return this.assets.animations.walk_up.getCurrentFrame();
+    // } else if (this.yMove > 0){
+    //   lastAnimation = "walk_down";
+    //   return this.assets.animations.walk_down.getCurrentFrame();
+    // } else if (this.xMove < 0){
+    //   lastAnimation = "walk_left";
+    //   return this.assets.animations.walk_left.getCurrentFrame();
+    // } else if (this.xMove > 0){
+    //   lastAnimation = "walk_right";
+    //   return this.assets.animations.walk_right.getCurrentFrame();
+    // } else {
+    //   return this.assets.animations[lastAnimation].getCurrentFrame();
+    // }
   }
 
-  getHealthBar() {
-    return this.healthbar;
-  }
+  // getHealthBar() {
+  //   return this.healthbar;
+  // }
 
-  getWeaponCollisionBounds(xOffset, yOffset) {
-    return new Rectangle(this.weapon.bounds.x + this.x - this.handler.getGameCamera().getxOffset(),
-      this.weapon.bounds.y + this.y - this.handler.getGameCamera().getyOffset(),
-      this.weapon.bounds.width, this.weapon.bounds.height);
-  }
+  // getWeaponCollisionBounds(xOffset, yOffset) {
+  //   return new Rectangle(this.weapon.bounds.x + this.x - this.handler.getGameCamera().getxOffset(),
+  //     this.weapon.bounds.y + this.y - this.handler.getGameCamera().getyOffset(),
+  //     this.weapon.bounds.width, this.weapon.bounds.height);
+  // }
 }

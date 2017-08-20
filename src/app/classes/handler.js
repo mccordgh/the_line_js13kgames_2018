@@ -1,36 +1,34 @@
-let game, world;//, leaderBoards = [], soundManager;
-
 export class Handler {
   constructor(_game) {
-    game = _game;
+    this.game = _game;
   }
 
   getWidth() {
-    return game.getWidth();
+    return this.game.getWidth();
   }
 
   getHeight() {
-    return game.getHeight();
+    return this.game.getHeight();
   }
 
   getKeyManager() {
-    return game.getKeyManager();
+    return this.game.getKeyManager();
   }
 
-  // getGameCamera: function() {
-  //   return game.getGameCamera();
-  // }
+  getGameCamera() {
+    return this.game.getGameCamera();
+  }
 
   getWorld() {
-    return world;
+    return this.world;
   }
 
   setWorld(_world) {
-    world = _world;
+    this.world = _world;
   }
 
   getGame() {
-    return game;
+    return this.game;
   }
 
   // getSoundManager(){
