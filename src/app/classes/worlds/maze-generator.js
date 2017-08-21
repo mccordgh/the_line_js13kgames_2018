@@ -1,7 +1,18 @@
 const maze = [],
   mazeWidth = 40,
   mazeHeight = 40,
-  finalMaze = [];
+  finalMaze = [],
+  // set maximum and minimumn number for wall ids (2 is yellow, 3 is blue);
+  maxWallId = 3,
+  minWallId = 2;
+
+const getRandomWallID = (i, j) => {
+  // console.log(i, j);
+  if (i === 0 || j === 0 || i === mazeWidth - 1 || j === mazeHeight - 1) return 1;
+
+  const randomNum = Math.floor(Math.random() * 20);
+  return (randomNum < 15) ? 1 : Math.floor(Math.random() * (maxWallId - minWallId + 1)) + minWallId;
+}
 
 export class MazeGenerator {
   static createMaze() {
@@ -72,12 +83,12 @@ export class MazeGenerator {
     for(let i = 0; i < mazeHeight; i ++){
       for(let j = 0; j < mazeWidth; j ++){
         if(!finalMaze[j]) finalMaze[j] = [];
-        finalMaze[j][i] = maze[i][j] === 1 ? 1 : 0;
+        finalMaze[j][i] = maze[i][j] === 1 ? getRandomWallID(i, j) : 0;
       }
     }
   }
 
-  static getRandomMaze(width, height, spawnX, spawnY) {
+  static getRandomMaze(height, width, spawnX, spawnY) {
     this.createMaze();
     return {
       width,

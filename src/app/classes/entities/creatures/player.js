@@ -12,9 +12,9 @@ export class Player extends Creature {
     this.y = _y;
     this.speed = 350;
     this.bounds.x = 6;
-    this.bounds.y = 24;
+    this.bounds.y = 6;
     this.bounds.width = TILE_WIDTH - (this.bounds.x * 2);
-    this.bounds.height = TILE_HEIGHT - this.bounds.y;
+    this.bounds.height = TILE_HEIGHT - (this.bounds.y * 2);
     this.type = 'player';
     this.damage = 60;
     // this.portrait = Assets.getAssets('Portraits');
@@ -116,8 +116,8 @@ export class Player extends Creature {
     // lastAttackCounter++;
 
     // ****** DRAW BOUNDING BOX DON'T DELETE!!
-    // _g.fillStyle = "red";
-    // _g.fillRect(this.bounds.x + this.x - this.handler.getGameCamera().getxOffset(), this.bounds.y + this.y - this.handler.getGameCamera().getyOffset(), this.bounds.width, this.bounds.height);
+    _g.fillStyle = "red";
+    _g.fillRect(this.bounds.x + this.x - this.handler.getGameCamera().getxOffset(), this.bounds.y + this.y - this.handler.getGameCamera().getyOffset(), this.bounds.width, this.bounds.height);
     // ****** DRAW BOUNDING BOX DON'T DELETE!!
 
     // ****** DRAW WEAPON BOUNDING BOX DON'T DELETE!!

@@ -33,20 +33,26 @@ export class World {
     // this.hud = new HUD(_handler, this.entityManager.getPlayer());
   }
 
-  loadWorld(_path) {
-    const maze = MazeGenerator.getRandomMaze(40, 40, 5, 5);
+  loadWorld() {
+    const pieces = this.fillWorld(40, 40, 1, 1);
 
-    this.width = maze.width;
+    for(let y = 0; y < this.height; y++){
+      for(let x = 0; x < this.width; x++){
+        if(!this.tiles[x]) this.tiles[x] = [];
+        this.tiles[x][y] = pieces[x][y];
+      }
+    }
+  }
+
+  fillWorld(height, width, spawnX, spawnY) {
+    const maze = MazeGenerator.getRandomMaze(height, width, spawnX, spawnY);
+
     this.height = maze.height;
+    this.width = maze.width;
     this.spawnX = maze.spawnX * TILE_WIDTH;
     this.spawnY = maze.spawnY * TILE_HEIGHT;
 
-    for(let y = 0; y < maze.height; y++){
-      for(let x = 0; x < maze.width; x++){
-        if(!this.tiles[x]) this.tiles[x] = [];
-        this.tiles[x][y] = maze.pieces[x][y];
-      }
-    }
+    return maze.pieces;
   }
 
   tick(_dt) {
