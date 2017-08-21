@@ -116,8 +116,8 @@ export class Player extends Creature {
     // lastAttackCounter++;
 
     // ****** DRAW BOUNDING BOX DON'T DELETE!!
-    _g.fillStyle = "red";
-    _g.fillRect(this.bounds.x + this.x - this.handler.getGameCamera().getxOffset(), this.bounds.y + this.y - this.handler.getGameCamera().getyOffset(), this.bounds.width, this.bounds.height);
+    // _g.fillStyle = "red";
+    // _g.fillRect(this.bounds.x + this.x - this.handler.getGameCamera().getxOffset(), this.bounds.y + this.y - this.handler.getGameCamera().getyOffset(), this.bounds.width, this.bounds.height);
     // ****** DRAW BOUNDING BOX DON'T DELETE!!
 
     // ****** DRAW WEAPON BOUNDING BOX DON'T DELETE!!
