@@ -38,10 +38,12 @@ const cropTile = (asset, x, y) => asset.sheet.crop(TILE_WIDTH * x, TILE_HEIGHT *
 
 //TILE ASSETS
 const tiles = new Assets("tiles", PATH + "tiles.png", TILE_WIDTH, TILE_HEIGHT);
-tiles.wall = cropTile(tiles, 0, 0);
 tiles.path = cropTile(tiles, 1, 0);
-tiles.wallBlue = cropTile(tiles, 0, 1);
-tiles.wallYellow = cropTile(tiles, 1, 1);
+tiles.pathBlue = cropTile(tiles, 1, 2);
+tiles.pathYellow = cropTile(tiles, 0, 2);
+tiles.wall = cropTile(tiles, 0, 0);
+tiles.wallBlue = cropTile(tiles, 1, 1);
+tiles.wallYellow = cropTile(tiles, 0, 1);
 
 //PLAYER TILE
 const player = new Assets("player", PATH + "player.png", TILE_WIDTH, TILE_HEIGHT);

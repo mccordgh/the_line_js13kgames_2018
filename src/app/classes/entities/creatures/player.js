@@ -132,19 +132,19 @@ export class Player extends Creature {
     // if((this.handler.getKeyManager().f || this.handler.getKeyManager().j) && lastAttackCounter > 30){
     // 	this.attacking = true;
     // }
-    if(this.handler.getKeyManager().space){
-      console.log("SPACE: JUMP!!");
-    }
-    if(this.handler.getKeyManager().up || this.handler.getKeyManager().up) {
+    // if(this.handler.getKeyManager().space){
+    //   console.log("SPACE: JUMP!!");
+    // }
+    if(this.handler.getKeyManager().up) {
       this.yMove = -this.speed * _dt;
     }
-    if (this.handler.getKeyManager().down || this.handler.getKeyManager().down) {
+    if (this.handler.getKeyManager().down) {
       this.yMove = this.speed * _dt;
     }
-    if(this.handler.getKeyManager().left || this.handler.getKeyManager().left) {
+    if(this.handler.getKeyManager().left) {
       this.xMove = -this.speed * _dt;
     }
-    if (this.handler.getKeyManager().right || this.handler.getKeyManager().right) {
+    if (this.handler.getKeyManager().right) {
       this.xMove = this.speed * _dt;
     }
   }

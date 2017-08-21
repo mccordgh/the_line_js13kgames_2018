@@ -6,10 +6,10 @@ export class KeyManager {
     this.down = keys[40];
     this.left = keys[37];
     this.right = keys[39];
-    // this.space = keys[32];
-    // this.f = keys[70];
-    // this.j = keys[74];
-    // this.enter = keys[13];
+    this.h = keys[72];
+    this.j = keys[74];
+    this.k = keys[75];
+    this.l = keys[76];
   }
 }
 

@@ -1,13 +1,15 @@
-import { mapOne } from './maps/map-one';
+// import { mapOne } from './maps/map-one';
 import { EntityManager } from '../entities/entity-manager';
 import { MazeGenerator } from './maze-generator';
 import { Player } from '../entities/creatures/player';
 import { SpatialGrid } from '../utils/spatial-grid';
 import { TileManager } from '../tiles/tile-manager';
 // import { Utils } from '../utils/utils';
-const PATH = window.location.href;
+// const PATH = window.location.href;
 const TILE_WIDTH = 64;
 const TILE_HEIGHT = 64;
+let blueTilesDown = false;
+let yellowTilesDown = false;
 
 export class World {
   constructor(_path, _handler) {
@@ -16,8 +18,11 @@ export class World {
     _handler.setWorld(this);
     this.entityManager = new EntityManager(_handler, new Player(_handler, 20, 20));
     // this.loadWorld(CURRENT_PATH + _path);
-    this.loadWorld(PATH + 'src/res/world.wrd');
     this.spatialGrid = new SpatialGrid(this.width * TILE_WIDTH, this.height * TILE_HEIGHT, 64);
+    this.level = 1;
+    this.blueTiles = [];
+    this.yellowTiles = [];
+    this.loadWorld();
     this.init();
   }
 
@@ -55,7 +60,37 @@ export class World {
     return maze.pieces;
   }
 
+  getInput() {
+    if (this.handler.getKeyManager().h) {
+      if (yellowTilesDown)
+        this.swapTilesByID(4, 2);
+      else
+        this.swapTilesByID(2, 4);
+
+      yellowTilesDown = !yellowTilesDown;
+    }
+    if (this.handler.getKeyManager().j) {
+      if (blueTilesDown)
+        this.swapTilesByID(5, 3);
+      else
+        this.swapTilesByID(3, 5);
+
+      blueTilesDown = !blueTilesDown;
+    }
+  }
+
+  swapTilesByID(tileID, swapTileID) {
+    for (let y = 1; y < this.height - 1; y++) {
+      for (let x = 1; x < this.width - 1; x++) {
+        if (this.tiles[x][y] === tileID) {
+          this.tiles[x][y] = swapTileID;
+        }
+      }
+    }
+  }
+
   tick(_dt) {
+    this.getInput();
     this.entityManager.tick(_dt);
   }
 
@@ -65,18 +100,10 @@ export class World {
     var yStart = parseInt(Math.max(0, this.handler.getGameCamera().getyOffset() / TILE_HEIGHT));
     var yEnd = parseInt(Math.min(this.height, (this.handler.getGameCamera().getyOffset() + this.handler.getHeight()) / TILE_HEIGHT + 1));
 
-    // console.log({ xStart, xEnd, yStart, yEnd });
-    // throw new Error();
-
     for(let y = yStart; y < yEnd; y++){
-      // console.log("FOOOOR LOOOP");
       for(let x = xStart; x < xEnd; x++){
-          // console.log(this.getTile(x, y));
         if (this.getTile(x,y) !== undefined)
-          // console.log("INNNNNNNN");
-          // console.log(this.getTile(x, y));
           this.getTile(x, y).render(_g, x * TILE_WIDTH - this.handler.getGameCamera().getxOffset(), y * TILE_HEIGHT -  this.handler.getGameCamera().getyOffset());
-          // this.getTile(x, y).render(_g, x * 16, y * 16);
       }
     }
 
