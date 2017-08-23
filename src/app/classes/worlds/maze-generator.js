@@ -95,16 +95,16 @@ export class MazeGenerator {
 
   static createSwitchRoom() {
     //room in middle for switch
-    const qX = Math.floor(mazeWidth / 2) - 2;
-    const qY = Math.floor(mazeHeight / 2) - 2;
+    const qX = Math.floor(mazeWidth / 2) - 1;
+    const qY = Math.floor(mazeHeight / 2) - 1;
 
-    for(let i = qY; i < qY + 5; i ++){
-      for(let j = qX; j < qX + 5; j ++){
+    for(let i = qY; i < qY + 3; i ++){
+      for(let j = qX; j < qX + 3; j ++){
         finalMaze[j][i] = 0;
       }
     }
 
-    finalMaze[qX + 2][qY + 2] = 9;
+    finalMaze[qX + 1][qY + 1] = 9;
   }
 
   static getRandomMaze(height, width, spawnX, spawnY) {
