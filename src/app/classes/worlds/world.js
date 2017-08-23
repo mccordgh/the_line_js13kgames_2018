@@ -8,11 +8,10 @@ import { TileManager } from '../tiles/tile-manager';
 // const PATH = window.location.href;
 const TILE_WIDTH = 64;
 const TILE_HEIGHT = 64;
-let blueTilesDown = false;
 let yellowTilesDown = false;
-let greenTilesDown = true;
 let yellowWallInterval = 0;
 const yellowWallIntervalMax = 3 * 60; // We want X seconds so we multiply that by our FPS which is 60
+let switchTimer = 0;
 
 export class World {
   constructor(_handler) {
@@ -55,32 +54,23 @@ export class World {
   }
 
   swapGreenAndBlueTiles(color) {
+    if (switchTimer < 60) return;
+
     if (color === 'blue') {
       this.swapTilesByID(5, 3);
       this.swapTilesByID(8, 7);
+      this.swapTilesByID(6, 9);
     } else if (color === 'green') {
       this.swapTilesByID(3, 5);
       this.swapTilesByID(7, 8);
+      this.swapTilesByID(9, 6);
     }
+
+    switchTimer = 0;
   }
 
   getInput() {
-    // if (this.handler.getKeyManager().j) {
-    //   if (blueTilesDown)
-    //     this.swapTilesByID(5, 3);
-    //   else
-    //     this.swapTilesByID(3, 5);
     //
-    //   blueTilesDown = !blueTilesDown;
-    // }
-    // if (this.handler.getKeyManager().k) {
-    //   if (greenTilesDown)
-    //     this.swapTilesByID(7, 8);
-    //   else
-    //     this.swapTilesByID(8, 7);
-    //
-    //   greenTilesDown = !greenTilesDown;
-    // }
   }
 
   swapTilesByID(tileID, swapTileID) {
@@ -112,6 +102,7 @@ export class World {
     this.getInput();
     this.checkForWallSwap();
     this.entityManager.tick(_dt);
+    switchTimer++;
   }
 
   render(_g) {
