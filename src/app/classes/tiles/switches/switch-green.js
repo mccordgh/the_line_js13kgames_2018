@@ -5,5 +5,7 @@ export class SwitchGreen extends Tile {
   constructor(_id) {
     super(Assets.getAssets('tiles').switchGreen, _id);
     this.isSolid = true;
+    this.type = 'switch';
+    this.color = 'green';
   }
 }

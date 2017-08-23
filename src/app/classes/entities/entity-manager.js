@@ -19,8 +19,8 @@ export class EntityManager {
 
   tick(_dt) {
     entities.sort(compare);
-    for(var i = 0; i < entities.length; i++){
-      var e = entities[i];
+    for(let i = 0; i < entities.length; i++){
+      const e = entities[i];
       e.tick(_dt);
     }
   }
@@ -87,7 +87,7 @@ export class EntityManager {
   getSingleEntity(_type) {
     let entityObj;
 
-    entities.forEach((item, index) => {
+    entities.forEach((item) => {
       if (item.type === _type) {
         entityObj = {
           type: item.type,
@@ -107,7 +107,7 @@ export class EntityManager {
 
   removeEntity(_entity) {
     for (let i = 0; i < entities.length; i++){
-      var e = entities[i];
+      const e = entities[i];
       if (e === _entity){
         entities.splice(i, 1);
       }
@@ -116,7 +116,7 @@ export class EntityManager {
 
   removeAllMonsters() {
     for (let i = 0; i < entities.length; i++){
-      var e = entities[i];
+      const e = entities[i];
       if (e.type === 'monster'){
         entities.splice(i, 1);
       }

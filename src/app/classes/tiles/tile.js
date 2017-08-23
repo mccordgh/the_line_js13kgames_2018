@@ -9,10 +9,6 @@ export class Tile {
     this.assets = Assets.getAssets("tiles");
   }
 
-  tick(_dt) {
-    //
-  }
-
   render(_g, _x, _y) {
     _g.myDrawImage(this.texture, _x, _y, TILE_WIDTH, TILE_HEIGHT);
   }

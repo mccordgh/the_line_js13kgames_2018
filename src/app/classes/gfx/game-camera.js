@@ -37,36 +37,30 @@ export class GameCamera {
   }
 
   move(_xAmt, _yAmt) {
-    // console.log('game camera move');
     this.xOffset += _xAmt;
     this.yOffset += _yAmt;
     this.checkBlankSpace();
   }
 
   getxOffset() {
-    // console.log('getting', this.xOffset);
     return parseInt(this.xOffset);
   }
 
   getyOffset() {
-    // console.log('getting', this.yOffset);
     return parseInt(this.yOffset);
   }
 
   setxOffset(_offset) {
-    // console.log('setting xOffset');
     throw new Error();
     this.xOffset = _offset;
   }
 
   setyOffset(_offset) {
-    // console.log('setting yOffset');
     throw new Error();
     this.yOffset = _offset;
   }
 
   checkBlankSpace() {
-    // console.log('checkBlankSpace');
     if (this.xOffset < 0) {
       this.xOffset = 0;
     } else if (this.xOffset > this.handler.getWorld().getWidth() * TILE_WIDTH - this.handler.getWidth()) {

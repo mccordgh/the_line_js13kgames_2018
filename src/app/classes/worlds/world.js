@@ -10,7 +10,7 @@ const TILE_WIDTH = 64;
 const TILE_HEIGHT = 64;
 let blueTilesDown = false;
 let yellowTilesDown = false;
-let greenTilesDown = false;
+let greenTilesDown = true;
 let yellowWallInterval = 0;
 const yellowWallIntervalMax = 3 * 60; // We want X seconds so we multiply that by our FPS which is 60
 
@@ -20,33 +20,24 @@ export class World {
     this.handler = _handler;
     _handler.setWorld(this);
     this.entityManager = new EntityManager(_handler, new Player(_handler, 20, 20));
-    // this.loadWorld(CURRENT_PATH + _path);
     this.spatialGrid = new SpatialGrid(this.width * TILE_WIDTH, this.height * TILE_HEIGHT, 64);
     this.level = 1;
-    this.blueTiles = [];
-    this.yellowTiles = [];
     this.loadWorld();
     this.init();
   }
 
   init() {
-    //CASTLE!
-    // this.entityManager.addEntity(new Castle(_handler, TILE_WIDTH * 47, Tile.TILE_HEIGHT * 42));
-
     //PLAYER SET SPAWN
     this.entityManager.getPlayer().setX(this.spawnX);
     this.entityManager.getPlayer().setY(this.spawnY);
-
-    //HUD INIT
-    // this.hud = new HUD(_handler, this.entityManager.getPlayer());
   }
 
   loadWorld() {
-    const pieces = this.fillWorld(40, 40, 1, 1);
+    const pieces = this.fillWorld(40, 40, 19, 19);
 
-    for(let y = 0; y < this.height; y++){
-      for(let x = 0; x < this.width; x++){
-        if(!this.tiles[x]) this.tiles[x] = [];
+    for (let y = 0; y < this.height; y++) {
+      for (let x = 0; x < this.width; x++) {
+        if (!this.tiles[x]) this.tiles[x] = [];
         this.tiles[x][y] = pieces[x][y];
       }
     }
@@ -63,31 +54,33 @@ export class World {
     return maze.pieces;
   }
 
+  swapGreenAndBlueTiles(color) {
+    if (color === 'blue') {
+      this.swapTilesByID(5, 3);
+      this.swapTilesByID(8, 7);
+    } else if (color === 'green') {
+      this.swapTilesByID(3, 5);
+      this.swapTilesByID(7, 8);
+    }
+  }
+
   getInput() {
-    // if (this.handler.getKeyManager().h) {
-    //   if (yellowTilesDown)
-    //     this.swapTilesByID(4, 2);
+    // if (this.handler.getKeyManager().j) {
+    //   if (blueTilesDown)
+    //     this.swapTilesByID(5, 3);
     //   else
-    //     this.swapTilesByID(2, 4);
+    //     this.swapTilesByID(3, 5);
     //
-    //   yellowTilesDown = !yellowTilesDown;
+    //   blueTilesDown = !blueTilesDown;
     // }
-    if (this.handler.getKeyManager().j) {
-      if (blueTilesDown)
-        this.swapTilesByID(5, 3);
-      else
-        this.swapTilesByID(3, 5);
-
-      blueTilesDown = !blueTilesDown;
-    }
-    if (this.handler.getKeyManager().k) {
-      if (greenTilesDown)
-        this.swapTilesByID(7, 8);
-      else
-        this.swapTilesByID(8, 7);
-
-      greenTilesDown = !greenTilesDown;
-    }
+    // if (this.handler.getKeyManager().k) {
+    //   if (greenTilesDown)
+    //     this.swapTilesByID(7, 8);
+    //   else
+    //     this.swapTilesByID(8, 7);
+    //
+    //   greenTilesDown = !greenTilesDown;
+    // }
   }
 
   swapTilesByID(tileID, swapTileID) {
@@ -127,19 +120,13 @@ export class World {
     var yStart = parseInt(Math.max(0, this.handler.getGameCamera().getyOffset() / TILE_HEIGHT));
     var yEnd = parseInt(Math.min(this.height, (this.handler.getGameCamera().getyOffset() + this.handler.getHeight()) / TILE_HEIGHT + 1));
 
-    for(let y = yStart; y < yEnd; y++){
-      for(let x = xStart; x < xEnd; x++){
-        if (this.getTile(x,y) !== undefined)
-          this.getTile(x, y).render(_g, x * TILE_WIDTH - this.handler.getGameCamera().getxOffset(), y * TILE_HEIGHT -  this.handler.getGameCamera().getyOffset());
+    for (let y = yStart; y < yEnd; y++) {
+      for (let x = xStart; x < xEnd; x++) {
+        if (this.getTile(x, y) !== undefined)
+          this.getTile(x, y).render(_g, x * TILE_WIDTH - this.handler.getGameCamera().getxOffset(), y * TILE_HEIGHT - this.handler.getGameCamera().getyOffset());
       }
     }
-
-    // throw new Error();
-    // _g.fillstyle = 'white';
-    // _g.fillRect(100, 100, 200, 200);
-    // this.hud.render(_g);
     this.entityManager.render(_g);
-    // tree.render(_g);
   }
 
   getTile(_x, _y) {
@@ -161,12 +148,4 @@ export class World {
   getSpatialGrid() {
     return this.spatialGrid;
   }
-
-  // getRoundOver(){
-  //   return roundOver;
-  // }
-
-  // setRoundOver(_bool){
-  //   roundOver = _bool;
-  // }
 }

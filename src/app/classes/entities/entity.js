@@ -43,34 +43,22 @@ export class Entity {
   checkEntityCollisions(xOffset, yOffset) {
     const candidates =  this.handler.getWorld().getSpatialGrid().retrieve(new Rectangle(this.x + this.bounds.x + xOffset, this.y + this.bounds.y + yOffset, this.bounds.width, this.bounds.height), this);
 
-    //*************************************
-    // console.log(`${this.type} > ${e.type}`);
-    //PLAYER > MONSTER
-    //*************************************
-
     for(let i = 0; i < candidates.length; i++){
       const e = candidates[i];
-      if (this.type === 'player' && e.type === 'monster' && e.health > 0){
-        // if (e.getCollisionBounds(0, 0).intersects(this.getWeaponCollisionBounds(xOffset, yOffset))){
-        // this.handler.getSoundManager().play("sword");
-        e.takeDamage(this.damage);
-        // }
-      }
-      if (e != this && e.health > 0 || e.health === undefined){
-        // if (e.type === 'monster' && this.type === 'player'){
-        // 	e.takeDamage(this.damage);
-        // }
-        if (e.getCollisionBounds(0, 0).intersects(this.getCollisionBounds(xOffset, yOffset)) && !(this.type === 'monster' && e.type === 'monster')){
-          if (e.type === 'castle' && this.type === 'monster'){
-            if (this.targetType && this.dead < 1)
-              if(this.targetType === 'castle')
-                // this.handler.getSoundManager().play("explodeBat");
-            this.takeDamage(e.damage);
-            e.takeDamage(this.damage);
-          }
+      // if (this.type === 'player' && e.type === 'monster' && e.health > 0){
+      //   e.takeDamage(this.damage);
+      // }
+      // if (e !== this && e.health > 0 || e.health === undefined){
+        if (e.getCollisionBounds(0, 0).intersects(this.getCollisionBounds(xOffset, yOffset))) { //&& !(this.type === 'monster' && e.type === 'monster')){
+          // if (e.type === 'castle' && this.type === 'monster'){
+          //   if (this.targetType && this.dead < 1)
+          //     if(this.targetType === 'castle')
+          //   this.takeDamage(e.damage);
+          //   e.takeDamage(this.damage);
+          // }
           return true;
         }
-      }
+      // }
     }
     return false;
   }
