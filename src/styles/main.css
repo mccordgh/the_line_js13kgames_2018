@@ -11,11 +11,9 @@ body {
 #canvas {
     background-color: inherit;
     border: 1px solid white;
-    /*height:480px;*/
     left:50%;
-    margin:-256px 0 0 -256px;
+    margin:-256px 0 0 -320px;
     position:fixed;
     top:50%;
-    /*width:512px;*/
     z-index: 100;
 }
