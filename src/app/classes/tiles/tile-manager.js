@@ -5,6 +5,10 @@ import { PathYellow } from './path-yellow';
 import { Wall } from './wall';
 import { WallBlue } from './wall-blue';
 import { WallYellow } from './wall-yellow';
+import { SwitchBlue } from './switch-blue';
+import { PathGreen } from './path-green';
+import { WallGreen } from './wall-green';
+import { SwitchGreen } from './switch-green';
 
 const assets = Assets.getAssets("tiles");
 const tiles = [];
@@ -15,6 +19,10 @@ tiles[2] = new WallYellow(2);
 tiles[3] = new WallBlue(3);
 tiles[4] = new PathYellow(4);
 tiles[5] = new PathBlue(5);
+tiles[6] = new SwitchBlue(6);
+tiles[7] = new PathGreen(7);
+tiles[8] = new WallGreen(8);
+tiles[9] = new SwitchGreen(9);
 
  export class TileManager {
 

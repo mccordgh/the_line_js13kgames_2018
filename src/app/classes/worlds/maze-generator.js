@@ -3,15 +3,16 @@ const maze = [],
   mazeHeight = 40,
   finalMaze = [],
   // set maximum and minimum number for wall ids (2 is yellow, 3 is blue);
-  minWallId = 2,
-  maxWallId = 3;
+  wallIDs = [2, 3, 8];
+  let counting = 0;
 
 const getRandomWallID = (i, j) => {
   // make sure we don't build a passable wall on the outside border
   if (i === 0 || j === 0 || i === mazeWidth - 1 || j === mazeHeight - 1) return 1;
 
   const randomNum = Math.floor(Math.random() * 20);
-  return (randomNum < 12) ? 1 : Math.floor(Math.random() * (maxWallId - minWallId + 1)) + minWallId;
+
+  return (randomNum < 6) ? 1 : wallIDs[Math.floor(Math.random() * (wallIDs.length))];
 };
 
 export class MazeGenerator {
