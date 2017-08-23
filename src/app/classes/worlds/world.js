@@ -11,6 +11,8 @@ const TILE_HEIGHT = 64;
 let blueTilesDown = false;
 let yellowTilesDown = false;
 let greenTilesDown = false;
+let yellowWallInterval = 0;
+const yellowWallIntervalMax = 3 * 60; // We want X seconds so we multiply that by our FPS which is 60
 
 export class World {
   constructor(_handler) {
@@ -62,14 +64,14 @@ export class World {
   }
 
   getInput() {
-    if (this.handler.getKeyManager().h) {
-      if (yellowTilesDown)
-        this.swapTilesByID(4, 2);
-      else
-        this.swapTilesByID(2, 4);
-
-      yellowTilesDown = !yellowTilesDown;
-    }
+    // if (this.handler.getKeyManager().h) {
+    //   if (yellowTilesDown)
+    //     this.swapTilesByID(4, 2);
+    //   else
+    //     this.swapTilesByID(2, 4);
+    //
+    //   yellowTilesDown = !yellowTilesDown;
+    // }
     if (this.handler.getKeyManager().j) {
       if (blueTilesDown)
         this.swapTilesByID(5, 3);
@@ -98,8 +100,24 @@ export class World {
     }
   }
 
+  checkForWallSwap() {
+    yellowWallInterval++;
+
+    if (yellowWallInterval > yellowWallIntervalMax) {
+      yellowWallInterval = 0;
+
+      if (yellowTilesDown)
+        this.swapTilesByID(4, 2);
+      else
+        this.swapTilesByID(2, 4);
+
+      yellowTilesDown = !yellowTilesDown;
+    }
+  }
+
   tick(_dt) {
     this.getInput();
+    this.checkForWallSwap();
     this.entityManager.tick(_dt);
   }
 
