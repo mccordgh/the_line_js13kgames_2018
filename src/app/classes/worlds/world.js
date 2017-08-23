@@ -10,9 +10,10 @@ const TILE_WIDTH = 64;
 const TILE_HEIGHT = 64;
 let blueTilesDown = false;
 let yellowTilesDown = false;
+let greenTilesDown = false;
 
 export class World {
-  constructor(_path, _handler) {
+  constructor(_handler) {
     this.tiles = [];
     this.handler = _handler;
     _handler.setWorld(this);
@@ -76,6 +77,14 @@ export class World {
         this.swapTilesByID(3, 5);
 
       blueTilesDown = !blueTilesDown;
+    }
+    if (this.handler.getKeyManager().k) {
+      if (greenTilesDown)
+        this.swapTilesByID(7, 8);
+      else
+        this.swapTilesByID(8, 7);
+
+      greenTilesDown = !greenTilesDown;
     }
   }
 

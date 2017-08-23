@@ -1,14 +1,14 @@
 import { Assets } from '../gfx/assets';
-import { Path } from './path';
-import { PathBlue } from './path-blue';
-import { PathYellow } from './path-yellow';
-import { Wall } from './wall';
-import { WallBlue } from './wall-blue';
-import { WallYellow } from './wall-yellow';
-import { SwitchBlue } from './switch-blue';
-import { PathGreen } from './path-green';
-import { WallGreen } from './wall-green';
-import { SwitchGreen } from './switch-green';
+import { Path } from './paths/path';
+import { PathBlue } from './paths/path-blue';
+import { PathYellow } from './paths/path-yellow';
+import { Wall } from './walls/wall';
+import { WallBlue } from './walls/wall-blue';
+import { WallYellow } from './walls/wall-yellow';
+import { SwitchBlue } from './switches/switch-blue';
+import { PathGreen } from './paths/path-green';
+import { WallGreen } from './walls/wall-green';
+import { SwitchGreen } from './switches/switch-green';
 
 const assets = Assets.getAssets("tiles");
 const tiles = [];
