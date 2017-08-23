@@ -3,12 +3,10 @@ import { Rectangle } from '../../gfx/shapes/rectangle';
 
 const DEFAULT_SPEED = 90,
   DEFAULT_HEALTH = 200,
-  DEFAULT_CREATURE_WIDTH = 64,
-  DEFAULT_CREATURE_HEIGHT = 64,
-  TILE_WIDTH = 64,
-  TILE_HEIGHT = 64;
-
-let switchTimer = 60;
+  DEFAULT_CREATURE_WIDTH = 48,
+  DEFAULT_CREATURE_HEIGHT = 48,
+  TILE_WIDTH = 48,
+  TILE_HEIGHT = 48;
 
 export class Creature extends Entity {
   constructor(_handler, _x, _y) {
@@ -17,7 +15,6 @@ export class Creature extends Entity {
     this.speed = DEFAULT_SPEED;
     this.xMove = 0;
     this.yMove = 0;
-    this.dead = 0;
   }
 
   move() {
@@ -102,13 +99,4 @@ export class Creature extends Entity {
   setSpeed(_speed) {
     this.speed = _speed;
   }
-
-  // takeDamage(_damage) {
-  //   if (typeof this.healthbar !== undefined && !this.dead)
-  //     this.health -= _damage;
-  //   this.healthbar.update();
-  //   if (this.health <= 0){
-  //     this.assets.animations.death.tick();
-  //   }
-  // }
 }

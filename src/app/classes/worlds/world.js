@@ -6,8 +6,8 @@ import { SpatialGrid } from '../utils/spatial-grid';
 import { TileManager } from '../tiles/tile-manager';
 // import { Utils } from '../utils/utils';
 // const PATH = window.location.href;
-const TILE_WIDTH = 64;
-const TILE_HEIGHT = 64;
+const TILE_WIDTH = 48;
+const TILE_HEIGHT = 48;
 let yellowTilesDown = false;
 let yellowWallInterval = 0;
 const yellowWallIntervalMax = 3 * 60; // We want X seconds so we multiply that by our FPS which is 60

@@ -2,7 +2,7 @@ import { Assets } from '../../gfx/assets';
 import { Creature } from './creature';
 import { Rectangle } from '../../gfx/shapes/rectangle';
 // var lastAnimation = "walk_down";//, attackCounter = 0, lastAttackCounter = 0;
-const TILE_HEIGHT = 64, TILE_WIDTH = 64;
+const TILE_HEIGHT = 48, TILE_WIDTH = 48;
 
 export class Player extends Creature {
   constructor(_handler, _x, _y){
@@ -34,7 +34,7 @@ export class Player extends Creature {
   }
 
   render(_g) {
-    _g.myDrawImage(this.getCurrentAnimationFrame(), this.x - this.handler.getGameCamera().getxOffset(), this.y - this.handler.getGameCamera().getyOffset(), this.assets.width, this.assets.height);
+    _g.myDrawImage(this.getCurrentAnimationFrame(), this.x - this.handler.getGameCamera().getxOffset(), this.y - this.handler.getGameCamera().getyOffset(), TILE_WIDTH, TILE_HEIGHT);
 
     // ****** DRAW BOUNDING BOX DON'T DELETE!!
     // _g.fillStyle = "red";

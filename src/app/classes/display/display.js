@@ -6,7 +6,6 @@ export class Display {
     this.title = _title;
     this.width = _width;
     this.height = _height;
-    // this.handler = _handler;
     this.createDisplay();
   }
 
@@ -36,35 +35,27 @@ export class Display {
 }
 
 CanvasRenderingContext2D.prototype.myDrawImage = (asset, _x, _y, _width, _height) => {
-  // console.log(asset);
-  // console.log(_x, _y, _width, _height);
   graphics.drawImage(asset.sheet, asset.x, asset.y, asset.width, asset.height, _x, _y, _width, _height);
-  // throw new Error();
 };
 
 CanvasRenderingContext2D.prototype.myDrawText = (_x, _y, _text) => {
   text = _text.toLowerCase().split("");
-  // console.log("text", text);
+
   let textStartX = 0;
-  for (let i = 0; i < text.length; i++){
+
+  for (let i = 0; i < text.length; i++) {
     let myAsset = myFont[text[i]];
-    // console.log("myFont[text[i]]",myFont[text[i]] );
     graphics.myDrawImage(myAsset, _x + textStartX, _y, myAsset.width * 32, myAsset.height * 30);
     textStartX = textStartX + myAsset.width + 2;
-    // console.log("myAsset.sheet", myAsset.sheet);
   }
 };
 
-CanvasRenderingContext2D.prototype.centerTextOnX = (_text) => {
-  return (width / 2) - (graphics.measureText(_text).width / 2);
-};
+CanvasRenderingContext2D.prototype.centerTextOnX = (_text) => (width / 2) - (graphics.measureText(_text).width / 2);
 
-CanvasRenderingContext2D.prototype.centerTextOnY = () => {
-  return (height / 2);
-};
+CanvasRenderingContext2D.prototype.centerTextOnY = () => height / 2
 
 CanvasRenderingContext2D.prototype.drawText = (_textObject) => {
-  graphics.font = `${_textObject.fontSize}px VT323`;
+  graphics.font = `${_textObject.fontSize}px Arial`;
   let borderWidth = _textObject.additionalWidth || graphics.measureText(_textObject.text).width;
   graphics.strokeStyle = _textObject.borderColor;
   graphics.fillStyle = _textObject.fillColor;
