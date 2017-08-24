@@ -1,9 +1,9 @@
 const maze = [],
-  mazeWidth = 40,
-  mazeHeight = 40,
+  mazeWidth = 39,
+  mazeHeight = 39,
   finalMaze = [],
   // set maximum and minimum number for wall ids (2 is yellow, 3 is blue);
-  wallIDs = [2, 3, 7];
+  wallIDs = [2, 3, 3, 7, 7];
   let counting = 0;
 
 const getRandomWallID = (i, j) => {
@@ -12,7 +12,7 @@ const getRandomWallID = (i, j) => {
 
   const randomNum = Math.floor(Math.random() * 20);
 
-  return (randomNum < 6) ? 1 : wallIDs[Math.floor(Math.random() * (wallIDs.length))];
+  return (randomNum < 18) ? 1 : wallIDs[Math.floor(Math.random() * (wallIDs.length))];
 };
 
 export class MazeGenerator {

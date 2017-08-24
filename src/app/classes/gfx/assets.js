@@ -36,7 +36,7 @@ export class Assets {
 
 const cropTile = (asset, x, y) => asset.sheet.crop(SPRITE_WIDTH * x, SPRITE_HEIGHT * y, SPRITE_WIDTH, SPRITE_HEIGHT);
 
-const tiles = new Assets("tiles", PATH + "tiles_16x16_tiny.png", SPRITE_WIDTH, SPRITE_HEIGHT);
+const tiles = new Assets("tiles", PATH + "tiles_16x16.png", SPRITE_WIDTH, SPRITE_HEIGHT);
 tiles.path = cropTile(tiles, 1, 0);
 tiles.pathBlue = cropTile(tiles, 1, 2);
 tiles.pathGreen = cropTile(tiles, 2, 2);
@@ -48,5 +48,6 @@ tiles.wallYellow = cropTile(tiles, 0, 1);
 tiles.switchBlue = cropTile(tiles, 2, 0);
 tiles.switchGreen = cropTile(tiles, 3, 0);
 
-const player = new Assets("player", PATH + "player_16x16_tiny.png", SPRITE_WIDTH, SPRITE_HEIGHT);
+const player = new Assets("player", PATH + "player_16x16.png", SPRITE_WIDTH, SPRITE_HEIGHT);
 player.idle = cropTile(player, 0, 0);
+player.ghost = cropTile(player, 0, 1);

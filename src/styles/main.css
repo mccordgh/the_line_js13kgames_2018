@@ -8,11 +8,12 @@ body {
 }
 
 /*IF YOU CHANGE HEIGHT OR WIDTH DO IT IN MAIN.JS ALSO*/
+/*NEGATIVE MARGIN IS HALF OF WIDTH AND HEIGHT*/
 #canvas {
     background-color: inherit;
-    border: 1px solid white;
+    /*border: 1px solid white;*/
     left:50%;
-    margin:-256px 0 0 -320px;
+    margin:-224px 0 0 -224px;
     position:fixed;
     top:50%;
     z-index: 100;
