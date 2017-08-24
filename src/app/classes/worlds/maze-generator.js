@@ -3,7 +3,7 @@ const maze = [],
   mazeHeight = 39,
   finalMaze = [],
   // set maximum and minimum number for wall ids (2 is yellow, 3 is blue);
-  wallIDs = [2, 3, 3, 7, 7];
+  wallIDs = [2, 3, 7];
   let counting = 0;
 
 const getRandomWallID = (i, j) => {
@@ -12,7 +12,7 @@ const getRandomWallID = (i, j) => {
 
   const randomNum = Math.floor(Math.random() * 20);
 
-  return (randomNum < 18) ? 1 : wallIDs[Math.floor(Math.random() * (wallIDs.length))];
+  return (randomNum < 15) ? 1 : wallIDs[Math.floor(Math.random() * (wallIDs.length))];
 };
 
 export class MazeGenerator {
@@ -90,21 +90,20 @@ export class MazeGenerator {
   }
 
   static createRooms() {
-    this.createSwitchRoom()
+    const roomSize = 3;
+
+    this.createSwitchRoom(1, 1, roomSize);
+    this.createSwitchRoom(1, mazeHeight - (roomSize + 1), roomSize);
+    this.createSwitchRoom(mazeWidth - (roomSize + 1), mazeHeight - (roomSize + 1), roomSize);
+    this.createSwitchRoom(mazeWidth - (roomSize + 1), 1, roomSize);
   }
 
-  static createSwitchRoom() {
-    //room in middle for switch
-    const qX = Math.floor(mazeWidth / 2) - 1;
-    const qY = Math.floor(mazeHeight / 2) - 1;
-
-    for(let i = qY; i < qY + 3; i ++){
-      for(let j = qX; j < qX + 3; j ++){
+  static createSwitchRoom(startX, startY, size) {
+    for(let i = startY; i < startY + size; i ++){
+      for(let j = startX; j < startX +  size; j ++){
         finalMaze[j][i] = 0;
       }
     }
-
-    finalMaze[qX + 1][qY + 1] = 9;
   }
 
   static getRandomMaze(height, width, spawnX, spawnY) {
