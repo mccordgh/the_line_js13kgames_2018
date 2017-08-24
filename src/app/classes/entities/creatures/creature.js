@@ -45,7 +45,7 @@ export class Creature extends Entity {
       this.x += this.xMove;
     } else {
       this.x = setX;
-      this.checkForSwitch(c1, c2, tempX);
+      this.checkForSwitchOrTrigger(c1, c2, tempX);
     }
   }
 
@@ -66,11 +66,11 @@ export class Creature extends Entity {
       this.y += this.yMove;
     } else {
       this.y = setY;
-      this.checkForSwitch(c1, c2, tempY);
+      this.checkForSwitchOrTrigger(c1, c2, tempY);
     }
   }
 
-  checkForSwitch(c1, c2, temp) {
+  checkForSwitchOrTrigger(c1, c2, temp) {
     const tile1 = this.handler.getWorld().getTile(c1, temp);
     const tile2 = this.handler.getWorld().getTile(c2, temp);
 
@@ -78,6 +78,12 @@ export class Creature extends Entity {
       this.handler.getWorld().swapGreenAndBlueTiles(tile1.color);
     } else if (tile2.type === 'switch') {
       this.handler.getWorld().swapGreenAndBlueTiles(tile2.color);
+    }
+
+    if (tile1.type === 'exit') {
+      console.log('1 exit!');
+    } else if (tile2.type === 'exit') {
+      console.log('2 exit!');
     }
   }
 

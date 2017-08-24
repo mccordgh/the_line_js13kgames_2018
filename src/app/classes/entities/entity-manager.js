@@ -38,8 +38,8 @@ export class EntityManager {
       let scaleX = 0, scaleY = 0, marker;
       let offScreen = false;
 
-      _g.font = "64px Arial Bold";
-      _g.fillStyle = "white";
+      _g.font = "64px Arial";
+      _g.fillStyle = 'white';
 
       if (e.x > checkRight){
         scaleX = e.handler.getWidth() - 55;

@@ -47,6 +47,7 @@ tiles.wallGreen = cropTile(tiles, 2, 1);
 tiles.wallYellow = cropTile(tiles, 0, 1);
 tiles.switchBlue = cropTile(tiles, 2, 0);
 tiles.switchGreen = cropTile(tiles, 3, 0);
+tiles.exit = cropTile(tiles, 3, 1);
 
 const creatures = new Assets("creatures", PATH + "player_16x16.png", SPRITE_WIDTH, SPRITE_HEIGHT);
 creatures.playerDown = cropTile(creatures, 0, 0);

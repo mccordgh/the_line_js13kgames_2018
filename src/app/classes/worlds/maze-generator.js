@@ -92,18 +92,20 @@ export class MazeGenerator {
   static createRooms() {
     const roomSize = 3;
 
-    this.createSwitchRoom(1, 1, roomSize);
-    this.createSwitchRoom(1, mazeHeight - (roomSize + 1), roomSize);
-    this.createSwitchRoom(mazeWidth - (roomSize + 1), mazeHeight - (roomSize + 1), roomSize);
-    this.createSwitchRoom(mazeWidth - (roomSize + 1), 1, roomSize);
+    this.createEmptyRoom(1, 1, roomSize);
+    this.createEmptyRoom(1, mazeHeight - (roomSize + 1), roomSize);
+    this.createEmptyRoom(mazeWidth - (roomSize + 1), mazeHeight - (roomSize + 1), roomSize);
+    this.createEmptyRoom(mazeWidth - (roomSize + 1), 1, roomSize);
   }
 
-  static createSwitchRoom(startX, startY, size) {
+  static createEmptyRoom(startX, startY, size) {
     for(let i = startY; i < startY + size; i ++){
       for(let j = startX; j < startX +  size; j ++){
         finalMaze[j][i] = 0;
       }
     }
+
+    finalMaze[startX + Math.floor(size / 2)][startY + Math.floor(size / 2)] = 10;
   }
 
   static getRandomMaze(height, width, spawnX, spawnY) {

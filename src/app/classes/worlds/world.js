@@ -30,9 +30,11 @@ export class World {
   }
 
   populateEnemies(number) {
-    for (let i = 0; i < number; i++) {
-      console.log(`adding ghost #${i + 1} at ${i * 3}, ${i * 3}`);
-      this.entityManager.addEntity(new Ghost(this.handler, TILE_WIDTH * (i * 3), TILE_HEIGHT * (i * 3)));
+    for (let i = 3; i <= number * 2; i += 2) {
+      const eSpawnX = TILE_WIDTH * Math.round(i * 1.5);
+      const eSpawnY = TILE_HEIGHT * Math.round(i * 1.5);
+      console.log(`spawning at ${eSpawnX / TILE_WIDTH}, ${eSpawnY / TILE_HEIGHT}`)
+      this.entityManager.addEntity(new Ghost(this.handler, eSpawnX, eSpawnY));
     }
   }
 
@@ -42,7 +44,7 @@ export class World {
   }
 
   loadWorld() {
-    const pieces = this.fillWorld(39, 39, 19, 19);
+    const pieces = this.fillWorld(39, 39, 1, 1);
 
     for (let y = 0; y < this.height; y++) {
       for (let x = 0; x < this.width; x++) {

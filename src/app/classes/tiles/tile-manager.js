@@ -1,4 +1,5 @@
 import { Assets } from '../gfx/assets';
+import { Exit } from './triggers/exit';
 import { Path } from './paths/path';
 import { PathBlue } from './paths/path-blue';
 import { PathYellow } from './paths/path-yellow';
@@ -23,6 +24,7 @@ tiles[6] = new SwitchBlue(6);
 tiles[7] = new PathGreen(7);
 tiles[8] = new WallGreen(8);
 tiles[9] = new SwitchGreen(9);
+tiles[10] = new Exit(10);
 
  export class TileManager {
 
