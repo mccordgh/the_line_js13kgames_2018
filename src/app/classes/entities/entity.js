@@ -45,20 +45,9 @@ export class Entity {
 
     for(let i = 0; i < candidates.length; i++){
       const e = candidates[i];
-      // if (this.type === 'player' && e.type === 'monster' && e.health > 0){
-      //   e.takeDamage(this.damage);
-      // }
-      // if (e !== this && e.health > 0 || e.health === undefined){
-        if (e.getCollisionBounds(0, 0).intersects(this.getCollisionBounds(xOffset, yOffset))) { //&& !(this.type === 'monster' && e.type === 'monster')){
-          // if (e.type === 'castle' && this.type === 'monster'){
-          //   if (this.targetType && this.dead < 1)
-          //     if(this.targetType === 'castle')
-          //   this.takeDamage(e.damage);
-          //   e.takeDamage(this.damage);
-          // }
+        if (e.getCollisionBounds(0, 0).intersects(this.getCollisionBounds(xOffset, yOffset))) {
           return true;
         }
-      // }
     }
     return false;
   }

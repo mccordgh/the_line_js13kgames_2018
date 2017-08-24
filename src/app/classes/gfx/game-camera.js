@@ -39,6 +39,7 @@ export class GameCamera {
   move(_xAmt, _yAmt) {
     this.xOffset += _xAmt;
     this.yOffset += _yAmt;
+
     this.checkBlankSpace();
   }
 
@@ -51,12 +52,10 @@ export class GameCamera {
   }
 
   setxOffset(_offset) {
-    throw new Error();
     this.xOffset = _offset;
   }
 
   setyOffset(_offset) {
-    throw new Error();
     this.yOffset = _offset;
   }
 

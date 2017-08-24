@@ -1,7 +1,6 @@
-let currentState = null;
-
 export class State {
   constructor(_handler){
+    this.currentState = null;
     this.handler = _handler;
   }
 
@@ -14,10 +13,10 @@ export class State {
   }
 
   getState() {
-    return currentState;
+    return this.currentState;
   }
 
   setState(_state) {
-    currentState = _state;
+    this.currentState = _state;
   }
 }
