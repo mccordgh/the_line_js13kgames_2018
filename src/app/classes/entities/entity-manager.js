@@ -1,3 +1,5 @@
+import { Rectangle } from '../gfx/shapes/rectangle';
+
 let handler, player, entities;
 
 const compare = (a, b) => {
@@ -36,8 +38,8 @@ export class EntityManager {
       let scaleX = 0, scaleY = 0, marker;
       let offScreen = false;
 
-      _g.font = "48px Arial";
-      _g.fillStyle = "red";
+      _g.font = "64px Arial Bold";
+      _g.fillStyle = "white";
 
       if (e.x > checkRight){
         scaleX = e.handler.getWidth() - 55;
@@ -59,15 +61,15 @@ export class EntityManager {
       }
       if (e.y < checkTop) {
         scaleX = e.x - e.handler.getGameCamera().getxOffset();
-        scaleY = 45;
+        scaleY = 65;
         offScreen = true;
         marker = "/\\";
       }
 
       if (offScreen && e.type === 'monster')
-        _g.fillText(marker,  scaleX, scaleY);
+        _g.fillText(marker, scaleX, scaleY);
 
-      if (!offScreen || e.type === 'castle')
+      if (!offScreen)
         e.render(_g);
     });
   }

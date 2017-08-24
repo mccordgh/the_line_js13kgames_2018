@@ -7,7 +7,7 @@ const TILE_HEIGHT = 64, TILE_WIDTH = 64;
 export class Player extends Creature {
   constructor(_handler, _x, _y){
     super(_handler, _x, _y);
-    this.assets = Assets.getAssets('player');
+    this.assets = Assets.getAssets('creatures');
     this.x = _x;
     this.y = _y;
     this.speed = 350;
@@ -61,7 +61,7 @@ export class Player extends Creature {
   }
 
   getCurrentAnimationFrame() {
-    return this.assets.idle;
+    return this.assets.playerDown;
     // if (this.yMove < 0){
     //   lastAnimation = "walk_up";
     //   return this.assets.animations.walk_up.getCurrentFrame();

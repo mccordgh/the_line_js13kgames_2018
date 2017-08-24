@@ -1,11 +1,10 @@
-// import { mapOne } from './maps/map-one';
 import { EntityManager } from '../entities/entity-manager';
+import { Ghost } from '../entities/creatures/monsters/ghost';
 import { MazeGenerator } from './maze-generator';
 import { Player } from '../entities/creatures/player';
 import { SpatialGrid } from '../utils/spatial-grid';
 import { TileManager } from '../tiles/tile-manager';
-// import { Utils } from '../utils/utils';
-// const PATH = window.location.href;
+
 const TILE_WIDTH = 64;
 const TILE_HEIGHT = 64;
 let yellowTilesDown = false;
@@ -26,9 +25,20 @@ export class World {
   }
 
   init() {
-    //PLAYER SET SPAWN
-    this.entityManager.getPlayer().setX(this.spawnX);
-    this.entityManager.getPlayer().setY(this.spawnY);
+    this.setPlayerSpawn(this.spawnX, this.spawnY);
+    this.populateEnemies(10);
+  }
+
+  populateEnemies(number) {
+    for (let i = 0; i < number; i++) {
+      console.log(`adding ghost #${i + 1} at ${i * 3}, ${i * 3}`);
+      this.entityManager.addEntity(new Ghost(this.handler, TILE_WIDTH * (i * 3), TILE_HEIGHT * (i * 3)));
+    }
+  }
+
+  setPlayerSpawn(x, y) {
+    this.entityManager.getPlayer().setX(x);
+    this.entityManager.getPlayer().setY(y);
   }
 
   loadWorld() {
