@@ -3,8 +3,8 @@ import { SpriteSheet } from './sprite-sheet';
 
 const assets = {};
 const PATH  = window.location.href + 'src/res/',
-TILE_HEIGHT = 16,
-TILE_WIDTH = 16;
+SPRITE_HEIGHT = 16,
+SPRITE_WIDTH = 16;
 
 export class Assets {
   constructor(_name, _path, _width, _height) {
@@ -34,9 +34,9 @@ export class Assets {
   }
 }
 
-const cropTile = (asset, x, y) => asset.sheet.crop(TILE_WIDTH * x, TILE_HEIGHT * y, TILE_WIDTH, TILE_HEIGHT);
+const cropTile = (asset, x, y) => asset.sheet.crop(SPRITE_WIDTH * x, SPRITE_HEIGHT * y, SPRITE_WIDTH, SPRITE_HEIGHT);
 
-const tiles = new Assets("tiles", PATH + "tiles_16x16_tiny.png", TILE_WIDTH, TILE_HEIGHT);
+const tiles = new Assets("tiles", PATH + "tiles_16x16_tiny.png", SPRITE_WIDTH, SPRITE_HEIGHT);
 tiles.path = cropTile(tiles, 1, 0);
 tiles.pathBlue = cropTile(tiles, 1, 2);
 tiles.pathGreen = cropTile(tiles, 2, 2);
@@ -48,5 +48,5 @@ tiles.wallYellow = cropTile(tiles, 0, 1);
 tiles.switchBlue = cropTile(tiles, 2, 0);
 tiles.switchGreen = cropTile(tiles, 3, 0);
 
-const player = new Assets("player", PATH + "player_16x16_tiny.png", TILE_WIDTH, TILE_HEIGHT);
+const player = new Assets("player", PATH + "player_16x16_tiny.png", SPRITE_WIDTH, SPRITE_HEIGHT);
 player.idle = cropTile(player, 0, 0);
