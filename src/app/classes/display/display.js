@@ -15,6 +15,9 @@ export class Display {
     myCanvas.setAttribute("height", this.height);
     myCanvas.setAttribute("width", this.width);
     graphics = myCanvas.getContext("2d");
+    graphics.webkitImageSmoothingEnabled = false;
+    graphics.mozImageSmoothingEnabled = false;
+    graphics.imageSmoothingEnabled = false;
   };
 
   getTitle() {
