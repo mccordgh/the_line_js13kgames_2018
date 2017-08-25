@@ -19,11 +19,16 @@ export class Player extends Creature {
     this.type = 'player';
     this.clipping = false;
     this.invincible = false;
+    this.superSpeed = false;
   }
 
   tick(_dt) {
       this.getInput(_dt);
       this.move();
+      if (this.superSpeed) {
+        this.move();
+        this.move();
+      }
       this.handler.getGameCamera().centerOnEntity(this);
       // if (this.yMove < 0)
       //   this.assets.animations.walk_up.tick();
@@ -63,7 +68,7 @@ export class Player extends Creature {
 
     if (!getDevInput) inputCounter++;
 
-    if (inputCounter > 50 || getDevInput) {
+    if (inputCounter > 15 || getDevInput) {
       getDevInput = true;
       inputCounter = 0;
       if (this.handler.getKeyManager().i) {
@@ -84,6 +89,16 @@ export class Player extends Creature {
         this.handler.devMessage(msg);
 
         this.clipping = !this.clipping;
+        getDevInput = false;
+      }
+
+      if (this.handler.getKeyManager().x) {
+        //super speed
+        const msg = this.superSpeed ? 'super speed disabled' : 'super speed enabled';
+
+        this.handler.devMessage(msg);
+
+        this.superSpeed = !this.superSpeed;
         getDevInput = false;
       }
     }

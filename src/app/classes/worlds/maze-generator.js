@@ -89,23 +89,53 @@ export class MazeGenerator {
     }
   }
 
-  static createRooms() {
-    const roomSize = 3;
+  static getRandomRoomEntities() {
+    //9 - SwitchGreen,  6 - SwitchBlue,  10 - Exit,  1 - wall (placeholder for now)
+    const entities = [10, 9, 6, 1];
+    const rooms = [];
 
-    this.createEmptyRoom(1, 1, roomSize);
-    this.createEmptyRoom(1, mazeHeight - (roomSize + 1), roomSize);
-    this.createEmptyRoom(mazeWidth - (roomSize + 1), mazeHeight - (roomSize + 1), roomSize);
-    this.createEmptyRoom(mazeWidth - (roomSize + 1), 1, roomSize);
+    //let's spawn one of the switches in room #1 with the player
+    const maxSwitchIndex = 2;
+    const minSwitchIndex = 1;
+    const whichSwitch = Math.floor(Math.random() * (maxSwitchIndex - minSwitchIndex + 1)) + minSwitchIndex;
+
+    rooms.push(entities[whichSwitch]);
+    entities.splice(whichSwitch, 1);
+
+    //then let's randomly spawn the rest of the stuff in the other three rooms
+    // console.log({rooms, entities});
+    do {
+      const maxIndex = entities.length - 1;
+      const randomIndex = Math.floor(Math.random() * (maxIndex + 1));
+      rooms.push(entities[randomIndex]);
+      entities.splice(randomIndex, 1);
+    } while (entities.length > 0);
+
+    return rooms;
   }
 
-  static createEmptyRoom(startX, startY, size) {
+  static createRooms() {
+    const roomSize = 3;
+    const roomEntities = this.getRandomRoomEntities();
+
+    // NW room
+    this.createRoom(1, 1, roomSize, roomEntities[0]);
+    // SW room
+    this.createRoom(1, mazeHeight - (roomSize + 1), roomSize, roomEntities[1]);
+    // SE ROOM
+    this.createRoom(mazeWidth - (roomSize + 1), mazeHeight - (roomSize + 1), roomSize, roomEntities[2]);
+    // NE ROOM
+    this.createRoom(mazeWidth - (roomSize + 1), 1, roomSize, roomEntities[3]);
+  }
+
+  static createRoom(startX, startY, size, entity) {
     for(let i = startY; i < startY + size; i ++){
       for(let j = startX; j < startX +  size; j ++){
         finalMaze[j][i] = 0;
       }
     }
 
-    finalMaze[startX + Math.floor(size / 2)][startY + Math.floor(size / 2)] = 10;
+    finalMaze[startX + Math.floor(size / 2)][startY + Math.floor(size / 2)] = entity;
   }
 
   static getRandomMaze(height, width, spawnX, spawnY) {

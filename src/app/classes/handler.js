@@ -2,7 +2,11 @@ export class Handler {
   constructor(_game) {
     this.game = _game;
     this.console = document.getElementById('console');
-    this.devMessage('console initialized<br>c - clipping<br>i - invincibility');
+    this.devMessage('console initialized<br>' +
+      'c - clipping<br>' +
+      'i - invincibility<br>' +
+      'x - super speed'
+    );
   }
 
   flushConsole() {

@@ -87,10 +87,10 @@ export class Game {
     g = display.getGraphics();
     state = new State();
     gameCamera = new GameCamera(handler, 0, 0);
-    // gameState = new GameState(handler);
-    // state.setState(gameState);
-    mainMenu = new MainMenu(handler);
-    state.setState(mainMenu);
+    gameState = new GameState(handler);
+    state.setState(gameState);
+    // mainMenu = new MainMenu(handler);
+    // state.setState(mainMenu);
   }
 
   tick(_dt) {
@@ -98,8 +98,7 @@ export class Game {
     if (state.getState()) state.getState().tick(_dt);
 
     consoleCounter++;
-    if (consoleCounter >= 240) {
-      console.log('FLUSH IT');
+    if (consoleCounter >= 120) {
       handler.flushConsole();
       consoleCounter = 0;
     }
