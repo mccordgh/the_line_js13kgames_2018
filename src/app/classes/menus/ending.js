@@ -17,7 +17,6 @@ export class Ending extends Menu {
       let xPos = (screenWidth / 2) - (_g.measureText(text).width / 2);
       let yPos = (screenHeight / 3);
       _g.drawText({
-        // borderColor: 'orange',
         fillColor: 'yellow',
         text,
         fontSize: 32,
@@ -30,7 +29,6 @@ export class Ending extends Menu {
       xPos = (screenWidth / 2) - (_g.measureText(text).width / 2);
       yPos = (screenHeight / 1.5);
       _g.drawText({
-        // borderColor: 'orange',
         fillColor: 'white',
         text,
         fontSize: 32,
@@ -45,20 +43,5 @@ export class Ending extends Menu {
     if (this.handler.getKeyManager().enter) {
       window.location.reload();
     }
-  }
-
-  getCredits() {
-    return [
-      'Programming: Matthew McCord',
-      'Artwork: http://www.opengameart.org/',
-      '    Player: Antifarea(PC)',
-      '    Tiles: Chris Hamons / Medicine Storm',
-      '    Tiles: Buch / Keith Karnage',
-      '    Music: OveMelaa',
-      '    Sound FX: artisticdude / OveMelaa',
-      '    Castle: Alucard',
-      'Thanks: Jamie Nichols // JS game engine',
-      '                         Youtube tutorial'
-    ];
   }
 }

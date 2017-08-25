@@ -72,7 +72,6 @@ import { Menu } from './menu';
         let xPos = (screenWidth / 2) - (_g.measureText(text).width / 2);
         let yPos = (screenHeight / 2);
         _g.drawText({
-          // borderColor: 'orange',
           fillColor: 'white',
           text,
           fontSize: 32,
