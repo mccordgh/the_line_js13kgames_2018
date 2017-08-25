@@ -15,16 +15,52 @@ export class Ghost extends Creature {
     this.bounds.height = TILE_HEIGHT - (this.bounds.y * 2);
     this.type = 'monster';
     this.targetType = 'player';
+    this.patrol = this.getPatrolPattern();
+    this.startX = _x;
+    this.startY = _y;
+    this.patrolLength = 100;
+    this.dirMoving = 0;
+    this.numberOfMoves = 0;
+  }
+
+  getPatrolPattern() {
+    const patterns = ['vertical', 'horizontal'];
+
+    return patterns[Math.floor(Math.random() * patterns.length)];
   }
 
   tick(_dt) {
-      // if (this.dead === 8){
-      //   this.dead = 666;
-      //   this.handler.getWorld().getEntityManager().removeEntity(this);
-      //   this.handler.getWorld().getSpatialGrid().remove(new Rectangle(this.x + this.bounds.x, this.y + this.bounds.y, this.bounds.width, this.bounds.height), this);
-      // }
     this.xMove = 0;
     this.yMove = 0;
+
+    if (this.patrol === 'vertical') {
+      if (this.dirMoving === 0) {
+        this.yMove = -this.speed * _dt
+      } else {
+        this.yMove = this.speed * _dt
+      }
+      this.numberOfMoves++;
+
+      if (this.numberOfMoves > 100) {
+        this.dirMoving = this.dirMoving === 0 ? 1 : 0;
+        this.numberOfMoves = 0;
+      }
+
+    } else if (this.patrol === 'horizontal') {
+      if (this.dirMoving === 0) {
+              this.xMove = -this.speed * _dt;
+      } else {
+              this.xMove = this.speed * _dt;
+      }
+      this.numberOfMoves++;
+
+      if (this.numberOfMoves > 100) {
+        this.dirMoving = this.dirMoving === 0 ? 1 : 0;
+        this.numberOfMoves = 0;
+      }
+    }
+
+    this.move();
 
     // this.target = this.handler.getWorld().getEntityManager().getSingleEntity(this.targetType);
     // if (this.target) {

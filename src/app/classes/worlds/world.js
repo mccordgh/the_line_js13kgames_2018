@@ -46,7 +46,7 @@ export class World {
   }
 
   loadWorld() {
-    const pieces = this.fillWorld(39, 39, 1, 1);
+    const pieces = this.fillWorld(39, 39, 11, 13);
 
     for (let y = 0; y < this.height; y++) {
       for (let x = 0; x < this.width; x++) {

@@ -2,7 +2,6 @@ let width, height, size, grid;
 
 export class SpatialGrid {
   constructor(_width, _height, _size) {
-    console.log(_width / 64, _height / 64, _size);
     this.width = parseInt(_width / _size);
     this.height = parseInt(_height / _size);
     this.size = _size;
