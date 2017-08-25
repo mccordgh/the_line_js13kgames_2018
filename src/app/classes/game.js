@@ -3,15 +3,12 @@ import { GameState } from './states/game-state';
 import { GameCamera } from './gfx/game-camera';
 import { Handler } from './handler';
 import { KeyManager } from './input/key-manager';
+import { MainMenu } from './menus/main-menu';
 import { State } from './states/state';
-
-//   import 'main-menu';
-//   import 'game-camera';
-//   import 'sound-manager';
 
 let running = false;
 let title, width, height, g, display, keyManager, handler, gameCamera, soundManager;
-let state, gameState, menuState, settingsState;
+let state, gameState, mainMenu, settingsState;
 let dt;
 
 export class Game {
@@ -79,6 +76,10 @@ export class Game {
     return gameCamera;
   }
 
+  getGameState() {
+    return state;
+  }
+
   init() {
     handler = new Handler(this);
     display = new Display(this.title, this.width, this.height);
@@ -86,10 +87,10 @@ export class Game {
     g = display.getGraphics();
     state = new State();
     gameCamera = new GameCamera(handler, 0, 0);
-    gameState = new GameState(handler);
-    state.setState(gameState);
-    // mainMenu = new MainMenu(handler);
-    // State.setState(mainMenu);
+    // gameState = new GameState(handler);
+    // state.setState(gameState);
+    mainMenu = new MainMenu(handler);
+    state.setState(mainMenu);
   }
 
   tick(_dt) {

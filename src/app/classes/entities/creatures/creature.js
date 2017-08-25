@@ -1,3 +1,4 @@
+import { Ending } from '../../menus/ending';
 import { Entity } from '../entity';
 import { Rectangle } from '../../gfx/shapes/rectangle';
 
@@ -80,10 +81,9 @@ export class Creature extends Entity {
       this.handler.getWorld().swapGreenAndBlueTiles(tile2.color);
     }
 
-    if (tile1.type === 'exit') {
-      console.log('1 exit!');
-    } else if (tile2.type === 'exit') {
-      console.log('2 exit!');
+    if (tile1.type === 'exit' || tile2.type === 'exit') {
+      const ending = new Ending(this.handler);
+      this.handler.getGame().getGameState().setState(ending);
     }
   }
 

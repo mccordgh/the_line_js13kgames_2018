@@ -10,6 +10,7 @@ export class KeyManager {
     this.j = keys[74];
     this.k = keys[75];
     this.l = keys[76];
+    this.enter = keys[13];
     // TODO SUPPORT ZQSD keys and WASD
     // W - 90, Z - 87, D - 68, S - 83, A - 65, Q - 81
   }

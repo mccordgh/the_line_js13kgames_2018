@@ -42,7 +42,7 @@ CanvasRenderingContext2D.prototype.myDrawImage = (asset, _x, _y, _width, _height
 };
 
 CanvasRenderingContext2D.prototype.myDrawText = (_x, _y, _text) => {
-  text = _text.toLowerCase().split("");
+  const text = _text.toLowerCase().split("");
 
   let textStartX = 0;
 
@@ -62,6 +62,6 @@ CanvasRenderingContext2D.prototype.drawText = (_textObject) => {
   let borderWidth = _textObject.additionalWidth || graphics.measureText(_textObject.text).width;
   graphics.strokeStyle = _textObject.borderColor;
   graphics.fillStyle = _textObject.fillColor;
-  graphics.strokeText(_textObject.text, _textObject.x(), _textObject.y());
-  graphics.fillText(_textObject.text,  _textObject.x(), _textObject.y());
+  graphics.strokeText(_textObject.text, _textObject.x, _textObject.y);
+  graphics.fillText(_textObject.text,  _textObject.x, _textObject.y);
 };
