@@ -26,15 +26,15 @@ export class World {
 
   init() {
     this.setPlayerSpawn(this.spawnX, this.spawnY);
-    this.populateEnemies(10);
+    this.populateEnemies(14);
   }
 
   populateEnemies(number) {
-    this.entityManager.addEntity(new Ghost(this.handler, 3 * TILE_WIDTH, 1 * TILE_HEIGHT));
+    // this.entityManager.addEntity(new Ghost(this.handler, 3 * TILE_WIDTH, 1 * TILE_HEIGHT));
 
     for (let i = 3; i <= number * 2; i += 2) {
-      const eSpawnX = TILE_WIDTH * Math.round(i * 1.5);
-      const eSpawnY = TILE_HEIGHT * Math.round(i * 1.5);
+      const eSpawnX = TILE_WIDTH * i; // Math.round(i * 1.5);
+      const eSpawnY = TILE_HEIGHT * i; //Math.round(i * 1.5);
 
       this.entityManager.addEntity(new Ghost(this.handler, eSpawnX, eSpawnY));
     }
@@ -46,7 +46,7 @@ export class World {
   }
 
   loadWorld() {
-    const pieces = this.fillWorld(39, 39, 11, 13);
+    const pieces = this.fillWorld(39, 39, 1, 1);
 
     for (let y = 0; y < this.height; y++) {
       for (let x = 0; x < this.width; x++) {

@@ -3,6 +3,7 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HtmlWebpackInlineSourcePlugin = require('html-webpack-inline-source-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const isProduction = process.env.npm_lifecycle_event === 'build';
 
@@ -44,13 +45,17 @@ let config = {
   plugins: [
     new ExtractTextPlugin('style.css'),
     new HtmlWebpackPlugin(htmlConfig),
-    new HtmlWebpackInlineSourcePlugin()
+    new HtmlWebpackInlineSourcePlugin(),
+    new CopyWebpackPlugin([
+      { from: 'src/res/player_16x16_tiny.png', to: 'src/res/player_16x16_tiny.png' },
+      { from: 'src/res/tiles_16x16_tiny.png', to: 'src/res/tiles_16x16_tiny.png' },
+      ])
   ],
   stats: 'minimal',
   devServer: {
     stats: 'minimal'
   }
-}
+};
 
 if(!isProduction) {
   config.devtool = 'eval-source-map'
@@ -60,4 +65,4 @@ if(!isProduction) {
   ])
 }
 
-module.exports = config
+module.exports = config;
