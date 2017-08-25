@@ -18,7 +18,7 @@ export class World {
     this.handler = _handler;
     _handler.setWorld(this);
     this.entityManager = new EntityManager(_handler, new Player(_handler, 20, 20));
-    this.spatialGrid = new SpatialGrid(this.width * TILE_WIDTH, this.height * TILE_HEIGHT, 64);
+    this.spatialGrid = new SpatialGrid(this.handler.getWidth() * TILE_WIDTH, this.handler.getHeight() * TILE_HEIGHT, 64);
     this.level = 1;
     this.loadWorld();
     this.init();
@@ -30,10 +30,12 @@ export class World {
   }
 
   populateEnemies(number) {
+    this.entityManager.addEntity(new Ghost(this.handler, 3 * TILE_WIDTH, 1 * TILE_HEIGHT));
+
     for (let i = 3; i <= number * 2; i += 2) {
       const eSpawnX = TILE_WIDTH * Math.round(i * 1.5);
       const eSpawnY = TILE_HEIGHT * Math.round(i * 1.5);
-      console.log(`spawning at ${eSpawnX / TILE_WIDTH}, ${eSpawnY / TILE_HEIGHT}`)
+
       this.entityManager.addEntity(new Ghost(this.handler, eSpawnX, eSpawnY));
     }
   }

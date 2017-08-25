@@ -1,3 +1,4 @@
+import { GameOver } from '../menus/game-over';
 import { Rectangle } from '../gfx/shapes/rectangle';
 
 export class Entity {
@@ -42,23 +43,14 @@ export class Entity {
 
   checkEntityCollisions(xOffset, yOffset) {
     const candidates =  this.handler.getWorld().getSpatialGrid().retrieve(new Rectangle(this.x + this.bounds.x + xOffset, this.y + this.bounds.y + yOffset, this.bounds.width, this.bounds.height), this);
-    // console.log({
-      // xOffset,
-      // yOffset,
-      // candidates,
-      // world: this.handler.getWorld(),
-      // grid: this.handler.getWorld().getSpatialGrid(),
-    // });
-    // throw new Error();
-    for(let i = 0; i < candidates.length; i++){
-      console.log(i);
+
+    for(let i = 0; i < candidates.length; i++) {
       const e = candidates[i];
         if (e.getCollisionBounds(0, 0).intersects(this.getCollisionBounds(xOffset, yOffset))) {
-            console.log(this.type, e.type);
             if (this.type === 'player' && e.type === 'monster'){
-             console.log('Y O U D I E D');
+              const gameOver = new GameOver(this.handler);
+              this.handler.getGame().getGameState().setState(gameOver);
             }
-
             return true;
         }
     }
