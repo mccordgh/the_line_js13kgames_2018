@@ -1,8 +1,10 @@
 import { GameState } from '../states/game-state';
+import { Menu } from './menu';
 
-  export class MainMenu {
+  export class MainMenu extends Menu {
     constructor(_handler){
-      this.handler = _handler;
+      super(_handler);
+      // this.handler = _handler;
       // var fontSize = 0, countSinceInput = 11, choicePosition = 0, leaderboardsLoaded = false;
       // var leaderBoard = [], credits = [], handlerRef, introStep = 1;
       // var rankIcons = Assets.getAssets('rankIcons');
@@ -51,12 +53,12 @@ import { GameState } from '../states/game-state';
       // this.view = 'intro';
     }
 
-    tick(_dt) {
-      // countSinceInput++;
-      // if (countSinceInput > 8)
-      this.getInput(_dt);
-      this.render();
-    }
+    // tick(_dt) {
+    //   // countSinceInput++;
+    //   // if (countSinceInput > 8)
+    //   this.getInput(_dt);
+    //   this.render();
+    // }
 
     render(_g) {
       if (_g) {

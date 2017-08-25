@@ -1,11 +1,8 @@
-export class Ending {
-  constructor(_handler){
-    this.handler = _handler;
-  }
+import { Menu } from './menu';
 
-  tick(_dt) {
-    this.getInput(_dt);
-    this.render();
+export class Ending extends Menu {
+  constructor(_handler){
+    super(_handler);
   }
 
   render(_g) {
