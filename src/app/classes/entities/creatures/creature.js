@@ -30,6 +30,11 @@ export class Creature extends Entity {
   }
 
   moveX() {
+    if (this.clipping) {
+      this.x += this.xMove;
+      return;
+    }
+
     const tempX = this.xMove > 0
       ? parseInt((this.x + this.xMove + this.bounds.x + this.bounds.width) / TILE_WIDTH)
       : parseInt((this.x + this.xMove + this.bounds.x) / TILE_WIDTH);
@@ -51,6 +56,11 @@ export class Creature extends Entity {
   }
 
   moveY() {
+    if (this.clipping) {
+      this.y += this.yMove;
+      return;
+    }
+
     const tempY = this.yMove > 0
       ? parseInt((this.y + this.yMove + this.bounds.y + this.bounds.height) / TILE_HEIGHT)
       : parseInt((this.y + this.yMove + this.bounds.y) / TILE_HEIGHT);

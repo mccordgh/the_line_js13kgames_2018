@@ -47,9 +47,13 @@ export class Entity {
     for(let i = 0; i < candidates.length; i++) {
       const e = candidates[i];
         if (e.getCollisionBounds(0, 0).intersects(this.getCollisionBounds(xOffset, yOffset))) {
-            if (this.type === 'player' && e.type === 'monster'){
-              const gameOver = new GameOver(this.handler);
-              this.handler.getGame().getGameState().setState(gameOver);
+            if (this.type === 'player') {
+              if (this.invincible) return false;
+
+              if (!this.invincible && e.type === 'monster') {
+                const gameOver = new GameOver(this.handler);
+                this.handler.getGame().getGameState().setState(gameOver);
+              }
             }
             return true;
         }

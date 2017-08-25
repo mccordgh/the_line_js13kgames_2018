@@ -1,6 +1,16 @@
 export class Handler {
   constructor(_game) {
     this.game = _game;
+    this.console = document.getElementById('console');
+    this.devMessage('console initialized<br>c - clipping<br>i - invincibility');
+  }
+
+  flushConsole() {
+    this.console.innerHTML = '';
+  }
+
+  devMessage(msg) {
+    this.console.innerHTML += `${msg}.<br>`;
   }
 
   getWidth() {

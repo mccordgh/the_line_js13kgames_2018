@@ -9,7 +9,7 @@ import { State } from './states/state';
 let running = false;
 let title, width, height, g, display, keyManager, handler, gameCamera, soundManager;
 let state, gameState, mainMenu, settingsState;
-let dt;
+let consoleCounter = 0;
 
 export class Game {
   constructor(_title, _width, _height){
@@ -96,6 +96,13 @@ export class Game {
   tick(_dt) {
     keyManager.tick();
     if (state.getState()) state.getState().tick(_dt);
+
+    consoleCounter++;
+    if (consoleCounter >= 240) {
+      console.log('FLUSH IT');
+      handler.flushConsole();
+      consoleCounter = 0;
+    }
   }
 
   render(){

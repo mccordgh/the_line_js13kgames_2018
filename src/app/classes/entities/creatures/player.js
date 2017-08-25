@@ -3,6 +3,7 @@ import { Creature } from './creature';
 import { Rectangle } from '../../gfx/shapes/rectangle';
 // var lastAnimation = "walk_down";//, attackCounter = 0, lastAttackCounter = 0;
 const TILE_HEIGHT = 64, TILE_WIDTH = 64;
+let getDevInput = false, inputCounter = 0;
 
 export class Player extends Creature {
   constructor(_handler, _x, _y){
@@ -16,7 +17,8 @@ export class Player extends Creature {
     this.bounds.width = TILE_WIDTH - (this.bounds.x * 2);
     this.bounds.height = TILE_HEIGHT - (this.bounds.y * 2);
     this.type = 'player';
-    this.damage = 60;
+    this.clipping = false;
+    this.invincible = false;
   }
 
   tick(_dt) {
@@ -57,6 +59,33 @@ export class Player extends Creature {
     }
     if (this.handler.getKeyManager().right) {
       this.xMove = this.speed * _dt;
+    }
+
+    if (!getDevInput) inputCounter++;
+
+    if (inputCounter > 50 || getDevInput) {
+      getDevInput = true;
+      inputCounter = 0;
+      if (this.handler.getKeyManager().i) {
+        //invincible
+        const msg = this.invincible ? 'invincibility disabled' : 'invincibility enabled';
+
+        this.handler.devMessage(msg);
+
+        this.invincible = !this.invincible;
+
+        getDevInput = false;
+      }
+
+      if (this.handler.getKeyManager().c) {
+        //clipping
+        const msg = this.clipping ? 'clipping disabled' : 'clipping enabled';
+
+        this.handler.devMessage(msg);
+
+        this.clipping = !this.clipping;
+        getDevInput = false;
+      }
     }
   }
 
