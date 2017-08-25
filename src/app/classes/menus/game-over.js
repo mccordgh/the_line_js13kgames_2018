@@ -17,25 +17,29 @@ export class GameOver {
       _g.fillRect(0, 0, screenWidth, screenHeight);
 
       let text = 'Y O U   D I E D';
+      let xPos = (screenWidth / 2) - (_g.measureText(text).width / 2);
+      let yPos = (screenHeight / 3);
       _g.drawText({
-        borderColor: 'orange',
+        // borderColor: 'orange',
         fillColor: 'red',
         text,
         fontSize: 32,
         font: 'serif',
-        x: (screenWidth / 2) - (_g.measureText(text).width / 2),
-        y: (screenHeight / 3),
+        x: xPos,
+        y: yPos,
       });
 
       text = 'press enter to try again';
+      xPos = (screenWidth / 2) - (_g.measureText(text).width / 2);
+      yPos = (screenHeight / 1.5);
       _g.drawText({
-        borderColor: 'orange',
+        // borderColor: 'orange',
         fillColor: 'white',
         text,
         fontSize: 32,
         font: 'serif',
-        x: (screenWidth / 2) - (_g.measureText(text).width / 2),
-        y: (screenHeight / 1.5),
+        x: xPos,
+        y: yPos,
       });
     }
   }

@@ -17,25 +17,29 @@ export class Ending {
       _g.fillRect(0, 0, screenWidth, screenHeight);
 
       let text = 'You escaped the maze!';
+      let xPos = (screenWidth / 2) - (_g.measureText(text).width / 2);
+      let yPos = (screenHeight / 3);
       _g.drawText({
-        borderColor: 'orange',
+        // borderColor: 'orange',
         fillColor: 'yellow',
         text,
         fontSize: 32,
         font: 'serif',
-        x: (screenWidth / 2) - (_g.measureText(text).width / 2),
-        y: (screenHeight / 3),
+        x: xPos,
+        y: yPos,
       });
 
       text = 'Press enter for another run!';
+      xPos = (screenWidth / 2) - (_g.measureText(text).width / 2);
+      yPos = (screenHeight / 1.5);
       _g.drawText({
-        borderColor: 'orange',
+        // borderColor: 'orange',
         fillColor: 'white',
         text,
         fontSize: 32,
         font: 'serif',
-        x: (screenWidth / 2) - (_g.measureText(text).width / 2),
-        y: (screenHeight / 1.5),
+        x: xPos,
+        y: yPos,
       });
     }
   }

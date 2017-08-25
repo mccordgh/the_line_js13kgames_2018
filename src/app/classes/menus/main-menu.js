@@ -67,14 +67,16 @@ import { GameState } from '../states/game-state';
         _g.fillRect(0, 0, screenWidth, screenHeight);
 
         const text = 'press enter to start';
+        let xPos = (screenWidth / 2) - (_g.measureText(text).width / 2);
+        let yPos = (screenHeight / 2);
         _g.drawText({
-          borderColor: 'orange',
+          // borderColor: 'orange',
           fillColor: 'white',
           text,
           fontSize: 32,
           font: 'serif',
-          x: (screenWidth / 2) - (_g.measureText(text).width / 2),
-          y: (screenHeight / 2),
+          x: xPos,
+          y: yPos,
         });
 
         //black background
