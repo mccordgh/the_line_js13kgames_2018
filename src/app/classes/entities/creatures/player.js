@@ -12,10 +12,10 @@ export class Player extends Creature {
     this.x = _x;
     this.y = _y;
     this.speed = 350;
-    this.bounds.x = 6;
-    this.bounds.y = 6;
-    this.bounds.width = TILE_WIDTH - (this.bounds.x * 2);
-    this.bounds.height = TILE_HEIGHT - (this.bounds.y * 2);
+    this.bounds.x = 14;
+    this.bounds.y = 24;
+    this.bounds.width = 36;
+    this.bounds.height = 39;
     this.type = 'player';
     this.clipping = false;
     this.invincible = false;
@@ -44,7 +44,7 @@ export class Player extends Creature {
     _g.myDrawImage(this.getCurrentAnimationFrame(), this.x - this.handler.getGameCamera().getxOffset(), this.y - this.handler.getGameCamera().getyOffset(), TILE_WIDTH, TILE_HEIGHT);
 
     // ****** DRAW BOUNDING BOX DON'T DELETE!!
-    // _g.fillStyle = "red";
+    // _g.fillStyle = "green";
     // _g.fillRect(this.bounds.x + this.x - this.handler.getGameCamera().getxOffset(), this.bounds.y + this.y - this.handler.getGameCamera().getyOffset(), this.bounds.width, this.bounds.height);
     // ****** DRAW BOUNDING BOX DON'T DELETE!!
   }
@@ -73,7 +73,7 @@ export class Player extends Creature {
       inputCounter = 0;
       if (this.handler.getKeyManager().i) {
         //invincible
-        const msg = this.invincible ? 'invincibility disabled' : 'invincibility enabled';
+        const msg = this.invincible ? ' invincibility disabled ' : ' invincibility enabled ';
 
         this.handler.devMessage(msg);
 
@@ -84,7 +84,7 @@ export class Player extends Creature {
 
       if (this.handler.getKeyManager().c) {
         //clipping
-        const msg = this.clipping ? 'clipping disabled' : 'clipping enabled';
+        const msg = this.clipping ? ' clipping disabled ' : ' clipping enabled ';
 
         this.handler.devMessage(msg);
 
@@ -94,7 +94,7 @@ export class Player extends Creature {
 
       if (this.handler.getKeyManager().x) {
         //super speed
-        const msg = this.superSpeed ? 'super speed disabled' : 'super speed enabled';
+        const msg = this.superSpeed ? ' super speed disabled ' : ' super speed enabled ';
 
         this.handler.devMessage(msg);
 

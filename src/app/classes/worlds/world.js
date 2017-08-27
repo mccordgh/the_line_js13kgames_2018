@@ -26,7 +26,7 @@ export class World {
 
   init() {
     this.setPlayerSpawn(this.spawnX, this.spawnY);
-    this.populateEnemies(14);
+    this.populateEnemies(10);
   }
 
   populateEnemies(number) {
