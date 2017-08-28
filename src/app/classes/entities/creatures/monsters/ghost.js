@@ -9,10 +9,10 @@ export class Ghost extends Creature {
     this.assets = Assets.getAssets("creatures");
     this.x = _x;
     this.y = _y;
-    this.bounds.x = 1;
-    this.bounds.y = 1;
-    this.bounds.width = TILE_WIDTH - 2;// - (this.bounds.x * 2);
-    this.bounds.height = TILE_HEIGHT - 2;// - (this.bounds.y * 2);
+    this.bounds.x = 5;
+    this.bounds.y = 5;
+    this.bounds.width = TILE_WIDTH  - (this.bounds.x * 2);
+    this.bounds.height = TILE_HEIGHT - (this.bounds.y * 2);
     this.type = 'monster';
     this.targetType = 'player';
     this.patrol = this.getPatrolPattern();

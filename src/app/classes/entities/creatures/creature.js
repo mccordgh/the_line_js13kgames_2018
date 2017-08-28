@@ -2,7 +2,7 @@ import { Ending } from '../../menus/ending';
 import { Entity } from '../entity';
 import { Rectangle } from '../../gfx/shapes/rectangle';
 
-const DEFAULT_SPEED = 90,
+const DEFAULT_SPEED = 80,
   DEFAULT_HEALTH = 200,
   DEFAULT_CREATURE_WIDTH = 64,
   DEFAULT_CREATURE_HEIGHT = 64,
@@ -110,6 +110,11 @@ export class Creature extends Entity {
   }
 
   collisionWithTile(_x, _y) {
+    if (_x < 0 || _y < 0) {
+      // console.log(`dat weird x and y bug ${_x}, ${_y}`);
+      return;
+    }
+
     return this.handler.getWorld().getTile(_x, _y).isSolid;
   }
 

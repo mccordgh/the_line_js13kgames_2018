@@ -31,14 +31,12 @@ export class World {
 
   init() {
     this.lightManager.addSource(4, 2);
-    this.addRandomLightSources();
+    this.addRandomLightSources(10);
     this.setPlayerSpawn(this.spawnX, this.spawnY);
     this.populateEnemies(10);
   }
 
-  addRandomLightSources() {
-    const numberOfSources = 30;
-
+  addRandomLightSources(numberOfSources) {
     for (let i = 0; i < numberOfSources; i++) {
       const x = Math.floor(Math.random() * ((WORLD_WIDTH - 3) - 3 + 1)) + 3;
       const y = Math.floor(Math.random() * ((WORLD_HEIGHT - 3) - 3 + 1)) + 3;
@@ -167,6 +165,11 @@ export class World {
   }
 
   getTile(_x, _y) {
+    if (_x < 0 || _y < 0) {
+      // console.log(`dat weird x and y bug ${_x}, ${_y}`);
+      return;
+    }
+
     return TileManager.getTiles()[this.tiles[_x][_y]];
   }
 

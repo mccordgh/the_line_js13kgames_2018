@@ -2,7 +2,7 @@ import {LightSource} from './light-source';
 
 const TILE_HEIGHT = 64;
 const TILE_WIDTH = 64;
-const DEFAULT_LIGHT = 0.9;
+const DEFAULT_LIGHT = 0.85;
 
 export class LightManager {
   constructor(_handler) {
@@ -30,14 +30,9 @@ export class LightManager {
   }
 
   tick() {
-    const xStart = parseInt(Math.max(0, this.handler.getGameCamera().getxOffset() / TILE_WIDTH));
-    const xEnd = parseInt(Math.min(this.handler.getWidth(), (this.handler.getGameCamera().getxOffset() + this.handler.getWidth()) / TILE_WIDTH + 1));
-    const yStart = parseInt(Math.max(0, this.handler.getGameCamera().getyOffset() / TILE_HEIGHT));
-    const yEnd = parseInt(Math.min(this.handler.getHeight(), (this.handler.getGameCamera().getyOffset() + this.handler.getHeight()) / TILE_HEIGHT + 1));
-
-    this.sources.forEach((source) => {
-      source.tick(xStart, xEnd, yStart, yEnd);
-    });
+    // this.sources.forEach((source) => {
+    //   source.tick(xStart, xEnd, yStart, yEnd);
+    // });
   }
 
   render(xStart, xEnd, yStart, yEnd, _g) {

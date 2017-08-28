@@ -11,7 +11,7 @@ export class Player extends Creature {
     this.assets = Assets.getAssets('creatures');
     this.x = _x;
     this.y = _y;
-    this.speed = 350;
+    this.speed = 160;
     this.bounds.x = 14;
     this.bounds.y = 24;
     this.bounds.width = 36;

@@ -1,8 +1,8 @@
 const TILE_WIDTH = 64;
 const TILE_HEIGHT = 64;
-const CENTER_LIGHT = 0.2;
+const CENTER_LIGHT = 0.3;
 const INNER_LIGHT = 0.5;
-const OUTER_LIGHT = 0.75;
+const OUTER_LIGHT = 0.7;
 
 export class LightSource {
   constructor(_x, _y, _handler, _manager) {
@@ -18,58 +18,38 @@ export class LightSource {
   }
 
   expandLight() {
-    //center of light source
+    //outer border
+    for (let y = -2; y < 3; y++) {
+      for (let x = -2; x < 3; x++) {
+        this.manager.lightMap[this.x + x][this.y + y] = Math.min(this.manager.lightMap[this.x + x][this.y + y], OUTER_LIGHT);
+      }
+    }
+
+    //inner border
+    for (let y = -1; y < 2; y++) {
+      for (let x = -1; x < 2; x++) {
+        this.manager.lightMap[this.x + x][this.y + y] = Math.min(this.manager.lightMap[this.x + x][this.y + y], INNER_LIGHT);
+      }
+    }
+
+    // center of light source
     this.manager.lightMap[this.x][this.y] = CENTER_LIGHT;
-
-    //tiles around the inner ring
-    this.manager.lightMap[this.x - 1][this.y - 1] = INNER_LIGHT;
-    this.manager.lightMap[this.x][this.y - 1] = INNER_LIGHT;
-    this.manager.lightMap[this.x + 1][this.y - 1] = INNER_LIGHT;
-    this.manager.lightMap[this.x - 1][this.y] = INNER_LIGHT;
-    this.manager.lightMap[this.x + 1][this.y] = INNER_LIGHT;
-    this.manager.lightMap[this.x - 1][this.y + 1] = INNER_LIGHT;
-    this.manager.lightMap[this.x][this.y + 1] = INNER_LIGHT;
-    this.manager.lightMap[this.x + 1][this.y + 1] = INNER_LIGHT;
-
-    //tiles around the outer ring
-    this.manager.lightMap[this.x - 2][this.y - 2] = OUTER_LIGHT;
-    this.manager.lightMap[this.x - 1][this.y - 2] = OUTER_LIGHT;
-    this.manager.lightMap[this.x][this.y - 2] = OUTER_LIGHT;
-    this.manager.lightMap[this.x + 1][this.y - 2] = OUTER_LIGHT;
-    this.manager.lightMap[this.x + 2][this.y - 2] = OUTER_LIGHT;
-    this.manager.lightMap[this.x + 2][this.y - 1] = OUTER_LIGHT;
-    this.manager.lightMap[this.x + 2][this.y] = OUTER_LIGHT;
-    this.manager.lightMap[this.x + 2][this.y + 1] = OUTER_LIGHT;
-    this.manager.lightMap[this.x + 2][this.y + 2] = OUTER_LIGHT;
-    this.manager.lightMap[this.x + 2][this.y + 2] = OUTER_LIGHT;
-
-    this.manager.lightMap[this.x - 2][this.y - 1] = OUTER_LIGHT;
-    this.manager.lightMap[this.x - 2][this.y] = OUTER_LIGHT;
-    this.manager.lightMap[this.x - 2][this.y + 1] = OUTER_LIGHT;
-    this.manager.lightMap[this.x - 2][this.y + 2] = OUTER_LIGHT;
-
-    this.manager.lightMap[this.x - 1][this.y + 2] = OUTER_LIGHT;
-    this.manager.lightMap[this.x][this.y + 2] = OUTER_LIGHT;
-    this.manager.lightMap[this.x + 1][this.y + 2] = OUTER_LIGHT;
   }
 
-  tick(xStart, xEnd, yStart, yEnd) {
-    // console.log(this.x, this.y);
-    // const centerTile = this.handler.getWorld().getTile(this.x, this.y);
-    // centerTile.light = Math.random();
-    // for (let y = yStart; y < yEnd; y++) {
-    //   for (let x = xStart; x < xEnd; x++) {
-    //     const targetTile = this.handler.getWorld().getTile(x, y);
-
-        // if (targetTile) {
-          // targetTile.light = Math.random();
-        // }
-      // }
-    // }
+  tick() {
+    //
   }
 
   render(_g) {
+    const x = (this.x  * TILE_WIDTH) - this.handler.getGameCamera().getxOffset();
+    const y = (this.y * TILE_HEIGHT) - this.handler.getGameCamera().getyOffset() ;
+
+    //draw crappy torch for now
     _g.fillStyle = 'yellow';
-    _g.fillRect((this.x  * TILE_WIDTH) - this.handler.getGameCamera().getxOffset() + 16, (this.y * TILE_HEIGHT) - this.handler.getGameCamera().getyOffset() + 16, 32, 32);
+    _g.fillRect(x + 16, y + 8, 32, 32);
+    _g.fillStyle = 'orange';
+    _g.fillRect(x + 24, y + 16, 16, 16);
+    _g.fillStyle = 'brown';
+    _g.fillRect(x + 24, y + 40, 16, 16);
   }
 }
