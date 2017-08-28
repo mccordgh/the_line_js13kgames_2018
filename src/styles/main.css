@@ -11,6 +11,7 @@ body {
 /*NEGATIVE MARGIN IS HALF OF WIDTH AND HEIGHT*/
 #canvas {
     background-color: inherit;
+    /*border: 1px solid white;*/
     border-radius: 235px;
     left:50%;
     margin:-224px 0 0 -224px;

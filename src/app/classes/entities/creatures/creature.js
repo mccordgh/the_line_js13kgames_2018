@@ -2,7 +2,7 @@ import { Ending } from '../../menus/ending';
 import { Entity } from '../entity';
 import { Rectangle } from '../../gfx/shapes/rectangle';
 
-const DEFAULT_SPEED = 80,
+const DEFAULT_SPEED = 120,
   DEFAULT_HEALTH = 200,
   DEFAULT_CREATURE_WIDTH = 64,
   DEFAULT_CREATURE_HEIGHT = 64,

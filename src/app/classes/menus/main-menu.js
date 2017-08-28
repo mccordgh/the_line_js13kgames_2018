@@ -12,37 +12,40 @@ import { Menu } from './menu';
 
     render(_g) {
       if (_g) {
+        let text, xPos, yPos;
+
         const screenWidth = this.handler.getWidth();
         const screenHeight = this.handler.getHeight();
 
         _g.fillStyle = "black";
         _g.fillRect(0, 0, screenWidth, screenHeight);
 
-        let text = 'ALONE';
-        let xPos = (screenWidth / 2) - (_g.measureText(text).width / 2);
-        let yPos = (screenHeight / 4);
         _g.drawText({
           fillColor: 'white',
-          text,
-          fontSize: 64,
-          font: 'serif',
-          x: xPos,
-          y: yPos,
-        });
-
-        text = 'press enter to start';
-        xPos = (screenWidth / 2) - (_g.measureText(text).width / 2);
-        yPos = (screenHeight / 2);
-        _g.drawText({
-          fillColor: 'white',
-          text,
+          text: 'you are',
           fontSize: 32,
           font: 'serif',
-          x: 150,
-          y: 300,
+          x: 90,
+          y: (screenHeight / 4),
         });
 
-        //
+        _g.drawText({
+          fillColor: 'yellow',
+          text: 'A L O N E',
+          fontSize: 64,
+          font: 'serif',
+          x: 80,
+          y: screenHeight / 2,
+        });
+
+        _g.drawText({
+          fillColor: 'white',
+          text: 'press enter',
+          fontSize: 32,
+          font: 'serif',
+          x: 210,
+          y: screenHeight / 1.4,
+        });
       }
     }
 

@@ -1,8 +1,9 @@
-import {LightSource} from './light-source';
+import { LightSource } from './light-source';
 
 const TILE_HEIGHT = 64;
 const TILE_WIDTH = 64;
 const DEFAULT_LIGHT = 0.85;
+const CENTER_LIGHT = 0.3;
 
 export class LightManager {
   constructor(_handler) {
@@ -40,10 +41,6 @@ export class LightManager {
       source.render(_g);
     });
 
-    // _g.fillStyle = 'black';
-    // _g.globalAlpha = DEFAULT_LIGHT;
-    // _g.fillRect (0, 0, this.handler.getWidth(), this.handler.getHeight());
-    // _g.globalAlpha = 1.0;
     this.drawLightBlocks(xStart, xEnd, yStart, yEnd, _g);
   }
 
@@ -52,7 +49,9 @@ export class LightManager {
 
    for (let y = yStart; y < yEnd; y++) {
      for (let x = xStart; x < xEnd; x++) {
-      _g.globalAlpha = this.lightMap[x][y];
+       const tile = this.handler.getWorld().getTile(x, y).type;
+
+       _g.globalAlpha =  (tile === 'switch' || tile === 'exit') ? CENTER_LIGHT : this.lightMap[x][y];
 
        _g.fillRect(x * TILE_WIDTH - this.handler.getGameCamera().getxOffset(), y * TILE_HEIGHT - this.handler.getGameCamera().getyOffset(), TILE_WIDTH, TILE_HEIGHT);
      }
@@ -63,6 +62,10 @@ export class LightManager {
   //
   addSource(x, y) {
     this.sources.push(new LightSource(x, y, this.handler, this));
+  }
+
+  setLight(x, y, lightAmount) {
+    this.lightMap[x][y] = lightAmount;
   }
   //
   // removeSource(_source) {

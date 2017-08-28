@@ -31,7 +31,7 @@ export class World {
 
   init() {
     this.lightManager.addSource(4, 2);
-    this.addRandomLightSources(10);
+    this.addRandomLightSources(20);
     this.setPlayerSpawn(this.spawnX, this.spawnY);
     this.populateEnemies(20);
   }
@@ -54,7 +54,7 @@ export class World {
   }
 
   populateEnemies(number) {
-    // this.entityManager.addEntity(new Ghost(this.handler, 3 * TILE_WIDTH, 1 * TILE_HEIGHT));
+    this.entityManager.addEntity(new Ghost(this.handler, 3 * TILE_WIDTH, 3 * TILE_HEIGHT));
 
     for (let i = 0; i < number; i++) {
       const eSpawnX = Math.floor(Math.random() * ((WORLD_WIDTH - 5) - 5 + 1)) + 5;
