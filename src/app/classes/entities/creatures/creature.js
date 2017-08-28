@@ -95,7 +95,7 @@ export class Creature extends Entity {
     const tile1 = this.handler.getWorld().getTile(c1, temp);
     const tile2 = this.handler.getWorld().getTile(c2, temp);
 
-    console.log(tile1.type, tile2.type);
+    // console.log(tile1.type, tile2.type);
 
     if (tile1.type === 'switch') {
       this.handler.getWorld().swapGreenAndBlueTiles(tile1.color);
