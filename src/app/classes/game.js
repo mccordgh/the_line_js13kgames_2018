@@ -71,7 +71,6 @@ export class Game {
   }
 
   getGameCamera() {
-    // console.log('returning', gameCamera);
     return gameCamera;
   }
 
@@ -86,10 +85,10 @@ export class Game {
     g = display.getGraphics();
     state = new State();
     gameCamera = new GameCamera(handler, 0, 0);
-    gameState = new GameState(handler);
-    state.setState(gameState);
-    // mainMenu = new MainMenu(handler);
-    // state.setState(mainMenu);
+    // gameState = new GameState(handler);
+    // state.setState(gameState);
+    mainMenu = new MainMenu(handler);
+    state.setState(mainMenu);
   }
 
   tick(_dt) {

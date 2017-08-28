@@ -156,10 +156,17 @@ export class MazeGenerator {
     finalMaze[Math.ceil(mazeWidth / 2) + 1][mazeHeight - 2] = 1;
   }
 
+  static addOneOfEachSwitchAtStart() {
+    finalMaze[4][1] = 3;
+    finalMaze[4][3] = 7;
+    finalMaze[2][4] = 2;
+  }
+
   static getRandomMaze(height, width, spawnX, spawnY) {
     this.createMaze();
     this.createRooms();
     this.createBarriers();
+    this.addOneOfEachSwitchAtStart();
     return {
       width,
       height,

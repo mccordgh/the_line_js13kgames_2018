@@ -6,7 +6,6 @@ export class Menu {
 
   tick(_dt) {
     this.countSinceInput++;
-
     if (this.countSinceInput > 8)
       this.getInput(_dt);
 
