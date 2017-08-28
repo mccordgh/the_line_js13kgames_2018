@@ -33,7 +33,7 @@ export class World {
     this.lightManager.addSource(4, 2);
     this.addRandomLightSources(10);
     this.setPlayerSpawn(this.spawnX, this.spawnY);
-    this.populateEnemies(10);
+    this.populateEnemies(20);
   }
 
   addRandomLightSources(numberOfSources) {
@@ -56,11 +56,11 @@ export class World {
   populateEnemies(number) {
     // this.entityManager.addEntity(new Ghost(this.handler, 3 * TILE_WIDTH, 1 * TILE_HEIGHT));
 
-    for (let i = 3; i <= number * 2; i += 2) {
-      const eSpawnX = TILE_WIDTH * i; // Math.round(i * 1.5);
-      const eSpawnY = TILE_HEIGHT * i; //Math.round(i * 1.5);
+    for (let i = 0; i < number; i++) {
+      const eSpawnX = Math.floor(Math.random() * ((WORLD_WIDTH - 5) - 5 + 1)) + 5;
+      const eSpawnY = Math.floor(Math.random() * ((WORLD_HEIGHT - 5) - 5 + 1)) + 5;
 
-      this.entityManager.addEntity(new Ghost(this.handler, eSpawnX, eSpawnY));
+      this.entityManager.addEntity(new Ghost(this.handler, eSpawnX * TILE_WIDTH, eSpawnY * TILE_HEIGHT));
     }
   }
 

@@ -16,6 +16,11 @@ export class Creature extends Entity {
     this.speed = DEFAULT_SPEED;
     this.xMove = 0;
     this.yMove = 0;
+    this.init();
+  }
+
+  init() {
+    //
   }
 
   move() {
