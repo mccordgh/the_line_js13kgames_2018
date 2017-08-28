@@ -138,9 +138,28 @@ export class MazeGenerator {
     finalMaze[startX + Math.floor(size / 2)][startY + Math.floor(size / 2)] = entity;
   }
 
+  static createBarriers() {
+    //mid left
+    finalMaze[1][Math.ceil(mazeHeight / 2)] = 1;
+    finalMaze[1][Math.ceil(mazeHeight / 2) + 1] = 1;
+
+    //mid right
+    finalMaze[mazeWidth - 2][Math.ceil(mazeHeight / 2)] = 1;
+    finalMaze[mazeWidth - 2][Math.ceil(mazeHeight / 2) + 1] = 1;
+
+    //mid top
+    finalMaze[Math.ceil(mazeWidth / 2)][1] = 1;
+    finalMaze[Math.ceil(mazeWidth / 2) + 1][1] = 1;
+
+    //mid bottom
+    finalMaze[Math.ceil(mazeWidth / 2)][mazeHeight - 2] = 1;
+    finalMaze[Math.ceil(mazeWidth / 2) + 1][mazeHeight - 2] = 1;
+  }
+
   static getRandomMaze(height, width, spawnX, spawnY) {
     this.createMaze();
     this.createRooms();
+    this.createBarriers();
     return {
       width,
       height,
