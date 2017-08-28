@@ -90,17 +90,17 @@ export class MazeGenerator {
   }
 
   static getRandomRoomEntities() {
-    //9 - SwitchGreen,  6 - SwitchBlue,  10 - Exit,  1 - wall (placeholder for now)
-    const entities = [10, 9, 6, 1];
-    const rooms = [];
-
+    //9 - SwitchGreen,  6 - SwitchBlue,  10 - Exit,  0 - path (empty room)
+    const entities = [10, 0, 9];
     //let's spawn one of the switches in room #1 with the player
-    const maxSwitchIndex = 2;
-    const minSwitchIndex = 1;
-    const whichSwitch = Math.floor(Math.random() * (maxSwitchIndex - minSwitchIndex + 1)) + minSwitchIndex;
+    const rooms = [9];
 
-    rooms.push(entities[whichSwitch]);
-    entities.splice(whichSwitch, 1);
+    // const maxSwitchIndex = 2;
+    // const minSwitchIndex = 1;
+    // const whichSwitch = Math.floor(Math.random() * (maxSwitchIndex - minSwitchIndex + 1)) + minSwitchIndex;
+    //
+    // rooms.push(entities[whichSwitch]);
+    // entities.splice(whichSwitch, 1);
 
     //then let's randomly spawn the rest of the stuff in the other three rooms
     // console.log({rooms, entities});

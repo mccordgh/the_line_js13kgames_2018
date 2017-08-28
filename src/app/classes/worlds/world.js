@@ -10,7 +10,7 @@ const TILE_HEIGHT = 64;
 let yellowTilesDown = false;
 let yellowWallInterval = 0;
 const yellowWallIntervalMax = 3 * 60; // We want X seconds so we multiply that by our FPS which is 60
-let switchTimer = 0;
+let switchTimer = 60;
 
 export class World {
   constructor(_handler) {

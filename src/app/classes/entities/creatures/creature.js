@@ -35,23 +35,27 @@ export class Creature extends Entity {
       return;
     }
 
-    const tempX = this.xMove > 0
-      ? parseInt((this.x + this.xMove + this.bounds.x + this.bounds.width) / TILE_WIDTH)
-      : parseInt((this.x + this.xMove + this.bounds.x) / TILE_WIDTH);
-
-    const c1 = parseInt((this.y + this.bounds.y) / TILE_HEIGHT);
-    const c2 = parseInt((this.y + this.bounds.y + this.bounds.height) / TILE_HEIGHT);
-
-    const setX = this.xMove > 0
-      ? tempX * TILE_WIDTH - this.bounds.x - this.bounds.width - 1
-      : tempX * TILE_WIDTH + TILE_WIDTH - this.bounds.x;
-
-    // this.x = (!c1 && !c2) ? this.x + this.xMove : setX;
-    if(!this.collisionWithTile(tempX, c1) && !this.collisionWithTile(tempX, c2)) {
-      this.x += this.xMove;
-    } else {
-      this.x = setX;
-      this.checkForSwitchOrTrigger(c1, c2, tempX);
+    let tempX;
+    if (this.xMove > 0) {
+      tempX = parseInt((this.x + this.xMove + this.bounds.x + this.bounds.width) / TILE_WIDTH);
+      const c1 = parseInt((this.y + this.bounds.y) / TILE_HEIGHT);
+      const c2 = parseInt((this.y + this.bounds.y + this.bounds.height) / TILE_HEIGHT);
+      if(!this.collisionWithTile(tempX, c1) && !this.collisionWithTile(tempX, c2)) {
+        this.x += this.xMove;
+      } else {
+        this.x = tempX * TILE_WIDTH - this.bounds.x - this.bounds.width - 1;
+        this.checkForSwitchOrTrigger(c1, c2, tempX);
+      }
+    } else if (this.xMove < 0) {
+      tempX = parseInt((this.x + this.xMove + this.bounds.x) / TILE_WIDTH);
+      const c1 = parseInt((this.y + this.bounds.y) / TILE_HEIGHT);
+      const c2 = parseInt((this.y + this.bounds.y + this.bounds.height) / TILE_HEIGHT);
+      if(!this.collisionWithTile(tempX, c1) && !this.collisionWithTile(tempX, c2)) {
+        this.x += this.xMove;
+      } else {
+        this.x = tempX * TILE_WIDTH + TILE_WIDTH - this.bounds.x;
+        this.checkForSwitchOrTrigger(c1, c2, tempX);
+      }
     }
   }
 
@@ -61,29 +65,37 @@ export class Creature extends Entity {
       return;
     }
 
-    const tempY = this.yMove > 0
-      ? parseInt((this.y + this.yMove + this.bounds.y + this.bounds.height) / TILE_HEIGHT)
-      : parseInt((this.y + this.yMove + this.bounds.y) / TILE_HEIGHT);
-
-    const c1 = parseInt((this.x + this.bounds.x) / TILE_WIDTH);
-    const c2 = parseInt((this.x + this.bounds.x + this.bounds.width) / TILE_WIDTH);
-
-    const setY = this.yMove > 0
-      ? tempY * TILE_HEIGHT - this.bounds.y - this.bounds.height - 1
-      : tempY * TILE_HEIGHT + TILE_HEIGHT - this.bounds.y;
-
-    // this.y = (!c1 && !c2) ? this.y + this.yMove : setY;
-    if(!this.collisionWithTile(c1, tempY) && !this.collisionWithTile(c2, tempY)) {
-      this.y += this.yMove;
-    } else {
-      this.y = setY;
-      this.checkForSwitchOrTrigger(c1, c2, tempY);
+    let tempY;
+    if (this.yMove > 0) {
+      tempY = parseInt((this.y + this.yMove + this.bounds.y + this.bounds.height) / TILE_HEIGHT);
+      const c1 = parseInt((this.x + this.bounds.x) / TILE_WIDTH);
+      const c2 = parseInt((this.x + this.bounds.x + this.bounds.width) / TILE_WIDTH);
+      if(!this.collisionWithTile(c1, tempY) &&
+        !this.collisionWithTile(c2, tempY)) {
+        this.y += this.yMove;
+      } else {
+        this.y = tempY * TILE_HEIGHT - this.bounds.y - this.bounds.height - 1;
+        this.checkForSwitchOrTrigger(c1, c2, tempY);
+      }
+    } else if (this.yMove < 0) {
+      tempY = parseInt((this.y + this.yMove + this.bounds.y) / TILE_HEIGHT);
+      const c1 = parseInt((this.x + this.bounds.x) / TILE_WIDTH);
+      const c2 = parseInt((this.x + this.bounds.x + this.bounds.width) / TILE_WIDTH);
+      if(!this.collisionWithTile(c1, tempY) &&
+        !this.collisionWithTile(c2, tempY)) {
+        this.y += this.yMove;
+      } else {
+        this.y = tempY * TILE_HEIGHT + TILE_HEIGHT - this.bounds.y;
+        this.checkForSwitchOrTrigger(c1, c2, tempY);
+      }
     }
   }
 
   checkForSwitchOrTrigger(c1, c2, temp) {
     const tile1 = this.handler.getWorld().getTile(c1, temp);
     const tile2 = this.handler.getWorld().getTile(c2, temp);
+
+    console.log(tile1.type, tile2.type);
 
     if (tile1.type === 'switch') {
       this.handler.getWorld().swapGreenAndBlueTiles(tile1.color);
