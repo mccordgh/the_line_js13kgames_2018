@@ -18,7 +18,7 @@ export class Ghost extends Creature {
     this.patrol = this.getPatrolPattern();
     this.startX = _x;
     this.startY = _y;
-    this.patrolLength = 100;
+    this.patrolLength = 200;
     this.dirMoving = 0;
     this.numberOfMoves = 0;
   }
@@ -47,7 +47,7 @@ export class Ghost extends Creature {
       }
       this.numberOfMoves++;
 
-      if (this.numberOfMoves > 100) {
+      if (this.numberOfMoves > this.patrolLength) {
         this.dirMoving = this.dirMoving === 0 ? 1 : 0;
         this.numberOfMoves = 0;
         this.maybeChangePatrol();
@@ -61,7 +61,7 @@ export class Ghost extends Creature {
       }
       this.numberOfMoves++;
 
-      if (this.numberOfMoves > 100) {
+      if (this.numberOfMoves > this.patrolLength) {
         this.dirMoving = this.dirMoving === 0 ? 1 : 0;
         this.numberOfMoves = 0;
         this.maybeChangePatrol();

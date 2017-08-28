@@ -47,6 +47,8 @@ export class Entity {
     for(let i = 0; i < candidates.length; i++) {
       const e = candidates[i];
         if (e.getCollisionBounds(0, 0).intersects(this.getCollisionBounds(xOffset, yOffset))) {
+            if (this.type === 'monster' && e.type === 'monster') return false;
+
             if ((this.type === 'player' && e.type === 'monster') || this.type === 'monster' && e.type === 'player') {
               if (this.invincible || e.invincible) return false;
 

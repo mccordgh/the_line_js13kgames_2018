@@ -20,6 +20,7 @@ export class Player extends Creature {
     this.clipping = false;
     this.invincible = false;
     this.superSpeed = false;
+    this.allCheats = false;
   }
 
   tick(_dt) {
@@ -71,6 +72,21 @@ export class Player extends Creature {
     if (inputCounter > 15 || getDevInput) {
       getDevInput = true;
       inputCounter = 0;
+      if (this.handler.getKeyManager().a) {
+        //all cheats
+        const msg = this.allCheats ? ' ALL CHEATS disabled ' : ' ALL CHEATS enabled ';
+
+        this.handler.devMessage(msg);
+
+        this.allCheats = !this.allCheats;
+
+        this.clipping = this.allCheats;
+        this.invincible = this.allCheats;
+        this.superSpeed = this.allCheats;
+
+        getDevInput = false;
+      }
+
       if (this.handler.getKeyManager().i) {
         //invincible
         const msg = this.invincible ? ' invincibility disabled ' : ' invincibility enabled ';

@@ -10,6 +10,7 @@ export class KeyManager {
     // this.j = keys[74];
     // this.k = keys[75];
     // this.l = keys[76];
+    this.a = keys[65];
     this.c = keys[67];
     this.i = keys[73];
     this.x = keys[88];
