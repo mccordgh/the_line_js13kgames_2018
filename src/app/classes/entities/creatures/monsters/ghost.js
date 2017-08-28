@@ -29,6 +29,12 @@ export class Ghost extends Creature {
     return patterns[Math.floor(Math.random() * patterns.length)];
   }
 
+  maybeChangePatrol() {
+    if (Math.random() < 0.41) {
+      this.patrol = this.patrol === 'vertical' ? 'horizontal' : 'vertical';
+    }
+  }
+
   tick(_dt) {
     this.xMove = 0;
     this.yMove = 0;
@@ -44,6 +50,7 @@ export class Ghost extends Creature {
       if (this.numberOfMoves > 100) {
         this.dirMoving = this.dirMoving === 0 ? 1 : 0;
         this.numberOfMoves = 0;
+        this.maybeChangePatrol();
       }
 
     } else if (this.patrol === 'horizontal') {
@@ -57,6 +64,7 @@ export class Ghost extends Creature {
       if (this.numberOfMoves > 100) {
         this.dirMoving = this.dirMoving === 0 ? 1 : 0;
         this.numberOfMoves = 0;
+        this.maybeChangePatrol();
       }
     }
 
