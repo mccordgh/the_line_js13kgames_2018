@@ -2,7 +2,7 @@ const TILE_WIDTH = 64;
 const TILE_HEIGHT = 64;
 const CENTER_LIGHT = 0.3;
 const INNER_LIGHT = 0.5;
-const OUTER_LIGHT = 0.7;
+const OUTER_LIGHT = 0.65;
 
 export class LightSource {
   constructor(_x, _y, _handler, _manager) {
@@ -42,14 +42,15 @@ export class LightSource {
 
   render(_g) {
     const x = (this.x  * TILE_WIDTH) - this.handler.getGameCamera().getxOffset();
-    const y = (this.y * TILE_HEIGHT) - this.handler.getGameCamera().getyOffset() ;
+    const y = (this.y * TILE_HEIGHT) - this.handler.getGameCamera().getyOffset();
 
     //draw crappy torch for now
-    _g.fillStyle = 'yellow';
-    _g.fillRect(x + 16, y + 8, 32, 32);
     _g.fillStyle = 'orange';
+    _g.fillRect(x + 16, y + 8, 32, 32);
+    _g.fillStyle = 'yellow';
     _g.fillRect(x + 24, y + 16, 16, 16);
     _g.fillStyle = 'brown';
-    _g.fillRect(x + 24, y + 40, 16, 16);
+    _g.fillRect(x + 24, y + 38, 16, 16);
+    //crappy torch
   }
 }

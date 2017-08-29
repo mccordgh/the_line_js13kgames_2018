@@ -49,7 +49,7 @@ export class Creature extends Entity {
         this.x += this.xMove;
       } else {
         this.x = tempX * TILE_WIDTH - this.bounds.x - this.bounds.width - 1;
-        this.checkForSwitchOrTrigger(c1, c2, tempX);
+        if (this.type === 'player') this.checkForSwitchOrTrigger(c1, c2, tempX);
       }
     } else if (this.xMove < 0) {
       tempX = parseInt((this.x + this.xMove + this.bounds.x) / TILE_WIDTH);
@@ -59,7 +59,7 @@ export class Creature extends Entity {
         this.x += this.xMove;
       } else {
         this.x = tempX * TILE_WIDTH + TILE_WIDTH - this.bounds.x;
-        this.checkForSwitchOrTrigger(c1, c2, tempX);
+        if (this.type === 'player') this.checkForSwitchOrTrigger(c1, c2, tempX);
       }
     }
   }

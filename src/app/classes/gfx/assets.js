@@ -22,11 +22,11 @@ export class Assets {
   // }
 
   getWidth() {
-    return DEFAULT_WIDTH;
+    return SPRITE_WIDTH;
   }
 
   getHeight() {
-    return DEFAULT_HEIGHT;
+    return SPRITE_HEIGHT;
   }
 
   static getAssets(_name) {
