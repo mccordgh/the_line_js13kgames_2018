@@ -3,10 +3,10 @@ export class Handler {
     this.game = _game;
     this.console = document.getElementById('console');
     this.devMessage(' dev cheats initialized \n' +
-      ' c - clipping \n' +
-      ' i - invincibility \n' +
-      ' x - super speed \n' +
-      ' a - all cheats '
+      ' 2 - clipping \n' +
+      ' 3 - invincibility \n' +
+      ' 4 - super speed \n' +
+      ' 1 - all cheats '
     );
   }
 
@@ -16,8 +16,6 @@ export class Handler {
       , 'border: 1px solid #3E0E02'
       , 'color: black'
       , 'display: block'
-      // , 'text-shadow: 0 1px 0 rgba(0, 0, 0, 0.3)'
-      // , 'box-shadow: 0 1px 0 rgba(255, 255, 255, 0.4) inset, 0 5px 3px -5px rgba(0, 0, 0, 0.5), 0 -13px 5px -10px rgba(255, 255, 255, 0.4) inset'
       , 'line-height: 40px'
       , 'text-align: center'
       , 'font-size: 18px'

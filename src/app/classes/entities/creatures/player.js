@@ -53,17 +53,18 @@ export class Player extends Creature {
   getInput(_dt) {
     this.xMove = 0;
     this.yMove = 0;
+    const manager = this.handler.getKeyManager();
 
-    if(this.handler.getKeyManager().up) {
+    if(manager.up || manager.w || manager.z) {
       this.yMove = -this.speed * _dt;
     }
-    if (this.handler.getKeyManager().down) {
+    if (manager.down || manager.s) {
       this.yMove = this.speed * _dt;
     }
-    if(this.handler.getKeyManager().left) {
+    if(manager.left || manager.a || manager.q) {
       this.xMove = -this.speed * _dt;
     }
-    if (this.handler.getKeyManager().right) {
+    if (manager.right || manager.d) {
       this.xMove = this.speed * _dt;
     }
 
@@ -72,7 +73,7 @@ export class Player extends Creature {
     if (inputCounter > 15 || getDevInput) {
       getDevInput = true;
       inputCounter = 0;
-      if (this.handler.getKeyManager().a) {
+      if (manager.one) {
         //all cheats
         const msg = this.allCheats ? ' ALL CHEATS disabled ' : ' ALL CHEATS enabled ';
 
@@ -87,7 +88,7 @@ export class Player extends Creature {
         getDevInput = false;
       }
 
-      if (this.handler.getKeyManager().i) {
+      if (manager.three) {
         //invincible
         const msg = this.invincible ? ' invincibility disabled ' : ' invincibility enabled ';
 
@@ -98,7 +99,7 @@ export class Player extends Creature {
         getDevInput = false;
       }
 
-      if (this.handler.getKeyManager().c) {
+      if (manager.two) {
         //clipping
         const msg = this.clipping ? ' clipping disabled ' : ' clipping enabled ';
 
@@ -108,7 +109,7 @@ export class Player extends Creature {
         getDevInput = false;
       }
 
-      if (this.handler.getKeyManager().x) {
+      if (manager.four) {
         //super speed
         const msg = this.superSpeed ? ' super speed disabled ' : ' super speed enabled ';
 

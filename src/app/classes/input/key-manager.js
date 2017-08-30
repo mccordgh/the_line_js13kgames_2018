@@ -6,17 +6,20 @@ export class KeyManager {
     this.down = keys[40];
     this.left = keys[37];
     this.right = keys[39];
-    // this.h = keys[72];
-    // this.j = keys[74];
-    // this.k = keys[75];
-    // this.l = keys[76];
+    this.one = keys[49];
+    this.two = keys[50];
+    this.three = keys[51];
+    this.four = keys[52];
     this.a = keys[65];
-    this.c = keys[67];
-    this.i = keys[73];
-    this.x = keys[88];
+    this.w = keys[87];
+    this.s = keys[83];
+    this.d = keys[68];
+    this.z = keys[90];
+    this.q = keys[81];
+    // this.c = keys[67];
+    // this.i = keys[73];
+    // this.x = keys[88];
     this.enter = keys[13];
-    // TODO SUPPORT ZQSD keys and WASD
-    // W - 90, Z - 87, D - 68, S - 83, A - 65, Q - 81
   }
 }
 
