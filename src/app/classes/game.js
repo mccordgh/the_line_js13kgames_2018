@@ -5,6 +5,7 @@ import { Handler } from './handler';
 import { KeyManager } from './input/key-manager';
 import { MainMenu } from './menus/main-menu';
 import { State } from './states/state';
+import { SoundManager } from './sounds/sound-manager';
 
 let running = false;
 let title, width, height, g, display, keyManager, handler, gameCamera, soundManager;
@@ -54,6 +55,10 @@ export class Game {
     this.run();
   }
 
+  getSoundManager() {
+    return soundManager;
+  }
+
   getKeyManager() {
     return keyManager;
   }
@@ -85,6 +90,8 @@ export class Game {
     g = display.getGraphics();
     state = new State();
     gameCamera = new GameCamera(handler, 0, 0);
+    soundManager = new SoundManager();
+    soundManager.init();
     // gameState = new GameState(handler);
     // state.setState(gameState);
     mainMenu = new MainMenu(handler);

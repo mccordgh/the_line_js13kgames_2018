@@ -5,7 +5,8 @@ export class Handler {
     this.devMessage(' dev cheats initialized \n' +
       ' c - clipping \n' +
       ' i - invincibility \n' +
-      ' x - super speed '
+      ' x - super speed \n' +
+      ' a - all cheats '
     );
   }
 
