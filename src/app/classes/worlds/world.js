@@ -13,7 +13,7 @@ const TILE_WIDTH = 64;
 const TILE_HEIGHT = 64;
 let yellowTilesDown = false;
 let yellowWallInterval = 0;
-const yellowWallIntervalMax = 2 * 60; // We want X seconds so we multiply that by our FPS which is 60
+const yellowWallIntervalMax = 3 * 60; // We want X seconds so we multiply that by our FPS which is 60
 let switchTimer = 60;
 
 export class World {
@@ -31,17 +31,19 @@ export class World {
 
   init() {
     this.lightManager.addSource(4, 2);
-    this.addRandomLightSources(20);
+    this.addEvenSpreadOfLightSources(7);
     this.setPlayerSpawn(this.spawnX, this.spawnY);
-    this.populateEnemies(20);
+    this.entityManager.addEntity(new Ghost(this.handler, 3 * TILE_WIDTH, 3 * TILE_HEIGHT));
+    this.addEvenSPreadOfMonsters(8);
   }
 
-  addRandomLightSources(numberOfSources) {
-    for (let i = 0; i < numberOfSources; i++) {
-      const x = Math.floor(Math.random() * ((WORLD_WIDTH - 3) - 3 + 1)) + 3;
-      const y = Math.floor(Math.random() * ((WORLD_HEIGHT - 3) - 3 + 1)) + 3;
+  addEvenSpreadOfLightSources(spread) {
+    const spawns = Math.round(((WORLD_HEIGHT + WORLD_WIDTH) / 2) / spread);
 
-      this.lightManager.addSource(x, y);
+    for (let y = spread; y <= WORLD_HEIGHT; y += spread) {
+      for (let x = spread; x <= WORLD_WIDTH; x += spread) {
+        this.lightManager.addSource(x, y);
+      }
     }
   }
 
@@ -53,14 +55,14 @@ export class World {
     return WORLD_WIDTH;
   }
 
-  populateEnemies(number) {
-    this.entityManager.addEntity(new Ghost(this.handler, 3 * TILE_WIDTH, 3 * TILE_HEIGHT));
+  addEvenSPreadOfMonsters(spread) {
+    const spawns = Math.round(((WORLD_HEIGHT + WORLD_WIDTH) / 2) / spread);
+    let count = 0;
 
-    for (let i = 0; i < number; i++) {
-      const eSpawnX = Math.floor(Math.random() * ((WORLD_WIDTH - 5) - 5 + 1)) + 5;
-      const eSpawnY = Math.floor(Math.random() * ((WORLD_HEIGHT - 5) - 5 + 1)) + 5;
-
-      this.entityManager.addEntity(new Ghost(this.handler, eSpawnX * TILE_WIDTH, eSpawnY * TILE_HEIGHT));
+    for (let y = spread; y <= WORLD_HEIGHT; y += spread) {
+      for (let x = spread; x <= WORLD_WIDTH; x += spread) {
+        this.entityManager.addEntity(new Ghost(this.handler, x * TILE_WIDTH, y * TILE_WIDTH));
+      }
     }
   }
 
