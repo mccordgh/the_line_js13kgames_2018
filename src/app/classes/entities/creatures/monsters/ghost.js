@@ -9,6 +9,8 @@ export class Ghost extends Creature {
     this.assets = Assets.getAssets("creatures");
     this.x = _x;
     this.y = _y;
+    this.spawnX = _x;
+    this.spawnY = _y;
     this.bounds.x = 10;
     this.bounds.y = 10;
     this.bounds.width = TILE_WIDTH  - (this.bounds.x * 2);
@@ -36,6 +38,19 @@ export class Ghost extends Creature {
   }
 
   tick(_dt) {
+    const width = this.handler.getWorld().getWorldWidth() * TILE_WIDTH;
+    const height = this.handler.getWorld().getWorldHeight() * TILE_HEIGHT;
+    // console.log({
+    //   x: this.x,
+    //   y: this.y,
+    //   width,
+    //   height
+    // })
+    if (this.x < 1 || this.y < 1 || this.x > width || this.y > height) {
+      this.x = this.spawnX;
+      this.y = this.spawnY;
+    }
+
     this.xMove = 0;
     this.yMove = 0;
 
@@ -69,7 +84,7 @@ export class Ghost extends Creature {
     }
 
     this.move();
-
+    // console.log({x: this.x, y: this.y})
     // this.target = this.handler.getWorld().getEntityManager().getSingleEntity(this.targetType);
     // if (this.target) {
     //   if(this.target.y < this.y) {

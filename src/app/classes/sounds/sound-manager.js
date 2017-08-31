@@ -31,14 +31,13 @@ export class SoundManager {
 
         audio.src = URL.createObjectURL(new Blob([wave], {type: "audio/wav"}));
         audio.play();
-        audio.volume = .5;
+        audio.volume = .3;
 
         setInterval(function () {
           // Get currently playing data.
           const t = audio.currentTime;
           const data = player.getData(t, 300);
           if (data && this.logged === 0) {
-            console.log(data);
             this.logged++;
           }
 

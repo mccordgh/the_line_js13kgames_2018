@@ -167,12 +167,17 @@ export class World {
   }
 
   getTile(_x, _y) {
-    if (_x < 0 || _y < 0) {
+    // if (_x < 0 || _y < 0) {
       // console.log(`dat weird x and y bug ${_x}, ${_y}`);
-      return;
+      // return;
+    // }
+    try {
+      return TileManager.getTiles()[this.tiles[_x][_y]];
     }
-
-    return TileManager.getTiles()[this.tiles[_x][_y]];
+    catch(e) {
+      // console.log('Tile Error IN WORLD Dummbbb');
+      // console.log({_x, _y, TileManager, tiles: TileManager.getTiles(), thisTiles: this.tiles[_x][_y]});
+    }
   }
 
   getWidth() {

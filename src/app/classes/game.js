@@ -90,20 +90,22 @@ export class Game {
     g = display.getGraphics();
     state = new State();
     gameCamera = new GameCamera(handler, 0, 0);
-    // soundManager = new SoundManager();
-    // soundManager.init();
-    // mainMenu = new MainMenu(handler);
-    // state.setState(mainMenu);
-    gameState = new GameState(handler);
-    state.setState(gameState);
+    soundManager = new SoundManager();
+    soundManager.init();
+    mainMenu = new MainMenu(handler);
+    state.setState(mainMenu);
+    // gameState = new GameState(handler);
+    // state.setState(gameState);
   }
 
   tick(_dt) {
     keyManager.tick();
-    if (state.getState()) state.getState().tick(_dt);
+    if (state.getState() && !display.paused)
+      state.getState().tick(_dt);
   }
 
   render(){
-    if (state.getState()) state.getState().render(g);
+    if (state.getState() && !display.paused)
+      state.getState().render(g);
   }
 }

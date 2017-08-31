@@ -7,10 +7,10 @@ export class GameState {
   }
 
   tick(_dt) {
-    this.world.tick(_dt);
+      this.world.tick(_dt);
   }
 
   render(_g) {
-    this.world.render(_g);
+      this.world.render(_g);
   }
 }

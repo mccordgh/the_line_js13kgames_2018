@@ -6,6 +6,7 @@ export class Display {
     this.title = _title;
     this.width = _width;
     this.height = _height;
+    this.paused = false;
     this.createDisplay();
   }
 
@@ -18,7 +19,21 @@ export class Display {
     graphics.webkitImageSmoothingEnabled = false;
     graphics.mozImageSmoothingEnabled = false;
     graphics.imageSmoothingEnabled = false;
+    this.setEventListeners();
   };
+
+  setEventListeners() {
+    window.onblur = this.pause;
+    window.onfocus = this.unPause;
+  }
+
+  pause() {
+    this.paused = true;
+  }
+
+  unPause() {
+    this.paused = false;
+  }
 
   getTitle() {
     return this.title;
