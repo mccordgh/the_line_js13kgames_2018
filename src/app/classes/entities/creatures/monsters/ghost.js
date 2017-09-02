@@ -37,23 +37,17 @@ export class Ghost extends Creature {
     }
   }
 
-  tick(_dt) {
+  checkIfOffMap() {
     const width = this.handler.getWorld().getWorldWidth() * TILE_WIDTH;
     const height = this.handler.getWorld().getWorldHeight() * TILE_HEIGHT;
-    // console.log({
-    //   x: this.x,
-    //   y: this.y,
-    //   width,
-    //   height
-    // })
+
     if (this.x < 1 || this.y < 1 || this.x > width || this.y > height) {
       this.x = this.spawnX;
       this.y = this.spawnY;
     }
+  }
 
-    this.xMove = 0;
-    this.yMove = 0;
-
+  setPatrolMovement(_dt) {
     if (this.patrol === 'vertical') {
       if (this.dirMoving === 0) {
         this.yMove = -this.speed * _dt
@@ -70,9 +64,9 @@ export class Ghost extends Creature {
 
     } else if (this.patrol === 'horizontal') {
       if (this.dirMoving === 0) {
-              this.xMove = -this.speed * _dt;
+        this.xMove = -this.speed * _dt;
       } else {
-              this.xMove = this.speed * _dt;
+        this.xMove = this.speed * _dt;
       }
       this.numberOfMoves++;
 
@@ -82,8 +76,42 @@ export class Ghost extends Creature {
         this.maybeChangePatrol();
       }
     }
+  }
+
+  checkIfInWall() {
+    const xx = Math.round(this.x / TILE_WIDTH);
+    const yy = Math.round(this.y / TILE_HEIGHT);
+    const tile = this.handler.getWorld().getTile(xx, yy);
+
+    if (!tile.isSolid) return;
+
+    const startX = xx - 1;
+    const startY = yy - 1;
+    const endX = xx + 1;
+    const endY = yy + 1;
+
+    for (let j = startY; j < endY; j++) {
+      for (let i = startX; i < endX; i++) {
+        if (!this.handler.getWorld().getTile(i, j).isSolid && !(i !== xx && j !== yy)) {
+          this.x = i * TILE_WIDTH;
+          this.y = j * TILE_HEIGHT;
+          return;
+        }
+      }
+    }
+  }
+
+  tick(_dt) {
+    this.checkIfOffMap();
+    this.checkIfInWall();
+
+    this.xMove = 0;
+    this.yMove = 0;
+
+    this.setPatrolMovement(_dt);
 
     this.move();
+
     // console.log({x: this.x, y: this.y})
     // this.target = this.handler.getWorld().getEntityManager().getSingleEntity(this.targetType);
     // if (this.target) {
@@ -121,7 +149,7 @@ export class Ghost extends Creature {
 
   render(_g){
     _g.myDrawImage(this.getCurrentAnimationFrame(), this.x - this.handler.getGameCamera().getxOffset(), this.y - this.handler.getGameCamera().getyOffset(), this.width, this.height);
-    // this.healthbar.render(_g);
+
     // ****** DRAW BOUNDING BOX DON'T DELETE!!
     // _g.fillStyle = "blue";
     // _g.fillRect(this.bounds.x + this.x - this.handler.getGameCamera().getxOffset(), this.bounds.y + this.y - this.handler.getGameCamera().getyOffset(), this.bounds.width, this.bounds.height);
@@ -129,7 +157,7 @@ export class Ghost extends Creature {
   }
 
   getInput(_dt) {
-
+    //
   }
 
   getCurrentAnimationFrame() {
@@ -149,8 +177,4 @@ export class Ghost extends Creature {
       return this.assets.ghostDown;
     // }
   }
-
-  // getHealthBar: function() {
-  //   return this.healthbar;
-  // }
 }

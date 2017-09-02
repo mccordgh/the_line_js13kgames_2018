@@ -24,21 +24,21 @@ export class Player extends Creature {
   }
 
   tick(_dt) {
-      this.getInput(_dt);
+    this.getInput(_dt);
+    this.move();
+    if (this.superSpeed) {
       this.move();
-      if (this.superSpeed) {
-        this.move();
-        this.move();
-      }
-      this.handler.getGameCamera().centerOnEntity(this);
-      // if (this.yMove < 0)
-      //   this.assets.animations.walk_up.tick();
-      // if (this.yMove > 0)
-      //   this.assets.animations.walk_down.tick();
-      // if (this.xMove > 0)
-      //   this.assets.animations.walk_right.tick();
-      // if (this.xMove < 0)
-      //   this.assets.animations.walk_left.tick();
+      this.move();
+    }
+    this.handler.getGameCamera().centerOnEntity(this);
+    // if (this.yMove < 0)
+    //   this.assets.animations.walk_up.tick();
+    // if (this.yMove > 0)
+    //   this.assets.animations.walk_down.tick();
+    // if (this.xMove > 0)
+    //   this.assets.animations.walk_right.tick();
+    // if (this.xMove < 0)
+    //   this.assets.animations.walk_left.tick();
   }
 
   render(_g) {

@@ -115,16 +115,10 @@ export class Creature extends Entity {
   }
 
   collisionWithTile(_x, _y) {
-    // if (_x < 0 || _y < 0) {
-      // console.log(`dat weird x and y bug ${_x}, ${_y}`);
-      // return;
-    // }
     try {
       return this.handler.getWorld().getTile(_x, _y).isSolid;
     }
     catch(e) {
-      // console.log('Tile Error IN CREATURE Dummbbb');
-      // console.log({_x, _y, world: this.handler.getWorld(), tile: this.handler.getWorld().getTile(_x, _y)});
     }
   }
 

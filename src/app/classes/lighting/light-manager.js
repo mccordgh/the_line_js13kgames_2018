@@ -2,7 +2,7 @@ import { LightSource } from './light-source';
 
 const TILE_HEIGHT = 64;
 const TILE_WIDTH = 64;
-const DEFAULT_LIGHT = 0.75;
+const DEFAULT_LIGHT = 0.85;
 const CENTER_LIGHT = 0.3;
 
 export class LightManager {
@@ -31,9 +31,10 @@ export class LightManager {
   }
 
   tick() {
-    // this.sources.forEach((source) => {
-    //   source.tick(xStart, xEnd, yStart, yEnd);
-    // });
+    this.sources.forEach((source) => {
+      // source.tick(xStart, xEnd, yStart, yEnd);
+      source.tick();
+    });
   }
 
   render(xStart, xEnd, yStart, yEnd, _g) {

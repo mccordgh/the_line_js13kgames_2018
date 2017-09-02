@@ -32,14 +32,14 @@ export class World {
   init() {
     this.lightManager.addSource(4, 2);
     this.addEvenSpreadOfLightSources(7);
+
     this.setPlayerSpawn(this.spawnX, this.spawnY);
-    this.entityManager.addEntity(new Ghost(this.handler, 3 * TILE_WIDTH, 3 * TILE_HEIGHT));
+
+    this.entityManager.addEntity(new Ghost(this.handler, 3 * TILE_WIDTH, 4 * TILE_HEIGHT));
     this.addEvenSPreadOfMonsters(8);
   }
 
   addEvenSpreadOfLightSources(spread) {
-    const spawns = Math.round(((WORLD_HEIGHT + WORLD_WIDTH) / 2) / spread);
-
     for (let y = spread; y <= WORLD_HEIGHT; y += spread) {
       for (let x = spread; x <= WORLD_WIDTH; x += spread) {
         this.lightManager.addSource(x, y);
@@ -167,16 +167,10 @@ export class World {
   }
 
   getTile(_x, _y) {
-    // if (_x < 0 || _y < 0) {
-      // console.log(`dat weird x and y bug ${_x}, ${_y}`);
-      // return;
-    // }
     try {
       return TileManager.getTiles()[this.tiles[_x][_y]];
     }
     catch(e) {
-      // console.log('Tile Error IN WORLD Dummbbb');
-      // console.log({_x, _y, TileManager, tiles: TileManager.getTiles(), thisTiles: this.tiles[_x][_y]});
     }
   }
 
