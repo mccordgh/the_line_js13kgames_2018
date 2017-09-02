@@ -35,7 +35,6 @@ export class World {
 
     this.setPlayerSpawn(this.spawnX, this.spawnY);
 
-    this.entityManager.addEntity(new Ghost(this.handler, 3 * TILE_WIDTH, 4 * TILE_HEIGHT));
     this.addEvenSPreadOfMonsters(8);
   }
 
@@ -94,7 +93,7 @@ export class World {
   }
 
   swapGreenAndBlueTiles(color) {
-    if (switchTimer < 60) return;
+    if (switchTimer < 30) return;
 
     if (color === 'blue') {
       this.swapTilesByID(5, 3);
