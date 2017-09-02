@@ -16,6 +16,7 @@ export class LightSource {
     this.flickerToggle = 0;
     this.flickerCount = 0;
     this.flickerTimes = 0;
+    this.flickerLength = 0;
     this.init();
   }
 
@@ -65,7 +66,11 @@ export class LightSource {
     const chance = Math.random();
     if (chance < 0.85) return;
 
+    const max = 8;
+    const min = 4;
+
     this.lastFlickerCounter = 0;
+    this.flickerLength = Math.floor(Math.random() * (max - min + 1)) + min;
     this.flickering = true;
   }
 
@@ -82,7 +87,7 @@ export class LightSource {
 
     this.flickerCount++;
 
-    if (this.flickerCount >= 5) {
+    if (this.flickerCount >= this.flickerLength) {
       this.flickerCount = 0;
       this.flickerTimes++;
     }
@@ -106,7 +111,7 @@ export class LightSource {
   }
 
   render(_g) {
-    const x = (this.x  * TILE_WIDTH) - this.handler.getGameCamera().getxOffset();
+    const x = (this.x * TILE_WIDTH) - this.handler.getGameCamera().getxOffset();
     const y = (this.y * TILE_HEIGHT) - this.handler.getGameCamera().getyOffset();
 
     //draw crappy torch for now
