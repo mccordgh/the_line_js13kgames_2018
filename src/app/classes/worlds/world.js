@@ -25,7 +25,7 @@ export class World {
     this.lightManager = new LightManager(_handler);
     this.spatialGrid = new SpatialGrid(this.handler.getWidth() * TILE_WIDTH, this.handler.getHeight() * TILE_HEIGHT, 64);
     this.level = 1;
-    this.loadWorld();
+    this.loadWorld(this.level);
     this.init();
   }
 
