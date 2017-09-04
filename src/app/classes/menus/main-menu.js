@@ -1,9 +1,13 @@
+import { Assets } from '../gfx/assets';
 import { GameState } from '../states/game-state';
 import { Menu } from './menu';
 
   export class MainMenu extends Menu {
-    constructor(_handler){
+    constructor(_handler, test = 0){
       super(_handler);
+      this.test = test;
+      this.sprites = Assets.getAssets('sprites');
+      this.tiles = Assets.getAssets('tiles');
     }
 
     // tick(_dt) {
@@ -11,13 +15,81 @@ import { Menu } from './menu';
     // }
 
     render(_g) {
+      // tiles.path = cropTile(tiles, 1, 0);
+      // tiles.pathBlue = cropTile(tiles, 1, 2);
+      // tiles.pathGreen = cropTile(tiles, 2, 2);
+      // tiles.pathYellow = cropTile(tiles, 0, 2);
+      // tiles.wall = cropTile(tiles, 0, 0);
+      // tiles.wallBlue = cropTile(tiles, 1, 1);
+      // tiles.wallGreen = cropTile(tiles, 2, 1);
+      // tiles.wallYellow = cropTile(tiles, 0, 1);
+      // tiles.switchBlue = cropTile(tiles, 2, 0);
+      // tiles.switchGreen = cropTile(tiles, 3, 0);
+      // tiles.exit = cropTile(tiles, 3, 1);
       if (_g) {
+        if (this.test === 1) {
+          let ct=0;
+          let cx=1;
+          console.log(this.sprites);
+
+          _g.myDrawImage(this.sprites.animations.walk_up.frames[0].frame, 10 + (ct * 64), 10 + (cx * 64), 64, 64);
+          ct++;
+          _g.myDrawImage(this.sprites.animations.walk_up.frames[1].frame, 10 + (ct * 64), 10 + (cx * 64), 64, 64);
+          ct++;
+          _g.myDrawImage(this.sprites.animations.walk_up.frames[2].frame, 10 + (ct * 64), 10 + (cx * 64), 64, 64);
+
+          _g.myDrawImage(this.sprites.animations.walk_right.frames[0].frame, 10 + (ct * 64), 10 + (cx * 64), 64, 64);
+          ct++;
+          _g.myDrawImage(this.sprites.animations.walk_right.frames[1].frame, 10 + (ct * 64), 10 + (cx * 64), 64, 64);
+          ct++;
+          _g.myDrawImage(this.sprites.animations.walk_right.frames[2].frame, 10 + (ct * 64), 10 + (cx * 64), 64, 64);
+          ct=0;
+          cx++;
+          _g.myDrawImage(this.sprites.animations.walk_left.frames[0].frame, 10 + (ct * 64), 10 + (cx * 64), 64, 64);
+          ct++;
+          _g.myDrawImage(this.sprites.animations.walk_left.frames[1].frame, 10 + (ct * 64), 10 + (cx * 64), 64, 64);
+          ct++;
+          _g.myDrawImage(this.sprites.animations.walk_left.frames[2].frame, 10 + (ct * 64), 10 + (cx * 64), 64, 64);
+
+          _g.myDrawImage(this.sprites.animations.walk_down.frames[0].frame, 10 + (ct * 64), 10 + (cx * 64), 64, 64);
+          ct++;
+          _g.myDrawImage(this.sprites.animations.walk_down.frames[1].frame, 10 + (ct * 64), 10 + (cx * 64), 64, 64);
+          ct++;
+          _g.myDrawImage(this.sprites.animations.walk_down.frames[2].frame, 10 + (ct * 64), 10 + (cx * 64), 64, 64);
+          ct=0;
+          cx++;
+          _g.myDrawImage(this.tiles.path, 10 + (ct * 64), 10 + (cx * 64), 64, 64);
+          ct++;
+          _g.myDrawImage(this.tiles.pathBlue, 10 + (ct * 64), 10 + (cx * 64), 64, 64);
+          ct++;
+          _g.myDrawImage(this.tiles.pathGreen, 10 + (ct * 64), 10 + (cx * 64), 64, 64);
+          ct++;
+          _g.myDrawImage(this.tiles.pathYellow, 10 + (ct * 64), 10 + (cx * 64), 64, 64);
+          ct=0;
+          cx++;
+          _g.myDrawImage(this.tiles.wall, 10 + (ct * 64), 10 + (cx * 64), 64, 64);
+          ct++;
+          _g.myDrawImage(this.tiles.wallBlue, 10 + (ct * 64), 10 + (cx * 64), 64, 64);
+          ct++;
+          _g.myDrawImage(this.tiles.wallGreen, 10 + (ct * 64), 10 + (cx * 64), 64, 64);
+          ct++;
+          _g.myDrawImage(this.tiles.wallYellow, 10 + (ct * 64), 10 + (cx * 64), 64, 64);
+          ct=0;
+          cx++;
+          _g.myDrawImage(this.tiles.switchBlue, 10 + (ct * 64), 10 + (cx * 64), 64, 64);
+          ct++;
+          _g.myDrawImage(this.tiles.switchGreen, 10 + (ct * 64), 10 + (cx * 64), 64, 64);
+          ct++;
+          _g.myDrawImage(this.tiles.exit, 10 + (ct * 64), 10 + (cx * 64), 64, 64);
+          return;
+        }
+
         let text, xPos, yPos;
 
         const screenWidth = this.handler.getWidth();
         const screenHeight = this.handler.getHeight();
 
-        _g.fillStyle = "black";
+        _g.fillStyle = 'black';
         _g.fillRect(0, 0, screenWidth, screenHeight);
 
         _g.drawText({
@@ -76,12 +148,12 @@ import { Menu } from './menu';
     sm.setSounds();
     handlerRef.setSoundManager(sm);
     soundsLoaded = true;
-    loadingText = "up/down to select, enter or   /   button to choose";
-    handlerRef.getSoundManager().play("evilLaugh");
+    loadingText = 'up/down to select, enter or   /   button to choose';
+    handlerRef.getSoundManager().play('evilLaugh');
   }
 
    loadSounds(){
-    loadingText = "loading sounds...";
+    loadingText = 'loading sounds...';
     //Load the sounds
     sounds.load([
       `${CURRENT_PATH}/res/sound/ItaloUnlimited.ogg`,
