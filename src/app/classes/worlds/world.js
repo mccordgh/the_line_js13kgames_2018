@@ -49,7 +49,7 @@ export class World {
       this.lightManager.addSource(3, 3);
     } else {
       this.addEvenSpreadOfLightSources(7);
-    //   this.addEvenSpreadOfMonsters(8);
+      this.addEvenSpreadOfMonsters(8);
     }
   }
 
