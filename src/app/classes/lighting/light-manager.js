@@ -8,12 +8,12 @@ const CENTER_LIGHT = 0.3;
 export class LightManager {
   constructor(_handler) {
     this.handler = _handler;
-    this.sources = [];
-    this.lightMap = [];
     this.init();
   }
 
   init() {
+    this.sources = [];
+    this.lightMap = [];
     this.fillLightMap();
   }
 
@@ -51,7 +51,7 @@ export class LightManager {
    for (let y = yStart; y < yEnd; y++) {
      for (let x = xStart; x < xEnd; x++) {
        const tile = this.handler.getWorld().getTile(x, y).type;
-
+        // console.log({x, y})
        _g.globalAlpha =  (tile === 'switch' || tile === 'exit') ? CENTER_LIGHT : this.lightMap[x][y];
 
        _g.fillRect(x * TILE_WIDTH - this.handler.getGameCamera().getxOffset(), y * TILE_HEIGHT - this.handler.getGameCamera().getyOffset(), TILE_WIDTH, TILE_HEIGHT);

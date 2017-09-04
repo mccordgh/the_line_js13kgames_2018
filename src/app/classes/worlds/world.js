@@ -7,8 +7,8 @@ import { TileManager } from '../tiles/tile-manager';
 import { LightManager } from '../lighting/light-manager';
 
 
-const WORLD_WIDTH = 39;
-const WORLD_HEIGHT = 39;
+// const WORLD_WIDTH = 39;
+// const WORLD_HEIGHT = 39;
 const TILE_WIDTH = 64;
 const TILE_HEIGHT = 64;
 let yellowTilesDown = false;
@@ -18,48 +18,66 @@ let switchTimer = 60;
 
 export class World {
   constructor(_handler) {
+    this.width = null;
+    this.height = null;
     this.tiles = [];
     this.handler = _handler;
     _handler.setWorld(this);
     this.entityManager = new EntityManager(_handler, new Player(_handler, 20, 20));
-    this.lightManager = new LightManager(_handler);
     this.spatialGrid = new SpatialGrid(this.handler.getWidth() * TILE_WIDTH, this.handler.getHeight() * TILE_HEIGHT, 64);
     this.level = 1;
-    this.loadWorld(this.level);
+    this.loadWorld();
+    this.lightManager = new LightManager(_handler);
+    this.init();
+  }
+
+  changeLevel() {
+    this.setPlayerSpawn(this.spawnX, this.spawnY);
+    this.level += 1;
+    this.tiles = [];
+
+    this.loadWorld();
     this.init();
   }
 
   init() {
-    this.lightManager.addSource(4, 2);
-    this.addEvenSpreadOfLightSources(7);
-
     this.setPlayerSpawn(this.spawnX, this.spawnY);
 
-    this.addEvenSPreadOfMonsters(8);
+    this.lightManager.fillLightMap();
+
+    if (this.level === 1) {
+      this.lightManager.addSource(3, 3);
+    } else {
+      this.addEvenSpreadOfLightSources(7);
+    //   this.addEvenSpreadOfMonsters(8);
+    }
   }
 
   addEvenSpreadOfLightSources(spread) {
-    for (let y = spread; y <= WORLD_HEIGHT; y += spread) {
-      for (let x = spread; x <= WORLD_WIDTH; x += spread) {
-        this.lightManager.addSource(x, y);
+    for (let y = spread; y <= this.height; y += spread) {
+      for (let x = spread; x <= this.width; x += spread) {
+        if (this.height - y > 2 && this.width - x > 2) {
+          //TODO blah blah blah
+          this.lightManager.addSource(x, y);
+        }
       }
     }
   }
 
   getWorldHeight() {
-    return WORLD_HEIGHT;
+    return this.height;
   }
 
   getWorldWidth() {
-    return WORLD_WIDTH;
+    return this.width;
   }
 
-  addEvenSPreadOfMonsters(spread) {
-    const spawns = Math.round(((WORLD_HEIGHT + WORLD_WIDTH) / 2) / spread);
-    let count = 0;
+  addEvenSpreadOfMonsters(spread) {
+    // const spawns = Math.round(((this.height + this.width) / 2) / spread);
+    // let count = 0;
 
-    for (let y = spread; y <= WORLD_HEIGHT; y += spread) {
-      for (let x = spread; x <= WORLD_WIDTH; x += spread) {
+    for (let y = spread; y <= this.height; y += spread) {
+      for (let x = spread; x <= this.width; x += spread) {
         this.entityManager.addEntity(new Ghost(this.handler, x * TILE_WIDTH, y * TILE_WIDTH));
       }
     }
@@ -71,8 +89,7 @@ export class World {
   }
 
   loadWorld() {
-    const pieces = this.fillWorld(WORLD_HEIGHT, WORLD_WIDTH, 1, 1);
-
+    const pieces = this.fillWorld(this.level, 1, 1);
     for (let y = 0; y < this.height; y++) {
       for (let x = 0; x < this.width; x++) {
         if (!this.tiles[x]) this.tiles[x] = [];
@@ -81,11 +98,11 @@ export class World {
     }
   }
 
-  fillWorld(height, width, spawnX, spawnY) {
-    const maze = MazeGenerator.getRandomMaze(height, width, spawnX, spawnY);
+  fillWorld(level, spawnX, spawnY) {
+    const maze = MazeGenerator.getRandomMaze(level, spawnX, spawnY);
 
-    this.height = maze.height;
-    this.width = maze.width;
+    this.height = maze.mazeHeight;
+    this.width = maze.mazeWidth;
     this.spawnX = maze.spawnX * TILE_WIDTH;
     this.spawnY = maze.spawnY * TILE_HEIGHT;
 
@@ -113,8 +130,8 @@ export class World {
   }
 
   swapTilesByID(tileID, swapTileID) {
-    for (let y = 1; y < this.height - 1; y++) {
-      for (let x = 1; x < this.width - 1; x++) {
+    for (let y = 1; y < this.height; y++) {
+      for (let x = 1; x < this.width; x++) {
         if (this.tiles[x][y] === tileID) {
           this.tiles[x][y] = swapTileID;
         }

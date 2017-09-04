@@ -83,6 +83,7 @@ export class Ghost extends Creature {
     const yy = Math.round(this.y / TILE_HEIGHT);
     const tile = this.handler.getWorld().getTile(xx, yy);
 
+    // console.log({xx, yy})
     if (!tile.isSolid) return;
 
     const startX = xx - 1;

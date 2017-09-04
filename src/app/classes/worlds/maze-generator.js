@@ -1,10 +1,9 @@
 const maze = [],
-  mazeWidth = 39,
-  mazeHeight = 39,
   finalMaze = [],
   // set maximum and minimum number for wall ids (2 is yellow, 3 is blue);
   wallIDs = [2, 3, 7];
   let counting = 0;
+  let mazeWidth = 0, mazeHeight = 0;
 
 const getRandomWallID = (i, j) => {
   // make sure we don't build a passable wall on the outside border
@@ -80,7 +79,7 @@ export class MazeGenerator {
     while (moves.length);
   }
 
-  static buildFinalMaze(posX, posY) {
+  static buildFinalMaze() {
     for(let i = 0; i < mazeHeight; i ++){
       for(let j = 0; j < mazeWidth; j ++){
         if(!finalMaze[j]) finalMaze[j] = [];
@@ -95,15 +94,6 @@ export class MazeGenerator {
     //let's spawn one of the switches in room #1 with the player
     const rooms = [9];
 
-    // const maxSwitchIndex = 2;
-    // const minSwitchIndex = 1;
-    // const whichSwitch = Math.floor(Math.random() * (maxSwitchIndex - minSwitchIndex + 1)) + minSwitchIndex;
-    //
-    // rooms.push(entities[whichSwitch]);
-    // entities.splice(whichSwitch, 1);
-
-    //then let's randomly spawn the rest of the stuff in the other three rooms
-    // console.log({rooms, entities});
     do {
       const maxIndex = entities.length - 1;
       const randomIndex = Math.floor(Math.random() * (maxIndex + 1));
@@ -162,17 +152,42 @@ export class MazeGenerator {
     finalMaze[2][4] = 2;
   }
 
-  static getRandomMaze(height, width, spawnX, spawnY) {
-    this.createMaze();
-    this.createRooms();
-    this.createBarriers();
-    this.addOneOfEachSwitchAtStart();
-    return {
-      width,
-      height,
-      spawnX,
-      spawnY,
-      pieces: finalMaze,
-    };
+  static getIntroMaze() {
+    return [
+      [1, 1, 1, 1, 1, 1, 1],
+      [1, 0, 10, 0, 0, 0, 1],
+      [1, 0, 0, 1, 0, 0, 1],
+      [1, 0, 1, 1, 1, 0, 1],
+      [1, 0, 0, 1, 0, 0, 1],
+      [1, 0, 0, 0, 0, 10, 1],
+      [1, 1, 1, 1, 1, 1, 1],
+      ];
+  }
+
+  static getRandomMaze(level, spawnX, spawnY) {
+    if (level === 1) {
+      return {
+        mazeWidth: 7,
+        mazeHeight: 7,
+        spawnX: 1,
+        spawnY: 1,
+        pieces: this.getIntroMaze()
+      };
+    } else {
+      mazeWidth = mazeHeight = (level * 10) - 1;
+
+      this.createMaze();
+      this.createRooms();
+      this.createBarriers();
+      this.addOneOfEachSwitchAtStart();
+
+      return {
+        mazeWidth,
+        mazeHeight,
+        spawnX,
+        spawnY,
+        pieces: finalMaze,
+      };
+    }
   }
 }

@@ -1,6 +1,7 @@
 import { Ending } from '../../menus/ending';
 import { Entity } from '../entity';
 import { Rectangle } from '../../gfx/shapes/rectangle';
+import { World } from '../../worlds/world';
 
 const DEFAULT_SPEED = 120,
   DEFAULT_HEALTH = 200,
@@ -109,8 +110,12 @@ export class Creature extends Entity {
     }
 
     if (tile1.type === 'exit' || tile2.type === 'exit') {
-      const ending = new Ending(this.handler);
-      this.handler.getGame().getGameState().setState(ending);
+      if (this.handler.getWorld().level >= 3) {
+        const ending = new Ending(this.handler);
+        this.handler.getGame().getGameState().setState(ending);
+      }
+
+      this.handler.getWorld().changeLevel();
     }
   }
 
