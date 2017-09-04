@@ -21,7 +21,26 @@ export class LightSource {
   }
 
   init() {
+    this.makeSureOnWall();
     this.expandLight();
+  }
+
+  makeSureOnWall() {
+    const xx = this.x;
+    const yy = this.y;
+    const tile = this.handler.getWorld().getTile(xx, yy);
+
+    if (tile.isSolid) return;
+
+    for (let y = yy - 1; y < yy + 1; y++) {
+      for (let x = xx - 1; x < xx + 1; x++) {
+        if (this.handler.getWorld().getTile(x, y).id === 1) {
+          this.x = x;
+          this.y = y;
+          return;
+        }
+      }
+    }
   }
 
   expandLight() {

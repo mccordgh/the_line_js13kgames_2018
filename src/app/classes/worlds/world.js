@@ -43,6 +43,7 @@ export class World {
   init() {
     this.setPlayerSpawn(this.spawnX, this.spawnY);
 
+    this.lightManager.init();
     this.lightManager.fillLightMap();
 
     if (this.level === 1) {
@@ -57,7 +58,7 @@ export class World {
     for (let y = spread; y <= this.height; y += spread) {
       for (let x = spread; x <= this.width; x += spread) {
         if (this.height - y > 2 && this.width - x > 2) {
-          //TODO blah blah blah
+          console.log(`adding at ${x}, ${y}`)
           this.lightManager.addSource(x, y);
         }
       }
@@ -73,12 +74,11 @@ export class World {
   }
 
   addEvenSpreadOfMonsters(spread) {
-    // const spawns = Math.round(((this.height + this.width) / 2) / spread);
-    // let count = 0;
-
     for (let y = spread; y <= this.height; y += spread) {
       for (let x = spread; x <= this.width; x += spread) {
-        this.entityManager.addEntity(new Ghost(this.handler, x * TILE_WIDTH, y * TILE_WIDTH));
+        if (this.height - y > 2 && this.width - x > 2) {
+          this.entityManager.addEntity(new Ghost(this.handler, x * TILE_WIDTH, y * TILE_WIDTH));
+        }
       }
     }
   }
