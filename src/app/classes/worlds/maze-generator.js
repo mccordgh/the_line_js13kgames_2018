@@ -128,7 +128,9 @@ export class MazeGenerator {
     finalMaze[startX + Math.floor(size / 2)][startY + Math.floor(size / 2)] = entity;
   }
 
-  static createBarriers() {
+  static createBarriers(level) {
+    if (level === 2) return;
+
     //mid left
     finalMaze[1][Math.ceil(mazeHeight / 2)] = 1;
     finalMaze[1][Math.ceil(mazeHeight / 2) + 1] = 1;
@@ -178,7 +180,7 @@ export class MazeGenerator {
 
       this.createMaze();
       this.createRooms();
-      this.createBarriers();
+      this.createBarriers(level);
       this.addOneOfEachSwitchAtStart();
 
       return {

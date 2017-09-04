@@ -110,7 +110,7 @@ export class Creature extends Entity {
     }
 
     if (tile1.type === 'exit' || tile2.type === 'exit') {
-      if (this.handler.getWorld().level >= 3) {
+      if (this.handler.getWorld().level >= 4) {
         const ending = new Ending(this.handler);
         this.handler.getGame().getGameState().setState(ending);
       }
