@@ -1,5 +1,5 @@
 import { EntityManager } from '../entities/entity-manager';
-import { Ghost } from '../entities/creatures/monsters/ghost';
+import { Clone } from '../entities/creatures/monsters/clone';
 import { MazeGenerator } from './maze-generator';
 import { Player } from '../entities/creatures/player';
 import { SpatialGrid } from '../utils/spatial-grid';
@@ -7,14 +7,12 @@ import { TileManager } from '../tiles/tile-manager';
 import { LightManager } from '../lighting/light-manager';
 
 
-// const WORLD_WIDTH = 39;
-// const WORLD_HEIGHT = 39;
 const TILE_WIDTH = 64;
 const TILE_HEIGHT = 64;
-let yellowTilesDown = false;
+let yellowTilesDown = false, monstersCleared = false;
 let yellowWallInterval = 0;
 const yellowWallIntervalMax = 3 * 60; // We want X seconds so we multiply that by our FPS which is 60
-let switchTimer = 60;
+let switchTimer = 60, timeSpent = 0;
 
 export class World {
   constructor(_handler) {
@@ -32,9 +30,12 @@ export class World {
   }
 
   changeLevel() {
+    console.log('CHANGE LEVEL');
     this.setPlayerSpawn(this.spawnX, this.spawnY);
     this.level += 1;
     this.tiles = [];
+    timeSpent = 0;
+    monstersCleared = false;
 
     this.loadWorld();
     this.init();
@@ -58,7 +59,6 @@ export class World {
     for (let y = spread; y <= this.height; y += spread) {
       for (let x = spread; x <= this.width; x += spread) {
         if (this.height - y > 2 && this.width - x > 2) {
-          console.log(`adding at ${x}, ${y}`)
           this.lightManager.addSource(x, y);
         }
       }
@@ -77,7 +77,7 @@ export class World {
     for (let y = spread; y <= this.height; y += spread) {
       for (let x = spread; x <= this.width; x += spread) {
         if (this.height - y > 2 && this.width - x > 2) {
-          this.entityManager.addEntity(new Ghost(this.handler, x * TILE_WIDTH, y * TILE_WIDTH));
+          this.entityManager.addEntity(new Clone(this.handler, x * TILE_WIDTH, y * TILE_WIDTH));
         }
       }
     }
@@ -160,6 +160,16 @@ export class World {
     this.entityManager.tick(_dt);
     this.lightManager.tick(_dt);
     switchTimer++;
+
+    if (!monstersCleared) {
+      timeSpent++;
+
+      if ((timeSpent / 60) >= 120) {
+        alert('the monsters crumble all around you.');
+        this.entityManager.removeAllMonsters();
+        monstersCleared = true;
+      }
+    }
   }
 
   render(_g) {

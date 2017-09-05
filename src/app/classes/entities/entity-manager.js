@@ -120,16 +120,23 @@ export class EntityManager {
       const e = entities[i];
       if (e === _entity){
         entities.splice(i, 1);
+        return;
       }
     }
   }
 
   removeAllMonsters() {
-    for (let i = 0; i < entities.length; i++){
-      const e = entities[i];
-      if (e.type === 'monster'){
-        entities.splice(i, 1);
-      }
-    }
+    entities = entities.filter(e => e.type !== 'monster');
+    // const newEntities = [];
+    //
+    // for (let i = 0; i < entities.length; i++){
+    //   const e = entities[i];
+    //
+    //   if (e.type !== 'monster'){
+    //     newEntities.push(e);
+    //   }
+    // }
+    //
+    // entities = newEntities;
   }
 }

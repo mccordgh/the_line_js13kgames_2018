@@ -3,10 +3,10 @@ import { Creature } from '../creature';
 
 const TILE_WIDTH = 64, TILE_HEIGHT = 64;
 
-export class Ghost extends Creature {
+export class Clone extends Creature {
   constructor(_handler, _x, _y) {
     super(_handler, _x, _y, TILE_WIDTH, TILE_HEIGHT);
-    this.assets = Assets.getAssets("creatures");
+    this.assets = Assets.getAssets('creature');
     this.x = _x;
     this.y = _y;
     this.spawnX = _x;
@@ -20,7 +20,7 @@ export class Ghost extends Creature {
     this.patrol = this.getPatrolPattern();
     this.startX = _x;
     this.startY = _y;
-    this.patrolLength = 200;
+    this.patrolLength = 100;
     this.dirMoving = 0;
     this.numberOfMoves = 0;
   }
@@ -113,7 +113,6 @@ export class Ghost extends Creature {
 
     this.move();
 
-    // console.log({x: this.x, y: this.y})
     // this.target = this.handler.getWorld().getEntityManager().getSingleEntity(this.targetType);
     // if (this.target) {
     //   if(this.target.y < this.y) {
@@ -136,16 +135,16 @@ export class Ghost extends Creature {
     // if (this.dead === 0)
     //   this.move();
 
-    // if (this.yMove < 0)
-    //   this.assets.animations.walk_up.tick();
-    // if (this.yMove > 0)
-    //   this.assets.animations.walk_down.tick();
-    // if (this.xMove > 0)
-    //   this.assets.animations.walk_right.tick();
-    // if (this.xMove < 0)
-    //   this.assets.animations.walk_left.tick();
+    if (this.yMove < 0)
+      this.assets.animations.walk_up.tick();
+    if (this.yMove > 0)
+      this.assets.animations.walk_down.tick();
+    if (this.xMove > 0)
+      this.assets.animations.walk_right.tick();
+    if (this.xMove < 0)
+      this.assets.animations.walk_left.tick();
 
-    // this.assets.animations.idle.tick();
+    this.assets.animations.idle.tick();
   }
 
   render(_g){
@@ -166,16 +165,16 @@ export class Ghost extends Creature {
     //   this.assets.animations.death.tick();
     //   return this.assets.animations.death.getCurrentFrame();
     // }
-    // if (this.yMove < 0){
-    //   return this.assets.animations.walk_up.getCurrentFrame();
-    // } else if (this.yMove > 0){
-    //   return this.assets.animations.walk_down.getCurrentFrame();
-    // } else if (this.xMove < 0){
-    //   return this.assets.animations.walk_left.getCurrentFrame();
-    // } else if (this.xMove > 0){
-    //   return this.assets.animations.walk_right.getCurrentFrame();
-    // } else {
-      return this.assets.ghostDown;
-    // }
+    if (this.yMove < 0){
+      return this.assets.animations.walk_up.getCurrentFrame();
+    } else if (this.yMove > 0){
+      return this.assets.animations.walk_down.getCurrentFrame();
+    } else if (this.xMove < 0){
+      return this.assets.animations.walk_left.getCurrentFrame();
+    } else if (this.xMove > 0){
+      return this.assets.animations.walk_right.getCurrentFrame();
+    } else {
+      return this.assets.animations.idle.getCurrentFrame();
+    }
   }
 }

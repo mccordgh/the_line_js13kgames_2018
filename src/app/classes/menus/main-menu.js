@@ -15,22 +15,10 @@ import { Menu } from './menu';
     // }
 
     render(_g) {
-      // tiles.path = cropTile(tiles, 1, 0);
-      // tiles.pathBlue = cropTile(tiles, 1, 2);
-      // tiles.pathGreen = cropTile(tiles, 2, 2);
-      // tiles.pathYellow = cropTile(tiles, 0, 2);
-      // tiles.wall = cropTile(tiles, 0, 0);
-      // tiles.wallBlue = cropTile(tiles, 1, 1);
-      // tiles.wallGreen = cropTile(tiles, 2, 1);
-      // tiles.wallYellow = cropTile(tiles, 0, 1);
-      // tiles.switchBlue = cropTile(tiles, 2, 0);
-      // tiles.switchGreen = cropTile(tiles, 3, 0);
-      // tiles.exit = cropTile(tiles, 3, 1);
       if (_g) {
         if (this.test === 1) {
           let ct=0;
           let cx=1;
-          console.log(this.sprites);
 
           _g.myDrawImage(this.sprites.animations.walk_up.frames[0].frame, 10 + (ct * 64), 10 + (cx * 64), 64, 64);
           ct++;

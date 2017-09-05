@@ -1,17 +1,17 @@
 import { Assets } from '../../gfx/assets';
 import { Creature } from './creature';
 import { Rectangle } from '../../gfx/shapes/rectangle';
-// var lastAnimation = "walk_down";//, attackCounter = 0, lastAttackCounter = 0;
+var lastAnimation = "walk_down";//, attackCounter = 0, lastAttackCounter = 0;
 const TILE_HEIGHT = 64, TILE_WIDTH = 64;
 let getDevInput = false, inputCounter = 0;
 
 export class Player extends Creature {
   constructor(_handler, _x, _y){
     super(_handler, _x, _y);
-    this.assets = Assets.getAssets('creatures');
+    this.assets = Assets.getAssets('sprites');
     this.x = _x;
     this.y = _y;
-    this.speed = 160;
+    this.speed = 90;
     this.bounds.x = 14;
     this.bounds.y = 24;
     this.bounds.width = 36;
@@ -31,14 +31,14 @@ export class Player extends Creature {
       this.move();
     }
     this.handler.getGameCamera().centerOnEntity(this);
-    // if (this.yMove < 0)
-    //   this.assets.animations.walk_up.tick();
-    // if (this.yMove > 0)
-    //   this.assets.animations.walk_down.tick();
-    // if (this.xMove > 0)
-    //   this.assets.animations.walk_right.tick();
-    // if (this.xMove < 0)
-    //   this.assets.animations.walk_left.tick();
+    if (this.yMove < 0)
+      this.assets.animations.walk_up.tick();
+    if (this.yMove > 0)
+      this.assets.animations.walk_down.tick();
+    if (this.xMove > 0)
+      this.assets.animations.walk_right.tick();
+    if (this.xMove < 0)
+      this.assets.animations.walk_left.tick();
   }
 
   render(_g) {
@@ -122,21 +122,21 @@ export class Player extends Creature {
   }
 
   getCurrentAnimationFrame() {
-    return this.assets.playerDown;
-    // if (this.yMove < 0){
-    //   lastAnimation = "walk_up";
-    //   return this.assets.animations.walk_up.getCurrentFrame();
-    // } else if (this.yMove > 0){
-    //   lastAnimation = "walk_down";
-    //   return this.assets.animations.walk_down.getCurrentFrame();
-    // } else if (this.xMove < 0){
-    //   lastAnimation = "walk_left";
-    //   return this.assets.animations.walk_left.getCurrentFrame();
-    // } else if (this.xMove > 0){
-    //   lastAnimation = "walk_right";
-    //   return this.assets.animations.walk_right.getCurrentFrame();
-    // } else {
-    //   return this.assets.animations[lastAnimation].getCurrentFrame();
-    // }
+    // return this.assets.playerDown;
+    if (this.yMove < 0){
+      lastAnimation = "walk_up";
+      return this.assets.animations.walk_up.getCurrentFrame();
+    } else if (this.yMove > 0){
+      lastAnimation = "walk_down";
+      return this.assets.animations.walk_down.getCurrentFrame();
+    } else if (this.xMove < 0){
+      lastAnimation = "walk_left";
+      return this.assets.animations.walk_left.getCurrentFrame();
+    } else if (this.xMove > 0){
+      lastAnimation = "walk_right";
+      return this.assets.animations.walk_right.getCurrentFrame();
+    } else {
+      return this.assets.animations[lastAnimation].getCurrentFrame();
+    }
   }
 }

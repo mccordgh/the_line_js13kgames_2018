@@ -3,7 +3,7 @@ import { Entity } from '../entity';
 import { Rectangle } from '../../gfx/shapes/rectangle';
 import { World } from '../../worlds/world';
 
-const DEFAULT_SPEED = 120,
+const DEFAULT_SPEED = 100,
   DEFAULT_HEALTH = 200,
   DEFAULT_CREATURE_WIDTH = 64,
   DEFAULT_CREATURE_HEIGHT = 64,
