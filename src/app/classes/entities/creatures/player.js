@@ -1,7 +1,8 @@
 import { Assets } from '../../gfx/assets';
 import { Creature } from './creature';
 import { Rectangle } from '../../gfx/shapes/rectangle';
-var lastAnimation = "walk_down";//, attackCounter = 0, lastAttackCounter = 0;
+
+
 const TILE_HEIGHT = 64, TILE_WIDTH = 64;
 let getDevInput = false, inputCounter = 0;
 
@@ -21,24 +22,23 @@ export class Player extends Creature {
     this.invincible = false;
     this.superSpeed = false;
     this.allCheats = false;
+    this.lastAnimation = 'walk_down';
   }
 
   tick(_dt) {
+    this.xMove = this.yMove = 0;
+
     this.getInput(_dt);
+
+    super.tick(_dt);
+
     this.move();
     if (this.superSpeed) {
       this.move();
       this.move();
     }
+
     this.handler.getGameCamera().centerOnEntity(this);
-    if (this.yMove < 0)
-      this.assets.animations.walk_up.tick();
-    if (this.yMove > 0)
-      this.assets.animations.walk_down.tick();
-    if (this.xMove > 0)
-      this.assets.animations.walk_right.tick();
-    if (this.xMove < 0)
-      this.assets.animations.walk_left.tick();
   }
 
   render(_g) {
@@ -51,8 +51,6 @@ export class Player extends Creature {
   }
 
   getInput(_dt) {
-    this.xMove = 0;
-    this.yMove = 0;
     const manager = this.handler.getKeyManager();
 
     if(manager.up || manager.w || manager.z) {
@@ -121,22 +119,21 @@ export class Player extends Creature {
     }
   }
 
-  getCurrentAnimationFrame() {
-    // return this.assets.playerDown;
-    if (this.yMove < 0){
-      lastAnimation = "walk_up";
-      return this.assets.animations.walk_up.getCurrentFrame();
-    } else if (this.yMove > 0){
-      lastAnimation = "walk_down";
-      return this.assets.animations.walk_down.getCurrentFrame();
-    } else if (this.xMove < 0){
-      lastAnimation = "walk_left";
-      return this.assets.animations.walk_left.getCurrentFrame();
-    } else if (this.xMove > 0){
-      lastAnimation = "walk_right";
-      return this.assets.animations.walk_right.getCurrentFrame();
-    } else {
-      return this.assets.animations[lastAnimation].getCurrentFrame();
-    }
-  }
+  // getCurrentAnimationFrame() {
+  //   if (this.yMove < 0){
+  //     lastAnimation = "walk_up";
+  //     return this.assets.animations.walk_up.getCurrentFrame();
+  //   } else if (this.yMove > 0){
+  //     lastAnimation = "walk_down";
+  //     return this.assets.animations.walk_down.getCurrentFrame();
+  //   } else if (this.xMove < 0){
+  //     lastAnimation = "walk_left";
+  //     return this.assets.animations.walk_left.getCurrentFrame();
+  //   } else if (this.xMove > 0){
+  //     lastAnimation = "walk_right";
+  //     return this.assets.animations.walk_right.getCurrentFrame();
+  //   } else {
+  //     return this.assets.animations[lastAnimation].getCurrentFrame();
+  //   }
+  // }
 }

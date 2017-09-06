@@ -3,6 +3,7 @@ import { Entity } from '../entity';
 import { Rectangle } from '../../gfx/shapes/rectangle';
 import { World } from '../../worlds/world';
 
+
 const DEFAULT_SPEED = 100,
   DEFAULT_HEALTH = 200,
   DEFAULT_CREATURE_WIDTH = 64,
@@ -17,11 +18,17 @@ export class Creature extends Entity {
     this.speed = DEFAULT_SPEED;
     this.xMove = 0;
     this.yMove = 0;
-    this.init();
   }
 
-  init() {
-    //
+  tick() {
+    if (this.yMove < 0)
+      this.assets.animations.walk_up.tick();
+    if (this.yMove > 0)
+      this.assets.animations.walk_down.tick();
+    if (this.xMove > 0)
+      this.assets.animations.walk_right.tick();
+    if (this.xMove < 0)
+      this.assets.animations.walk_left.tick();
   }
 
   move() {
@@ -110,6 +117,10 @@ export class Creature extends Entity {
     }
 
     if (tile1.type === 'exit' || tile2.type === 'exit') {
+      console.log('EXIT HIT')
+      console.log('EXIT HIT')
+      console.log('EXIT HIT')
+      console.log('EXIT HIT')
       if (this.handler.getWorld().level >= 4) {
         const ending = new Ending(this.handler);
         this.handler.getGame().getGameState().setState(ending);
@@ -140,5 +151,23 @@ export class Creature extends Entity {
 
   setSpeed(_speed) {
     this.speed = _speed;
+  }
+
+  getCurrentAnimationFrame() {
+    if (this.yMove < 0){
+      this.lastAnimation = "walk_up";
+      return this.assets.animations.walk_up.getCurrentFrame();
+    } else if (this.yMove > 0){
+      this.lastAnimation = "walk_down";
+      return this.assets.animations.walk_down.getCurrentFrame();
+    } else if (this.xMove < 0){
+      this.lastAnimation = "walk_left";
+      return this.assets.animations.walk_left.getCurrentFrame();
+    } else if (this.xMove > 0){
+      this.lastAnimation = "walk_right";
+      return this.assets.animations.walk_right.getCurrentFrame();
+    } else {
+      return this.assets.animations[this.lastAnimation].getCurrentFrame();
+    }
   }
 }

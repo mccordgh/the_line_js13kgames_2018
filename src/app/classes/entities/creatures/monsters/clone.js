@@ -16,13 +16,13 @@ export class Clone extends Creature {
     this.bounds.width = TILE_WIDTH  - (this.bounds.x * 2);
     this.bounds.height = TILE_HEIGHT - (this.bounds.y * 2);
     this.type = 'monster';
-    this.targetType = 'player';
     this.patrol = this.getPatrolPattern();
     this.startX = _x;
     this.startY = _y;
     this.patrolLength = 100;
     this.dirMoving = 0;
     this.numberOfMoves = 0;
+    this.lastAnimation = 'walk_down';
   }
 
   getPatrolPattern() {
@@ -83,7 +83,6 @@ export class Clone extends Creature {
     const yy = Math.round(this.y / TILE_HEIGHT);
     const tile = this.handler.getWorld().getTile(xx, yy);
 
-    // console.log({xx, yy})
     if (!tile.isSolid) return;
 
     const startX = xx - 1;
@@ -106,10 +105,9 @@ export class Clone extends Creature {
     this.checkIfOffMap();
     this.checkIfInWall();
 
-    this.xMove = 0;
-    this.yMove = 0;
-
     this.setPatrolMovement(_dt);
+
+    super.tick();
 
     this.move();
 
@@ -135,16 +133,16 @@ export class Clone extends Creature {
     // if (this.dead === 0)
     //   this.move();
 
-    if (this.yMove < 0)
-      this.assets.animations.walk_up.tick();
-    if (this.yMove > 0)
-      this.assets.animations.walk_down.tick();
-    if (this.xMove > 0)
-      this.assets.animations.walk_right.tick();
-    if (this.xMove < 0)
-      this.assets.animations.walk_left.tick();
-
-    this.assets.animations.idle.tick();
+    // if (this.xMove > 0)
+    //   this.assets.animations.walk_right.tick();
+    // if (this.xMove < 0)
+    //   this.assets.animations.walk_left.tick();
+    // if (this.yMove < 0)
+    //   this.assets.animations.walk_up.tick();
+    // if (this.yMove > 0)
+    //   this.assets.animations.walk_down.tick();
+    //
+    // this.assets.animations.idle.tick();
   }
 
   render(_g){
@@ -160,21 +158,17 @@ export class Clone extends Creature {
     //
   }
 
-  getCurrentAnimationFrame() {
-    // if (this.health <= 0){
-    //   this.assets.animations.death.tick();
-    //   return this.assets.animations.death.getCurrentFrame();
-    // }
-    if (this.yMove < 0){
-      return this.assets.animations.walk_up.getCurrentFrame();
-    } else if (this.yMove > 0){
-      return this.assets.animations.walk_down.getCurrentFrame();
-    } else if (this.xMove < 0){
-      return this.assets.animations.walk_left.getCurrentFrame();
-    } else if (this.xMove > 0){
-      return this.assets.animations.walk_right.getCurrentFrame();
-    } else {
-      return this.assets.animations.idle.getCurrentFrame();
-    }
-  }
+  // getCurrentAnimationFrame() {
+  //   if (this.xMove < 0){
+  //     return this.assets.animations.walk_left.getCurrentFrame();
+  //   } else if (this.xMove > 0) {
+  //     return this.assets.animations.walk_right.getCurrentFrame();
+  //   } else if (this.yMove < 0){
+  //     return this.assets.animations.walk_up.getCurrentFrame();
+  //   } else if (this.yMove > 0){
+  //     return this.assets.animations.walk_down.getCurrentFrame();
+  //   } else {
+  //     return this.assets.animations.idle.getCurrentFrame();
+  //   }
+  // }
 }
