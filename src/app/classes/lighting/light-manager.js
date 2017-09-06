@@ -1,4 +1,4 @@
-import { LightSource } from './light-source';
+import { LightSource } from '../entities/statics/light-source';
 
 const TILE_HEIGHT = 64;
 const TILE_WIDTH = 64;
@@ -60,7 +60,9 @@ export class LightManager {
  }
   //
   addSource(x, y) {
-    this.sources.push(new LightSource(x, y, this.handler, this));
+    const newSource = new LightSource(this.handler, x, y, TILE_WIDTH, TILE_HEIGHT, this);
+    this.handler.getWorld().getEntityManager().addEntity(newSource);
+    this.sources.push(newSource);
   }
 
   setLight(x, y, lightAmount) {

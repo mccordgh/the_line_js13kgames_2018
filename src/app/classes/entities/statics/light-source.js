@@ -1,3 +1,6 @@
+import { StaticEntity } from './static-entity';
+import {Assets} from '../../gfx/assets';
+
 const TILE_WIDTH = 64;
 const TILE_HEIGHT = 64;
 const CENTER_LIGHT = 0.3;
@@ -5,18 +8,17 @@ const INNER_LIGHT = 0.5;
 const OUTER_LIGHT = 0.65;
 const DEFAULT_LIGHT = 0.75;
 
-export class LightSource {
-  constructor(_x, _y, _handler, _manager) {
-    this.handler = _handler;
-    this.manager = _manager;
-    this.x = _x;
-    this.y = _y;
+export class LightSource extends StaticEntity {
+  constructor(handler, x, y, width, height) {
+    super(handler, x, y, width, height);
+    this.manager = this.handler.getWorld().getLightManager();
     this.flickering = false;
     this.lastFlickerCounter = 0;
     this.flickerToggle = 0;
     this.flickerCount = 0;
     this.flickerTimes = 0;
     this.flickerLength = 0;
+    this.assets = Assets.getAssets('tiles');
     this.init();
   }
 
@@ -30,7 +32,7 @@ export class LightSource {
     const yy = this.y;
     const tile = this.handler.getWorld().getTile(xx, yy);
 
-    if (tile.isSolid) return;
+    if (tile.id === 1) return;
 
     for (let y = yy - 1; y < yy + 1; y++) {
       for (let x = xx - 1; x < xx + 1; x++) {
@@ -133,13 +135,16 @@ export class LightSource {
     const x = (this.x * TILE_WIDTH) - this.handler.getGameCamera().getxOffset();
     const y = (this.y * TILE_HEIGHT) - this.handler.getGameCamera().getyOffset();
 
+    _g.globalAlpha = this.manager.lightMap[Math.floor(this.x / TILE_WIDTH)][Math.floor(this.y / TILE_HEIGHT)];
+    _g.myDrawImage(this.assets.lantern, x, y, this.width, this.height);
+
     //draw crappy torch for now
-    _g.fillStyle = 'orange';
-    _g.fillRect(x + 16, y + 8, 32, 32);
-    _g.fillStyle = 'yellow';
-    _g.fillRect(x + 24, y + 16, 16, 16);
-    _g.fillStyle = 'brown';
-    _g.fillRect(x + 24, y + 38, 16, 16);
+    // _g.fillStyle = 'orange';
+    // _g.fillRect(x + 16, y + 8, 32, 32);
+    // _g.fillStyle = 'yellow';
+    // _g.fillRect(x + 24, y + 16, 16, 16);
+    // _g.fillStyle = 'brown';
+    // _g.fillRect(x + 24, y + 38, 16, 16);
     //crappy torch
   }
 }

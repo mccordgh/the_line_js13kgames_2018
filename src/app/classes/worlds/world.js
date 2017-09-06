@@ -29,6 +29,10 @@ export class World {
     this.init();
   }
 
+  getLightManager() {
+    return this.lightManager;
+  }
+
   changeLevel() {
     this.setPlayerSpawn(this.spawnX, this.spawnY);
     this.level += 1;
