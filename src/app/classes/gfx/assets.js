@@ -3,13 +3,14 @@ import { ImageLoader } from './image-loader';
 import { SpriteSheet } from './sprite-sheet';
 
 const assets = {};
-const PATH  = window.location.href + '/src/res/',
+const PATH  = window.location.href.replace('index.html', '') + 'src/res/',
   SPRITE_HEIGHT = 16,
   SPRITE_WIDTH = 16,
   CREATURE_HEIGHT = 18;
 
 export class Assets {
   constructor(_name, _path, _width, _height) {
+    console.log(PATH);
     assets[_name] = this;
     this.name = _name;
     this.path = _path;
