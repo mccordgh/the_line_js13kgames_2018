@@ -83,7 +83,7 @@ export class EntityManager {
   //   }
   // }
 
-  removeAllMonsters() {
-    entities = entities.filter(e => e.type !== 'monster');
+  removeEntitiesByType(type) {
+    entities = entities.filter(e => e.type !== type);
   }
 }

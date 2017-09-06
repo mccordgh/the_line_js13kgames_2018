@@ -113,11 +113,11 @@ export class Creature extends Entity {
   }
 
   collisionWithTile(_x, _y) {
-    // try {
+    try {
       return this.handler.getWorld().getTile(_x, _y).isSolid;
-    // }
-    // catch(e) {
-    // }
+    }
+    catch(e) {
+    }
   }
 
   getCurrentAnimationFrame() {

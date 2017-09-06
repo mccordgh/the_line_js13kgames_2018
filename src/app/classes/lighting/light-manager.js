@@ -68,6 +68,12 @@ export class LightManager {
   setLight(x, y, lightAmount) {
     this.lightMap[x][y] = lightAmount;
   }
+
+  removeSources() {
+    this.handler.getWorld().getEntityManager().removeEntitiesByType('light');
+
+    this.sources = [];
+  }
   //
   // removeSource(_source) {
   //   const index = this.sources.indexOf(_source);

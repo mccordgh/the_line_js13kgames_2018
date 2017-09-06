@@ -19,6 +19,7 @@ export class LightSource extends StaticEntity {
     this.flickerTimes = 0;
     this.flickerLength = 0;
     this.assets = Assets.getAssets('tiles');
+    this.type = 'light';
     this.init();
   }
 
@@ -135,16 +136,6 @@ export class LightSource extends StaticEntity {
     const x = (this.x * TILE_WIDTH) - this.handler.getGameCamera().getxOffset();
     const y = (this.y * TILE_HEIGHT) - this.handler.getGameCamera().getyOffset();
 
-    _g.globalAlpha = this.manager.lightMap[Math.floor(this.x / TILE_WIDTH)][Math.floor(this.y / TILE_HEIGHT)];
     _g.myDrawImage(this.assets.lantern, x, y, this.width, this.height);
-
-    //draw crappy torch for now
-    // _g.fillStyle = 'orange';
-    // _g.fillRect(x + 16, y + 8, 32, 32);
-    // _g.fillStyle = 'yellow';
-    // _g.fillRect(x + 24, y + 16, 16, 16);
-    // _g.fillStyle = 'brown';
-    // _g.fillRect(x + 24, y + 38, 16, 16);
-    //crappy torch
   }
 }

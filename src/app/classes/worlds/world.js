@@ -39,6 +39,7 @@ export class World {
     this.tiles = [];
     timeSpent = 0;
     monstersCleared = false;
+    this.lightManager.removeSources();
 
     this.loadWorld();
     this.init();
@@ -52,7 +53,6 @@ export class World {
 
     if (this.level === 1) {
       this.lightManager.addSource(3, 3);
-      // this.entityManager.addEntity(new Clone(this.handler, 4 * TILE_WIDTH, 2 * TILE_WIDTH));
     } else {
       this.addEvenSpreadOfLightSources(7);
       this.addEvenSpreadOfMonsters(8);
@@ -168,9 +168,9 @@ export class World {
     if (!monstersCleared) {
       timeSpent++;
 
-      if ((timeSpent / 60) >= 120) {
+      if ((timeSpent / 60) >= 240) {
         alert('the monsters crumble all around you.');
-        this.entityManager.removeAllMonsters();
+        this.entityManager.removeEntitiesByType('monster');
         monstersCleared = true;
       }
     }
@@ -197,11 +197,11 @@ export class World {
   }
 
   getTile(_x, _y) {
-    // try {
+    try {
       return TileManager.getTiles()[this.tiles[_x][_y]];
-    // }
-    // catch(e) {
-    // }
+    }
+    catch(e) {
+    }
   }
 
   getWidth() {
