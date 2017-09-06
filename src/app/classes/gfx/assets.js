@@ -10,7 +10,6 @@ const PATH  = window.location.href.replace('index.html', '') + 'src/res/',
 
 export class Assets {
   constructor(_name, _path, _width, _height) {
-    console.log(PATH);
     assets[_name] = this;
     this.name = _name;
     this.path = _path;
@@ -38,23 +37,6 @@ export class Assets {
 }
 
 const cropTile = (asset, x, y) => asset.sheet.crop(SPRITE_WIDTH * x, SPRITE_HEIGHT * y, SPRITE_WIDTH, SPRITE_HEIGHT);
-
-// const tiles = new Assets("tiles", PATH + "tiles_16x16_tiny.png", SPRITE_WIDTH, SPRITE_HEIGHT);
-// tiles.path = cropTile(tiles, 1, 0);
-// tiles.pathBlue = cropTile(tiles, 1, 2);
-// tiles.pathGreen = cropTile(tiles, 2, 2);
-// tiles.pathYellow = cropTile(tiles, 0, 2);
-// tiles.wall = cropTile(tiles, 0, 0);
-// tiles.wallBlue = cropTile(tiles, 1, 1);
-// tiles.wallGreen = cropTile(tiles, 2, 1);
-// tiles.wallYellow = cropTile(tiles, 0, 1);
-// tiles.switchBlue = cropTile(tiles, 2, 0);
-// tiles.switchGreen = cropTile(tiles, 3, 0);
-// tiles.exit = cropTile(tiles, 3, 1);
-//
-// const creatures = new Assets("creatures", PATH + "player_16x16_tiny.png", SPRITE_WIDTH, SPRITE_HEIGHT);
-// creatures.playerDown = cropTile(creatures, 0, 0);
-// creatures.ghostDown = cropTile(creatures, 0, 1);
 
 const tiles = new Assets('tiles', PATH + "tiles.png", SPRITE_WIDTH, SPRITE_HEIGHT);
 tiles.path = cropTile(tiles, 1, 0);

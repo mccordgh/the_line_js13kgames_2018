@@ -42,9 +42,10 @@ export class SoundManager {
           }
 
           // CODE FOR REPEATING
-          if (t <= this.lastTime && (t !== 0 && this.lastTime !== 0)) {
+          // if (t <= this.lastTime && (t !== 0 && this.lastTime !== 0)) {
             audio.play();
-          }
+            audio.loop = true;
+          // }
 
           this.lastTime = t;
 

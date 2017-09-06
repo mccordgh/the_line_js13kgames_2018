@@ -96,8 +96,6 @@ export class Creature extends Entity {
     const tile1 = this.handler.getWorld().getTile(c1, temp);
     const tile2 = this.handler.getWorld().getTile(c2, temp);
 
-    console.log({checking: '', tile1, tile2})
-
     if (tile1.type === 'switch') {
       this.handler.getWorld().swapGreenAndBlueTiles(tile1.color);
     } else if (tile2.type === 'switch') {
@@ -115,26 +113,11 @@ export class Creature extends Entity {
   }
 
   collisionWithTile(_x, _y) {
-    try {
+    // try {
       return this.handler.getWorld().getTile(_x, _y).isSolid;
-    }
-    catch(e) {
-    }
-  }
-
-  getHealth() {
-    return this.health;
-  }
-  getSpeed() {
-    return this.speed;
-  }
-
-  setHealth(_health) {
-    this.health = _health;
-  }
-
-  setSpeed(_speed) {
-    this.speed = _speed;
+    // }
+    // catch(e) {
+    // }
   }
 
   getCurrentAnimationFrame() {

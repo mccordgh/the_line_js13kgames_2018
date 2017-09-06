@@ -32,7 +32,6 @@ export class LightManager {
 
   tick() {
     this.sources.forEach((source) => {
-      // source.tick(xStart, xEnd, yStart, yEnd);
       source.tick();
     });
   }
@@ -51,7 +50,6 @@ export class LightManager {
    for (let y = yStart; y < yEnd; y++) {
      for (let x = xStart; x < xEnd; x++) {
        const tile = this.handler.getWorld().getTile(x, y).type;
-        // console.log({x, y})
        _g.globalAlpha =  (tile === 'switch' || tile === 'exit') ? CENTER_LIGHT : this.lightMap[x][y];
 
        _g.fillRect(x * TILE_WIDTH - this.handler.getGameCamera().getxOffset(), y * TILE_HEIGHT - this.handler.getGameCamera().getyOffset(), TILE_WIDTH, TILE_HEIGHT);

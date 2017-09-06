@@ -6,7 +6,7 @@ export class Tile {
     this.isSolid = false;
     this.texture = _texture;
     this.id = _id;
-    this.light = 0.6;
+    // this.light = 0.6;
     this.assets = Assets.getAssets("tiles");
   }
 

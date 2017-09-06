@@ -8,8 +8,8 @@ import { State } from './states/state';
 import { SoundManager } from './sounds/sound-manager';
 
 let running = false;
-let title, width, height, g, display, keyManager, handler, gameCamera, soundManager;
-let state, gameState, mainMenu, settingsState;
+let g, display, keyManager, handler, gameCamera, soundManager;
+let state, gameState, mainMenu;
 
 export class Game {
   constructor(_title, _width, _height){

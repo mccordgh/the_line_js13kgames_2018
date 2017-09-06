@@ -1,5 +1,3 @@
-let width, height, size, grid;
-
 export class SpatialGrid {
   constructor(_width, _height, _size) {
     this.width = parseInt(_width / _size);
@@ -37,8 +35,8 @@ export class SpatialGrid {
     let entities = [];
     for (let y = startY; y <= endY; y++){
       for (let x = startX; x <= endX; x++){
-        this.grid[x][y].forEach(function(entity){
-          if (entity !== _entity && entities.indexOf(entity) == -1)
+        this.grid[x][y].forEach((entity) => {
+          if (entity !== _entity && entities.indexOf(entity) === -1)
             entities.push(entity);
         });
       }
@@ -52,7 +50,7 @@ export class SpatialGrid {
     let startY = Math.max(0, parseInt(_rect.y / this.size));
     let endX = Math.min(this.width, parseInt((_rect.x + _rect.width) / this.size));
     let endY = Math.min(this.height, parseInt((_rect.y + _rect.height) / this.size));
-    let entities = [];
+
     for (let y = startY; y <= endY; y++){
       for (let x = startX; x <= endX; x++){
         for (let i = 0; i < this.grid[x][y].length; i++){

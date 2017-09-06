@@ -13,11 +13,11 @@ export class Menu {
   }
 
   render() {
-    alert ('overwrite this menu render bro');
+    alert ('all menus need a render!');
   }
 
   getInput() {
-    alert ('overwrite this menu input bro');
+    alert ('all menus need getInput!');
   }
 
 }

@@ -29,57 +29,15 @@ export class EntityManager {
 
   render(_g) {
     //Iterate through every entity, check whether they are currently in the camera view.
-    //If they are then draw them, if not and they are a monster draw offscreen monster pointer
+    //If they are in view then draw them
     entities.forEach(function(e) {
-      let checkRight = e.handler.getWidth() + e.handler.getGameCamera().getxOffset();
-      let checkBottom = e.handler.getHeight() + e.handler.getGameCamera().getyOffset();
-      let checkLeft = e.handler.getGameCamera().getxOffset() - e.width;
-      let checkTop = e.handler.getGameCamera().getyOffset() - e.height;
-      let scaleX = 0, scaleY = 0, marker;
-      let offScreen = false;
-
-      _g.font = "72px Arial";
-      _g.fillStyle = 'red';
-
-      if (e.x > checkRight || e.y > checkBottom || e.x < checkLeft || e.y < checkTop ) {
-        // const player = this.getPlayer();
-        offScreen = true;
-        // marker = "!";
-        // scaleX = (player.x + (player.width / 2) - 9) - e.handler.getGameCamera().getxOffset();
-        // scaleY = (player.y - 10) - e.handler.getGameCamera().getyOffset();
-      }
-
-      // if (e.x > checkRight){
-      //   scaleX = e.handler.getWidth() - 55;
-      //   scaleY = e.y - e.handler.getGameCamera().getyOffset();
-      //   offScreen = true;
-      //   marker = ">";
-      // }
-      // if (e.y > checkBottom){
-      //   scaleX = e.x - e.handler.getGameCamera().getxOffset();
-      //   scaleY = e.handler.getHeight() - 25;
-      //   offScreen = true;
-      //   marker = "V";
-      // }
-      // if (e.x < checkLeft){
-      //   scaleX = 10;
-      //   scaleY = e.y - e.handler.getGameCamera().getyOffset();
-      //   offScreen = true;
-      //   marker = "<";
-      // }
-      // if (e.y < checkTop) {
-      //   scaleX = e.x - e.handler.getGameCamera().getxOffset();
-      //   scaleY = 65;
-      //   offScreen = true;
-      //   marker = "/\\";
-      // }
-
-      // if (offScreen && e.type === 'monster')
-      //   _g.fillText(marker, scaleX, scaleY);
-
-      if (!offScreen)
-        e.render(_g);
-    }, this);
+      if (
+        e.handler.getWidth() + e.handler.getGameCamera().getxOffset() // check right side
+        && e.handler.getHeight() + e.handler.getGameCamera().getyOffset() // check bottom
+        && e.handler.getGameCamera().getxOffset() - e.width // check left side
+        && e.handler.getGameCamera().getyOffset() - e.height // check top
+      ) e.render(_g);
+    });
   }
 
   getPlayer() {
@@ -94,49 +52,38 @@ export class EntityManager {
     return entities;
   }
 
-  getSingleEntity(_type) {
-    let entityObj;
+  // getSingleEntity(_type) {
+  //   let entityObj;
+  //
+  //   entities.forEach((item) => {
+  //     if (item.type === _type) {
+  //       entityObj = {
+  //         type: item.type,
+  //         x: item.x,
+  //         y: item.y
+  //       };
+  //     }
+  //   });
 
-    entities.forEach((item) => {
-      if (item.type === _type) {
-        entityObj = {
-          type: item.type,
-          x: item.x,
-          y: item.y
-        };
-      }
-    });
-
-    return entityObj;
-  }
+    // return entityObj;
+  // }
 
   addEntity(e) {
     entities.push(e);
     handler.getWorld().getSpatialGrid().insert(new Rectangle(e.x + e.bounds.x, e.y + e.bounds.y, e.bounds.width, e.bounds.height), e);
   }
 
-  removeEntity(_entity) {
-    for (let i = 0; i < entities.length; i++){
-      const e = entities[i];
-      if (e === _entity){
-        entities.splice(i, 1);
-        return;
-      }
-    }
-  }
+  // removeEntity(_entity) {
+  //   for (let i = 0; i < entities.length; i++){
+  //     const e = entities[i];
+  //     if (e === _entity){
+  //       entities.splice(i, 1);
+  //       return;
+  //     }
+  //   }
+  // }
 
   removeAllMonsters() {
     entities = entities.filter(e => e.type !== 'monster');
-    // const newEntities = [];
-    //
-    // for (let i = 0; i < entities.length; i++){
-    //   const e = entities[i];
-    //
-    //   if (e.type !== 'monster'){
-    //     newEntities.push(e);
-    //   }
-    // }
-    //
-    // entities = newEntities;
   }
 }

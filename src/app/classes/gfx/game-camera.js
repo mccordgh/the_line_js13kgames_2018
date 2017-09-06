@@ -14,27 +14,27 @@ export class GameCamera {
     this.checkBlankSpace();
   }
 
-  slowCenterOnEntity(entity) {
-    let startX = this.xOffset,
-      startY = this.yOffset,
-      goalX = entity.getX() - this.handler.getWidth() / 2 + entity.getWidth() / 2,
-      goalY = entity.getY() - this.handler.getHeight() / 2 + entity.getHeight() / 2;
-
-    if(startY > goalY && this.yOffset > goalY) {
-      this.yOffset -= 5;
-    }
-    if (goalY > startY && this.yOffset < goalY) {
-      this.yOffset += 5;
-    }
-    if(startX > goalX && this.xOffset > goalX) {
-      this.xOffset -= 5;
-    }
-    if (goalX > startX && this.xOffset < goalX) {
-      this.xOffset += 5;
-    }
-
-    this.checkBlankSpace();
-  }
+  // slowCenterOnEntity(entity) {
+  //   let startX = this.xOffset,
+  //     startY = this.yOffset,
+  //     goalX = entity.getX() - this.handler.getWidth() / 2 + entity.getWidth() / 2,
+  //     goalY = entity.getY() - this.handler.getHeight() / 2 + entity.getHeight() / 2;
+  //
+  //   if(startY > goalY && this.yOffset > goalY) {
+  //     this.yOffset -= 5;
+  //   }
+  //   if (goalY > startY && this.yOffset < goalY) {
+  //     this.yOffset += 5;
+  //   }
+  //   if(startX > goalX && this.xOffset > goalX) {
+  //     this.xOffset -= 5;
+  //   }
+  //   if (goalX > startX && this.xOffset < goalX) {
+  //     this.xOffset += 5;
+  //   }
+  //
+  //   this.checkBlankSpace();
+  // }
 
   move(_xAmt, _yAmt) {
     this.xOffset += _xAmt;

@@ -2,7 +2,7 @@ const maze = [],
   finalMaze = [],
   // set maximum and minimum number for wall ids (2 is yellow, 3 is blue);
   wallIDs = [2, 3, 7];
-  let counting = 0;
+  // let counting = 0;
   let mazeWidth = 0, mazeHeight = 0;
 
 const getRandomWallID = (i, j) => {

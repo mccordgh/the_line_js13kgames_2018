@@ -30,7 +30,6 @@ export class World {
   }
 
   changeLevel() {
-    console.log('CHANGE LEVEL');
     this.setPlayerSpawn(this.spawnX, this.spawnY);
     this.level += 1;
     this.tiles = [];
@@ -49,7 +48,7 @@ export class World {
 
     if (this.level === 1) {
       this.lightManager.addSource(3, 3);
-      this.entityManager.addEntity(new Clone(this.handler, 4 * TILE_WIDTH, 2 * TILE_WIDTH));
+      // this.entityManager.addEntity(new Clone(this.handler, 4 * TILE_WIDTH, 2 * TILE_WIDTH));
     } else {
       this.addEvenSpreadOfLightSources(7);
       this.addEvenSpreadOfMonsters(8);
@@ -194,11 +193,11 @@ export class World {
   }
 
   getTile(_x, _y) {
-    try {
+    // try {
       return TileManager.getTiles()[this.tiles[_x][_y]];
-    }
-    catch(e) {
-    }
+    // }
+    // catch(e) {
+    // }
   }
 
   getWidth() {

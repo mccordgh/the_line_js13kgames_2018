@@ -110,39 +110,6 @@ export class Clone extends Creature {
     super.tick();
 
     this.move();
-
-    // this.target = this.handler.getWorld().getEntityManager().getSingleEntity(this.targetType);
-    // if (this.target) {
-    //   if(this.target.y < this.y) {
-    //     if (this.target.y - this.y > 10 || this.target.y - this.y < -10)
-    //       this.yMove = -this.speed * _dt;
-    //   }
-    //   if (this.target.y > this.y) {
-    //     if (this.target.y - this.y > 10 || this.target.y - this.y < -10)
-    //       this.yMove = this.speed * _dt;
-    //   }
-    //   if(this.target.x < this.x) {
-    //     if (this.target.x - this.x > 10 || this.target.x - this.x < -10)
-    //       this.xMove = -this.speed * _dt;
-    //   }
-    //   if (this.target.x > this.x) {
-    //     if (this.target.x - this.x > 10 || this.target.x - this.x < -10)
-    //       this.xMove = this.speed * _dt;
-    //   }
-    // }
-    // if (this.dead === 0)
-    //   this.move();
-
-    // if (this.xMove > 0)
-    //   this.assets.animations.walk_right.tick();
-    // if (this.xMove < 0)
-    //   this.assets.animations.walk_left.tick();
-    // if (this.yMove < 0)
-    //   this.assets.animations.walk_up.tick();
-    // if (this.yMove > 0)
-    //   this.assets.animations.walk_down.tick();
-    //
-    // this.assets.animations.idle.tick();
   }
 
   render(_g){
@@ -153,22 +120,4 @@ export class Clone extends Creature {
     // _g.fillRect(this.bounds.x + this.x - this.handler.getGameCamera().getxOffset(), this.bounds.y + this.y - this.handler.getGameCamera().getyOffset(), this.bounds.width, this.bounds.height);
     // ****** DRAW BOUNDING BOX DON'T DELETE!!
   }
-
-  getInput(_dt) {
-    //
-  }
-
-  // getCurrentAnimationFrame() {
-  //   if (this.xMove < 0){
-  //     return this.assets.animations.walk_left.getCurrentFrame();
-  //   } else if (this.xMove > 0) {
-  //     return this.assets.animations.walk_right.getCurrentFrame();
-  //   } else if (this.yMove < 0){
-  //     return this.assets.animations.walk_up.getCurrentFrame();
-  //   } else if (this.yMove > 0){
-  //     return this.assets.animations.walk_down.getCurrentFrame();
-  //   } else {
-  //     return this.assets.animations.idle.getCurrentFrame();
-  //   }
-  // }
 }

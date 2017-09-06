@@ -32,31 +32,31 @@ const CPlayer = function() {
   //--------------------------------------------------------------------------
 
   // Oscillators
-  var osc_sin = function (value) {
+  const osc_sin = function (value) {
     return Math.sin(value * 6.283184);
   };
 
-  var osc_saw = function (value) {
+  const osc_saw = function (value) {
     return 2 * (value % 1) - 1;
   };
 
-  var osc_square = function (value) {
+  const osc_square = function (value) {
     return (value % 1) < 0.5 ? 1 : -1;
   };
 
-  var osc_tri = function (value) {
-    var v2 = (value % 1) * 4;
+  const osc_tri = function (value) {
+    let v2 = (value % 1) * 4;
     if(v2 < 2) return v2 - 1;
     return 3 - v2;
   };
 
-  var getnotefreq = function (n) {
+  const getnotefreq = function (n) {
     // 174.61.. / 44100 = 0.003959503758 (F3)
     return 0.003959503758 * Math.pow(2, (n - 128) / 12);
   };
 
-  var createNote = function (instr, n, rowLen) {
-    var osc1 = mOscillators[instr.i[0]],
+  const createNote = function (instr, n, rowLen) {
+    let osc1 = mOscillators[instr.i[0]],
       o1vol = instr.i[1],
       o1xenv = instr.i[3],
       osc2 = mOscillators[instr.i[4]],
@@ -70,13 +70,13 @@ const CPlayer = function() {
       arp = instr.i[13],
       arpInterval = rowLen * Math.pow(2, 2 - instr.i[14]);
 
-    var noteBuf = new Int32Array(attack + sustain + release);
+    const noteBuf = new Int32Array(attack + sustain + release);
 
     // Re-trig oscillators
-    var c1 = 0, c2 = 0;
+    let c1 = 0, c2 = 0;
 
-    // Local variables.
-    var j, j2, e, t, rsample, o1t, o2t;
+    // Local constiables.
+    let j, j2, e, t, rsample, o1t, o2t;
 
     // Generate one note (attack + sustain + release)
     for (j = 0, j2 = 0; j < attack + sustain + release; j++, j2++) {
@@ -132,15 +132,15 @@ const CPlayer = function() {
   //--------------------------------------------------------------------------
 
   // Array of oscillator functions
-  var mOscillators = [
+  const mOscillators = [
     osc_sin,
     osc_square,
     osc_saw,
     osc_tri
   ];
 
-  // Private variables set up by init()
-  var mSong, mLastRow, mCurrentCol, mNumWords, mMixBuf;
+  // Private constiables set up by init()
+  let mSong, mLastRow, mCurrentCol, mNumWords, mMixBuf;
 
 
   //--------------------------------------------------------------------------
@@ -151,7 +151,7 @@ const CPlayer = function() {
     // Define the song
     mSong = song;
 
-    // Init iteration state variables
+    // Init iteration state constiables
     mLastRow = song.endPattern - 2;
     mCurrentCol = 0;
 
@@ -169,22 +169,22 @@ const CPlayer = function() {
 
   // Generate audio data for a single track
   this.generate = function () {
-    // Local variables
-    var i, j, b, p, row, col, n, cp,
+    // Local constiables
+    let i, j, b, p, row, col, n, cp,
       k, t, lfor, e, x, rsample, rowStartSample, f, da;
 
-    // Put performance critical items in local variables
-    var chnBuf = new Int32Array(mNumWords),
+    // Put performance critical items in local constiables
+    let chnBuf = new Int32Array(mNumWords),
       instr = mSong.songData[mCurrentCol],
       rowLen = mSong.rowLen,
       patternLen = mSong.patternLen;
 
     // Clear effect state
-    var low = 0, band = 0, high;
-    var lsample, filterActive = false;
+    let low = 0, band = 0, high;
+    let lsample, filterActive = false;
 
     // Clear note cache.
-    var noteCache = [];
+    let noteCache = [];
 
     // Patterns
     for (p = 0; p <= mLastRow; ++p) {
@@ -193,7 +193,7 @@ const CPlayer = function() {
       // Pattern rows
       for (row = 0; row < patternLen; ++row) {
         // Execute effect command.
-        var cmdNo = cp ? instr.c[cp - 1].f[row] : 0;
+        const cmdNo = cp ? instr.c[cp - 1].f[row] : 0;
         if (cmdNo) {
           instr.i[cmdNo - 1] = instr.c[cp - 1].f[row + patternLen] || 0;
 
@@ -203,8 +203,8 @@ const CPlayer = function() {
           }
         }
 
-        // Put performance critical instrument properties in local variables
-        var oscLFO = mOscillators[instr.i[15]],
+        // Put performance critical instrument properties in local constiables
+        let oscLFO = mOscillators[instr.i[15]],
           lfoAmt = instr.i[16] / 512,
           lfoFreq = Math.pow(2, instr.i[17] - 9) / rowLen,
           fxLFO = instr.i[18],
@@ -230,7 +230,7 @@ const CPlayer = function() {
             }
 
             // Copy note from the note cache
-            var noteBuf = noteCache[n];
+            let noteBuf = noteCache[n];
             for (j = 0, i = rowStartSample * 2; j < noteBuf.length; j++, i += 2) {
               chnBuf[i] += noteBuf[j];
             }
@@ -245,7 +245,7 @@ const CPlayer = function() {
 
           // We only do effects if we have some sound input
           if (rsample || filterActive) {
-            // State variable filter
+            // State constiable filter
             f = fxFreq;
             if (fxLFO) {
               f *= oscLFO(lfoFreq * k) * lfoAmt + 0.5;
@@ -305,10 +305,10 @@ const CPlayer = function() {
   // Create a WAVE formatted Uint8Array from the generated audio data
   this.createWave = function() {
     // Create WAVE header
-    var headerLen = 44;
-    var l1 = headerLen + mNumWords * 2 - 8;
-    var l2 = l1 - 36;
-    var wave = new Uint8Array(headerLen + mNumWords * 2);
+    let headerLen = 44;
+    let l1 = headerLen + mNumWords * 2 - 8;
+    let l2 = l1 - 36;
+    let wave = new Uint8Array(headerLen + mNumWords * 2);
     wave.set(
       [82,73,70,70,
         l1 & 255,(l1 >> 8) & 255,(l1 >> 16) & 255,(l1 >> 24) & 255,
@@ -318,9 +318,9 @@ const CPlayer = function() {
     );
 
     // Append actual wave data
-    for (var i = 0, idx = headerLen; i < mNumWords; ++i) {
+    for (let i = 0, idx = headerLen; i < mNumWords; ++i) {
       // Note: We clamp here
-      var y = mMixBuf[i];
+      let y = mMixBuf[i];
       y = y < -32767 ? -32767 : (y > 32767 ? 32767 : y);
       wave[idx++] = y & 255;
       wave[idx++] = (y >> 8) & 255;
@@ -332,10 +332,10 @@ const CPlayer = function() {
 
   // Get n samples of wave data at time t [s]. Wave data in range [-2,2].
   this.getData = function(t, n) {
-    var i = 2 * Math.floor(t * 44100);
-    var d = new Array(n);
-    for (var j = 0; j < 2*n; j += 1) {
-      var k = i + j;
+    let i = 2 * Math.floor(t * 44100);
+    let d = new Array(n);
+    for (let j = 0; j < 2*n; j += 1) {
+      let k = i + j;
       d[j] = t > 0 && k < mMixBuf.length ? mMixBuf[k] / 32768 : 0;
     }
     return d;

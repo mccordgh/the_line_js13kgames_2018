@@ -118,22 +118,4 @@ export class Player extends Creature {
       }
     }
   }
-
-  // getCurrentAnimationFrame() {
-  //   if (this.yMove < 0){
-  //     lastAnimation = "walk_up";
-  //     return this.assets.animations.walk_up.getCurrentFrame();
-  //   } else if (this.yMove > 0){
-  //     lastAnimation = "walk_down";
-  //     return this.assets.animations.walk_down.getCurrentFrame();
-  //   } else if (this.xMove < 0){
-  //     lastAnimation = "walk_left";
-  //     return this.assets.animations.walk_left.getCurrentFrame();
-  //   } else if (this.xMove > 0){
-  //     lastAnimation = "walk_right";
-  //     return this.assets.animations.walk_right.getCurrentFrame();
-  //   } else {
-  //     return this.assets.animations[lastAnimation].getCurrentFrame();
-  //   }
-  // }
 }
