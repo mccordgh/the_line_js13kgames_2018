@@ -88,44 +88,42 @@ export class MazeGenerator {
     }
   }
 
-  static getRandomRoomEntities() {
-    //9 - SwitchGreen,  6 - SwitchBlue,  10 - Exit,  0 - path (empty room)
-    const entities = [10, 0, 9];
-    //let's spawn one of the switches in room #1 with the player
-    const rooms = [9];
-
-    do {
-      const maxIndex = entities.length - 1;
-      const randomIndex = Math.floor(Math.random() * (maxIndex + 1));
-      rooms.push(entities[randomIndex]);
-      entities.splice(randomIndex, 1);
-    } while (entities.length > 0);
-
-    return rooms;
-  }
+  // static getRandomRoomEntities() {
+  //   //9 - SwitchGreen,  6 - SwitchBlue,  10 - Exit,  0 - path (empty room)
+  //   const entities = [10, 0, 9];
+  //   //let's spawn one of the switches in room #1 with the player
+  //   const rooms = [9];
+  //
+  //   do {
+  //     const maxIndex = entities.length - 1;
+  //     const randomIndex = Math.floor(Math.random() * (maxIndex + 1));
+  //     rooms.push(entities[randomIndex]);
+  //     entities.splice(randomIndex, 1);
+  //   } while (entities.length > 0);
+  //
+  //   return rooms;
+  // }
 
   static createRooms() {
     const roomSize = 3;
-    const roomEntities = this.getRandomRoomEntities();
+    // const roomEntities = this.getRandomRoomEntities();
 
     // NW room
-    this.createRoom(1, 1, roomSize, roomEntities[0]);
+    this.createRoom(1, 1, roomSize);//, roomEntities[0]);
     // SW room
-    this.createRoom(1, mazeHeight - (roomSize + 1), roomSize, roomEntities[1]);
+    this.createRoom(1, mazeHeight - (roomSize + 1), roomSize);//, roomEntities[1]);
     // SE ROOM
-    this.createRoom(mazeWidth - (roomSize + 1), mazeHeight - (roomSize + 1), roomSize, roomEntities[2]);
+    this.createRoom(mazeWidth - (roomSize + 1), mazeHeight - (roomSize + 1), roomSize);//, roomEntities[2]);
     // NE ROOM
-    this.createRoom(mazeWidth - (roomSize + 1), 1, roomSize, roomEntities[3]);
+    this.createRoom(mazeWidth - (roomSize + 1), 1, roomSize);//, roomEntities[3]);
   }
 
-  static createRoom(startX, startY, size, entity) {
+  static createRoom(startX, startY, size) {
     for(let i = startY; i < startY + size; i ++){
       for(let j = startX; j < startX +  size; j ++){
         finalMaze[j][i] = 0;
       }
     }
-
-    finalMaze[startX + Math.floor(size / 2)][startY + Math.floor(size / 2)] = entity;
   }
 
   static createBarriers(level) {
