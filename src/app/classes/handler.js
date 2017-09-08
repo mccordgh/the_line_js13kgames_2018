@@ -12,14 +12,14 @@ export class Handler {
 
   devMessage(msg) {
     const styles = [
-      'background: linear-gradient(#ffffff, #ff00ff)'
-      , 'border: 1px solid #3E0E02'
-      , 'color: black'
-      , 'display: block'
-      , 'line-height: 40px'
-      , 'text-align: center'
-      , 'font-size: 18px'
-      , 'font-weight: bold'
+      'background: linear-gradient(#ffffff, #ff00ff)',
+      'border: 1px solid #3E0E02',
+      'color: black',
+      'display: block',
+      'line-height: 40px',
+      'text-align: center',
+      'font-size: 18px',
+      'font-weight: bold',
     ].join(';');
 
     console.log(`%c${msg}`, styles);
