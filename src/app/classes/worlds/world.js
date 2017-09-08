@@ -5,6 +5,7 @@ import { Player } from '../entities/creatures/player';
 import { SpatialGrid } from '../utils/spatial-grid';
 import { TileManager } from '../tiles/tile-manager';
 import { LightManager } from '../lighting/light-manager';
+import { Exit } from '../entities/statics/exit';
 
 
 const TILE_WIDTH = 64;
@@ -40,9 +41,27 @@ export class World {
     timeSpent = 0;
     monstersCleared = false;
     this.lightManager.removeSources();
+    this.entityManager.removeEntitiesByType('exit');
+    // this.entityManager.removeEntitiesByType('switch');
 
     this.loadWorld();
     this.init();
+  }
+
+  spawnRandomRoomEntities() {
+    //9 - SwitchGreen,  6 - SwitchBlue,  10 - Exit,  0 - path (empty room)
+    const exit = new Exit(this.handler, (this.width - 3) * TILE_WIDTH, (this.height - 3) * TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT);
+
+    const entities = [exit];
+    //let's spawn one of the switches in room #1 with the player
+    // const rooms = [9];
+
+    do {
+      const maxIndex = entities.length - 1;
+      const randomIndex = Math.floor(Math.random() * (maxIndex + 1));
+      this.entityManager.addEntity(entities[randomIndex]);
+      entities.splice(randomIndex, 1);
+    } while (entities.length > 0);
   }
 
   init() {
@@ -52,10 +71,12 @@ export class World {
     this.lightManager.fillLightMap();
 
     if (this.level === 1) {
+      this.entityManager.addEntity(new Exit(this.handler, TILE_WIDTH, 2 * TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT));
       this.lightManager.addSource(3, 3);
     } else {
+      this.spawnRandomRoomEntities();
       this.addEvenSpreadOfLightSources(7);
-      this.addEvenSpreadOfMonsters(8);
+      this.addEvenSpreadOfMonsters(7);
     }
   }
 

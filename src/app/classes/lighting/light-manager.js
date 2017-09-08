@@ -60,7 +60,7 @@ export class LightManager {
  }
   //
   addSource(x, y) {
-    const newSource = new LightSource(this.handler, x, y, TILE_WIDTH, TILE_HEIGHT, this);
+    const newSource = new LightSource(this.handler, x * TILE_WIDTH, y * TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT, this);
     this.handler.getWorld().getEntityManager().addEntity(newSource);
     this.sources.push(newSource);
   }

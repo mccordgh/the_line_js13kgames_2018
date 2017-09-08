@@ -12,6 +12,12 @@ export class LightSource extends StaticEntity {
   constructor(handler, x, y, width, height) {
     super(handler, x, y, width, height);
     this.manager = this.handler.getWorld().getLightManager();
+    this.posX = Math.floor(x / TILE_WIDTH);
+    this.posY = Math.floor(y / TILE_HEIGHT);
+    this.bounds.x = 0;
+    this.bounds.y = 0;
+    this.bounds.width = 0;
+    this.bounds.height = 0;
     this.flickering = false;
     this.lastFlickerCounter = 0;
     this.flickerToggle = 0;
@@ -29,8 +35,8 @@ export class LightSource extends StaticEntity {
   }
 
   makeSureOnWall() {
-    const xx = this.x;
-    const yy = this.y;
+    const xx = this.posX;
+    const yy = this.posY;
     const tile = this.handler.getWorld().getTile(xx, yy);
 
     if (tile.id === 1) return;
@@ -38,8 +44,8 @@ export class LightSource extends StaticEntity {
     for (let y = yy - 1; y < yy + 1; y++) {
       for (let x = xx - 1; x < xx + 1; x++) {
         if (this.handler.getWorld().getTile(x, y).id === 1) {
-          this.x = x;
-          this.y = y;
+          this.posX = x;
+          this.posY = y;
           return;
         }
       }
@@ -50,38 +56,38 @@ export class LightSource extends StaticEntity {
     //outer border
     for (let y = -2; y < 3; y++) {
       for (let x = -2; x < 3; x++) {
-        this.manager.lightMap[this.x + x][this.y + y] = Math.min(this.manager.lightMap[this.x + x][this.y + y], OUTER_LIGHT);
+        this.manager.lightMap[this.posX + x][this.posY + y] = Math.min(this.manager.lightMap[this.posX + x][this.posY + y], OUTER_LIGHT);
       }
     }
 
     //inner border
     for (let y = -1; y < 2; y++) {
       for (let x = -1; x < 2; x++) {
-        this.manager.lightMap[this.x + x][this.y + y] = Math.min(this.manager.lightMap[this.x + x][this.y + y], INNER_LIGHT);
+        this.manager.lightMap[this.posX + x][this.posY + y] = Math.min(this.manager.lightMap[this.posX + x][this.posY + y], INNER_LIGHT);
       }
     }
 
     // center of light source
-    this.manager.lightMap[this.x][this.y] = CENTER_LIGHT;
+    this.manager.lightMap[this.posX][this.posY] = CENTER_LIGHT;
   }
 
   dimLights(diff) {
     //outer border
     for (let y = -2; y < 3; y++) {
       for (let x = -2; x < 3; x++) {
-        this.manager.lightMap[this.x + x][this.y + y] = Math.min(DEFAULT_LIGHT, OUTER_LIGHT + diff);
+        this.manager.lightMap[this.posX + x][this.posY + y] = Math.min(DEFAULT_LIGHT, OUTER_LIGHT + diff);
       }
     }
 
     //inner border
     for (let y = -1; y < 2; y++) {
       for (let x = -1; x < 2; x++) {
-        this.manager.lightMap[this.x + x][this.y + y] = Math.min(DEFAULT_LIGHT, INNER_LIGHT + diff);
+        this.manager.lightMap[this.posX + x][this.posY + y] = Math.min(DEFAULT_LIGHT, INNER_LIGHT + diff);
       }
     }
 
     // center of light source
-    this.manager.lightMap[this.x][this.y] = Math.min(DEFAULT_LIGHT, CENTER_LIGHT + diff);
+    this.manager.lightMap[this.posX][this.posY] = Math.min(DEFAULT_LIGHT, CENTER_LIGHT + diff);
   }
 
   chanceToFlicker() {
@@ -133,8 +139,8 @@ export class LightSource extends StaticEntity {
   }
 
   render(_g) {
-    const x = (this.x * TILE_WIDTH) - this.handler.getGameCamera().getxOffset();
-    const y = (this.y * TILE_HEIGHT) - this.handler.getGameCamera().getyOffset();
+    const x = this.x - this.handler.getGameCamera().getxOffset();
+    const y = this.y - this.handler.getGameCamera().getyOffset();
 
     _g.myDrawImage(this.assets.lantern, x, y, this.width, this.height);
   }

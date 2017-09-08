@@ -6,10 +6,10 @@ export class Exit extends StaticEntity {
     super(handler, x, y, width, height);
     this.assets = Assets.getAssets('tiles');
     this.type = 'exit';
-    this.bounds.x = 10;
-    this.bounds.y = 10;
-    this.bounds.width = this.width - 20;
-    this.bounds.height = this.height - 20;
+    this.bounds.x = 15;
+    this.bounds.y = 15;
+    this.bounds.width = this.width - 30;
+    this.bounds.height = this.height - 30;
   }
 
   tick(){

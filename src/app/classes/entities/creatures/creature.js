@@ -1,7 +1,5 @@
-import { Ending } from '../../menus/ending';
 import { Entity } from '../entity';
 import { Rectangle } from '../../gfx/shapes/rectangle';
-import { World } from '../../worlds/world';
 
 
 const DEFAULT_SPEED = 100,
@@ -63,7 +61,6 @@ export class Creature extends Entity {
       this.x += this.xMove;
     } else {
       this.x = setX;
-      if (this.type === 'player') this.checkForSwitchOrTrigger(c1, c2, tempX);
     }
   }
 
@@ -88,29 +85,28 @@ export class Creature extends Entity {
       this.y += this.yMove;
     } else {
       this.y = setY;
-      if (this.type === 'player') this.checkForSwitchOrTrigger(c1, c2, tempY);
     }
   }
 
-  checkForSwitchOrTrigger(c1, c2, temp) {
-    const tile1 = this.handler.getWorld().getTile(c1, temp);
-    const tile2 = this.handler.getWorld().getTile(c2, temp);
-
-    if (tile1.type === 'switch') {
-      this.handler.getWorld().swapGreenAndBlueTiles(tile1.color);
-    } else if (tile2.type === 'switch') {
-      this.handler.getWorld().swapGreenAndBlueTiles(tile2.color);
-    }
-
-    if (tile1.type === 'exit' || tile2.type === 'exit') {
-      if (this.handler.getWorld().level >= 4) {
-        const ending = new Ending(this.handler);
-        this.handler.getGame().getGameState().setState(ending);
-      }
-
-      this.handler.getWorld().changeLevel();
-    }
-  }
+  // checkForSwitchOrTrigger(c1, c2, temp) {
+  //   const tile1 = this.handler.getWorld().getTile(c1, temp);
+  //   const tile2 = this.handler.getWorld().getTile(c2, temp);
+  //
+  //   if (tile1.type === 'switch') {
+  //     this.handler.getWorld().swapGreenAndBlueTiles(tile1.color);
+  //   } else if (tile2.type === 'switch') {
+  //     this.handler.getWorld().swapGreenAndBlueTiles(tile2.color);
+  //   }
+  //
+  //   if (tile1.type === 'exit' || tile2.type === 'exit') {
+  //     if (this.handler.getWorld().level >= 4) {
+  //       const ending = new Ending(this.handler);
+  //       this.handler.getGame().getGameState().setState(ending);
+  //     }
+  //
+  //     this.handler.getWorld().changeLevel();
+  //   }
+  // }
 
   collisionWithTile(_x, _y) {
     try {

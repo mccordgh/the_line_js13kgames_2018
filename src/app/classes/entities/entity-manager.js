@@ -84,6 +84,12 @@ export class EntityManager {
   // }
 
   removeEntitiesByType(type) {
-    entities = entities.filter(e => e.type !== type);
+    entities = entities.filter((e) => {
+      if (e.type === type) {
+        handler.getWorld().getSpatialGrid().remove(new Rectangle(e.x + e.bounds.x, e.y + e.bounds.y, e.bounds.width, e.bounds.height), e);
+      } else {
+        return e;
+      }
+    });
   }
 }

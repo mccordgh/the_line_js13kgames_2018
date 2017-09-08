@@ -1,3 +1,4 @@
+import { Ending } from '../menus/ending';
 import { GameOver } from '../menus/game-over';
 import { Rectangle } from '../gfx/shapes/rectangle';
 
@@ -47,19 +48,37 @@ export class Entity {
     for(let i = 0; i < candidates.length; i++) {
       const e = candidates[i];
         if (e.getCollisionBounds(0, 0).intersects(this.getCollisionBounds(xOffset, yOffset))) {
-            if (this.type === 'monster' && e.type === 'monster') return false;
+            this.checkForCollisionEvents(this, e);
 
-            if ((this.type === 'player' && e.type === 'monster') || this.type === 'monster' && e.type === 'player') {
-              if (this.invincible || e.invincible) return false;
-
-              const gameOver = new GameOver(this.handler);
-              this.handler.getGame().getGameState().setState(gameOver);
-            }
             return true;
         }
     }
     return false;
   }
+
+  checkForCollisionEvents(e1, e2) {
+    if (this.checkCollidingTypes(e1, e2, 'monster', 'monster')) return;
+
+    if (this.checkCollidingTypes(e1, e2, 'player', 'exit')) {
+      if (this.handler.getWorld().level >= 4) {
+        const ending = new Ending(this.handler);
+        this.handler.getGame().getGameState().setState(ending);
+      }
+
+      this.handler.getWorld().changeLevel();
+    }
+
+    if (this.checkCollidingTypes(e1, e2, 'player', 'monster')) {
+      if (e1.invincible || e2.invincible) return;
+
+      const gameOver = new GameOver(e1.handler);
+      e1.handler.getGame().getGameState().setState(gameOver);
+    }
+  }
+
+  checkCollidingTypes(e1, e2, type1, type2) {
+    return ((e1.type === type1 && e2.type === type2) || (e1.type === type2 && e2.type === type1));
+      }
 
   setX(_x) {
     this.x = _x;
