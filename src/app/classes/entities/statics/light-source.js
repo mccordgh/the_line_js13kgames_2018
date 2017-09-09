@@ -24,6 +24,7 @@ export class LightSource extends StaticEntity {
     this.flickerCount = 0;
     this.flickerTimes = 0;
     this.flickerLength = 0;
+    this.moveThrough = true;
     this.assets = Assets.getAssets('tiles');
     this.type = 'light';
     this.init();
@@ -139,9 +140,19 @@ export class LightSource extends StaticEntity {
   }
 
   render(_g) {
-    const x = this.x - this.handler.getGameCamera().getxOffset();
-    const y = this.y - this.handler.getGameCamera().getyOffset();
+    // const x = this.x - this.handler.getGameCamera().getxOffset();
+    // const y = this.y - this.handler.getGameCamera().getyOffset();
+		//
+		// _g.myDrawImage(this.assets.lantern, x, y, this.width, this.height);
+		_g.myDrawImage(this.assets.lantern,
+			this.x - this.handler.getGameCamera().getxOffset(),
+			this.y - this.handler.getGameCamera().getyOffset(),
+			this.width,
+			this.height);
 
-    _g.myDrawImage(this.assets.lantern, x, y, this.width, this.height);
-  }
+		// ****** DRAW BOUNDING BOX DON'T DELETE!!
+		// _g.fillStyle = "white";
+		// _g.fillRect(this.bounds.x + this.x - this.handler.getGameCamera().getxOffset(), this.bounds.y + this.y - this.handler.getGameCamera().getyOffset(), this.bounds.width, this.bounds.height);
+		// ****** DRAW BOUNDING BOX DON'T DELETE!!
+	}
 }

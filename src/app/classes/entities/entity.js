@@ -11,6 +11,7 @@ export class Entity {
     this.handler = _handler;
     this.bounds = new Rectangle(0, 0, _width, _height);
     this.target = null;
+    this.moveThrough = false;
   }
 
   tick(_dt) {
@@ -47,6 +48,8 @@ export class Entity {
 
     for(let i = 0; i < candidates.length; i++) {
       const e = candidates[i];
+        if (e.moveThrough) return false;
+
         if (e.getCollisionBounds(0, 0).intersects(this.getCollisionBounds(xOffset, yOffset))) {
             this.checkForCollisionEvents(this, e);
 

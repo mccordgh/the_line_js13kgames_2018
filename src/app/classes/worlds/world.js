@@ -22,7 +22,7 @@ const TILE_WIDTH = 64;
 const TILE_HEIGHT = 64;
 let yellowTilesDown = false, monstersCleared = false;
 let yellowWallInterval = 0;
-const yellowWallIntervalMax = 3 * 60; // We want X seconds so we multiply that by our FPS which is 60
+const yellowWallIntervalMax = 5 * 60; // We want X seconds so we multiply that by our FPS which is 60
 let timeSpent = 0;
 
 export class World {
@@ -50,10 +50,14 @@ export class World {
     this.level += 1;
     this.tiles = [];
     timeSpent = 0;
-    monstersCleared = false;
     this.lightManager.removeSources();
     this.entityManager.removeEntitiesByType('exit');
-    // this.entityManager.removeEntitiesByType('switch');
+    this.entityManager.removeEntitiesByType('switch');
+    this.entityManager.removeEntitiesByType('journal');
+
+    if (!monstersCleared) this.entityManager.removeEntitiesByType('monster');
+
+    monstersCleared = false;
 
     this.loadWorld();
     this.init();
@@ -61,20 +65,15 @@ export class World {
 
   spawnRandomRoomEntities() {
     //9 - SwitchGreen,  6 - SwitchBlue,  10 - Exit,  0 - path (empty room)
-    const exit = new Exit(this.handler, (this.width - 3) * TILE_WIDTH, (this.height - 3) * TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT);
-		const switchOne = new Switch(this.handler, 2 * TILE_WIDTH, 2 * TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT);
-		const switchTwo = new Switch(this.handler, (this.width - 3) * TILE_WIDTH, 2 * TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT);
+    const exit = new Exit(this.handler, (this.width - 2) * TILE_WIDTH, (this.height - 2) * TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT);
+		const switchSpawnTop = Math.random() < 0.5;
 
-    const entities = [exit, switchOne, switchTwo];
-    //let's spawn one of the switches in room #1 with the player
-    // const rooms = [9];
+		const switchX = switchSpawnTop ? (this.width - 3) * TILE_WIDTH : 2 * TILE_WIDTH;
+		const switchY = switchSpawnTop ? 2 * TILE_HEIGHT : (this.height - 3) * TILE_HEIGHT;
 
-    do {
-      const maxIndex = entities.length - 1;
-      const randomIndex = Math.floor(Math.random() * (maxIndex + 1));
-      this.entityManager.addEntity(entities[randomIndex]);
-      entities.splice(randomIndex, 1);
-    } while (entities.length > 0);
+		this.entityManager.addEntity(new Switch(this.handler, switchX, switchY, TILE_WIDTH, TILE_HEIGHT));
+		this.entityManager.addEntity(exit);
+
   }
 
   init() {
@@ -84,15 +83,36 @@ export class World {
     this.lightManager.fillLightMap();
 
     if (this.level === 1) {
-      // this.entityManager.addEntity(new Exit(this.handler, TILE_WIDTH, 2 * TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT));
-			this.entityManager.addEntity(new JournalPage(this.handler, TILE_WIDTH, 2 * TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT, new JournalSeven()));
-			this.lightManager.addSource(3, 3);
+      this.entityManager.addEntity(new Exit(this.handler, 7 * TILE_WIDTH, 7 * TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT));
+			this.entityManager.addEntity(new JournalPage(this.handler, 1 * TILE_WIDTH, 2 * TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT, new JournalOne()));
+			this.entityManager.addEntity(new Clone(this.handler, 6 * TILE_WIDTH, 2 * TILE_WIDTH));
+			this.entityManager.addEntity(new Switch(this.handler, 5 * TILE_WIDTH, 4 * TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT));
+			this.lightManager.addSource(5, 3);
     } else {
       this.spawnRandomRoomEntities();
       this.addEvenSpreadOfLightSources(7);
       this.addEvenSpreadOfMonsters(7);
+      this.spawnJournals();
     }
   }
+
+  spawnJournals() {
+		const journals = [
+			new JournalTwo(),
+			new JournalThree(),
+			new JournalFour(),
+			new JournalFive(),
+			new JournalSix(),
+			new JournalSeven(),
+		];
+
+  	const firstJournal = journals[(this.level * 2) - 4];
+		const lastJournal = journals[(this.level * 2) - 3];
+
+
+		this.entityManager.addEntity(new JournalPage(this.handler, 2 * TILE_WIDTH, 2 * TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT, firstJournal));
+		this.entityManager.addEntity(new JournalPage(this.handler, (this.width - 3) * TILE_WIDTH, (this.height - 3) * TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT, lastJournal));
+	}
 
   addEvenSpreadOfLightSources(spread) {
     for (let y = spread; y <= this.height; y += spread) {
@@ -168,7 +188,7 @@ export class World {
     for (let y = 1; y < this.height; y++) {
       for (let x = 1; x < this.width; x++) {
         if (this.tiles[x][y] === tileID) {
-          this.tiles[x][y] = swapTileID;
+					this.tiles[x][y] = this.handler.getWorld().getTile(x, y).disappear ? 0 : swapTileID;
         }
       }
     }

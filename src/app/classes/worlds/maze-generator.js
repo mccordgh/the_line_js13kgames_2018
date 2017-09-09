@@ -153,22 +153,25 @@ export class MazeGenerator {
   // }
 
   static getIntroMaze() {
+    // greenPath 7 - blueWall - 3;
 		return [
-      [1, 1, 1, 1, 1, 1, 1],
-      [1, 0, 0, 0, 0, 0, 1],
-      [1, 0, 0, 1, 0, 0, 1],
-      [1, 0, 1, 1, 1, 0, 1],
-      [1, 0, 0, 1, 0, 0, 1],
-      [1, 0, 0, 0, 0, 0, 1],
-      [1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 0, 0, 2, 0, 0, 0, 0, 1],
+			[1, 2, 2, 2, 0, 0, 7, 0, 1],
+			[1, 0, 0, 0, 0, 0, 7, 0, 1],
+			[1, 0, 0, 0, 0, 0, 7, 0, 1],
+			[1, 3, 3, 0, 0, 0, 7, 0, 1],
+			[1, 0, 0, 3, 0, 0, 7, 0, 1],
+			[1, 0, 0, 3, 0, 0, 7, 0, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1, 1],
       ];
   }
 
   static getRandomMaze(level, spawnX, spawnY) {
     if (level === 1) {
       return {
-        mazeWidth: 7,
-        mazeHeight: 7,
+        mazeWidth: 9,
+        mazeHeight: 9,
         spawnX: 1,
         spawnY: 1,
         pieces: this.getIntroMaze()
