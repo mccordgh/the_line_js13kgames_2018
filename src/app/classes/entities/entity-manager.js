@@ -75,18 +75,10 @@ export class EntityManager {
 
   removeEntity(e) {
     const index = entities.indexOf(e);
-    console.log({entities, index});
-		handler.getWorld().getSpatialGrid().remove(new Rectangle(e.x + e.bounds.x, e.y + e.bounds.y, e.bounds.width, e.bounds.height), e);
-    entities.splice(index, 1);
 
-		// for (let i = 0; i < entities.length; i++){
-    //   const e = entities[i];
-    //   if (e === _entity){
-			// 	handler.getWorld().getSpatialGrid().remove(new Rectangle(e.x + e.bounds.x, e.y + e.bounds.y, e.bounds.width, e.bounds.height), e);
-			// 	entities.splice(i, 1);
-       //  return;
-      // }
-    // }
+		handler.getWorld().getSpatialGrid().remove(new Rectangle(e.x + e.bounds.x, e.y + e.bounds.y, e.bounds.width, e.bounds.height), e);
+
+    entities.splice(index, 1);
   }
 
   removeEntitiesByType(type) {

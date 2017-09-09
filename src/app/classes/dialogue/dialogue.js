@@ -3,7 +3,7 @@ const speakerBox = document.getElementById('speaker');
 
 let speechTimer = 5;
 let sentencePause = 0;
-let symbol = '', textPrefix = '', textSuffix = '', greenToggle = false;
+let symbol = '', textPrefix = '', textSuffix = '', redToggle = false, emToggle = false, yellowToggle = false;
 
 export class Dialogue {
 
@@ -49,21 +49,40 @@ export class Dialogue {
 		let next = this.words[0][0];
 
 		if (next === '@') {
-			greenToggle = !greenToggle;
+			redToggle = !redToggle;
 		}
 
-		if (greenToggle) {
-			textPrefix = '<span style="color:lime">';
-			textSuffix = '</span>';
-		} else if (next === '%') {
-			textPrefix = '';
-			textSuffix = '<br />';
-		} else {
-			textPrefix = '';
-			textSuffix = '';
+		if (next === '$') {
+			yellowToggle = !yellowToggle;
 		}
 
-		dialogue.innerHTML += textPrefix + next.replace('%', '').replace('@', '') + textSuffix;
+		if (next === '&') {
+			emToggle = !emToggle;
+		}
+
+		textPrefix = '';
+		textSuffix = '';
+
+		if (redToggle) {
+			textPrefix += '<span style="color:red">';
+			textSuffix += '</span>';
+		}
+
+		if (yellowToggle) {
+			textPrefix += '<span style="color:yellow">';
+			textSuffix += '</span>';
+		}
+
+		if (emToggle) {
+			textPrefix += '<em>';
+			textSuffix += '</em>';
+		}
+
+		if (next === '%') {
+			textSuffix += '<br />';
+		}
+
+		dialogue.innerHTML += textPrefix + next.replace('%', '').replace('@', '').replace('&', '').replace('$', '') + textSuffix;
 
 		this.words[0].splice(0, 1);
 

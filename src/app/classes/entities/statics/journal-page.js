@@ -12,7 +12,6 @@ export class JournalPage extends StaticEntity {
 		this.bounds.height = this.height - 30;
 		this.journal = journal;
 		this.triggered = false;
-		console.log(this.journal)
 	}
 
 	tick(){

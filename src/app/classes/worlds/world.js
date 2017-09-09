@@ -10,6 +10,12 @@ import { Switch } from "../entities/statics/switch";
 import { Dialogue } from "../dialogue/dialogue";
 import {JournalPage} from "../entities/statics/journal-page";
 import { JournalOne } from "../dialogue/journals/journal-one";
+import { JournalTwo } from "../dialogue/journals/journal-two";
+import { JournalThree } from "../dialogue/journals/journal-three";
+import { JournalFour } from "../dialogue/journals/journal-four";
+import { JournalFive } from "../dialogue/journals/journal-five";
+import { JournalSix } from "../dialogue/journals/journal-six";
+import { JournalSeven } from "../dialogue/journals/journal-seven";
 
 
 const TILE_WIDTH = 64;
@@ -79,7 +85,7 @@ export class World {
 
     if (this.level === 1) {
       // this.entityManager.addEntity(new Exit(this.handler, TILE_WIDTH, 2 * TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT));
-			this.entityManager.addEntity(new JournalPage(this.handler, TILE_WIDTH, 2 * TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT, new JournalOne()));
+			this.entityManager.addEntity(new JournalPage(this.handler, TILE_WIDTH, 2 * TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT, new JournalSeven()));
 			this.lightManager.addSource(3, 3);
     } else {
       this.spawnRandomRoomEntities();
