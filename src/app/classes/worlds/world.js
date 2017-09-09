@@ -7,6 +7,7 @@ import { TileManager } from '../tiles/tile-manager';
 import { LightManager } from '../lighting/light-manager';
 import { Exit } from '../entities/statics/exit';
 import { Switch } from "../entities/statics/switch";
+import { Dialogue } from "../display/dialogue";
 
 
 const TILE_WIDTH = 64;
@@ -28,6 +29,7 @@ export class World {
     this.level = 1;
     this.loadWorld();
     this.lightManager = new LightManager(_handler);
+    this.dialogue = new Dialogue();
     this.init();
   }
 
@@ -81,6 +83,10 @@ export class World {
       this.addEvenSpreadOfLightSources(7);
       this.addEvenSpreadOfMonsters(7);
     }
+
+		this.dialogue.addWords('Testing, testing. Is this thing on?');
+		this.dialogue.addWords('It looks like you are trapped.');
+		this.dialogue.addWords('You will never escape ya jerk.');
   }
 
   addEvenSpreadOfLightSources(spread) {
@@ -183,6 +189,7 @@ export class World {
     this.checkForWallSwap();
     this.entityManager.tick(_dt);
     this.lightManager.tick(_dt);
+    this.dialogue.tick();
 
     if (!monstersCleared && this.level !== 1) {
       timeSpent++;

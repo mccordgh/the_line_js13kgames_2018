@@ -20,7 +20,6 @@ export class Ending extends Menu {
         fillColor: 'yellow',
         text,
         fontSize: 32,
-        font: 'serif',
         x: xPos,
         y: yPos,
       });
@@ -32,7 +31,6 @@ export class Ending extends Menu {
         fillColor: 'white',
         text,
         fontSize: 32,
-        font: 'serif',
         x: xPos,
         y: yPos,
       });

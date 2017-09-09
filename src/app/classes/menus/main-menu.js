@@ -26,7 +26,6 @@ export class MainMenu extends Menu {
         fillColor: 'white',
         text: 'you are',
         fontSize: 32,
-        font: 'serif',
         x: 90,
         y: (screenHeight / 4),
       });
@@ -35,7 +34,6 @@ export class MainMenu extends Menu {
         fillColor: 'yellow',
         text: 'A L O N E',
         fontSize: 64,
-        font: 'serif',
         x: 80,
         y: screenHeight / 2,
       });
@@ -44,7 +42,6 @@ export class MainMenu extends Menu {
         fillColor: 'white',
         text: 'press enter',
         fontSize: 32,
-        font: 'serif',
         x: 210,
         y: screenHeight / 1.4,
       });

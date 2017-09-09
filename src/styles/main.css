@@ -19,3 +19,19 @@ body {
     top:50%;
     z-index: 100;
 }
+
+#dialogue {
+    width: 896px;
+    /*border: 1px solid white;*/
+    text-align: center;
+    height: 336px;
+    left:50%;
+    margin:112px 0 0 -448px;
+    position:fixed;
+    top:50%;
+    z-index: 100;
+    padding: 50px 10px;
+    font-family: 'Arial', 'serif';
+    font-size: 32px;
+    color: white;
+}
