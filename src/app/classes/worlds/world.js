@@ -52,8 +52,10 @@ export class World {
   spawnRandomRoomEntities() {
     //9 - SwitchGreen,  6 - SwitchBlue,  10 - Exit,  0 - path (empty room)
     const exit = new Exit(this.handler, (this.width - 3) * TILE_WIDTH, (this.height - 3) * TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT);
+		const switchOne = new Switch(this.handler, 2 * TILE_WIDTH, 2 * TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT);
+		const switchTwo = new Switch(this.handler, (this.width - 3) * TILE_WIDTH, 2 * TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT);
 
-    const entities = [exit];
+    const entities = [exit, switchOne, switchTwo];
     //let's spawn one of the switches in room #1 with the player
     // const rooms = [9];
 
