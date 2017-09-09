@@ -83,10 +83,6 @@ export class World {
       this.addEvenSpreadOfLightSources(7);
       this.addEvenSpreadOfMonsters(7);
     }
-
-		this.dialogue.addWords('Testing, testing. Is this thing on?');
-		this.dialogue.addWords('It looks like you are trapped.');
-		this.dialogue.addWords('You will never escape ya jerk.');
   }
 
   addEvenSpreadOfLightSources(spread) {

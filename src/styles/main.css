@@ -20,18 +20,31 @@ body {
     z-index: 100;
 }
 
-#dialogue {
-    width: 896px;
-    /*border: 1px solid white;*/
-    text-align: center;
-    height: 336px;
+.speech {
     left:50%;
-    margin:112px 0 0 -448px;
-    position:fixed;
-    top:50%;
-    z-index: 100;
-    padding: 50px 10px;
     font-family: 'Arial', 'serif';
-    font-size: 32px;
-    color: white;
+    line-height: 36px;
+    font-size: 26px;
+    height: 224px;
+    padding: 20px;
+    position:fixed;
+    z-index: 100;
+    top:50%;
 }
+
+#dialogue {
+    /*border: 1px solid white;*/
+    color: white;
+    margin:112px 0 0 -190px;
+    width: 600px;
+}
+
+#speaker {
+    /*border: 1px solid yellow;*/
+    color: yellow;
+    margin:112px 0 0 -425px;
+    text-align: right;
+    width: 200px;
+}
+
+
