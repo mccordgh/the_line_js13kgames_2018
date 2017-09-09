@@ -1,16 +1,16 @@
 import { World } from '../worlds/world';
 
 export class GameState {
-  constructor(_handler) {
-    this.handler = _handler;
-    this.world = new World(_handler);
+  constructor(handler) {
+    this.handler = handler;
+    this.world = new World(handler);
   }
 
-  tick(_dt) {
-      this.world.tick(_dt);
+  tick(dt) {
+      this.world.tick(dt);
   }
 
-  render(_g) {
-      this.world.render(_g);
+  render(g) {
+      this.world.render(g);
   }
 }

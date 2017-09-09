@@ -1,17 +1,17 @@
 export class Rectangle {
-  constructor(_x, _y, _width, _height){
-    this.x = _x;
-    this.y = _y;
-    this.width = _width;
-    this.height = _height;
+  constructor(x, y, width, height){
+    this.x = x;
+    this.y = y;
+    this.width = width;
+    this.height = height;
   }
 
-  intersects(_rect) {
+  intersects(rect) {
     return (
-      this.x < _rect.x + _rect.width
-      && this.x + this.width > _rect.x
-      && this.y < _rect.y + _rect.height
-      && this.y + this.height > _rect.y
+      this.x < rect.x + rect.width
+      && this.x + this.width > rect.x
+      && this.y < rect.y + rect.height
+      && this.y + this.height > rect.y
     );
   }
 }

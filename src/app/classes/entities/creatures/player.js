@@ -7,11 +7,11 @@ const TILE_HEIGHT = 64, TILE_WIDTH = 64;
 let getDevInput = false, inputCounter = 0;
 
 export class Player extends Creature {
-  constructor(_handler, _x, _y){
-    super(_handler, _x, _y);
+  constructor(handler, x, y){
+    super(handler, x, y);
     this.assets = Assets.getAssets('sprites');
-    this.x = _x;
-    this.y = _y;
+    this.x = x;
+    this.y = y;
     this.speed = 140;
     this.bounds.x = 14;
     this.bounds.y = 24;
@@ -25,12 +25,12 @@ export class Player extends Creature {
     this.lastAnimation = 'walk_down';
   }
 
-  tick(_dt) {
+  tick(dt) {
     this.xMove = this.yMove = 0;
 
-    this.getInput(_dt);
+    this.getInput(dt);
 
-    super.tick(_dt);
+    super.tick(dt);
 
     this.move();
     if (this.superSpeed) {
@@ -41,29 +41,29 @@ export class Player extends Creature {
     this.handler.getGameCamera().centerOnEntity(this);
   }
 
-  render(_g) {
-    _g.myDrawImage(this.getCurrentAnimationFrame(), this.x - this.handler.getGameCamera().getxOffset(), this.y - this.handler.getGameCamera().getyOffset(), TILE_WIDTH, TILE_HEIGHT);
+  render(g) {
+    g.myDrawImage(this.getCurrentAnimationFrame(), this.x - this.handler.getGameCamera().getxOffset(), this.y - this.handler.getGameCamera().getyOffset(), TILE_WIDTH, TILE_HEIGHT);
 
     // ****** DRAW BOUNDING BOX DON'T DELETE!!
-    // _g.fillStyle = "green";
-    // _g.fillRect(this.bounds.x + this.x - this.handler.getGameCamera().getxOffset(), this.bounds.y + this.y - this.handler.getGameCamera().getyOffset(), this.bounds.width, this.bounds.height);
+    // g.fillStyle = "green";
+    // g.fillRect(this.bounds.x + this.x - this.handler.getGameCamera().getxOffset(), this.bounds.y + this.y - this.handler.getGameCamera().getyOffset(), this.bounds.width, this.bounds.height);
     // ****** DRAW BOUNDING BOX DON'T DELETE!!
   }
 
-  getInput(_dt) {
+  getInput(dt) {
     const manager = this.handler.getKeyManager();
 
     if(manager.up || manager.w || manager.z) {
-      this.yMove = -this.speed * _dt;
+      this.yMove = -this.speed * dt;
     }
     if (manager.down || manager.s) {
-      this.yMove = this.speed * _dt;
+      this.yMove = this.speed * dt;
     }
     if(manager.left || manager.a || manager.q) {
-      this.xMove = -this.speed * _dt;
+      this.xMove = -this.speed * dt;
     }
     if (manager.right || manager.d) {
-      this.xMove = this.speed * _dt;
+      this.xMove = this.speed * dt;
     }
 
     if (!getDevInput) inputCounter++;

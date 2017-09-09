@@ -2,10 +2,10 @@ const TILE_WIDTH = 64;
 const TILE_HEIGHT = 64;
 
 export class GameCamera {
-  constructor(_handler, _xOffset, _yOffset){
-    this.xOffset = _xOffset;
-    this.yOffset = _yOffset;
-    this.handler = _handler;
+  constructor(handler, xOffset, yOffset){
+    this.xOffset = xOffset;
+    this.yOffset = yOffset;
+    this.handler = handler;
   }
 
   centerOnEntity(entity) {
@@ -36,9 +36,9 @@ export class GameCamera {
   //   this.checkBlankSpace();
   // }
 
-  move(_xAmt, _yAmt) {
-    this.xOffset += _xAmt;
-    this.yOffset += _yAmt;
+  move(xAmt, yAmt) {
+    this.xOffset += xAmt;
+    this.yOffset += yAmt;
 
     this.checkBlankSpace();
   }
@@ -51,12 +51,12 @@ export class GameCamera {
     return parseInt(this.yOffset);
   }
 
-  setxOffset(_offset) {
-    this.xOffset = _offset;
+  setxOffset(offset) {
+    this.xOffset = offset;
   }
 
-  setyOffset(_offset) {
-    this.yOffset = _offset;
+  setyOffset(offset) {
+    this.yOffset = offset;
   }
 
   checkBlankSpace() {

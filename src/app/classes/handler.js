@@ -1,6 +1,6 @@
 export class Handler {
-  constructor(_game) {
-    this.game = _game;
+  constructor(game) {
+    this.game = game;
     this.console = document.getElementById('console');
     this.devMessage(' dev cheats initialized \n' +
       ' 2 - clipping \n' +
@@ -45,8 +45,8 @@ export class Handler {
     return this.world;
   }
 
-  setWorld(_world) {
-    this.world = _world;
+  setWorld(world) {
+    this.world = world;
   }
 
   getGame() {
@@ -56,7 +56,7 @@ export class Handler {
   // getSoundManager(){
   //   return soundManager;
   // },
-  // setSoundManager(_sm){
-  //   soundManager = _sm;
+  // setSoundManager(sm){
+  //   soundManager = sm;
   // }
 }

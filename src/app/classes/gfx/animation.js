@@ -1,6 +1,6 @@
 export class Animation {
-  constructor(_frames){
-    this.frames = _frames;
+  constructor(frames){
+    this.frames = frames;
     this.index = 0;
     this.lastTime = Date.now();
     this.timer = 0;

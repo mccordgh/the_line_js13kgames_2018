@@ -1,13 +1,13 @@
 export class Menu {
-  constructor(_handler) {
-    this.handler = _handler;
+  constructor(handler) {
+    this.handler = handler;
     this.countSinceInput = 0;
   }
 
-  tick(_dt) {
+  tick(dt) {
     this.countSinceInput++;
     if (this.countSinceInput > 8)
-      this.getInput(_dt);
+      this.getInput(dt);
 
     this.render();
   }

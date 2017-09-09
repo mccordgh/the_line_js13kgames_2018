@@ -26,17 +26,17 @@ const yellowWallIntervalMax = 5 * 60; // We want X seconds so we multiply that b
 let timeSpent = 0;
 
 export class World {
-  constructor(_handler) {
+  constructor(handler) {
     this.width = null;
     this.height = null;
     this.tiles = [];
-    this.handler = _handler;
-    _handler.setWorld(this);
-    this.entityManager = new EntityManager(_handler, new Player(_handler, 20, 20));
+    this.handler = handler;
+    handler.setWorld(this);
+    this.entityManager = new EntityManager(handler, new Player(handler, 20, 20));
     this.spatialGrid = new SpatialGrid(this.handler.getWidth() * TILE_WIDTH, this.handler.getHeight() * TILE_HEIGHT, 64);
     this.level = 1;
     this.loadWorld();
-    this.lightManager = new LightManager(_handler);
+    this.lightManager = new LightManager(handler);
     this.dialogue = new Dialogue();
     this.init();
   }
@@ -86,7 +86,7 @@ export class World {
       this.entityManager.addEntity(new Exit(this.handler, 7 * TILE_WIDTH, 7 * TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT));
 			this.entityManager.addEntity(new JournalPage(this.handler, 1 * TILE_WIDTH, 2 * TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT, new JournalOne()));
 			this.entityManager.addEntity(new Clone(this.handler, 6 * TILE_WIDTH, 2 * TILE_WIDTH));
-			this.entityManager.addEntity(new Switch(this.handler, 5 * TILE_WIDTH, 4 * TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT));
+			this.entityManager.addEntity(new Switch(this.handler, 4 * TILE_WIDTH, 4 * TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT));
 			this.lightManager.addSource(5, 3);
     } else {
       this.spawnRandomRoomEntities();
@@ -209,11 +209,11 @@ export class World {
     }
   }
 
-  tick(_dt) {
+  tick(dt) {
     this.getInput();
     this.checkForWallSwap();
-    this.entityManager.tick(_dt);
-    this.lightManager.tick(_dt);
+    this.entityManager.tick(dt);
+    this.lightManager.tick(dt);
     this.dialogue.tick();
 
     if (!monstersCleared && this.level !== 1) {
@@ -227,29 +227,29 @@ export class World {
     }
   }
 
-  render(_g) {
+  render(g) {
     const xStart = parseInt(Math.max(0, this.handler.getGameCamera().getxOffset() / TILE_WIDTH));
     const xEnd = parseInt(Math.min(this.width, (this.handler.getGameCamera().getxOffset() + this.handler.getWidth()) / TILE_WIDTH + 1));
     const yStart = parseInt(Math.max(0, this.handler.getGameCamera().getyOffset() / TILE_HEIGHT));
     const yEnd = parseInt(Math.min(this.height, (this.handler.getGameCamera().getyOffset() + this.handler.getHeight()) / TILE_HEIGHT + 1));
 
-    this.drawTiles(xStart, xEnd, yStart, yEnd, _g);
-    this.entityManager.render(_g);
-    this.lightManager.render(xStart, xEnd, yStart, yEnd, _g);
+    this.drawTiles(xStart, xEnd, yStart, yEnd, g);
+    this.entityManager.render(g);
+    this.lightManager.render(xStart, xEnd, yStart, yEnd, g);
   }
 
-  drawTiles(xStart, xEnd, yStart, yEnd, _g) {
+  drawTiles(xStart, xEnd, yStart, yEnd, g) {
     for (let y = yStart; y < yEnd; y++) {
       for (let x = xStart; x < xEnd; x++) {
         if (this.getTile(x, y) !== undefined)
-          this.getTile(x, y).render(_g, x * TILE_WIDTH - this.handler.getGameCamera().getxOffset(), y * TILE_HEIGHT - this.handler.getGameCamera().getyOffset());
+          this.getTile(x, y).render(g, x * TILE_WIDTH - this.handler.getGameCamera().getxOffset(), y * TILE_HEIGHT - this.handler.getGameCamera().getyOffset());
       }
     }
   }
 
-  getTile(_x, _y) {
+  getTile(x, y) {
     try {
-      return TileManager.getTiles()[this.tiles[_x][_y]];
+      return TileManager.getTiles()[this.tiles[x][y]];
     }
     catch(e) {
     }

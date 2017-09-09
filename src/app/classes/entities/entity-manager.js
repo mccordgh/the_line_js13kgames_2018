@@ -19,15 +19,15 @@ export class EntityManager {
     entities = new Array(player);
   }
 
-  tick(_dt) {
+  tick(dt) {
     entities.sort(compare);
     for(let i = 0; i < entities.length; i++){
       const e = entities[i];
-      e.tick(_dt);
+      e.tick(dt);
     }
   }
 
-  render(_g) {
+  render(g) {
     //Iterate through every entity, check whether they are currently in the camera view.
     //If they are in view then draw them
     entities.forEach(function(e) {
@@ -36,7 +36,7 @@ export class EntityManager {
         && e.handler.getHeight() + e.handler.getGameCamera().getyOffset() // check bottom
         && e.handler.getGameCamera().getxOffset() - e.width // check left side
         && e.handler.getGameCamera().getyOffset() - e.height // check top
-      ) e.render(_g);
+      ) e.render(g);
     });
   }
 
@@ -52,11 +52,11 @@ export class EntityManager {
     return entities;
   }
 
-  // getSingleEntity(_type) {
+  // getSingleEntity(type) {
   //   let entityObj;
   //
   //   entities.forEach((item) => {
-  //     if (item.type === _type) {
+  //     if (item.type === type) {
   //       entityObj = {
   //         type: item.type,
   //         x: item.x,

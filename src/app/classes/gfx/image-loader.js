@@ -1,7 +1,7 @@
 export class ImageLoader {
-  static loadImage(_path) {
+  static loadImage(path) {
     const image = new Image();
-    image.src = _path;
+    image.src = path;
     return image;
   }
 }

@@ -32,19 +32,19 @@ const CPlayer = function() {
   //--------------------------------------------------------------------------
 
   // Oscillators
-  const osc_sin = function (value) {
+  const oscsin = function (value) {
     return Math.sin(value * 6.283184);
   };
 
-  const osc_saw = function (value) {
+  const oscsaw = function (value) {
     return 2 * (value % 1) - 1;
   };
 
-  const osc_square = function (value) {
+  const oscsquare = function (value) {
     return (value % 1) < 0.5 ? 1 : -1;
   };
 
-  const osc_tri = function (value) {
+  const osctri = function (value) {
     let v2 = (value % 1) * 4;
     if(v2 < 2) return v2 - 1;
     return 3 - v2;
@@ -133,10 +133,10 @@ const CPlayer = function() {
 
   // Array of oscillator functions
   const mOscillators = [
-    osc_sin,
-    osc_square,
-    osc_saw,
-    osc_tri
+    oscsin,
+    oscsquare,
+    oscsaw,
+    osctri
   ];
 
   // Private constiables set up by init()
@@ -259,7 +259,7 @@ const CPlayer = function() {
             // Distortion
             if (dist) {
               rsample *= dist;
-              rsample = rsample < 1 ? rsample > -1 ? osc_sin(rsample*.25) : -1 : 1;
+              rsample = rsample < 1 ? rsample > -1 ? oscsin(rsample*.25) : -1 : 1;
               rsample /= dist;
             }
 

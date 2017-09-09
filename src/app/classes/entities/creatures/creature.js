@@ -10,8 +10,8 @@ const DEFAULT_SPEED = 100,
   TILE_HEIGHT = 64;
 
 export class Creature extends Entity {
-  constructor(_handler, _x, _y) {
-    super(_handler, _x, _y, DEFAULT_CREATURE_WIDTH, DEFAULT_CREATURE_HEIGHT);
+  constructor(handler, x, y) {
+    super(handler, x, y, DEFAULT_CREATURE_WIDTH, DEFAULT_CREATURE_HEIGHT);
     this.health = DEFAULT_HEALTH;
     this.speed = DEFAULT_SPEED;
     this.xMove = 0;
@@ -108,9 +108,9 @@ export class Creature extends Entity {
   //   }
   // }
 
-  collisionWithTile(_x, _y) {
+  collisionWithTile(x, y) {
     try {
-      return this.handler.getWorld().getTile(_x, _y).isSolid;
+      return this.handler.getWorld().getTile(x, y).isSolid;
     }
     catch(e) {
     }

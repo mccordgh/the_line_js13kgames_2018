@@ -1,10 +1,10 @@
 let graphics = null;
 
 export class Display {
-  constructor(_title, _width, _height) {
-    this.title = _title;
-    this.width = _width;
-    this.height = _height;
+  constructor(title, width, height) {
+    this.title = title;
+    this.width = width;
+    this.height = height;
     this.paused = false;
     this.createDisplay();
   }
@@ -51,8 +51,8 @@ export class Display {
   }
 }
 
-CanvasRenderingContext2D.prototype.myDrawImage = (asset, _x, _y, _width, _height) => {
-  graphics.drawImage(asset.sheet, asset.x, asset.y, asset.width, asset.height, _x, _y, _width, _height);
+CanvasRenderingContext2D.prototype.myDrawImage = (asset, x, y, width, height) => {
+  graphics.drawImage(asset.sheet, asset.x, asset.y, asset.width, asset.height, x, y, width, height);
 };
 
 CanvasRenderingContext2D.prototype.drawText = (txtObj) => {

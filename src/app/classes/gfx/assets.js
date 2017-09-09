@@ -9,18 +9,18 @@ const PATH  = window.location.href.replace('index.html', '') + 'src/res/',
   CREATURE_HEIGHT = 18;
 
 export class Assets {
-  constructor(_name, _path, _width, _height) {
-    assets[_name] = this;
-    this.name = _name;
-    this.path = _path;
-    this.width = _width;
-    this.height = _height;
+  constructor(name, path, width, height) {
+    assets[name] = this;
+    this.name = name;
+    this.path = path;
+    this.width = width;
+    this.height = height;
     this.sheet = new SpriteSheet(ImageLoader.loadImage(this.path));
     this.animations = {};
   }
 
-  addAnimation(_name, _animation) {
-    this.animations[_name] = _animation;
+  addAnimation(name, animation) {
+    this.animations[name] = animation;
   }
 
   getWidth() {
@@ -31,8 +31,8 @@ export class Assets {
     return SPRITE_HEIGHT;
   }
 
-  static getAssets(_name) {
-    return assets[_name];
+  static getAssets(name) {
+    return assets[name];
   }
 }
 

@@ -1,22 +1,22 @@
 import { Menu } from './menu';
 
 export class GameOver extends Menu {
-  constructor(_handler){
-    super(_handler);
+  constructor(handler){
+    super(handler);
   }
 
-  render(_g) {
-    if (_g) {
+  render(g) {
+    if (g) {
       const screenWidth = this.handler.getWidth();
       const screenHeight = this.handler.getHeight();
 
-      _g.fillStyle = "black";
-      _g.fillRect(0, 0, screenWidth, screenHeight);
+      g.fillStyle = "black";
+      g.fillRect(0, 0, screenWidth, screenHeight);
 
       let text = 'Y O U   D I E D';
-      let xPos = (screenWidth / 2) - (_g.measureText(text).width / 2);
+      let xPos = (screenWidth / 2) - (g.measureText(text).width / 2);
       let yPos = (screenHeight / 3);
-      _g.drawText({
+      g.drawText({
         fillColor: 'red',
         text,
         fontSize: 32,
@@ -25,9 +25,9 @@ export class GameOver extends Menu {
       });
 
       text = 'press enter to try again';
-      xPos = (screenWidth / 2) - (_g.measureText(text).width / 2);
+      xPos = (screenWidth / 2) - (g.measureText(text).width / 2);
       yPos = (screenHeight / 1.5);
-      _g.drawText({
+      g.drawText({
         fillColor: 'white',
         text,
         fontSize: 32,

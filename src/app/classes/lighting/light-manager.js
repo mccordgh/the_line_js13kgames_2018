@@ -6,8 +6,8 @@ const DEFAULT_LIGHT = 0.85;
 const CENTER_LIGHT = 0.3;
 
 export class LightManager {
-  constructor(_handler) {
-    this.handler = _handler;
+  constructor(handler) {
+    this.handler = handler;
     this.init();
   }
 
@@ -36,27 +36,27 @@ export class LightManager {
     });
   }
 
-  render(xStart, xEnd, yStart, yEnd, _g) {
+  render(xStart, xEnd, yStart, yEnd, g) {
     this.sources.forEach((source) => {
-      source.render(_g);
+      source.render(g);
     });
 
-    this.drawLightBlocks(xStart, xEnd, yStart, yEnd, _g);
+    this.drawLightBlocks(xStart, xEnd, yStart, yEnd, g);
   }
 
- drawLightBlocks(xStart, xEnd, yStart, yEnd, _g) {
-   _g.fillStyle = 'black';
+ drawLightBlocks(xStart, xEnd, yStart, yEnd, g) {
+   g.fillStyle = 'black';
 
    for (let y = yStart; y < yEnd; y++) {
      for (let x = xStart; x < xEnd; x++) {
        const tile = this.handler.getWorld().getTile(x, y).type;
-       _g.globalAlpha =  (tile === 'switch' || tile === 'exit') ? CENTER_LIGHT : this.lightMap[x][y];
+       g.globalAlpha =  (tile === 'switch' || tile === 'exit') ? CENTER_LIGHT : this.lightMap[x][y];
 
-       _g.fillRect(x * TILE_WIDTH - this.handler.getGameCamera().getxOffset(), y * TILE_HEIGHT - this.handler.getGameCamera().getyOffset(), TILE_WIDTH, TILE_HEIGHT);
+       g.fillRect(x * TILE_WIDTH - this.handler.getGameCamera().getxOffset(), y * TILE_HEIGHT - this.handler.getGameCamera().getyOffset(), TILE_WIDTH, TILE_HEIGHT);
      }
    }
 
-   _g.globalAlpha = 1.0;
+   g.globalAlpha = 1.0;
  }
   //
   addSource(x, y) {
@@ -75,8 +75,8 @@ export class LightManager {
     this.sources = [];
   }
   //
-  // removeSource(_source) {
-  //   const index = this.sources.indexOf(_source);
+  // removeSource(source) {
+  //   const index = this.sources.indexOf(source);
   //
   //   this.sources.splice(index, 1);
   // }

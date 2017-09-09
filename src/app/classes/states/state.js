@@ -1,14 +1,14 @@
 export class State {
-  constructor(_handler){
+  constructor(handler){
     this.currentState = null;
-    this.handler = _handler;
+    this.handler = handler;
   }
 
-  tick(_dt) {
+  tick(dt) {
     throw("Every state needs a tick");
   }
 
-  render(_g) {
+  render(g) {
     throw("Every state needs a render");
   }
 
@@ -16,7 +16,7 @@ export class State {
     return this.currentState;
   }
 
-  setState(_state) {
-    this.currentState = _state;
+  setState(state) {
+    this.currentState = state;
   }
 }

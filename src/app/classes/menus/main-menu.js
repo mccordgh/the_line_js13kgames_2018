@@ -3,26 +3,26 @@ import { GameState } from '../states/game-state';
 import { Menu } from './menu';
 
 export class MainMenu extends Menu {
-  constructor(_handler, test = 0){
-    super(_handler);
+  constructor(handler, test = 0){
+    super(handler);
     // this.test = test;
     // this.sprites = Assets.getAssets('sprites');
     // this.tiles = Assets.getAssets('tiles');
   }
 
-  // tick(_dt) {
+  // tick(dt) {
     //
   // }
 
-  render(_g) {
-    if (_g) {
+  render(g) {
+    if (g) {
       const screenWidth = this.handler.getWidth();
       const screenHeight = this.handler.getHeight();
 
-      _g.fillStyle = 'black';
-      _g.fillRect(0, 0, screenWidth, screenHeight);
+      g.fillStyle = 'black';
+      g.fillRect(0, 0, screenWidth, screenHeight);
 
-      _g.drawText({
+      g.drawText({
         fillColor: 'white',
         text: 'you are',
         fontSize: 32,
@@ -30,7 +30,7 @@ export class MainMenu extends Menu {
         y: (screenHeight / 4),
       });
 
-      _g.drawText({
+      g.drawText({
         fillColor: 'yellow',
         text: 'A L O N E',
         fontSize: 64,
@@ -38,7 +38,7 @@ export class MainMenu extends Menu {
         y: screenHeight / 2,
       });
 
-      _g.drawText({
+      g.drawText({
         fillColor: 'white',
         text: 'press enter',
         fontSize: 32,
@@ -48,7 +48,7 @@ export class MainMenu extends Menu {
     }
   }
 
-  getInput(_dt) {
+  getInput(dt) {
     if (this.handler.getKeyManager().enter) {
       const gameState = new GameState(this.handler);
       this.handler.getGame().getGameState().setState(gameState);

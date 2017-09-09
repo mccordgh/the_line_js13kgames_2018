@@ -2,16 +2,16 @@ import { Assets } from '../gfx/assets';
 const TILE_WIDTH = 64, TILE_HEIGHT = 64;
 
 export class Tile {
-  constructor(_texture, _id) {
+  constructor(texture, id) {
     this.isSolid = false;
-    this.texture = _texture;
-    this.id = _id;
+    this.texture = texture;
+    this.id = id;
     this.disappear = false;
     this.assets = Assets.getAssets("tiles");
   }
 
-  render(_g, _x, _y) {
-    _g.myDrawImage(this.texture, _x, _y, TILE_WIDTH, TILE_HEIGHT);
+  render(g, x, y) {
+    g.myDrawImage(this.texture, x, y, TILE_WIDTH, TILE_HEIGHT);
   }
 
   getId() {

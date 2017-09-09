@@ -3,22 +3,14 @@ import { GameOver } from '../menus/game-over';
 import { Rectangle } from '../gfx/shapes/rectangle';
 
 export class Entity {
-  constructor(_handler, _x, _y, _width, _height) {
-    this.x = _x;
-    this.y = _y;
-    this.width = _width;
-    this.height = _height;
-    this.handler = _handler;
-    this.bounds = new Rectangle(0, 0, _width, _height);
-    this.target = null;
+  constructor(handler, x, y, width, height) {
+    this.x = x;
+    this.y = y;
+    this.width = width;
+    this.height = height;
+    this.handler = handler;
+    this.bounds = new Rectangle(0, 0, width, height);
     this.moveThrough = false;
-  }
-
-  tick(_dt) {
-    throw("Entities must have a tick function!");
-  }
-  render(_g) {
-    throw("Entities must have a render function!");
   }
 
   getX() {
@@ -62,13 +54,18 @@ export class Entity {
   checkForCollisionEvents(e1, e2) {
     if (this.checkCollidingTypes(e1, e2, 'monster', 'monster')) return;
 
+    const h = this.handler;
+    const hG = h.getGame();
+    const hW = h.getWorld();
+    const eM = hW.entityManager;
+
     if (this.checkCollidingTypes(e1, e2, 'player', 'journal')) {
       if (e1.type === 'journal') {
         e1.triggerEntry();
-        this.handler.getWorld().entityManager.removeEntity(e1);
+        eM.removeEntity(e1);
       } else {
         e2.triggerEntry();
-				this.handler.getWorld().entityManager.removeEntity(e2);
+				eM.removeEntity(e2);
 			}
     }
 
@@ -81,20 +78,24 @@ export class Entity {
     }
 
     if (this.checkCollidingTypes(e1, e2, 'player', 'exit')) {
-      if (this.handler.getWorld().level >= 4) {
+      if (hW.level >= 4) {
+        hW.dialogue.clear();
+
         const ending = new Ending(this.handler);
-        this.handler.getGame().getGameState().setState(ending);
+        hG.getGameState().setState(ending);
       }
 
-      this.handler.getWorld().changeLevel();
+      hW.changeLevel();
       return;
     }
 
     if (this.checkCollidingTypes(e1, e2, 'player', 'monster')) {
       if (e1.invincible || e2.invincible) return;
 
-      const gameOver = new GameOver(e1.handler);
-      e1.handler.getGame().getGameState().setState(gameOver);
+			hW.dialogue.clear();
+
+			const gameOver = new GameOver(e1.handler);
+      hG.getGameState().setState(gameOver);
     }
   }
 
@@ -102,19 +103,19 @@ export class Entity {
     return ((e1.type === type1 && e2.type === type2) || (e1.type === type2 && e2.type === type1));
       }
 
-  setX(_x) {
-    this.x = _x;
+  setX(x) {
+    this.x = x;
   }
 
-  setY(_y) {
-    this.y = _y;
+  setY(y) {
+    this.y = y;
   }
 
-  setWidth(_width) {
-    this.width = _width;
+  setWidth(width) {
+    this.width = width;
   }
 
-  setHeight(_height) {
-    this.height = _height;
+  setHeight(height) {
+    this.height = height;
   }
 }

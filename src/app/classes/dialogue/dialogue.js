@@ -1,26 +1,14 @@
 const dialogue = document.getElementById('dialogue');
 const speakerBox = document.getElementById('speaker');
 
-let speechTimer = 5;
-let sentencePause = 0;
-let symbol = '', textPrefix = '', textSuffix = '', redToggle = false, emToggle = false, yellowToggle = false;
+let speechTimer = 5, sentencePause = 0, textPrefix = '', textSuffix = '',
+	redToggle = false, emToggle = false, yellowToggle = false, words = [], speakers = [];
 
 export class Dialogue {
-
-	constructor() {
-		this.init();
-		this.words = [];
-		this.speakers = [];
-	}
-
-	init() {
-		//
-	}
-
 	tick() {
 		if (speechTimer >= 0) {
-			if (this.words.length) {
-				if (this.words[0].length) {
+			if (words.length) {
+				if (words[0].length) {
 					this.speakNextLetter();
 				} else {
 					if (sentencePause >= 120) {
@@ -36,17 +24,17 @@ export class Dialogue {
 	}
 
 	resetForNextSentence() {
-		this.words.splice(0, 1);
-		this.speakers.splice(0, 1);
+		words.splice(0, 1);
+		speakers.splice(0, 1);
 		dialogue.innerHTML = '';
 		speakerBox.innerHTML = '';
 		sentencePause = 0;
 	}
 
 	speakNextLetter() {
-		speakerBox.innerHTML = this.speakers[0] + ':';
+		speakerBox.innerHTML = speakers[0] + ':';
 
-		let next = this.words[0][0];
+		let next = words[0][0];
 
 		if (next === '@') {
 			redToggle = !redToggle;
@@ -84,14 +72,20 @@ export class Dialogue {
 
 		dialogue.innerHTML += textPrefix + next.replace('%', '').replace('@', '').replace('&', '').replace('$', '') + textSuffix;
 
-		this.words[0].splice(0, 1);
+		words[0].splice(0, 1);
 
 		speechTimer = 0;
 	}
 
-	addWords(speaker, words) {
-		this.words.push(words.split(''));
-		this.speakers.push(speaker);
+	addWords(speaker, _words) {
+		words.push(_words.split(''));
+		speakers.push(speaker);
+	}
 
+	clear() {
+		words = [];
+		speakers = [];
+		dialogue.innerHTML = '';
+		speakerBox.innerHTML = '';
 	}
 }

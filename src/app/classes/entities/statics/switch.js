@@ -39,16 +39,16 @@ export class Switch extends StaticEntity {
 		switchTimer = 0;
 	}
 
-	render(_g) {
-		_g.myDrawImage(this.currentSwitch,
+	render(g) {
+		g.myDrawImage(this.currentSwitch,
 			this.x - this.handler.getGameCamera().getxOffset(),
 			this.y - this.handler.getGameCamera().getyOffset(),
 			this.width,
 			this.height);
 
 		// ****** DRAW BOUNDING BOX DON'T DELETE!!
-		// _g.fillStyle = "white";
-		// _g.fillRect(this.bounds.x + this.x - this.handler.getGameCamera().getxOffset(), this.bounds.y + this.y - this.handler.getGameCamera().getyOffset(), this.bounds.width, this.bounds.height);
+		// g.fillStyle = "white";
+		// g.fillRect(this.bounds.x + this.x - this.handler.getGameCamera().getxOffset(), this.bounds.y + this.y - this.handler.getGameCamera().getyOffset(), this.bounds.width, this.bounds.height);
 		// ****** DRAW BOUNDING BOX DON'T DELETE!!
 	}
 }

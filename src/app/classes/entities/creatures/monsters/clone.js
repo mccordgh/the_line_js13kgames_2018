@@ -4,21 +4,21 @@ import { Creature } from '../creature';
 const TILE_WIDTH = 64, TILE_HEIGHT = 64;
 
 export class Clone extends Creature {
-  constructor(_handler, _x, _y) {
-    super(_handler, _x, _y, TILE_WIDTH, TILE_HEIGHT);
+  constructor(handler, x, y) {
+    super(handler, x, y, TILE_WIDTH, TILE_HEIGHT);
     this.assets = Assets.getAssets('creature');
-    this.x = _x;
-    this.y = _y;
-    this.spawnX = _x;
-    this.spawnY = _y;
+    this.x = x;
+    this.y = y;
+    this.spawnX = x;
+    this.spawnY = y;
     this.bounds.x = 10;
     this.bounds.y = 10;
     this.bounds.width = TILE_WIDTH  - (this.bounds.x * 2);
     this.bounds.height = TILE_HEIGHT - (this.bounds.y * 2);
     this.type = 'monster';
     this.patrol = this.getPatrolPattern();
-    this.startX = _x;
-    this.startY = _y;
+    this.startX = x;
+    this.startY = y;
     this.patrolLength = 100;
     this.dirMoving = 0;
     this.numberOfMoves = 0;
@@ -47,12 +47,12 @@ export class Clone extends Creature {
     }
   }
 
-  setPatrolMovement(_dt) {
+  setPatrolMovement(dt) {
     if (this.patrol === 'vertical') {
       if (this.dirMoving === 0) {
-        this.yMove = -this.speed * _dt
+        this.yMove = -this.speed * dt
       } else {
-        this.yMove = this.speed * _dt
+        this.yMove = this.speed * dt
       }
       this.numberOfMoves++;
 
@@ -64,9 +64,9 @@ export class Clone extends Creature {
 
     } else if (this.patrol === 'horizontal') {
       if (this.dirMoving === 0) {
-        this.xMove = -this.speed * _dt;
+        this.xMove = -this.speed * dt;
       } else {
-        this.xMove = this.speed * _dt;
+        this.xMove = this.speed * dt;
       }
       this.numberOfMoves++;
 
@@ -101,23 +101,23 @@ export class Clone extends Creature {
     }
   }
 
-  tick(_dt) {
+  tick(dt) {
     this.checkIfOffMap();
     this.checkIfInWall();
 
-    this.setPatrolMovement(_dt);
+    this.setPatrolMovement(dt);
 
     super.tick();
 
     this.move();
   }
 
-  render(_g){
-    _g.myDrawImage(this.getCurrentAnimationFrame(), this.x - this.handler.getGameCamera().getxOffset(), this.y - this.handler.getGameCamera().getyOffset(), this.width, this.height);
+  render(g){
+    g.myDrawImage(this.getCurrentAnimationFrame(), this.x - this.handler.getGameCamera().getxOffset(), this.y - this.handler.getGameCamera().getyOffset(), this.width, this.height);
 
     // ****** DRAW BOUNDING BOX DON'T DELETE!!
-    // _g.fillStyle = "blue";
-    // _g.fillRect(this.bounds.x + this.x - this.handler.getGameCamera().getxOffset(), this.bounds.y + this.y - this.handler.getGameCamera().getyOffset(), this.bounds.width, this.bounds.height);
+    // g.fillStyle = "blue";
+    // g.fillRect(this.bounds.x + this.x - this.handler.getGameCamera().getxOffset(), this.bounds.y + this.y - this.handler.getGameCamera().getyOffset(), this.bounds.width, this.bounds.height);
     // ****** DRAW BOUNDING BOX DON'T DELETE!!
   }
 }

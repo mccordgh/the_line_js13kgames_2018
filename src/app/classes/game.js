@@ -12,10 +12,10 @@ let g, display, keyManager, handler, gameCamera, soundManager;
 let state, gameState, mainMenu;
 
 export class Game {
-  constructor(_title, _width, _height){
-    this.height = _height;
-    this.title = _title;
-    this.width = _width;
+  constructor(title, width, height){
+    this.height = height;
+    this.title = title;
+    this.width = width;
   }
 
   run() {
@@ -98,10 +98,10 @@ export class Game {
     state.setState(gameState);
   }
 
-  tick(_dt) {
+  tick(dt) {
     keyManager.tick();
     if (state.getState() && !display.paused)
-      state.getState().tick(_dt);
+      state.getState().tick(dt);
   }
 
   render(){
