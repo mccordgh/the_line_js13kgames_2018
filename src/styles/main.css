@@ -14,9 +14,10 @@ body {
     /*border: 1px solid white;*/
     border-radius: 235px;
     left:50%;
-    margin:-336px 0 0 -224px;
+    /*margin:-336px 0 0 -224px;*/
+    margin: 50px 0 0 -224px;
     position:fixed;
-    top:50%;
+    /*top:50%;*/
     z-index: 100;
 }
 
@@ -24,17 +25,17 @@ body {
     left:50%;
     font-family: 'Arial', 'serif';
     line-height: 36px;
-    font-size: 26px;
-    height: 224px;
-    padding: 20px;
+    font-size: 24px;
+    padding: 0;
     position:fixed;
     z-index: 100;
-    top:50%;
+    top: 408px;
 }
 
 #dialogue {
     /*border: 1px solid white;*/
     color: white;
+    height: 324px;
     margin:112px 0 0 -190px;
     width: 600px;
 }
@@ -42,6 +43,7 @@ body {
 #speaker {
     /*border: 1px solid yellow;*/
     color: yellow;
+    height: 50px;
     margin:112px 0 0 -425px;
     text-align: right;
     width: 200px;

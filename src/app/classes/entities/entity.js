@@ -59,6 +59,16 @@ export class Entity {
   checkForCollisionEvents(e1, e2) {
     if (this.checkCollidingTypes(e1, e2, 'monster', 'monster')) return;
 
+    if (this.checkCollidingTypes(e1, e2, 'player', 'journal')) {
+      if (e1.type === 'journal') {
+        e1.triggerEntry();
+        this.handler.getWorld().entityManager.removeEntity(e1);
+      } else {
+        e2.triggerEntry();
+				this.handler.getWorld().entityManager.removeEntity(e2);
+			}
+    }
+
     if (this.checkCollidingTypes(e1, e2, 'switch', 'player')) {
       if (e1.type === 'switch') {
         e1.toggleSwitch();

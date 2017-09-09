@@ -7,7 +7,9 @@ import { TileManager } from '../tiles/tile-manager';
 import { LightManager } from '../lighting/light-manager';
 import { Exit } from '../entities/statics/exit';
 import { Switch } from "../entities/statics/switch";
-import { Dialogue } from "../display/dialogue";
+import { Dialogue } from "../dialogue/dialogue";
+import {JournalPage} from "../entities/statics/journal-page";
+import { JournalOne } from "../dialogue/journals/journal-one";
 
 
 const TILE_WIDTH = 64;
@@ -76,8 +78,9 @@ export class World {
     this.lightManager.fillLightMap();
 
     if (this.level === 1) {
-      this.entityManager.addEntity(new Exit(this.handler, TILE_WIDTH, 2 * TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT));
-      this.lightManager.addSource(3, 3);
+      // this.entityManager.addEntity(new Exit(this.handler, TILE_WIDTH, 2 * TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT));
+			this.entityManager.addEntity(new JournalPage(this.handler, TILE_WIDTH, 2 * TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT, new JournalOne()));
+			this.lightManager.addSource(3, 3);
     } else {
       this.spawnRandomRoomEntities();
       this.addEvenSpreadOfLightSources(7);
