@@ -20,11 +20,11 @@ tiles[2] = new WallYellow(2);
 tiles[3] = new WallBlue(3);
 tiles[4] = new PathYellow(4);
 tiles[5] = new PathBlue(5);
-tiles[6] = new SwitchBlue(6);
+// tiles[6] = new SwitchBlue(6);
 tiles[7] = new PathGreen(7);
 tiles[8] = new WallGreen(8);
-tiles[9] = new SwitchGreen(9);
-tiles[10] = new Exit(10);
+// tiles[9] = new SwitchGreen(9);
+// tiles[10] = new Exit(10);
 
  export class TileManager {
 

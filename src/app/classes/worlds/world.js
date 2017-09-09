@@ -6,6 +6,7 @@ import { SpatialGrid } from '../utils/spatial-grid';
 import { TileManager } from '../tiles/tile-manager';
 import { LightManager } from '../lighting/light-manager';
 import { Exit } from '../entities/statics/exit';
+import { Switch } from "../entities/statics/switch";
 
 
 const TILE_WIDTH = 64;
@@ -13,7 +14,7 @@ const TILE_HEIGHT = 64;
 let yellowTilesDown = false, monstersCleared = false;
 let yellowWallInterval = 0;
 const yellowWallIntervalMax = 3 * 60; // We want X seconds so we multiply that by our FPS which is 60
-let switchTimer = 60, timeSpent = 0;
+let timeSpent = 0;
 
 export class World {
   constructor(_handler) {
@@ -135,19 +136,15 @@ export class World {
   }
 
   swapGreenAndBlueTiles(color) {
-    if (switchTimer < 30) return;
-
-    if (color === 'blue') {
+    if (color === 'green') {
       this.swapTilesByID(5, 3);
       this.swapTilesByID(8, 7);
-      this.swapTilesByID(6, 9);
-    } else if (color === 'green') {
+      // this.swapTilesByID(6, 9);
+    } else if (color === 'blue') {
       this.swapTilesByID(3, 5);
       this.swapTilesByID(7, 8);
-      this.swapTilesByID(9, 6);
+      // this.swapTilesByID(9, 6);
     }
-
-    switchTimer = 0;
   }
 
   getInput() {
@@ -184,9 +181,8 @@ export class World {
     this.checkForWallSwap();
     this.entityManager.tick(_dt);
     this.lightManager.tick(_dt);
-    switchTimer++;
 
-    if (!monstersCleared) {
+    if (!monstersCleared && this.level !== 1) {
       timeSpent++;
 
       if ((timeSpent / 60) >= 240) {

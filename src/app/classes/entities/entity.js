@@ -59,6 +59,14 @@ export class Entity {
   checkForCollisionEvents(e1, e2) {
     if (this.checkCollidingTypes(e1, e2, 'monster', 'monster')) return;
 
+    if (this.checkCollidingTypes(e1, e2, 'switch', 'player')) {
+      if (e1.type === 'switch') {
+        e1.toggleSwitch();
+      } else {
+        e2.toggleSwitch();
+      }
+    }
+
     if (this.checkCollidingTypes(e1, e2, 'player', 'exit')) {
       if (this.handler.getWorld().level >= 4) {
         const ending = new Ending(this.handler);
@@ -66,6 +74,7 @@ export class Entity {
       }
 
       this.handler.getWorld().changeLevel();
+      return;
     }
 
     if (this.checkCollidingTypes(e1, e2, 'player', 'monster')) {

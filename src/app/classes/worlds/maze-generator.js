@@ -146,14 +146,14 @@ export class MazeGenerator {
     finalMaze[Math.ceil(mazeWidth / 2) + 1][mazeHeight - 2] = 1;
   }
 
-  static addOneOfEachSwitchAtStart() {
-    finalMaze[4][1] = 3;
-    finalMaze[4][3] = 7;
-    finalMaze[2][4] = 2;
-  }
+  // static addOneOfEachSwitchAtStart() {
+  //   finalMaze[4][1] = 3;
+  //   finalMaze[4][3] = 7;
+  //   finalMaze[2][4] = 2;
+  // }
 
   static getIntroMaze() {
-    return [
+		return [
       [1, 1, 1, 1, 1, 1, 1],
       [1, 0, 0, 0, 0, 0, 1],
       [1, 0, 0, 1, 0, 0, 1],
@@ -179,7 +179,7 @@ export class MazeGenerator {
       this.createMaze();
       this.createRooms();
       this.createBarriers(level);
-      this.addOneOfEachSwitchAtStart();
+      // this.addOneOfEachSwitchAtStart();
 
       return {
         mazeWidth,
