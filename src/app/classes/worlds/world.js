@@ -14,7 +14,7 @@ import { JournalTwo } from "../dialogue/journals/journal-two";
 import { JournalThree } from "../dialogue/journals/journal-three";
 import { JournalFour } from "../dialogue/journals/journal-four";
 
-let yellowTilesDown = false, monstersCleared = false, yellowWallInterval = 0, yellowWallIntervalMax = 1 * 60, timeSpent = 0, tm = 20, ts = 0, tc = 0;
+let yellowTilesDown = false, monstersCleared = false, yellowWallInterval = 0, yellowWallIntervalMax = 4 * 60, timeSpent = 0, tm = 20, ts = 0, tc = 0;
 
 export class World {
   constructor(handler) {
@@ -188,7 +188,7 @@ export class World {
     if (!monstersCleared && this.level !== 1) {
       timeSpent++;
 
-      if ((timeSpent / 60) >= 5) {
+      if ((timeSpent / 60) >= 300) {
         alert('the monsters crumble all around you.');
         this.entityManager.removeEntitiesByType('monster');
         monstersCleared = true;
