@@ -86,7 +86,7 @@ export class Entity {
 
 			hW.dialogue.clear();
 
-			let gameOver = new GameOver(e1.handler, ['Looks like this one',  'couldn\'t dodge his brothers...']);
+			let gameOver = new GameOver(e1.handler, ['"Looks like this one',  'couldn\'t dodge his brothers..."']);
       hG.getGameState().setState(gameOver);
     }
   }

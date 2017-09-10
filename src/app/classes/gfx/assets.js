@@ -37,13 +37,11 @@ let cropTile = (asset, x, y) => asset.sheet.crop(SPRITE_WIDTH * x, SPRITE_HEIGHT
 
 let tiles = new Assets('tiles', PATH + "all_tiles.png", SPRITE_WIDTH, SPRITE_HEIGHT);
 tiles.path = cropTile(tiles, 1, 0);
-tiles.pathGreen = cropTile(tiles, 1, 2);
-tiles.pathYellow = cropTile(tiles, 0, 2);
+tiles.pathYellow = cropTile(tiles, 1, 1);
 tiles.wall = cropTile(tiles, 0, 0);
-tiles.wallGreen = cropTile(tiles, 1, 1);
 tiles.wallYellow = cropTile(tiles, 0, 1);
-tiles.exit = cropTile(tiles, 1, 3);
-tiles.lantern = cropTile(tiles, 0, 3);
+tiles.exit = cropTile(tiles, 1, 2);
+tiles.lantern = cropTile(tiles, 0, 2);
 
 let addAnimations = (sprites, n, wurow, wrrow, wdrow, wlrow) => {
   let framespeed = 200, wrframes = [], wlframes = [], wuframes = [], wdframes = [];
@@ -73,5 +71,5 @@ let addAnimations = (sprites, n, wurow, wrrow, wdrow, wlrow) => {
   sprites.addAnimation(n + "walk_left", new Animation(wlframes));
 };
 
-addAnimations(tiles, 'p', 4, 5, 6, 7);
-addAnimations(tiles, 'c', 8, 9, 10, 11);
+addAnimations(tiles, 'p', 3, 4, 5, 6);
+addAnimations(tiles, 'c', 7, 8, 9, 10);
