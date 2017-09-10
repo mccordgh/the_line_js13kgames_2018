@@ -4,7 +4,7 @@ import { Creature } from '../creature';
 export class Clone extends Creature {
   constructor(handler, x, y) {
     super(handler, x, y, TILE_WIDTH, TILE_HEIGHT);
-    this.assets = Assets.getAssets('creature');
+    this.assets = Assets.getAssets('tiles');
     this.x = x;
     this.y = y;
     this.spawnX = x;
@@ -18,7 +18,7 @@ export class Clone extends Creature {
     this.patrolLength = 100;
     this.dirMoving = 0;
     this.numberOfMoves = 0;
-    this.lastAnimation = 'walk_down';
+    this.lastAnimation = 'cwalk_down';
   }
 
   getPatrolPattern() {

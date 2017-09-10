@@ -8,7 +8,7 @@ let getDevInput = false, inputCounter = 0;
 export class Player extends Creature {
   constructor(handler, x, y){
     super(handler, x, y);
-    this.assets = Assets.getAssets('sprites');
+    this.assets = Assets.getAssets('tiles');
     this.x = x;
     this.y = y;
     this.speed = 140;
@@ -21,7 +21,7 @@ export class Player extends Creature {
     this.invincible = false;
     this.superSpeed = false;
     this.allCheats = false;
-    this.lastAnimation = 'walk_down';
+    this.lastAnimation = 'pwalk_down';
   }
 
   tick(dt) {

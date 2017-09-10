@@ -35,7 +35,7 @@ export class Assets {
 
 let cropTile = (asset, x, y) => asset.sheet.crop(SPRITE_WIDTH * x, SPRITE_HEIGHT * y, SPRITE_WIDTH, SPRITE_HEIGHT);
 
-let tiles = new Assets('tiles', PATH + "tiles.png", SPRITE_WIDTH, SPRITE_HEIGHT);
+let tiles = new Assets('tiles', PATH + "all_tiles.png", SPRITE_WIDTH, SPRITE_HEIGHT);
 tiles.path = cropTile(tiles, 1, 0);
 tiles.pathBlue = cropTile(tiles, 1, 2);
 tiles.pathGreen = cropTile(tiles, 2, 2);
@@ -45,25 +45,19 @@ tiles.wallBlue = cropTile(tiles, 1, 1);
 tiles.wallGreen = cropTile(tiles, 2, 1);
 tiles.wallYellow = cropTile(tiles, 0, 1);
 tiles.switchGreen = cropTile(tiles, 2, 0);
-tiles.switchBlue = cropTile(tiles, 3, 0);
-tiles.exit = cropTile(tiles, 3, 1);
-tiles.lantern = cropTile(tiles, 3, 2);
+tiles.switchBlue = cropTile(tiles, 0, 3);
+tiles.exit = cropTile(tiles, 1, 3);
+tiles.lantern = cropTile(tiles, 2, 3);
 
-let player = new Assets('sprites',  PATH + "sprites.png", SPRITE_WIDTH, SPRITE_HEIGHT);
-let creature = new Assets('creature', PATH + "creature.png", SPRITE_WIDTH, SPRITE_HEIGHT);
+// let player = new Assets('sprites',  PATH + "sprites.png", SPRITE_WIDTH, SPRITE_HEIGHT);
+// let creature = new Assets('creature', PATH + "creature.png", SPRITE_WIDTH, SPRITE_HEIGHT);
 
-let addAnimations = (sprites) => {
+let addAnimations = (sprites, n, wurow, wrrow, wdrow, wlrow) => {
   let framespeed = 200,
     wrframes = [], //walk right frames
     wlframes = [], //walk left frames
     wuframes = [], //walk up frames
     wdframes = [], //walk down frames
-    deathframes = [], //dead animation frames
-    wurow = 0, //walk up row on spritesheet
-    wrrow = 1, //walk right row on spritesheet
-    wdrow = 2, //walk down row on spritesheet
-    wlrow = 3, //walk left row on spritesheet
-    deathrow = 4, //death animation row on spritesheet
     animationLength = 3; //how many frames in animation
 
   for (let i = 0; i < animationLength; i++) {
@@ -83,28 +77,13 @@ let addAnimations = (sprites) => {
       frame: sprites.sheet.crop(sprites.width * i, sprites.height * wlrow + 1, sprites.width, sprites.height),
       speed: framespeed
     });
-    deathframes.push({
-      frame: sprites.sheet.crop(sprites.width * i, sprites.height * deathrow, sprites.width, sprites.height),
-      speed: 500
-    });
   }
 
-  let idleframes = [
-    {frame: sprites.sheet.crop(0, 2 * sprites.height, sprites.width, sprites.height), speed: framespeed},
-    {
-      frame: sprites.sheet.crop(1 * sprites.width, 2 * sprites.height, sprites.width, sprites.height),
-      speed: framespeed
-    },
-    {frame: sprites.sheet.crop(2 * sprites.width, 2 * sprites.height, sprites.width, sprites.height), speed: framespeed}
-  ];
-
-  sprites.addAnimation("walk_up", new Animation(wuframes));
-  sprites.addAnimation("walk_right", new Animation(wrframes));
-  sprites.addAnimation("walk_down", new Animation(wdframes));
-  sprites.addAnimation("walk_left", new Animation(wlframes));
-  sprites.addAnimation("idle", new Animation(idleframes));
-  sprites.addAnimation("death", new Animation(deathframes));
+  sprites.addAnimation(n + "walk_up", new Animation(wuframes));
+  sprites.addAnimation(n + "walk_right", new Animation(wrframes));
+  sprites.addAnimation(n + "walk_down", new Animation(wdframes));
+  sprites.addAnimation(n + "walk_left", new Animation(wlframes));
 };
 
-addAnimations(player);
-addAnimations(creature);
+addAnimations(tiles, 'p', 4, 5, 6, 7);
+addAnimations(tiles, 'c', 8, 9, 10, 11);

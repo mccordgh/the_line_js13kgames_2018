@@ -1,6 +1,8 @@
 import { Entity } from '../entity';
 import { Rectangle } from '../../gfx/shapes/rectangle';
 
+let n;
+
 export class Creature extends Entity {
   constructor(handler, x, y) {
     super(handler, x, y,64, 64);
@@ -10,14 +12,16 @@ export class Creature extends Entity {
   }
 
   tick() {
+    n = this.type === 'player' ? 'p' : 'c';
+
     if (this.yMove < 0)
-      this.assets.animations.walk_up.tick();
+      this.assets.animations[n + 'walk_up'].tick();
     if (this.yMove > 0)
-      this.assets.animations.walk_down.tick();
+      this.assets.animations[n + 'walk_down'].tick();
     if (this.xMove > 0)
-      this.assets.animations.walk_right.tick();
+      this.assets.animations[n + 'walk_right'].tick();
     if (this.xMove < 0)
-      this.assets.animations.walk_left.tick();
+      this.assets.animations[n + 'walk_left'].tick();
   }
 
   move() {
@@ -79,26 +83,6 @@ export class Creature extends Entity {
     }
   }
 
-  // checkForSwitchOrTrigger(c1, c2, temp) {
-  //   const tile1 = this.handler.getWorld().getTile(c1, temp);
-  //   const tile2 = this.handler.getWorld().getTile(c2, temp);
-  //
-  //   if (tile1.type === 'switch') {
-  //     this.handler.getWorld().swapGreenAndBlueTiles(tile1.color);
-  //   } else if (tile2.type === 'switch') {
-  //     this.handler.getWorld().swapGreenAndBlueTiles(tile2.color);
-  //   }
-  //
-  //   if (tile1.type === 'exit' || tile2.type === 'exit') {
-  //     if (this.handler.getWorld().level >= 4) {
-  //       const ending = new Ending(this.handler);
-  //       this.handler.getGame().getGameState().setState(ending);
-  //     }
-  //
-  //     this.handler.getWorld().changeLevel();
-  //   }
-  // }
-
   collisionWithTile(x, y) {
     try {
       return this.handler.getWorld().getTile(x, y).isSolid;
@@ -108,18 +92,20 @@ export class Creature extends Entity {
   }
 
   getCurrentAnimationFrame() {
+    n = this.type === 'player' ? 'p' : 'c';
+
     if (this.xMove < 0){
-      this.lastAnimation = "walk_left";
-      return this.assets.animations.walk_left.getCurrentFrame();
+      this.lastAnimation = n + "walk_left";
+      return this.assets.animations[n + "walk_left"].getCurrentFrame();
     } else if (this.xMove > 0) {
-	    this.lastAnimation = "walk_right";
-	    return this.assets.animations.walk_right.getCurrentFrame();
+	    this.lastAnimation = n + "walk_right";
+	    return this.assets.animations[n + "walk_right"].getCurrentFrame();
     } else if (this.yMove < 0){
-      this.lastAnimation = "walk_up";
-      return this.assets.animations.walk_up.getCurrentFrame();
+      this.lastAnimation = n + "walk_up";
+      return this.assets.animations[n + "walk_up"].getCurrentFrame();
     } else if (this.yMove > 0){
-      this.lastAnimation = "walk_down";
-      return this.assets.animations.walk_down.getCurrentFrame();
+      this.lastAnimation = n + "walk_down";
+      return this.assets.animations[n + "walk_down"].getCurrentFrame();
     } else {
       return this.assets.animations[this.lastAnimation].getCurrentFrame();
     }
