@@ -76,8 +76,6 @@ export class World {
       d('', '(You find a note on the floor.)');
       j.text.forEach(e => { d(j.name, e); });
     }
-
-    console.log(this.entityManager.getEntities());
   }
 
   addEvenSpreadOfLightSources(spread) {

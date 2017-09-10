@@ -73,7 +73,11 @@ export class Clone extends Creature {
     let yy = Math.round(this.y / TILE_HEIGHT);
     let tile = this.handler.getWorld().getTile(xx, yy);
 
-    if (!tile.isSolid) return;
+    try {
+      if (!tile.isSolid) return;
+    } catch (e) {
+      //
+    }
 
     let startX = xx - 1;
     let startY = yy - 1;
@@ -82,10 +86,14 @@ export class Clone extends Creature {
 
     for (let j = startY; j < endY; j++) {
       for (let i = startX; i < endX; i++) {
-        if (!this.handler.getWorld().getTile(i, j).isSolid && !(i !== xx && j !== yy)) {
-          this.x = i * TILE_WIDTH;
-          this.y = j * TILE_HEIGHT;
-          return;
+        try {
+          if (!this.handler.getWorld().getTile(i, j).isSolid && !(i !== xx && j !== yy)) {
+            this.x = i * TILE_WIDTH;
+            this.y = j * TILE_HEIGHT;
+            return;
+          }
+        } catch (e) {
+          //
         }
       }
     }
