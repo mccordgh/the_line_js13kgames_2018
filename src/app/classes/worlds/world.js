@@ -13,7 +13,7 @@ import { JournalTwo } from "../dialogue/journals/journal-two";
 import { JournalThree } from "../dialogue/journals/journal-three";
 import { JournalFour } from "../dialogue/journals/journal-four";
 
-let yellowTilesDown = false, monstersCleared = false, yellowWallInterval = 0, yellowWallIntervalMax = 5 * 60, timeSpent = 0, tm = 20, ts = 0, tc = 0;
+let yellowTilesDown = false, monstersCleared = false, yellowWallInterval = 0, yellowWallIntervalMax = 5 * 60, timeSpent = 0, tm = 15, ts = 0, tc = 0;
 
 export class World {
   constructor(handler) {
@@ -172,6 +172,7 @@ export class World {
 
     if (ts <= 0 && tm <= 0) {
       let gameOver = new GameOver(this.handler, ['"Time\'s up!"', '"This one didn\'t make it either..."']);
+      this.dialogue.clear();
       this.handler.getGame().getGameState().setState(gameOver);
     }
   }

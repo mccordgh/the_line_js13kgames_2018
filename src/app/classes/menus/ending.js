@@ -4,8 +4,8 @@ export class Ending extends Menu {
   constructor(handler){
     super(handler);
     this.handler.getWorld().dialogue.addWords('?????', 'I knew this one was special.');
-    this.handler.getWorld().dialogue.addWords('?????', 'Made of my own flesh and bones.');
-    this.handler.getWorld().dialogue.addWords('?????', 'Come to me, my son.');
+    this.handler.getWorld().dialogue.addWords('?????', 'My own @flesh@ and @bones@.');
+    this.handler.getWorld().dialogue.addWords('?????', 'Come to me, son.');
   }
 
   render(g) {
