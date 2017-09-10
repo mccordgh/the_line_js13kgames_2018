@@ -7,7 +7,6 @@ import { TileManager } from '../tiles/tile-manager';
 import { LightManager } from '../lighting/light-manager';
 import { Exit } from '../entities/statics/exit';
 import { GameOver } from '../menus/game-over';
-import { JournalOne } from "../dialogue/journals/journal-one";
 import { JournalTwo } from "../dialogue/journals/journal-two";
 import { JournalThree } from "../dialogue/journals/journal-three";
 import { JournalFour } from "../dialogue/journals/journal-four";
@@ -65,19 +64,20 @@ export class World {
     this.addEvenSpreadOfLightSources(7);
     if (this.level !== 1) this.addEvenSpreadOfMonsters(6);
 
-    if (this.level <= 4) {
+    if (this.level <= 4 && this.level !== 1) {
       let j = [
-        new JournalOne(),
         new JournalTwo(),
         new JournalThree(),
         new JournalFour(),
-      ][this.level - 1];
+      ][this.level - 2];
 
       let d = this.dialogue.addWords;
 
       d('', '(You find a note on the floor.)');
       j.text.forEach(e => { d(j.name, e); });
     }
+
+    console.log(this.entityManager.getEntities());
   }
 
   addEvenSpreadOfLightSources(spread) {
