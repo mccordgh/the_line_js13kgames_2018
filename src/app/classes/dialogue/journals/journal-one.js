@@ -10,8 +10,8 @@ export class JournalOne extends JournalParent {
 	myText() {
 		return [
 			'I\'ve stayed alive longer than anyone else.',
-			'The grotesque beings down here are poisoning my mind.',
-      'But they are slow; The rotating walls help cut them off...',
+			'The strange beings down here are poisoning my mind.',
+      'They are slow; The rotating walls cut them off.',
 		];
 	}
 }
