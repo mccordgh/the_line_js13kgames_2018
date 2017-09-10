@@ -12,14 +12,8 @@ import { JournalOne } from "../dialogue/journals/journal-one";
 import { JournalTwo } from "../dialogue/journals/journal-two";
 import { JournalThree } from "../dialogue/journals/journal-three";
 import { JournalFour } from "../dialogue/journals/journal-four";
-import { JournalFive } from "../dialogue/journals/journal-five";
-import { JournalSix } from "../dialogue/journals/journal-six";
-import { JournalSeven } from "../dialogue/journals/journal-seven";
 
-let yellowTilesDown = false, monstersCleared = false;
-let yellowWallInterval = 0;
-let yellowWallIntervalMax = 5 * 60; // We want X seconds so we multiply that by our FPS which is 60
-let timeSpent = 0;
+let yellowTilesDown = false, monstersCleared = false, yellowWallInterval = 0, yellowWallIntervalMax = 5 * 60, timeSpent = 0;
 
 export class World {
   constructor(handler) {
@@ -82,17 +76,9 @@ export class World {
 			new JournalTwo(),
 			new JournalThree(),
 			new JournalFour(),
-			new JournalFive(),
-			new JournalSix(),
-			new JournalSeven(),
 		];
 
-  	let firstJournal = journals[(this.level * 2) - 4];
-		let lastJournal = journals[(this.level * 2) - 3];
-
-
-		this.entityManager.addEntity(new JournalPage(this.handler, 2 * TILE_WIDTH, 2 * TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT, firstJournal));
-		this.entityManager.addEntity(new JournalPage(this.handler, (this.width - 3) * TILE_WIDTH, (this.height - 3) * TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT, lastJournal));
+		this.entityManager.addEntity(new JournalPage(this.handler, 2 * TILE_WIDTH, 2 * TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT, journals[this.level - 2]));
 	}
 
   addEvenSpreadOfLightSources(spread) {
@@ -139,7 +125,7 @@ export class World {
   }
 
   fillWorld(level, spawnX, spawnY) {
-    let maze = MazeGenerator.getRandomMaze(level, spawnX, spawnY);
+    let maze = MazeGenerator.getRandomMaze(this.level, spawnX, spawnY);
 
     this.height = maze.mazeHeight;
     this.width = maze.mazeWidth;

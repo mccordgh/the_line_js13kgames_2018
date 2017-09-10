@@ -9,11 +9,9 @@ export class JournalOne extends JournalParent {
 
 	myText() {
 		return [
-			'Despite his best efforts, I\'ve stayed alive longer than anyone else...',
-			'Before he sent me down into this hellhole, I was able to swipe one of his notebooks. He noticed, and broke my leg with a pipe...',
-			'Beware of the grotesque beings down here. One touch from them will plague your mind.',
-			'The beings are often slow, so make use of the switches and rotating walls to cut them off.',
-			'For all who come after me, I hope to provide some small guidance.',
+			'I\'ve stayed alive longer than anyone else. Even with this broken leg.',
+			'The grotesque beings down here will poison your mind, but they are slow and the rotating walls help to cut them off.',
+      'This place seems dark and unending. I hope I\'ll see it to the end.',
 		];
 	}
 }

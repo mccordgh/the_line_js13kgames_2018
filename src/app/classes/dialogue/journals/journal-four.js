@@ -9,12 +9,9 @@ export class JournalFour extends JournalParent {
 
 	myText() {
 		return [
-			'It has been bothering me for a while and I can\'t get past it. Those creatures, they seem somehow... familiar.',
-			'I\'m not sure from when or where, but their faces are familiar to me.',
-			'Another thing bothering me is that same old man on every floor. How is he traveling between the floors without passing me?',
-			'I\'ll think more on this later... The voice in my head is getting louder and is more frequent.',
-			'(&At the bottom of the page you see these words written in what looks to be @blood@.&)',
-			'@... ~HeHe. VeRy GooD!~@',
+      '@~WoW. you MaDe iT To THe eND. WHaT a ViLe JoKe aWaiTS.~',
+      '~aT THe eND oF THiS FlooR, i HaVE SeeN THE ANSweR?????~',
+      '~SCuRRy oN LiTTLe RaT! you WiLL LeaRN THe TRuTH.~@',
 		];
 	}
 }
