@@ -14,7 +14,7 @@ import { JournalTwo } from "../dialogue/journals/journal-two";
 import { JournalThree } from "../dialogue/journals/journal-three";
 import { JournalFour } from "../dialogue/journals/journal-four";
 
-let yellowTilesDown = false, monstersCleared = false, yellowWallInterval = 0, yellowWallIntervalMax = 4 * 60, timeSpent = 0, tm = 20, ts = 0, tc = 0;
+let yellowTilesDown = false, monstersCleared = false, yellowWallInterval = 0, yellowWallIntervalMax = 5 * 60, timeSpent = 0, tm = 20, ts = 0, tc = 0;
 
 export class World {
   constructor(handler) {
@@ -149,6 +149,7 @@ export class World {
     yellowWallInterval++;
 
     if (yellowWallInterval > yellowWallIntervalMax) {
+      this.handler.getSM().play('wall');
       yellowWallInterval = 0;
 
       if (yellowTilesDown) {

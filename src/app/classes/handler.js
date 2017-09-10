@@ -1,3 +1,5 @@
+let sm;
+
 export class Handler {
   constructor(game) {
     this.game = game;
@@ -31,10 +33,11 @@ export class Handler {
     return this.game;
   }
 
-  // getSoundManager(){
-  //   return soundManager;
-  // },
-  // setSoundManager(sm){
-  //   soundManager = sm;
-  // }
+  getSM(){
+    return sm;
+  }
+
+  setSM(s) {
+    sm = s;
+  }
 }

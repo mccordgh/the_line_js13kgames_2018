@@ -55,10 +55,6 @@ export class Game {
     this.run();
   }
 
-  getSoundManager() {
-    return soundManager;
-  }
-
   getKeyManager() {
     return keyManager;
   }
@@ -91,11 +87,12 @@ export class Game {
     state = new State();
     gameCamera = new GameCamera(handler, 0, 0);
     soundManager = new SoundManager();
-    soundManager.init();
-    mainMenu = new MainMenu(handler);
-    state.setState(mainMenu);
-    // gameState = new GameState(handler);
-    // state.setState(gameState);
+    handler.setSM(soundManager);
+    // soundManager.init();
+    // mainMenu = new MainMenu(handler);
+    // state.setState(mainMenu);
+    gameState = new GameState(handler);
+    state.setState(gameState);
   }
 
   tick(dt) {
