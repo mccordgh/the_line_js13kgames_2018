@@ -37,26 +37,18 @@ let cropTile = (asset, x, y) => asset.sheet.crop(SPRITE_WIDTH * x, SPRITE_HEIGHT
 
 let tiles = new Assets('tiles', PATH + "all_tiles.png", SPRITE_WIDTH, SPRITE_HEIGHT);
 tiles.path = cropTile(tiles, 1, 0);
-tiles.pathGreen = cropTile(tiles, 2, 2);
+tiles.pathGreen = cropTile(tiles, 1, 2);
 tiles.pathYellow = cropTile(tiles, 0, 2);
 tiles.wall = cropTile(tiles, 0, 0);
-tiles.wallGreen = cropTile(tiles, 2, 1);
+tiles.wallGreen = cropTile(tiles, 1, 1);
 tiles.wallYellow = cropTile(tiles, 0, 1);
 tiles.exit = cropTile(tiles, 1, 3);
-tiles.lantern = cropTile(tiles, 2, 3);
-
-// let player = new Assets('sprites',  PATH + "sprites.png", SPRITE_WIDTH, SPRITE_HEIGHT);
-// let creature = new Assets('creature', PATH + "creature.png", SPRITE_WIDTH, SPRITE_HEIGHT);
+tiles.lantern = cropTile(tiles, 0, 3);
 
 let addAnimations = (sprites, n, wurow, wrrow, wdrow, wlrow) => {
-  let framespeed = 200,
-    wrframes = [], //walk right frames
-    wlframes = [], //walk left frames
-    wuframes = [], //walk up frames
-    wdframes = [], //walk down frames
-    animationLength = 3; //how many frames in animation
+  let framespeed = 200, wrframes = [], wlframes = [], wuframes = [], wdframes = [];
 
-  for (let i = 0; i < animationLength; i++) {
+  for (let i = 0; i < 2; i++) {
     wuframes.push({
       frame: sprites.sheet.crop(sprites.width * i, sprites.height * wurow, sprites.width, sprites.height),
       speed: framespeed

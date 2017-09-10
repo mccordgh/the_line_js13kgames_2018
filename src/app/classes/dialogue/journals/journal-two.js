@@ -4,7 +4,7 @@ export class JournalTwo extends JournalParent {
 	constructor() {
 		super();
 		this.setText(this.myText());
-		this.name = 'Journal #002';
+		this.name = 'Entry 2';
 	}
 
 	myText() {

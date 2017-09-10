@@ -59,26 +59,25 @@ export class World {
     this.lightManager.fillLightMap();
 
     if (this.level === 1) {
-      this.entityManager.addEntity(new Exit(this.handler, 7 * TILE_WIDTH, 7 * TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT));
-			this.entityManager.addEntity(new JournalPage(this.handler, 1 * TILE_WIDTH, 2 * TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT, new JournalOne()));
-			this.entityManager.addEntity(new Clone(this.handler, 6 * TILE_WIDTH, 2 * TILE_WIDTH));
-			this.lightManager.addSource(5, 3);
-    } else {
-      this.entityManager.addEntity(new Exit(this.handler, (this.width - 2) * TILE_WIDTH, (this.height - 2) * TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT));
-      this.addEvenSpreadOfLightSources(7);
-      this.addEvenSpreadOfMonsters(7);
-      this.spawnJournals();
+      this.entityManager.addEntity(new Clone(this.handler, 6 * TILE_WIDTH, 2 * TILE_WIDTH));
+      this.lightManager.addSource(4, 5);
     }
+
+    this.entityManager.addEntity(new Exit(this.handler, (this.width - 2) * TILE_WIDTH, (this.height - 2) * TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT));
+    this.addEvenSpreadOfLightSources(7);
+    if (this.level !== 1) this.addEvenSpreadOfMonsters(6);
+    this.spawnJournals();
   }
 
   spawnJournals() {
 		let journals = [
+		  new JournalOne(),
 			new JournalTwo(),
 			new JournalThree(),
 			new JournalFour(),
 		];
 
-		this.entityManager.addEntity(new JournalPage(this.handler, 2 * TILE_WIDTH, 2 * TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT, journals[this.level - 2]));
+		this.entityManager.addEntity(new JournalPage(this.handler, 2 * TILE_WIDTH, 2 * TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT, journals[this.level - 1]));
 	}
 
   addEvenSpreadOfLightSources(spread) {
