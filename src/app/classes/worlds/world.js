@@ -135,11 +135,11 @@ export class World {
     return maze.pieces;
   }
 
-  swapTilesByID(tileID, swapTileID) {
+  swapWalls(tile, swap) {
     for (let y = 1; y < this.height; y++) {
       for (let x = 1; x < this.width; x++) {
-        if (this.tiles[x][y] === tileID) {
-					this.tiles[x][y] = swapTileID;
+        if (this.tiles[x][y] === tile) {
+					this.tiles[x][y] = swap;
         }
       }
     }
@@ -153,11 +153,9 @@ export class World {
       yellowWallInterval = 0;
 
       if (yellowTilesDown) {
-        this.swapTilesByID(8, 7);
-        this.swapTilesByID(4, 2);
+        this.swapWalls(4, 2);
       } else {
-        this.swapTilesByID(7, 8);
-        this.swapTilesByID(2, 4);
+        this.swapWalls(2, 4);
       }
 
       yellowTilesDown = !yellowTilesDown;
