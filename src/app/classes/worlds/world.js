@@ -64,17 +64,19 @@ export class World {
     this.addEvenSpreadOfLightSources(7);
     if (this.level !== 1) this.addEvenSpreadOfMonsters(6);
 
-    let j = [
-      new JournalOne(),
-      new JournalTwo(),
-      new JournalThree(),
-      new JournalFour(),
-    ][this.level - 1];
+    if (this.level <= 4) {
+      let j = [
+        new JournalOne(),
+        new JournalTwo(),
+        new JournalThree(),
+        new JournalFour(),
+      ][this.level - 1];
 
-    let d = this.dialogue.addWords;
+      let d = this.dialogue.addWords;
 
-    d('', '(You find a journal entry on the floor.)');
-    j.text.forEach(e => { d(j.name, e); });
+      d('', '(You find a journal entry.)');
+      j.text.forEach(e => { d(j.name, e); });
+    }
   }
 
   addEvenSpreadOfLightSources(spread) {

@@ -37,7 +37,7 @@ export class Player extends Creature {
 
     // ****** DRAW BOUNDING BOX DON'T DELETE!!
     // g.fillStyle = "green";
-    // g.fillRect(this.b.x + this.x - this.handler.getGameCamera().getxOffset(), this.b.y + this.y - this.handler.getGameCamera().getyOffset(), this.b.w, this.b.height);
+    // g.fillRect(this.b.x + this.x - this.handler.getGameCamera().getxOffset(), this.b.y + this.y - this.handler.getGameCamera().getyOffset(), this.b.w, this.b.h);
     // ****** DRAW BOUNDING BOX DON'T DELETE!!
   }
 

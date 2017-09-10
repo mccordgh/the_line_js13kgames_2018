@@ -32,11 +32,11 @@ export class Entity {
   getCollisionBounds(xOffset, yOffset) {
     return new Rectangle(parseInt(this.x + this.b.x + xOffset),
       parseInt(this.y + this.b.y + yOffset),
-      this.b.w, this.b.height);
+      this.b.w, this.b.h);
   }
 
   checkEntityCollisions(xOffset, yOffset) {
-    let candidates =  this.handler.getWorld().getSpatialGrid().retrieve(new Rectangle(this.x + this.b.x + xOffset, this.y + this.b.y + yOffset, this.b.w, this.b.height), this);
+    let candidates =  this.handler.getWorld().getSpatialGrid().retrieve(new Rectangle(this.x + this.b.x + xOffset, this.y + this.b.y + yOffset, this.b.w, this.b.h), this);
 
     for(let i = 0; i < candidates.length; i++) {
       let e = candidates[i];

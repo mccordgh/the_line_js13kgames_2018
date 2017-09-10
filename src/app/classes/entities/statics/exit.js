@@ -25,7 +25,7 @@ export class Exit extends StaticEntity {
 
     // ****** DRAW BOUNDING BOX DON'T DELETE!!
     // g.fillStyle = "white";
-    // g.fillRect(this.b.x + this.x - this.handler.getGameCamera().getxOffset(), this.b.y + this.y - this.handler.getGameCamera().getyOffset(), this.b.w, this.b.height);
+    // g.fillRect(this.b.x + this.x - this.handler.getGameCamera().getxOffset(), this.b.y + this.y - this.handler.getGameCamera().getyOffset(), this.b.w, this.b.h);
     // ****** DRAW BOUNDING BOX DON'T DELETE!!
   }
 }

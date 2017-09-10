@@ -12,7 +12,7 @@ export class Creature extends Entity {
     this.b.x = 16;
     this.b.y = 24;
     this.b.w = 32;
-    this.b.height = 39;
+    this.b.h = 39;
   }
 
   tick() {
@@ -30,12 +30,12 @@ export class Creature extends Entity {
 
   move() {
     if(Math.abs(this.xMove) > 0 || Math.abs(this.yMove) > 0){
-      this.handler.getWorld().getSpatialGrid().remove(new Rectangle(this.x + this.b.x, this.y + this.b.y, this.b.w, this.b.height), this);
+      this.handler.getWorld().getSpatialGrid().remove(new Rectangle(this.x + this.b.x, this.y + this.b.y, this.b.w, this.b.h), this);
       if(!(this.checkEntityCollisions(this.xMove, 0)))
         this.moveX();
       if(!(this.checkEntityCollisions(0, this.yMove)))
         this.moveY();
-      this.handler.getWorld().getSpatialGrid().insert(new Rectangle(this.x + this.b.x, this.y + this.b.y, this.b.w, this.b.height), this);
+      this.handler.getWorld().getSpatialGrid().insert(new Rectangle(this.x + this.b.x, this.y + this.b.y, this.b.w, this.b.h), this);
     }
   }
 
@@ -50,7 +50,7 @@ export class Creature extends Entity {
       : parseInt((this.x + this.xMove + this.b.x) / TILE_WIDTH);
 
     let c1 = parseInt((this.y + this.b.y) / TILE_HEIGHT);
-    let c2 = parseInt((this.y + this.b.y + this.b.height) / TILE_HEIGHT);
+    let c2 = parseInt((this.y + this.b.y + this.b.h) / TILE_HEIGHT);
 
     let setX = this.xMove > 0
       ? tempX * TILE_WIDTH - this.b.x - this.b.w - 1
@@ -70,14 +70,14 @@ export class Creature extends Entity {
     }
 
     let tempY = this.yMove > 0
-      ? parseInt((this.y + this.yMove + this.b.y + this.b.height) / TILE_HEIGHT)
+      ? parseInt((this.y + this.yMove + this.b.y + this.b.h) / TILE_HEIGHT)
       : parseInt((this.y + this.yMove + this.b.y) / TILE_HEIGHT);
 
     let c1 = parseInt((this.x + this.b.x) / TILE_WIDTH);
     let c2 = parseInt((this.x + this.b.x + this.b.w) / TILE_WIDTH);
 
     let setY = this.yMove > 0
-      ? tempY * TILE_HEIGHT - this.b.y - this.b.height - 1
+      ? tempY * TILE_HEIGHT - this.b.y - this.b.h - 1
       : tempY * TILE_HEIGHT + TILE_HEIGHT - this.b.y;
 
     if (!this.collisionWithTile(c1, tempY) && !this.collisionWithTile(c2, tempY)) {

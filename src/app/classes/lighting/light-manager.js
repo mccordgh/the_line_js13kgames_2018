@@ -7,8 +7,8 @@ export class LightManager {
   }
 
   init() {
-    this.sources = [];
-    this.lightMap = [];
+    this.s = [];
+    this.LM = [];
     this.fillLightMap();
   }
 
@@ -18,21 +18,21 @@ export class LightManager {
 
     for (let y = 0; y < yEnd; y++) {
       for (let x = 0; x < xEnd; x++) {
-        if (!this.lightMap[x]) this.lightMap[x] = [];
+        if (!this.LM[x]) this.LM[x] = [];
 
-        this.lightMap[x][y] = DEFAULT_LIGHT;
+        this.LM[x][y] = DEFAULT_LIGHT;
       }
     }
   }
 
   tick() {
-    this.sources.forEach((source) => {
+    this.s.forEach((source) => {
       source.tick();
     });
   }
 
   render(xStart, xEnd, yStart, yEnd, g) {
-    this.sources.forEach((source) => {
+    this.s.forEach((source) => {
       source.render(g);
     });
 
@@ -44,7 +44,7 @@ export class LightManager {
 
    for (let y = yStart; y < yEnd; y++) {
      for (let x = xStart; x < xEnd; x++) {
-       g.globalAlpha = this.lightMap[x][y];
+       g.globalAlpha = this.LM[x][y];
 
        g.fillRect(x * TILE_WIDTH - this.handler.getGameCamera().getxOffset(), y * TILE_HEIGHT - this.handler.getGameCamera().getyOffset(), TILE_WIDTH, TILE_HEIGHT);
      }
@@ -56,16 +56,16 @@ export class LightManager {
   addSource(x, y) {
     let newSource = new LightSource(this.handler, x * TILE_WIDTH, y * TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT, this);
     this.handler.getWorld().getEntityManager().addEntity(newSource);
-    this.sources.push(newSource);
+    this.s.push(newSource);
   }
 
   setLight(x, y, lightAmount) {
-    this.lightMap[x][y] = lightAmount;
+    this.LM[x][y] = lightAmount;
   }
 
   removeSources() {
     this.handler.getWorld().getEntityManager().removeEntitiesByType('light');
 
-    this.sources = [];
+    this.s = [];
   }
 }
