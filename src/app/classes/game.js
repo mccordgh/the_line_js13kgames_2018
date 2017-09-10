@@ -90,10 +90,10 @@ export class Game {
     gameCamera = new GameCamera(handler, 0, 0);
     soundManager = new SoundManager();
     handler.setSM(soundManager);
-    // mainMenu = new MainMenu(handler);
-    // state.setState(mainMenu);
-    gameState = new GameState(handler);
-    state.setState(gameState);
+    mainMenu = new MainMenu(handler);
+    state.setState(mainMenu);
+    // gameState = new GameState(handler);
+    // state.setState(gameState);
   }
 
   tick(dt) {
