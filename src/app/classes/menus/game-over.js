@@ -1,8 +1,9 @@
 import { Menu } from './menu';
 
 export class GameOver extends Menu {
-  constructor(handler){
+  constructor(handler, reason){
     super(handler);
+    this.reason = reason;
   }
 
   render(g) {
@@ -24,7 +25,17 @@ export class GameOver extends Menu {
         y: yPos,
       });
 
-      text = 'press enter to try again';
+      xPos = (screenWidth / 2) - (g.measureText(this.reason).width / 2);
+      yPos = (screenHeight / 2);
+      g.drawText({
+        fillColor: 'yellow',
+        text: this.reason,
+        fontSize: 24,
+        x: xPos,
+        y: yPos,
+      });
+
+      text = 'press enter...';
       xPos = (screenWidth / 2) - (g.measureText(text).width / 2);
       yPos = (screenHeight / 1.5);
       g.drawText({

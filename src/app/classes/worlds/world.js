@@ -7,13 +7,14 @@ import { TileManager } from '../tiles/tile-manager';
 import { LightManager } from '../lighting/light-manager';
 import { Exit } from '../entities/statics/exit';
 import { Dialogue } from "../dialogue/dialogue";
-import {JournalPage} from "../entities/statics/journal-page";
+import { GameOver } from '../menus/game-over';
+import { JournalPage } from "../entities/statics/journal-page";
 import { JournalOne } from "../dialogue/journals/journal-one";
 import { JournalTwo } from "../dialogue/journals/journal-two";
 import { JournalThree } from "../dialogue/journals/journal-three";
 import { JournalFour } from "../dialogue/journals/journal-four";
 
-let yellowTilesDown = false, monstersCleared = false, yellowWallInterval = 0, yellowWallIntervalMax = 5 * 60, timeSpent = 0;
+let yellowTilesDown = false, monstersCleared = false, yellowWallInterval = 0, yellowWallIntervalMax = 5 * 60, timeSpent = 0, tm = 20, ts = 0, tc = 0;
 
 export class World {
   constructor(handler) {
@@ -114,7 +115,7 @@ export class World {
   }
 
   loadWorld() {
-    let pieces = this.fillWorld(this.level, 1, 1);
+    let pieces = this.fillWorld();
     for (let y = 0; y < this.height; y++) {
       for (let x = 0; x < this.width; x++) {
         if (!this.tiles[x]) this.tiles[x] = [];
@@ -123,8 +124,8 @@ export class World {
     }
   }
 
-  fillWorld(level, spawnX, spawnY) {
-    let maze = MazeGenerator.getRandomMaze(this.level, spawnX, spawnY);
+  fillWorld() {
+    let maze = MazeGenerator.getRandomMaze(this.level, 1, 1);
 
     this.height = maze.mazeHeight;
     this.width = maze.mazeWidth;
@@ -162,16 +163,32 @@ export class World {
     }
   }
 
+  plusTime() {
+    tc++;
+
+    // if (tc === 60) {
+      ts = ts === 0 ? 59 : ts -= 1;
+      if (ts === 59) tm--;
+      tc = 0;
+    // }
+
+    if (ts <= 0 && tm <= 0) {
+      let gameOver = new GameOver(this.handler, 'your mind was overwhelmed.');
+      this.handler.getGame().getGameState().setState(gameOver);
+    }
+  }
+
   tick(dt) {
     this.checkForWallSwap();
     this.entityManager.tick(dt);
     this.lightManager.tick(dt);
     this.dialogue.tick();
+    this.plusTime();
 
     if (!monstersCleared && this.level !== 1) {
       timeSpent++;
 
-      if ((timeSpent / 60) >= 240) {
+      if ((timeSpent / 60) >= 5) {
         alert('the monsters crumble all around you.');
         this.entityManager.removeEntitiesByType('monster');
         monstersCleared = true;
@@ -188,6 +205,15 @@ export class World {
     this.drawTiles(xStart, xEnd, yStart, yEnd, g);
     this.entityManager.render(g);
     this.lightManager.render(xStart, xEnd, yStart, yEnd, g);
+
+    g.drawText({
+      fillColor: 'white',
+      text: (tm.toString().length === 1 ? '0' + tm : tm) + ':' + (ts.toString().length === 1 ? '0' + ts : ts),
+      fontSize: 40,
+      x: 174,
+      y: 50,
+    });
+
   }
 
   drawTiles(xStart, xEnd, yStart, yEnd, g) {

@@ -52,22 +52,6 @@ export class EntityManager {
     return entities;
   }
 
-  // getSingleEntity(type) {
-  //   let entityObj;
-  //
-  //   entities.forEach((item) => {
-  //     if (item.type === type) {
-  //       entityObj = {
-  //         type: item.type,
-  //         x: item.x,
-  //         y: item.y
-  //       };
-  //     }
-  //   });
-
-    // return entityObj;
-  // }
-
   addEntity(e) {
     entities.push(e);
     handler.getWorld().getSpatialGrid().insert(new Rectangle(e.x + e.bounds.x, e.y + e.bounds.y, e.bounds.width, e.bounds.height), e);

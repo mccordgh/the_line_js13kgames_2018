@@ -86,7 +86,7 @@ export class Entity {
 
 			hW.dialogue.clear();
 
-			let gameOver = new GameOver(e1.handler);
+			let gameOver = new GameOver(e1.handler, 'you became poisoned.');
       hG.getGameState().setState(gameOver);
     }
   }
