@@ -6,7 +6,6 @@ import { SpatialGrid } from '../utils/spatial-grid';
 import { TileManager } from '../tiles/tile-manager';
 import { LightManager } from '../lighting/light-manager';
 import { Exit } from '../entities/statics/exit';
-import { Switch } from "../entities/statics/switch";
 import { Dialogue } from "../dialogue/dialogue";
 import {JournalPage} from "../entities/statics/journal-page";
 import { JournalOne } from "../dialogue/journals/journal-one";
@@ -19,7 +18,7 @@ import { JournalSeven } from "../dialogue/journals/journal-seven";
 
 let yellowTilesDown = false, monstersCleared = false;
 let yellowWallInterval = 0;
-let yellowWallIntervalMax = 5 * 60; // We want X seconds so we multiply that by our FPS which is 60
+let yellowWallIntervalMax = 2.5 * 60; // We want X seconds so we multiply that by our FPS which is 60
 let timeSpent = 0;
 
 export class World {
@@ -49,7 +48,6 @@ export class World {
     timeSpent = 0;
     this.lightManager.removeSources();
     this.entityManager.removeEntitiesByType('exit');
-    this.entityManager.removeEntitiesByType('switch');
     this.entityManager.removeEntitiesByType('journal');
 
     if (!monstersCleared) this.entityManager.removeEntitiesByType('monster');
@@ -58,19 +56,6 @@ export class World {
 
     this.loadWorld();
     this.init();
-  }
-
-  spawnRandomRoomEntities() {
-    //9 - SwitchGreen,  6 - SwitchBlue,  10 - Exit,  0 - path (empty room)
-    let exit = new Exit(this.handler, (this.width - 2) * TILE_WIDTH, (this.height - 2) * TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT);
-		let switchSpawnTop = Math.random() < 0.5;
-
-		let switchX = switchSpawnTop ? (this.width - 3) * TILE_WIDTH : 2 * TILE_WIDTH;
-		let switchY = switchSpawnTop ? 2 * TILE_HEIGHT : (this.height - 3) * TILE_HEIGHT;
-
-		this.entityManager.addEntity(new Switch(this.handler, switchX, switchY, TILE_WIDTH, TILE_HEIGHT));
-		this.entityManager.addEntity(exit);
-
   }
 
   init() {
@@ -83,10 +68,9 @@ export class World {
       this.entityManager.addEntity(new Exit(this.handler, 7 * TILE_WIDTH, 7 * TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT));
 			this.entityManager.addEntity(new JournalPage(this.handler, 1 * TILE_WIDTH, 2 * TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT, new JournalOne()));
 			this.entityManager.addEntity(new Clone(this.handler, 6 * TILE_WIDTH, 2 * TILE_WIDTH));
-			this.entityManager.addEntity(new Switch(this.handler, 4 * TILE_WIDTH, 4 * TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT));
 			this.lightManager.addSource(5, 3);
     } else {
-      this.spawnRandomRoomEntities();
+      this.entityManager.addEntity(new Exit(this.handler, (this.width - 2) * TILE_WIDTH, (this.height - 2) * TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT));
       this.addEvenSpreadOfLightSources(7);
       this.addEvenSpreadOfMonsters(7);
       this.spawnJournals();
@@ -165,22 +149,6 @@ export class World {
     return maze.pieces;
   }
 
-  swapGreenAndBlueTiles(color) {
-    if (color === 'green') {
-      this.swapTilesByID(5, 3);
-      this.swapTilesByID(8, 7);
-      // this.swapTilesByID(6, 9);
-    } else if (color === 'blue') {
-      this.swapTilesByID(3, 5);
-      this.swapTilesByID(7, 8);
-      // this.swapTilesByID(9, 6);
-    }
-  }
-
-  getInput() {
-    //
-  }
-
   swapTilesByID(tileID, swapTileID) {
     for (let y = 1; y < this.height; y++) {
       for (let x = 1; x < this.width; x++) {
@@ -197,17 +165,19 @@ export class World {
     if (yellowWallInterval > yellowWallIntervalMax) {
       yellowWallInterval = 0;
 
-      if (yellowTilesDown)
+      if (yellowTilesDown) {
+        this.swapTilesByID(8, 7);
         this.swapTilesByID(4, 2);
-      else
+      } else {
+        this.swapTilesByID(7, 8);
         this.swapTilesByID(2, 4);
+      }
 
       yellowTilesDown = !yellowTilesDown;
     }
   }
 
   tick(dt) {
-    this.getInput();
     this.checkForWallSwap();
     this.entityManager.tick(dt);
     this.lightManager.tick(dt);

@@ -69,14 +69,6 @@ export class Entity {
 			}
     }
 
-    if (this.checkCollidingTypes(e1, e2, 'switch', 'player')) {
-      if (e1.type === 'switch') {
-        e1.toggleSwitch();
-      } else {
-        e2.toggleSwitch();
-      }
-    }
-
     if (this.checkCollidingTypes(e1, e2, 'player', 'exit')) {
       if (hW.level >= 4) {
         hW.dialogue.clear();

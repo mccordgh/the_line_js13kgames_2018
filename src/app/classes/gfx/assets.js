@@ -44,8 +44,6 @@ tiles.wall = cropTile(tiles, 0, 0);
 tiles.wallBlue = cropTile(tiles, 1, 1);
 tiles.wallGreen = cropTile(tiles, 2, 1);
 tiles.wallYellow = cropTile(tiles, 0, 1);
-tiles.switchGreen = cropTile(tiles, 2, 0);
-tiles.switchBlue = cropTile(tiles, 0, 3);
 tiles.exit = cropTile(tiles, 1, 3);
 tiles.lantern = cropTile(tiles, 2, 3);
 

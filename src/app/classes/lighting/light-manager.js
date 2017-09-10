@@ -44,8 +44,7 @@ export class LightManager {
 
    for (let y = yStart; y < yEnd; y++) {
      for (let x = xStart; x < xEnd; x++) {
-       let tile = this.handler.getWorld().getTile(x, y).type;
-       g.globalAlpha =  (tile === 'switch' || tile === 'exit') ? CENTER_LIGHT : this.lightMap[x][y];
+       g.globalAlpha = this.lightMap[x][y];
 
        g.fillRect(x * TILE_WIDTH - this.handler.getGameCamera().getxOffset(), y * TILE_HEIGHT - this.handler.getGameCamera().getyOffset(), TILE_WIDTH, TILE_HEIGHT);
      }
