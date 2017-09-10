@@ -2,11 +2,8 @@ import { Animation } from './animation';
 import { ImageLoader } from './image-loader';
 import { SpriteSheet } from './sprite-sheet';
 
-let assets = {};
-let PATH  = window.location.href.replace('index.html', '') + 'src/res/',
-  SPRITE_HEIGHT = 16,
-  SPRITE_WIDTH = 16,
-  CREATURE_HEIGHT = 18;
+let assets = {}, PATH  = window.location.href.replace('index.html', '') + 'src/res/';
+let SPRITE_HEIGHT = 16, SPRITE_WIDTH = 16;
 
 export class Assets {
   constructor(name, path, width, height) {
@@ -52,8 +49,8 @@ tiles.switchBlue = cropTile(tiles, 3, 0);
 tiles.exit = cropTile(tiles, 3, 1);
 tiles.lantern = cropTile(tiles, 3, 2);
 
-let player = new Assets('sprites',  PATH + "sprites.png", SPRITE_WIDTH, CREATURE_HEIGHT);
-let creature = new Assets('creature', PATH + "creature.png", SPRITE_WIDTH, CREATURE_HEIGHT);
+let player = new Assets('sprites',  PATH + "sprites.png", SPRITE_WIDTH, SPRITE_HEIGHT);
+let creature = new Assets('creature', PATH + "creature.png", SPRITE_WIDTH, SPRITE_HEIGHT);
 
 let addAnimations = (sprites) => {
   let framespeed = 200,
