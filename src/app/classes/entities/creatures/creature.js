@@ -117,18 +117,18 @@ export class Creature extends Entity {
   }
 
   getCurrentAnimationFrame() {
-    if (this.yMove < 0){
+    if (this.xMove < 0){
+      this.lastAnimation = "walk_left";
+      return this.assets.animations.walk_left.getCurrentFrame();
+    } else if (this.xMove > 0) {
+	    this.lastAnimation = "walk_right";
+	    return this.assets.animations.walk_right.getCurrentFrame();
+    } else if (this.yMove < 0){
       this.lastAnimation = "walk_up";
       return this.assets.animations.walk_up.getCurrentFrame();
     } else if (this.yMove > 0){
       this.lastAnimation = "walk_down";
       return this.assets.animations.walk_down.getCurrentFrame();
-    } else if (this.xMove < 0){
-      this.lastAnimation = "walk_left";
-      return this.assets.animations.walk_left.getCurrentFrame();
-    } else if (this.xMove > 0){
-      this.lastAnimation = "walk_right";
-      return this.assets.animations.walk_right.getCurrentFrame();
     } else {
       return this.assets.animations[this.lastAnimation].getCurrentFrame();
     }

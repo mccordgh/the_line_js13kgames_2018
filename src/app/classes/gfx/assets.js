@@ -56,7 +56,6 @@ const player = new Assets('sprites',  PATH + "sprites.png", SPRITE_WIDTH, CREATU
 const creature = new Assets('creature', PATH + "creature.png", SPRITE_WIDTH, CREATURE_HEIGHT);
 
 const addAnimations = (sprites) => {
-
   let framespeed = 200,
     wrframes = [], //walk right frames
     wlframes = [], //walk left frames

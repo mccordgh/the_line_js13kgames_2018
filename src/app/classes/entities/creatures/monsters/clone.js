@@ -17,8 +17,6 @@ export class Clone extends Creature {
     this.bounds.height = TILE_HEIGHT - (this.bounds.y * 2);
     this.type = 'monster';
     this.patrol = this.getPatrolPattern();
-    this.startX = x;
-    this.startY = y;
     this.patrolLength = 100;
     this.dirMoving = 0;
     this.numberOfMoves = 0;
