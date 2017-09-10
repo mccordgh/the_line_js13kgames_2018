@@ -74,7 +74,7 @@ export class World {
       new JournalFour(),
     ][this.level - 1];
 
-    let d = this.handler.getWorld().dialogue.addWords;
+    let d = this.dialogue.addWords;
 
     d('', '(You find a journal entry on the floor.)');
     j.text.forEach(e => { d(j.name, e); });
