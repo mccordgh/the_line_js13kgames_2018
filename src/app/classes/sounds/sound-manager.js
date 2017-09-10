@@ -15,10 +15,8 @@ export class SoundManager {
 
     // Generate music...
     let done = false;
-    // const loading = setInterval(function () {
     setInterval(function () {
       if (done) {
-        // clearInterval(loading);
         return;
       }
 
@@ -30,35 +28,10 @@ export class SoundManager {
         let audio = document.createElement("audio");
 
         audio.src = URL.createObjectURL(new Blob([wave], {type: "audio/wav"}));
-        audio.play();
         audio.volume = .3;
-
-        setInterval(function () {
-          // Get currently playing data.
-          let t = audio.currentTime;
-          let data = player.getData(t, 300);
-          if (data && this.logged === 0) {
-            this.logged++;
-          }
-
-          // CODE FOR REPEATING
-          // if (t <= this.lastTime && (t !== 0 && this.lastTime !== 0)) {
-            audio.play();
-            audio.loop = true;
-          // }
-
-          this.lastTime = t;
-
-        }, 16);
+        audio.loop = true;
+        audio.play();
       }
     }, 0);
-  }
-
-  tick() {
-    //
-  }
-
-  render() {
-    //
   }
 }
