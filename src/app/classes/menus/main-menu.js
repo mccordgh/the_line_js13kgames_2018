@@ -1,5 +1,6 @@
 import { GameState } from '../states/game-state';
 import { Menu } from './menu';
+let d = 0;
 
 export class MainMenu extends Menu {
   constructor(handler){
@@ -14,6 +15,13 @@ export class MainMenu extends Menu {
         'press enter...',
       ]
     );
+
+    if (d < 300) d++;
+
+    if (g && d === 300) {
+      d++;
+      this.handler.getGame().d.addWords('', 'Me, Myself, and I, and i...');
+    }
   }
 
   getInput() {

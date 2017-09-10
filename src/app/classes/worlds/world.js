@@ -6,14 +6,13 @@ import { SpatialGrid } from '../utils/spatial-grid';
 import { TileManager } from '../tiles/tile-manager';
 import { LightManager } from '../lighting/light-manager';
 import { Exit } from '../entities/statics/exit';
-import { Dialogue } from "../dialogue/dialogue";
 import { GameOver } from '../menus/game-over';
 import { JournalOne } from "../dialogue/journals/journal-one";
 import { JournalTwo } from "../dialogue/journals/journal-two";
 import { JournalThree } from "../dialogue/journals/journal-three";
 import { JournalFour } from "../dialogue/journals/journal-four";
 
-let yellowTilesDown = false, monstersCleared = false, yellowWallInterval = 0, yellowWallIntervalMax = 5 * 60, timeSpent = 0, tm = 15, ts = 0, tc = 0;
+let yellowTilesDown = false, yellowWallInterval = 0, yellowWallIntervalMax = 5 * 60, timeSpent = 0, tm = 12, ts = 0, tc = 0;
 
 export class World {
   constructor(handler) {
@@ -27,7 +26,7 @@ export class World {
     this.level = 1;
     this.loadWorld();
     this.lightManager = new LightManager(handler);
-    this.dialogue = new Dialogue();
+    this.dialogue = handler.getGame().d;
     this.init();
   }
 
@@ -43,10 +42,7 @@ export class World {
     this.lightManager.removeSources();
     this.entityManager.removeEntitiesByType('exit');
     this.entityManager.removeEntitiesByType('journal');
-
-    if (!monstersCleared) this.entityManager.removeEntitiesByType('monster');
-
-    monstersCleared = false;
+    this.entityManager.removeEntitiesByType('monster');
 
     this.loadWorld();
     this.init();
@@ -182,16 +178,14 @@ export class World {
     this.checkForWallSwap();
     this.entityManager.tick(dt);
     this.lightManager.tick(dt);
-    this.dialogue.tick(this.handler);
     this.plusTime();
 
-    if (!monstersCleared && this.level !== 1) {
+    if (this.level !== 1) {
       timeSpent++;
 
       if ((timeSpent / 60) >= ((this.level * 60) + 60)) {
         alert('the monsters crumble all around you.');
         this.entityManager.removeEntitiesByType('monster');
-        monstersCleared = true;
       }
     }
   }

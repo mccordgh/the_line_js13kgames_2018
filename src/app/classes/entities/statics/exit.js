@@ -9,7 +9,7 @@ export class Exit extends StaticEntity {
     this.b.x = 15;
     this.b.y = 15;
     this.b.w = this.width - 30;
-    this.b.height = this.height - 30;
+    this.b.h = this.height - 30;
   }
 
   tick(){

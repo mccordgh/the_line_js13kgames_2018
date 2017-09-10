@@ -7,6 +7,6 @@ window.CENTER_LIGHT = 0.3;
 window.INNER_LIGHT = 0.5;
 window.OUTER_LIGHT = 0.65;
 
-let game = new Game('Lost!', 448, 448);
+let game = new Game('Me, Myself, and I, and i', 448, 448);
 
 game.start();

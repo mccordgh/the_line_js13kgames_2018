@@ -1,3 +1,4 @@
+import { Dialogue } from './dialogue/dialogue';
 import { Display } from './display/display';
 import { GameState } from './states/game-state';
 import { GameCamera } from './gfx/game-camera';
@@ -83,18 +84,20 @@ export class Game {
     handler = new Handler(this);
     display = new Display(this.title, this.width, this.height);
     keyManager = new KeyManager();
+    this.d = new Dialogue();
     g = display.getGraphics();
     state = new State();
     gameCamera = new GameCamera(handler, 0, 0);
     soundManager = new SoundManager();
     handler.setSM(soundManager);
-    mainMenu = new MainMenu(handler);
-    state.setState(mainMenu);
-    // gameState = new GameState(handler);
-    // state.setState(gameState);
+    // mainMenu = new MainMenu(handler);
+    // state.setState(mainMenu);
+    gameState = new GameState(handler);
+    state.setState(gameState);
   }
 
   tick(dt) {
+    this.d.tick(handler);
     keyManager.tick();
     if (state.getState() && !display.paused)
       state.getState().tick(dt);

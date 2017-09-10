@@ -16,7 +16,7 @@ export class JournalThree extends JournalParent {
       'I fear no help will come.',
       '@~you aRe aLoNe!~@',
       'These headaches are relentless.',
-      '~@%#**%*!%%!!!~~@',
+      '@~%#**%*!%%!!~~@',
 		];
 	}
 }
