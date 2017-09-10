@@ -9,11 +9,11 @@ export class JournalThree extends JournalParent {
 
 	myText() {
 		return [
-      'These creatures all have the same familiar face.',
+      'These creatures all have the same face.',
       '@~eVeRy.~',
       '~SiNGLe.~',
       '~oNe.~@',
-      'If you\'ve made it this far, I fear no help is available to you.',
+      'I fear no help will come.',
       '@~you aRe aLoNe!~@',
       'These headaches are relentless.',
       '~@%#**%*!%%!!!~~@',

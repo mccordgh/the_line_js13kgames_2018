@@ -9,8 +9,8 @@ export class MainMenu extends Menu {
   render(g) {
     super.draw(g, [
         'You are',
-        'alone alone alone',
-        'aloNe AloNE ALONe',
+        '"alone alone alone"',
+        '"aloNe AloNE? ALONe!!!"',
         'press enter...',
       ]
     );
