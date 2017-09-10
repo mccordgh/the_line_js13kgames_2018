@@ -8,8 +8,8 @@ export class MainMenu extends Menu {
 
   render(g) {
     if (g) {
-      const screenWidth = this.handler.getWidth();
-      const screenHeight = this.handler.getHeight();
+      let screenWidth = this.handler.getWidth();
+      let screenHeight = this.handler.getHeight();
 
       g.fillStyle = 'black';
       g.fillRect(0, 0, screenWidth, screenHeight);
@@ -42,7 +42,7 @@ export class MainMenu extends Menu {
 
   getInput(dt) {
     if (this.handler.getKeyManager().enter) {
-      const gameState = new GameState(this.handler);
+      let gameState = new GameState(this.handler);
       this.handler.getGame().getGameState().setState(gameState);
     }
   }

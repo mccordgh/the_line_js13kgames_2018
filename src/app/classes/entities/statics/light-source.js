@@ -29,9 +29,9 @@ export class LightSource extends StaticEntity {
   }
 
   makeSureOnWall() {
-    const xx = this.posX;
-    const yy = this.posY;
-    const tile = this.handler.getWorld().getTile(xx, yy);
+    let xx = this.posX;
+    let yy = this.posY;
+    let tile = this.handler.getWorld().getTile(xx, yy);
 
     if (tile.id === 1) return;
 
@@ -85,11 +85,11 @@ export class LightSource extends StaticEntity {
   }
 
   chanceToFlicker() {
-    const chance = Math.random();
+    let chance = Math.random();
     if (chance < 0.85) return;
 
-    const max = 8;
-    const min = 4;
+    let max = 8;
+    let min = 4;
 
     this.lastFlickerCounter = 0;
     this.flickerLength = Math.floor(Math.random() * (max - min + 1)) + min;

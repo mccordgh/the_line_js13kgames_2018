@@ -36,10 +36,10 @@ export class Entity {
   }
 
   checkEntityCollisions(xOffset, yOffset) {
-    const candidates =  this.handler.getWorld().getSpatialGrid().retrieve(new Rectangle(this.x + this.bounds.x + xOffset, this.y + this.bounds.y + yOffset, this.bounds.width, this.bounds.height), this);
+    let candidates =  this.handler.getWorld().getSpatialGrid().retrieve(new Rectangle(this.x + this.bounds.x + xOffset, this.y + this.bounds.y + yOffset, this.bounds.width, this.bounds.height), this);
 
     for(let i = 0; i < candidates.length; i++) {
-      const e = candidates[i];
+      let e = candidates[i];
         if (e.moveThrough) return false;
 
         if (e.getCollisionBounds(0, 0).intersects(this.getCollisionBounds(xOffset, yOffset))) {
@@ -54,10 +54,10 @@ export class Entity {
   checkForCollisionEvents(e1, e2) {
     if (this.checkCollidingTypes(e1, e2, 'monster', 'monster')) return;
 
-    const h = this.handler;
-    const hG = h.getGame();
-    const hW = h.getWorld();
-    const eM = hW.entityManager;
+    let h = this.handler;
+    let hG = h.getGame();
+    let hW = h.getWorld();
+    let eM = hW.entityManager;
 
     if (this.checkCollidingTypes(e1, e2, 'player', 'journal')) {
       if (e1.type === 'journal') {
@@ -81,7 +81,7 @@ export class Entity {
       if (hW.level >= 4) {
         hW.dialogue.clear();
 
-        const ending = new Ending(this.handler);
+        let ending = new Ending(this.handler);
         hG.getGameState().setState(ending);
       }
 
@@ -94,7 +94,7 @@ export class Entity {
 
 			hW.dialogue.clear();
 
-			const gameOver = new GameOver(e1.handler);
+			let gameOver = new GameOver(e1.handler);
       hG.getGameState().setState(gameOver);
     }
   }

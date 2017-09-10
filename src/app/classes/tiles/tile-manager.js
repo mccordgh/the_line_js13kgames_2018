@@ -8,8 +8,8 @@ import { WallYellow } from './walls/wall-yellow';
 import { PathGreen } from './paths/path-green';
 import { WallGreen } from './walls/wall-green';
 
-const assets = Assets.getAssets("tiles");
-const tiles = [];
+let assets = Assets.getAssets("tiles");
+let tiles = [];
 
 tiles[0] = new Path(0);
 tiles[1] = new Wall(1);

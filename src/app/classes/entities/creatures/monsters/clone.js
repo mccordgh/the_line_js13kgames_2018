@@ -22,7 +22,7 @@ export class Clone extends Creature {
   }
 
   getPatrolPattern() {
-    const patterns = ['vertical', 'horizontal'];
+    let patterns = ['vertical', 'horizontal'];
 
     return patterns[Math.floor(Math.random() * patterns.length)];
   }
@@ -34,8 +34,8 @@ export class Clone extends Creature {
   }
 
   checkIfOffMap() {
-    const width = this.handler.getWorld().getWorldWidth() * TILE_WIDTH;
-    const height = this.handler.getWorld().getWorldHeight() * TILE_HEIGHT;
+    let width = this.handler.getWorld().getWorldWidth() * TILE_WIDTH;
+    let height = this.handler.getWorld().getWorldHeight() * TILE_HEIGHT;
 
     if (this.x < 1 || this.y < 1 || this.x > width || this.y > height) {
       this.x = this.spawnX;
@@ -75,16 +75,16 @@ export class Clone extends Creature {
   }
 
   checkIfInWall() {
-    const xx = Math.round(this.x / TILE_WIDTH);
-    const yy = Math.round(this.y / TILE_HEIGHT);
-    const tile = this.handler.getWorld().getTile(xx, yy);
+    let xx = Math.round(this.x / TILE_WIDTH);
+    let yy = Math.round(this.y / TILE_HEIGHT);
+    let tile = this.handler.getWorld().getTile(xx, yy);
 
     if (!tile.isSolid) return;
 
-    const startX = xx - 1;
-    const startY = yy - 1;
-    const endX = xx + 1;
-    const endY = yy + 1;
+    let startX = xx - 1;
+    let startY = yy - 1;
+    let endX = xx + 1;
+    let endY = yy + 1;
 
     for (let j = startY; j < endY; j++) {
       for (let i = startX; i < endX; i++) {

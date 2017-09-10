@@ -2,18 +2,18 @@ let maze = [],
   finalMaze = [],
   mazeWidth = 0, mazeHeight = 0;
 
-const getRandomWallID = (i, j) => {
+let getRandomWallID = (i, j) => {
   // make sure we don't build a passable wall on the outside border
   if (i === 0 || j === 0 || i === mazeWidth - 1 || j === mazeHeight - 1) return 1;
 
-  const randomNum = Math.floor(Math.random() * 20);
+  let randomNum = Math.floor(Math.random() * 20);
 
   return (randomNum < 15) ? 1 : wallIDs[Math.floor(Math.random() * (wallIDs.length))];
 };
 
 export class MazeGenerator {
   static createMaze() {
-    const moves = [];
+    let moves = [];
     for(let i = 0; i < mazeHeight; i ++){
       maze[i] = [];
       for(let j = 0; j < mazeWidth; j ++){
@@ -40,7 +40,7 @@ export class MazeGenerator {
           possibleDirections += 'E';
         }
         if (possibleDirections) {
-          const move = Math.floor(Math.random() * possibleDirections.length);
+          let move = Math.floor(Math.random() * possibleDirections.length);
           switch (possibleDirections[move]) {
             case 'N':
               maze[posX - 2][posY] = 0;
@@ -66,7 +66,7 @@ export class MazeGenerator {
           moves.push(posY + posX * mazeWidth);
         }
         else {
-          const back = moves.pop();
+          let back = moves.pop();
           posX = Math.floor(back / mazeWidth);
           posY = back % mazeWidth;
         }
@@ -86,7 +86,7 @@ export class MazeGenerator {
   }
 
   static createRooms() {
-    const roomSize = 3;
+    let roomSize = 3;
 
     // NW room
     this.createRoom(1, 1, roomSize);

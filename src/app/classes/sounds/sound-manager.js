@@ -10,7 +10,7 @@ export class SoundManager {
 
   init() {
     // Initialize music generation (player).
-    const player = new CPlayer();
+    let player = new CPlayer();
     player.init(this.bgMusic);
 
     // Generate music...
@@ -26,8 +26,8 @@ export class SoundManager {
 
       if (done) {
         // Put the generated song in an Audio element.
-        const wave = player.createWave();
-        const audio = document.createElement("audio");
+        let wave = player.createWave();
+        let audio = document.createElement("audio");
 
         audio.src = URL.createObjectURL(new Blob([wave], {type: "audio/wav"}));
         audio.play();
@@ -35,8 +35,8 @@ export class SoundManager {
 
         setInterval(function () {
           // Get currently playing data.
-          const t = audio.currentTime;
-          const data = player.getData(t, 300);
+          let t = audio.currentTime;
+          let data = player.getData(t, 300);
           if (data && this.logged === 0) {
             this.logged++;
           }

@@ -1,5 +1,5 @@
-const dialogue = document.getElementById('dialogue');
-const speakerBox = document.getElementById('speaker');
+let dialogue = document.getElementById('dialogue');
+let speakerBox = document.getElementById('speaker');
 
 let speechTimer = 5, sentencePause = 0, textPrefix = '', textSuffix = '',
 	redToggle = false, emToggle = false, yellowToggle = false, words = [], speakers = [];

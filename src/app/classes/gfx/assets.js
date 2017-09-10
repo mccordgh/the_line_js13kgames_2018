@@ -2,8 +2,8 @@ import { Animation } from './animation';
 import { ImageLoader } from './image-loader';
 import { SpriteSheet } from './sprite-sheet';
 
-const assets = {};
-const PATH  = window.location.href.replace('index.html', '') + 'src/res/',
+let assets = {};
+let PATH  = window.location.href.replace('index.html', '') + 'src/res/',
   SPRITE_HEIGHT = 16,
   SPRITE_WIDTH = 16,
   CREATURE_HEIGHT = 18;
@@ -36,9 +36,9 @@ export class Assets {
   }
 }
 
-const cropTile = (asset, x, y) => asset.sheet.crop(SPRITE_WIDTH * x, SPRITE_HEIGHT * y, SPRITE_WIDTH, SPRITE_HEIGHT);
+let cropTile = (asset, x, y) => asset.sheet.crop(SPRITE_WIDTH * x, SPRITE_HEIGHT * y, SPRITE_WIDTH, SPRITE_HEIGHT);
 
-const tiles = new Assets('tiles', PATH + "tiles.png", SPRITE_WIDTH, SPRITE_HEIGHT);
+let tiles = new Assets('tiles', PATH + "tiles.png", SPRITE_WIDTH, SPRITE_HEIGHT);
 tiles.path = cropTile(tiles, 1, 0);
 tiles.pathBlue = cropTile(tiles, 1, 2);
 tiles.pathGreen = cropTile(tiles, 2, 2);
@@ -52,10 +52,10 @@ tiles.switchBlue = cropTile(tiles, 3, 0);
 tiles.exit = cropTile(tiles, 3, 1);
 tiles.lantern = cropTile(tiles, 3, 2);
 
-const player = new Assets('sprites',  PATH + "sprites.png", SPRITE_WIDTH, CREATURE_HEIGHT);
-const creature = new Assets('creature', PATH + "creature.png", SPRITE_WIDTH, CREATURE_HEIGHT);
+let player = new Assets('sprites',  PATH + "sprites.png", SPRITE_WIDTH, CREATURE_HEIGHT);
+let creature = new Assets('creature', PATH + "creature.png", SPRITE_WIDTH, CREATURE_HEIGHT);
 
-const addAnimations = (sprites) => {
+let addAnimations = (sprites) => {
   let framespeed = 200,
     wrframes = [], //walk right frames
     wlframes = [], //walk left frames
@@ -92,7 +92,7 @@ const addAnimations = (sprites) => {
     });
   }
 
-  const idleframes = [
+  let idleframes = [
     {frame: sprites.sheet.crop(0, 2 * sprites.height, sprites.width, sprites.height), speed: framespeed},
     {
       frame: sprites.sheet.crop(1 * sprites.width, 2 * sprites.height, sprites.width, sprites.height),

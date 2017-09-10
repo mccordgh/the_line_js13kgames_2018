@@ -2,7 +2,7 @@ import { Rectangle } from '../gfx/shapes/rectangle';
 
 let handler, player, entities;
 
-const compare = (a, b) => {
+let compare = (a, b) => {
   let aY = a.getY();
   let bY = b.getY();
   let aH = a.getHeight();
@@ -22,7 +22,7 @@ export class EntityManager {
   tick(dt) {
     entities.sort(compare);
     for(let i = 0; i < entities.length; i++){
-      const e = entities[i];
+      let e = entities[i];
       e.tick(dt);
     }
   }
@@ -74,7 +74,7 @@ export class EntityManager {
   }
 
   removeEntity(e) {
-    const index = entities.indexOf(e);
+    let index = entities.indexOf(e);
 
 		handler.getWorld().getSpatialGrid().remove(new Rectangle(e.x + e.bounds.x, e.y + e.bounds.y, e.bounds.width, e.bounds.height), e);
 

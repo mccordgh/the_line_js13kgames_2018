@@ -25,37 +25,37 @@
 
 "use strict";
 
-const CPlayer = function() {
+let CPlayer = function() {
 
   //--------------------------------------------------------------------------
   // Private methods
   //--------------------------------------------------------------------------
 
   // Oscillators
-  const oscsin = function (value) {
+  let oscsin = function (value) {
     return Math.sin(value * 6.283184);
   };
 
-  const oscsaw = function (value) {
+  let oscsaw = function (value) {
     return 2 * (value % 1) - 1;
   };
 
-  const oscsquare = function (value) {
+  let oscsquare = function (value) {
     return (value % 1) < 0.5 ? 1 : -1;
   };
 
-  const osctri = function (value) {
+  let osctri = function (value) {
     let v2 = (value % 1) * 4;
     if(v2 < 2) return v2 - 1;
     return 3 - v2;
   };
 
-  const getnotefreq = function (n) {
+  let getnotefreq = function (n) {
     // 174.61.. / 44100 = 0.003959503758 (F3)
     return 0.003959503758 * Math.pow(2, (n - 128) / 12);
   };
 
-  const createNote = function (instr, n, rowLen) {
+  let createNote = function (instr, n, rowLen) {
     let osc1 = mOscillators[instr.i[0]],
       o1vol = instr.i[1],
       o1xenv = instr.i[3],
@@ -70,7 +70,7 @@ const CPlayer = function() {
       arp = instr.i[13],
       arpInterval = rowLen * Math.pow(2, 2 - instr.i[14]);
 
-    const noteBuf = new Int32Array(attack + sustain + release);
+    let noteBuf = new Int32Array(attack + sustain + release);
 
     // Re-trig oscillators
     let c1 = 0, c2 = 0;
@@ -132,7 +132,7 @@ const CPlayer = function() {
   //--------------------------------------------------------------------------
 
   // Array of oscillator functions
-  const mOscillators = [
+  let mOscillators = [
     oscsin,
     oscsquare,
     oscsaw,
@@ -193,7 +193,7 @@ const CPlayer = function() {
       // Pattern rows
       for (row = 0; row < patternLen; ++row) {
         // Execute effect command.
-        const cmdNo = cp ? instr.c[cp - 1].f[row] : 0;
+        let cmdNo = cp ? instr.c[cp - 1].f[row] : 0;
         if (cmdNo) {
           instr.i[cmdNo - 1] = instr.c[cp - 1].f[row + patternLen] || 0;
 

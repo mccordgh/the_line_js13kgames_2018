@@ -28,7 +28,7 @@ export class Game {
     let lastTime = Date.now();
     let timer = 0;
 
-    const loop = () => {
+    let loop = () => {
       if(running) {
         now = Date.now();
         delta = now - lastTime;

@@ -37,14 +37,14 @@ export class Creature extends Entity {
       return;
     }
 
-    const tempX = this.xMove > 0
+    let tempX = this.xMove > 0
       ? parseInt((this.x + this.xMove + this.bounds.x + this.bounds.width) / TILE_WIDTH)
       : parseInt((this.x + this.xMove + this.bounds.x) / TILE_WIDTH);
 
-    const c1 = parseInt((this.y + this.bounds.y) / TILE_HEIGHT);
-    const c2 = parseInt((this.y + this.bounds.y + this.bounds.height) / TILE_HEIGHT);
+    let c1 = parseInt((this.y + this.bounds.y) / TILE_HEIGHT);
+    let c2 = parseInt((this.y + this.bounds.y + this.bounds.height) / TILE_HEIGHT);
 
-    const setX = this.xMove > 0
+    let setX = this.xMove > 0
       ? tempX * TILE_WIDTH - this.bounds.x - this.bounds.width - 1
       : tempX * TILE_WIDTH + TILE_WIDTH - this.bounds.x;
 
@@ -61,14 +61,14 @@ export class Creature extends Entity {
       return;
     }
 
-    const tempY = this.yMove > 0
+    let tempY = this.yMove > 0
       ? parseInt((this.y + this.yMove + this.bounds.y + this.bounds.height) / TILE_HEIGHT)
       : parseInt((this.y + this.yMove + this.bounds.y) / TILE_HEIGHT);
 
-    const c1 = parseInt((this.x + this.bounds.x) / TILE_WIDTH);
-    const c2 = parseInt((this.x + this.bounds.x + this.bounds.width) / TILE_WIDTH);
+    let c1 = parseInt((this.x + this.bounds.x) / TILE_WIDTH);
+    let c2 = parseInt((this.x + this.bounds.x + this.bounds.width) / TILE_WIDTH);
 
-    const setY = this.yMove > 0
+    let setY = this.yMove > 0
       ? tempY * TILE_HEIGHT - this.bounds.y - this.bounds.height - 1
       : tempY * TILE_HEIGHT + TILE_HEIGHT - this.bounds.y;
 

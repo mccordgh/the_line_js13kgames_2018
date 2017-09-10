@@ -11,7 +11,7 @@ export class Display {
 
   createDisplay() {
     document.title = this.title;
-    const myCanvas = document.getElementById("canvas");
+    let myCanvas = document.getElementById("canvas");
     myCanvas.setAttribute("height", this.height);
     myCanvas.setAttribute("width", this.width);
     graphics = myCanvas.getContext("2d");

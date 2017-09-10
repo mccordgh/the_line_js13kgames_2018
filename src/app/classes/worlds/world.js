@@ -19,7 +19,7 @@ import { JournalSeven } from "../dialogue/journals/journal-seven";
 
 let yellowTilesDown = false, monstersCleared = false;
 let yellowWallInterval = 0;
-const yellowWallIntervalMax = 5 * 60; // We want X seconds so we multiply that by our FPS which is 60
+let yellowWallIntervalMax = 5 * 60; // We want X seconds so we multiply that by our FPS which is 60
 let timeSpent = 0;
 
 export class World {
@@ -62,11 +62,11 @@ export class World {
 
   spawnRandomRoomEntities() {
     //9 - SwitchGreen,  6 - SwitchBlue,  10 - Exit,  0 - path (empty room)
-    const exit = new Exit(this.handler, (this.width - 2) * TILE_WIDTH, (this.height - 2) * TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT);
-		const switchSpawnTop = Math.random() < 0.5;
+    let exit = new Exit(this.handler, (this.width - 2) * TILE_WIDTH, (this.height - 2) * TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT);
+		let switchSpawnTop = Math.random() < 0.5;
 
-		const switchX = switchSpawnTop ? (this.width - 3) * TILE_WIDTH : 2 * TILE_WIDTH;
-		const switchY = switchSpawnTop ? 2 * TILE_HEIGHT : (this.height - 3) * TILE_HEIGHT;
+		let switchX = switchSpawnTop ? (this.width - 3) * TILE_WIDTH : 2 * TILE_WIDTH;
+		let switchY = switchSpawnTop ? 2 * TILE_HEIGHT : (this.height - 3) * TILE_HEIGHT;
 
 		this.entityManager.addEntity(new Switch(this.handler, switchX, switchY, TILE_WIDTH, TILE_HEIGHT));
 		this.entityManager.addEntity(exit);
@@ -94,7 +94,7 @@ export class World {
   }
 
   spawnJournals() {
-		const journals = [
+		let journals = [
 			new JournalTwo(),
 			new JournalThree(),
 			new JournalFour(),
@@ -103,8 +103,8 @@ export class World {
 			new JournalSeven(),
 		];
 
-  	const firstJournal = journals[(this.level * 2) - 4];
-		const lastJournal = journals[(this.level * 2) - 3];
+  	let firstJournal = journals[(this.level * 2) - 4];
+		let lastJournal = journals[(this.level * 2) - 3];
 
 
 		this.entityManager.addEntity(new JournalPage(this.handler, 2 * TILE_WIDTH, 2 * TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT, firstJournal));
@@ -145,7 +145,7 @@ export class World {
   }
 
   loadWorld() {
-    const pieces = this.fillWorld(this.level, 1, 1);
+    let pieces = this.fillWorld(this.level, 1, 1);
     for (let y = 0; y < this.height; y++) {
       for (let x = 0; x < this.width; x++) {
         if (!this.tiles[x]) this.tiles[x] = [];
@@ -155,7 +155,7 @@ export class World {
   }
 
   fillWorld(level, spawnX, spawnY) {
-    const maze = MazeGenerator.getRandomMaze(level, spawnX, spawnY);
+    let maze = MazeGenerator.getRandomMaze(level, spawnX, spawnY);
 
     this.height = maze.mazeHeight;
     this.width = maze.mazeWidth;
@@ -225,10 +225,10 @@ export class World {
   }
 
   render(g) {
-    const xStart = parseInt(Math.max(0, this.handler.getGameCamera().getxOffset() / TILE_WIDTH));
-    const xEnd = parseInt(Math.min(this.width, (this.handler.getGameCamera().getxOffset() + this.handler.getWidth()) / TILE_WIDTH + 1));
-    const yStart = parseInt(Math.max(0, this.handler.getGameCamera().getyOffset() / TILE_HEIGHT));
-    const yEnd = parseInt(Math.min(this.height, (this.handler.getGameCamera().getyOffset() + this.handler.getHeight()) / TILE_HEIGHT + 1));
+    let xStart = parseInt(Math.max(0, this.handler.getGameCamera().getxOffset() / TILE_WIDTH));
+    let xEnd = parseInt(Math.min(this.width, (this.handler.getGameCamera().getxOffset() + this.handler.getWidth()) / TILE_WIDTH + 1));
+    let yStart = parseInt(Math.max(0, this.handler.getGameCamera().getyOffset() / TILE_HEIGHT));
+    let yEnd = parseInt(Math.min(this.height, (this.handler.getGameCamera().getyOffset() + this.handler.getHeight()) / TILE_HEIGHT + 1));
 
     this.drawTiles(xStart, xEnd, yStart, yEnd, g);
     this.entityManager.render(g);

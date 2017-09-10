@@ -7,8 +7,8 @@ export class Ending extends Menu {
 
   render(g) {
     if (g) {
-      const screenWidth = this.handler.getWidth();
-      const screenHeight = this.handler.getHeight();
+      let screenWidth = this.handler.getWidth();
+      let screenHeight = this.handler.getHeight();
 
       g.fillStyle = "black";
       g.fillRect(0, 0, screenWidth, screenHeight);

@@ -11,7 +11,7 @@ export class Handler {
   }
 
   devMessage(msg) {
-    const styles = [
+    let styles = [
       'background: linear-gradient(#ffffff, #ff00ff)',
       'border: 1px solid #3E0E02',
       'color: black',

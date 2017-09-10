@@ -1,4 +1,4 @@
-const keys = [];
+let keys = [];
 
 export class KeyManager {
   tick() {
