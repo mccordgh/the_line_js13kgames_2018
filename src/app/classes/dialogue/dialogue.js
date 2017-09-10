@@ -5,10 +5,11 @@ let speechTimer = 5, sentencePause = 0, textPrefix = '', textSuffix = '',
 	redToggle = false, words = [], speakers = [];
 
 export class Dialogue {
-	tick() {
+	tick(h) {
 		if (speechTimer >= 2) {
 			if (words.length) {
 				if (words[0].length) {
+				  h.getSM().play('txt');
 					this.speakNextLetter();
 				} else {
 					if (sentencePause >= 120) {

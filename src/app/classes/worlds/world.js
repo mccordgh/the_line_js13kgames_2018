@@ -24,7 +24,7 @@ export class World {
     handler.setWorld(this);
     this.entityManager = new EntityManager(handler, new Player(handler, 20, 20));
     this.spatialGrid = new SpatialGrid(this.handler.getWidth() * TILE_WIDTH, this.handler.getHeight() * TILE_HEIGHT, 64);
-    this.level = 1;
+    this.level = 4;
     this.loadWorld();
     this.lightManager = new LightManager(handler);
     this.dialogue = new Dialogue();
@@ -59,7 +59,8 @@ export class World {
     this.lightManager.fillLightMap();
 
     if (this.level === 1) {
-      this.entityManager.addEntity(new Clone(this.handler, 6 * TILE_WIDTH, 2 * TILE_WIDTH));
+      this.entityManager.addEntity(new Clone(this.handler, 6 * TILE_WIDTH, 3 * TILE_WIDTH));
+      this.entityManager.addEntity(new Clone(this.handler, 7 * TILE_WIDTH, 2 * TILE_WIDTH));
       this.lightManager.addSource(4, 5);
     }
 
@@ -181,13 +182,13 @@ export class World {
     this.checkForWallSwap();
     this.entityManager.tick(dt);
     this.lightManager.tick(dt);
-    this.dialogue.tick();
+    this.dialogue.tick(this.handler);
     this.plusTime();
 
     if (!monstersCleared && this.level !== 1) {
       timeSpent++;
 
-      if ((timeSpent / 60) >= this.level * 60) {
+      if ((timeSpent / 60) >= ((this.level * 60) + 60)) {
         alert('the monsters crumble all around you.');
         this.entityManager.removeEntitiesByType('monster');
         monstersCleared = true;
