@@ -5,6 +5,5 @@ export class WallYellow extends Tile {
   constructor(id) {
     super(Assets.getAssets('tiles').wallYellow, id);
     this.isSolid = true;
-    this.disappear = true;
   }
 }

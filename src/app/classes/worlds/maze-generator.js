@@ -1,6 +1,4 @@
-let maze = [],
-  finalMaze = [],
-  mazeWidth = 0, mazeHeight = 0;
+let maze = [], finalMaze = [], wallIDs = [2, 3, 7], mazeWidth = 0, mazeHeight = 0;
 
 let getRandomWallID = (i, j) => {
   // make sure we don't build a passable wall on the outside border

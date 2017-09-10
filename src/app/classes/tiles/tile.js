@@ -5,7 +5,6 @@ export class Tile {
     this.isSolid = false;
     this.texture = texture;
     this.id = id;
-    this.disappear = false;
     this.assets = Assets.getAssets("tiles");
   }
 

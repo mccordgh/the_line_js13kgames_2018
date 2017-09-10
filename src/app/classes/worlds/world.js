@@ -185,7 +185,7 @@ export class World {
     for (let y = 1; y < this.height; y++) {
       for (let x = 1; x < this.width; x++) {
         if (this.tiles[x][y] === tileID) {
-					this.tiles[x][y] = this.handler.getWorld().getTile(x, y).disappear ? 0 : swapTileID;
+					this.tiles[x][y] = swapTileID;
         }
       }
     }
