@@ -9,7 +9,6 @@ export class JournalThree extends JournalParent {
 
 	myText() {
 		return [
-      '(This page is covered in sweat and droplets of @blood@)',
       'These creatures all have the same familiar face.',
       '@~eVeRy.~',
       '~SiNGLe.~',

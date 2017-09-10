@@ -9,10 +9,9 @@ export class JournalTwo extends JournalParent {
 
 	myText() {
 		return [
-      'It seems like this place gets larger with each floor I descend. Am I in a pyramid?',
       'I am feeling migraines and hearing an eerie voice.',
       'These creatures seem somehow familiar.',
-      '(At the bottom of the page you see these words written in @blood@.)',
+      '(You see some words written in @blood@.)',
       '@... ~HeHe. VeRy GooD!~@',
 		];
 	}
