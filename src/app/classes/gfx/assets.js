@@ -37,11 +37,9 @@ let cropTile = (asset, x, y) => asset.sheet.crop(SPRITE_WIDTH * x, SPRITE_HEIGHT
 
 let tiles = new Assets('tiles', PATH + "all_tiles.png", SPRITE_WIDTH, SPRITE_HEIGHT);
 tiles.path = cropTile(tiles, 1, 0);
-tiles.pathBlue = cropTile(tiles, 1, 2);
 tiles.pathGreen = cropTile(tiles, 2, 2);
 tiles.pathYellow = cropTile(tiles, 0, 2);
 tiles.wall = cropTile(tiles, 0, 0);
-tiles.wallBlue = cropTile(tiles, 1, 1);
 tiles.wallGreen = cropTile(tiles, 2, 1);
 tiles.wallYellow = cropTile(tiles, 0, 1);
 tiles.exit = cropTile(tiles, 1, 3);

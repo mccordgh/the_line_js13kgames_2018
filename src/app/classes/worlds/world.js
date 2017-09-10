@@ -18,7 +18,7 @@ import { JournalSeven } from "../dialogue/journals/journal-seven";
 
 let yellowTilesDown = false, monstersCleared = false;
 let yellowWallInterval = 0;
-let yellowWallIntervalMax = 2.5 * 60; // We want X seconds so we multiply that by our FPS which is 60
+let yellowWallIntervalMax = 5 * 60; // We want X seconds so we multiply that by our FPS which is 60
 let timeSpent = 0;
 
 export class World {

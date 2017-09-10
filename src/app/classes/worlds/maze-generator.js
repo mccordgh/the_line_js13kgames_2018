@@ -1,4 +1,4 @@
-let maze = [], finalMaze = [], wallIDs = [2, 3, 7], mazeWidth = 0, mazeHeight = 0;
+let maze = [], finalMaze = [], wallIDs = [2, 7], mazeWidth = 0, mazeHeight = 0;
 
 let getRandomWallID = (i, j) => {
   // make sure we don't build a passable wall on the outside border
@@ -6,7 +6,7 @@ let getRandomWallID = (i, j) => {
 
   let randomNum = Math.floor(Math.random() * 20);
 
-  return (randomNum < 15) ? 1 : wallIDs[Math.floor(Math.random() * (wallIDs.length))];
+  return (randomNum < 10) ? 1 : wallIDs[Math.floor(Math.random() * (wallIDs.length))];
 };
 
 export class MazeGenerator {
@@ -131,9 +131,9 @@ export class MazeGenerator {
 			[1, 2, 2, 2, 0, 0, 7, 0, 1],
 			[1, 0, 0, 0, 0, 0, 7, 0, 1],
 			[1, 0, 0, 0, 0, 0, 7, 0, 1],
-			[1, 3, 3, 0, 0, 0, 7, 0, 1],
-			[1, 0, 0, 3, 0, 0, 7, 0, 1],
-			[1, 0, 0, 3, 0, 0, 7, 0, 1],
+			[1, 2, 2, 2, 0, 0, 7, 0, 1],
+			[1, 0, 0, 2, 0, 0, 7, 0, 1],
+			[1, 0, 0, 2, 0, 0, 7, 0, 1],
       [1, 1, 1, 1, 1, 1, 1, 1, 1],
       ];
   }
