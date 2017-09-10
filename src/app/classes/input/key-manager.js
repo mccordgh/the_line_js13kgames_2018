@@ -20,11 +20,10 @@ export class KeyManager {
   }
 }
 
-window.onkeydown = function(e){
-  // console.log(e.keyCode);
+window.onkeydown = (e) => {
   keys[e.keyCode] = true;
 };
 
-window.onkeyup = function(e){
+window.onkeyup = (e) => {
   keys[e.keyCode] = false;
 };

@@ -1,8 +1,6 @@
 import { Assets } from '../../../gfx/assets';
 import { Creature } from '../creature';
 
-const TILE_WIDTH = 64, TILE_HEIGHT = 64;
-
 export class Clone extends Creature {
   constructor(handler, x, y) {
     super(handler, x, y, TILE_WIDTH, TILE_HEIGHT);

@@ -17,9 +17,6 @@ import { JournalFive } from "../dialogue/journals/journal-five";
 import { JournalSix } from "../dialogue/journals/journal-six";
 import { JournalSeven } from "../dialogue/journals/journal-seven";
 
-
-const TILE_WIDTH = 64;
-const TILE_HEIGHT = 64;
 let yellowTilesDown = false, monstersCleared = false;
 let yellowWallInterval = 0;
 const yellowWallIntervalMax = 5 * 60; // We want X seconds so we multiply that by our FPS which is 60

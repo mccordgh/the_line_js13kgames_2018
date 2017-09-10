@@ -1,18 +1,10 @@
-import { Assets } from '../gfx/assets';
 import { GameState } from '../states/game-state';
 import { Menu } from './menu';
 
 export class MainMenu extends Menu {
-  constructor(handler, test = 0){
+  constructor(handler){
     super(handler);
-    // this.test = test;
-    // this.sprites = Assets.getAssets('sprites');
-    // this.tiles = Assets.getAssets('tiles');
   }
-
-  // tick(dt) {
-    //
-  // }
 
   render(g) {
     if (g) {
@@ -54,30 +46,4 @@ export class MainMenu extends Menu {
       this.handler.getGame().getGameState().setState(gameState);
     }
   }
-
-  // initSounds() {
-  //   let sm = new SoundManager();
-  //   sm.setSounds();
-  //   handlerRef.setSoundManager(sm);
-  //   soundsLoaded = true;
-  //   loadingText = 'up/down to select, enter or   /   button to choose';
-  //   handlerRef.getSoundManager().play('evilLaugh');
-  // }
-
-   // loadSounds(){
-   //  loadingText = 'loading sounds...';
-    //Load the sounds
-    // sounds.load([
-    //   `${CURRENT_PATH}/res/sound/ItaloUnlimited.ogg`,
-    //   `${CURRENT_PATH}/res/sound/explode.wav`,
-    //   `${CURRENT_PATH}/res/sound/explode2.wav`,
-    //   `${CURRENT_PATH}/res/sound/lvlup.ogg`,
-    //   `${CURRENT_PATH}/res/sound/select.wav`,
-    //   `${CURRENT_PATH}/res/sound/start.wav`,
-    //   `${CURRENT_PATH}/res/sound/spawn.ogg`,
-    //   `${CURRENT_PATH}/res/sound/evillaugh.ogg`,
-    //   `${CURRENT_PATH}/res/sound/monster.wav`,
-    //   `${CURRENT_PATH}/res/sound/sword.wav`,
-    // ]);
-  // }
 }

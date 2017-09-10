@@ -1,4 +1,12 @@
 import { Game } from './classes/game';
-// IF YOU CHANGE HEIGHT OR WIDTH DO IT IN CSS ALSO
-const game = new Game('Lost!', 448, 448);
+
+window.TILE_HEIGHT = 64;
+window.TILE_WIDTH = 64;
+window.DEFAULT_LIGHT = 0.85;
+window.CENTER_LIGHT = 0.3;
+window.INNER_LIGHT = 0.5;
+window.OUTER_LIGHT = 0.65;
+
+let game = new Game('Lost!', 448, 448);
+
 game.start();

@@ -1,13 +1,6 @@
 import { StaticEntity } from './static-entity';
 import {Assets} from '../../gfx/assets';
 
-const TILE_WIDTH = 64;
-const TILE_HEIGHT = 64;
-const CENTER_LIGHT = 0.3;
-const INNER_LIGHT = 0.5;
-const OUTER_LIGHT = 0.65;
-const DEFAULT_LIGHT = 0.75;
-
 export class LightSource extends StaticEntity {
   constructor(handler, x, y, width, height) {
     super(handler, x, y, width, height);

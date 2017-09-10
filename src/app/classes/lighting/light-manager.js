@@ -1,10 +1,5 @@
 import { LightSource } from '../entities/statics/light-source';
 
-const TILE_HEIGHT = 64;
-const TILE_WIDTH = 64;
-const DEFAULT_LIGHT = 0.85;
-const CENTER_LIGHT = 0.3;
-
 export class LightManager {
   constructor(handler) {
     this.handler = handler;
@@ -74,10 +69,4 @@ export class LightManager {
 
     this.sources = [];
   }
-  //
-  // removeSource(source) {
-  //   const index = this.sources.indexOf(source);
-  //
-  //   this.sources.splice(index, 1);
-  // }
 }

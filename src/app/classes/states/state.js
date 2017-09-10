@@ -4,14 +4,6 @@ export class State {
     this.handler = handler;
   }
 
-  tick(dt) {
-    throw("Every state needs a tick");
-  }
-
-  render(g) {
-    throw("Every state needs a render");
-  }
-
   getState() {
     return this.currentState;
   }

@@ -11,13 +11,4 @@ export class Menu {
 
     this.render();
   }
-
-  render() {
-    alert ('all menus need a render!');
-  }
-
-  getInput() {
-    alert ('all menus need getInput!');
-  }
-
 }

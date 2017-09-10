@@ -1,6 +1,3 @@
-const TILE_WIDTH = 64;
-const TILE_HEIGHT = 64;
-
 export class GameCamera {
   constructor(handler, xOffset, yOffset){
     this.xOffset = xOffset;

@@ -3,7 +3,6 @@ import { Creature } from './creature';
 import { Rectangle } from '../../gfx/shapes/rectangle';
 
 
-const TILE_HEIGHT = 64, TILE_WIDTH = 64;
 let getDevInput = false, inputCounter = 0;
 
 export class Player extends Creature {

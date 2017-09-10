@@ -14,7 +14,7 @@ export class JournalPage extends StaticEntity {
 		this.triggered = false;
 	}
 
-	tick(){
+	tick() {
 		//
 	}
 

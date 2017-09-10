@@ -1,19 +1,10 @@
 import { Entity } from '../entity';
 import { Rectangle } from '../../gfx/shapes/rectangle';
 
-
-const DEFAULT_SPEED = 100,
-  DEFAULT_HEALTH = 200,
-  DEFAULT_CREATURE_WIDTH = 64,
-  DEFAULT_CREATURE_HEIGHT = 64,
-  TILE_WIDTH = 64,
-  TILE_HEIGHT = 64;
-
 export class Creature extends Entity {
   constructor(handler, x, y) {
-    super(handler, x, y, DEFAULT_CREATURE_WIDTH, DEFAULT_CREATURE_HEIGHT);
-    this.health = DEFAULT_HEALTH;
-    this.speed = DEFAULT_SPEED;
+    super(handler, x, y,64, 64);
+    this.speed = 80;
     this.xMove = 0;
     this.yMove = 0;
   }

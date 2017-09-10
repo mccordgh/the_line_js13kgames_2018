@@ -1,9 +1,6 @@
-const maze = [],
+let maze = [],
   finalMaze = [],
-  // set maximum and minimum number for wall ids (2 is yellow, 3 is blue);
-  wallIDs = [2, 3, 7];
-  // let counting = 0;
-  let mazeWidth = 0, mazeHeight = 0;
+  mazeWidth = 0, mazeHeight = 0;
 
 const getRandomWallID = (i, j) => {
   // make sure we don't build a passable wall on the outside border
@@ -88,34 +85,17 @@ export class MazeGenerator {
     }
   }
 
-  // static getRandomRoomEntities() {
-  //   //9 - SwitchGreen,  6 - SwitchBlue,  10 - Exit,  0 - path (empty room)
-  //   const entities = [10, 0, 9];
-  //   //let's spawn one of the switches in room #1 with the player
-  //   const rooms = [9];
-  //
-  //   do {
-  //     const maxIndex = entities.length - 1;
-  //     const randomIndex = Math.floor(Math.random() * (maxIndex + 1));
-  //     rooms.push(entities[randomIndex]);
-  //     entities.splice(randomIndex, 1);
-  //   } while (entities.length > 0);
-  //
-  //   return rooms;
-  // }
-
   static createRooms() {
     const roomSize = 3;
-    // const roomEntities = this.getRandomRoomEntities();
 
     // NW room
-    this.createRoom(1, 1, roomSize);//, roomEntities[0]);
+    this.createRoom(1, 1, roomSize);
     // SW room
-    this.createRoom(1, mazeHeight - (roomSize + 1), roomSize);//, roomEntities[1]);
+    this.createRoom(1, mazeHeight - (roomSize + 1), roomSize);
     // SE ROOM
-    this.createRoom(mazeWidth - (roomSize + 1), mazeHeight - (roomSize + 1), roomSize);//, roomEntities[2]);
+    this.createRoom(mazeWidth - (roomSize + 1), mazeHeight - (roomSize + 1), roomSize);
     // NE ROOM
-    this.createRoom(mazeWidth - (roomSize + 1), 1, roomSize);//, roomEntities[3]);
+    this.createRoom(mazeWidth - (roomSize + 1), 1, roomSize);
   }
 
   static createRoom(startX, startY, size) {
@@ -146,14 +126,7 @@ export class MazeGenerator {
     finalMaze[Math.ceil(mazeWidth / 2) + 1][mazeHeight - 2] = 1;
   }
 
-  // static addOneOfEachSwitchAtStart() {
-  //   finalMaze[4][1] = 3;
-  //   finalMaze[4][3] = 7;
-  //   finalMaze[2][4] = 2;
-  // }
-
   static getIntroMaze() {
-    // greenPath 7 - blueWall - 3;
 		return [
       [1, 1, 1, 1, 1, 1, 1, 1, 1],
       [1, 0, 0, 2, 0, 0, 7, 0, 1],
@@ -182,7 +155,6 @@ export class MazeGenerator {
       this.createMaze();
       this.createRooms();
       this.createBarriers(level);
-      // this.addOneOfEachSwitchAtStart();
 
       return {
         mazeWidth,
