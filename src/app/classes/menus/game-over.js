@@ -11,7 +11,7 @@ export class GameOver extends Menu {
       'Y O U   D I E D',
       this.reason[0],
       this.reason[1],
-      'press enter...',
+      'to live again [press enter]',
       ]
     );
   }

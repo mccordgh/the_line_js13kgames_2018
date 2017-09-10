@@ -12,7 +12,7 @@ export class MainMenu extends Menu {
         'You are',
         '"alone alone alone"',
         '"aloNe AloNE? ALONe!!!"',
-        'press enter...',
+        'to live again [press enter]',
       ]
     );
 

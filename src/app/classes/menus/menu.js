@@ -47,8 +47,8 @@ export class Menu {
       if (this.c > 479) g.drawText({
         fillColor: 'white',
         text: text[3],
-        fontSize: 32,
-        x: 150,
+        fontSize: 24,
+        x: 100,
         y: 350,
       });
     }
