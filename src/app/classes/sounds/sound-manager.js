@@ -17,8 +17,12 @@ export class SoundManager {
 
   play(s) {
     if (sounds[s]) {
-      sounds[s].load();
-      sounds[s].play();
+      try {
+        sounds[s].load();
+        sounds[s].play();
+      } catch (e) {
+        //
+      }
     }
   }
 
