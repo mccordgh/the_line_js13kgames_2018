@@ -172,7 +172,7 @@ export class World {
     }
 
     if (ts <= 0 && tm <= 0) {
-      let gameOver = new GameOver(this.handler, ['time\'s up!', 'this one didn\'t make it either...']);
+      let gameOver = new GameOver(this.handler, ['"Time\'s up!"', '"This one didn\'t make it either..."']);
       this.handler.getGame().getGameState().setState(gameOver);
     }
   }
@@ -201,7 +201,13 @@ export class World {
     let yStart = parseInt(Math.max(0, this.handler.getGameCamera().getyOffset() / TILE_HEIGHT));
     let yEnd = parseInt(Math.min(this.height, (this.handler.getGameCamera().getyOffset() + this.handler.getHeight()) / TILE_HEIGHT + 1));
 
-    this.drawTiles(xStart, xEnd, yStart, yEnd, g);
+    for (let y = yStart; y < yEnd; y++) {
+      for (let x = xStart; x < xEnd; x++) {
+        if (this.getTile(x, y) !== undefined)
+          this.getTile(x, y).render(g, x * TILE_WIDTH - this.handler.getGameCamera().getxOffset(), y * TILE_HEIGHT - this.handler.getGameCamera().getyOffset());
+      }
+    }
+
     this.entityManager.render(g);
     this.lightManager.render(xStart, xEnd, yStart, yEnd, g);
 
@@ -213,15 +219,6 @@ export class World {
       y: 50,
     });
 
-  }
-
-  drawTiles(xStart, xEnd, yStart, yEnd, g) {
-    for (let y = yStart; y < yEnd; y++) {
-      for (let x = xStart; x < xEnd; x++) {
-        if (this.getTile(x, y) !== undefined)
-          this.getTile(x, y).render(g, x * TILE_WIDTH - this.handler.getGameCamera().getxOffset(), y * TILE_HEIGHT - this.handler.getGameCamera().getyOffset());
-      }
-    }
   }
 
   getTile(x, y) {
