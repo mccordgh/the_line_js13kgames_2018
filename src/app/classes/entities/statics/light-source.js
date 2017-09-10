@@ -46,50 +46,36 @@ export class LightSource extends StaticEntity {
     }
   }
 
-  expandLight() {
+  expandLight(diff = 0) {
     //outer border
     for (let y = -2; y < 3; y++) {
       for (let x = -2; x < 3; x++) {
-        this.manager.lightMap[this.posX + x][this.posY + y] = Math.min(this.manager.lightMap[this.posX + x][this.posY + y], OUTER_LIGHT);
+        this.manager.lightMap[this.posX + x][this.posY + y] = diff > 0
+          ? Math.min(DEFAULT_LIGHT, OUTER_LIGHT + diff)
+          : Math.min(this.manager.lightMap[this.posX + x][this.posY + y], OUTER_LIGHT);
       }
     }
 
     //inner border
     for (let y = -1; y < 2; y++) {
       for (let x = -1; x < 2; x++) {
-        this.manager.lightMap[this.posX + x][this.posY + y] = Math.min(this.manager.lightMap[this.posX + x][this.posY + y], INNER_LIGHT);
+        this.manager.lightMap[this.posX + x][this.posY + y] = diff > 0
+          ? Math.min(DEFAULT_LIGHT, INNER_LIGHT + diff)
+          : Math.min(this.manager.lightMap[this.posX + x][this.posY + y], INNER_LIGHT);
       }
     }
 
     // center of light source
-    this.manager.lightMap[this.posX][this.posY] = CENTER_LIGHT;
-  }
-
-  dimLights(diff) {
-    //outer border
-    for (let y = -2; y < 3; y++) {
-      for (let x = -2; x < 3; x++) {
-        this.manager.lightMap[this.posX + x][this.posY + y] = Math.min(DEFAULT_LIGHT, OUTER_LIGHT + diff);
-      }
-    }
-
-    //inner border
-    for (let y = -1; y < 2; y++) {
-      for (let x = -1; x < 2; x++) {
-        this.manager.lightMap[this.posX + x][this.posY + y] = Math.min(DEFAULT_LIGHT, INNER_LIGHT + diff);
-      }
-    }
-
-    // center of light source
-    this.manager.lightMap[this.posX][this.posY] = Math.min(DEFAULT_LIGHT, CENTER_LIGHT + diff);
+    this.manager.lightMap[this.posX][this.posY] = diff > 0
+      ? Math.min(DEFAULT_LIGHT, CENTER_LIGHT + diff)
+      : CENTER_LIGHT;
   }
 
   chanceToFlicker() {
-    let chance = Math.random();
-    if (chance < 0.85) return;
+    if (Math.random() < 0.85) return;
 
-    let max = 8;
-    let min = 4;
+    let max = 12;
+    let min = 6;
 
     this.lastFlickerCounter = 0;
     this.flickerLength = Math.floor(Math.random() * (max - min + 1)) + min;
@@ -99,7 +85,7 @@ export class LightSource extends StaticEntity {
   flickerLights() {
     if (this.flickerCount === 0) {
       if (this.flickerToggle === 0) {
-        this.dimLights(0.25);
+        this.expandLight(0.25);
         this.flickerToggle = 1;
       } else {
         this.expandLight();
@@ -133,10 +119,6 @@ export class LightSource extends StaticEntity {
   }
 
   render(g) {
-    // const x = this.x - this.handler.getGameCamera().getxOffset();
-    // const y = this.y - this.handler.getGameCamera().getyOffset();
-		//
-		// g.myDrawImage(this.assets.lantern, x, y, this.width, this.height);
 		g.myDrawImage(this.assets.lantern,
 			this.x - this.handler.getGameCamera().getxOffset(),
 			this.y - this.handler.getGameCamera().getyOffset(),
