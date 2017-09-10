@@ -166,11 +166,11 @@ export class World {
   plusTime() {
     tc++;
 
-    // if (tc === 60) {
+    if (tc === 60) {
       ts = ts === 0 ? 59 : ts -= 1;
       if (ts === 59) tm--;
       tc = 0;
-    // }
+    }
 
     if (ts <= 0 && tm <= 0) {
       let gameOver = new GameOver(this.handler, 'your mind was overwhelmed.');

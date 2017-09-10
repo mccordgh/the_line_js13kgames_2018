@@ -64,57 +64,5 @@ export class Player extends Creature {
     if (manager.right || manager.d) {
       this.xMove = this.speed * dt;
     }
-
-    if (!getDevInput) inputCounter++;
-
-    if (inputCounter > 15 || getDevInput) {
-      getDevInput = true;
-      inputCounter = 0;
-      if (manager.one) {
-        //all cheats
-        let msg = this.allCheats ? ' ALL CHEATS disabled ' : ' ALL CHEATS enabled ';
-
-        this.handler.devMessage(msg);
-
-        this.allCheats = !this.allCheats;
-
-        this.clipping = this.allCheats;
-        this.invincible = this.allCheats;
-        this.superSpeed = this.allCheats;
-
-        getDevInput = false;
-      }
-
-      if (manager.three) {
-        //invincible
-        let msg = this.invincible ? ' invincibility disabled ' : ' invincibility enabled ';
-
-        this.handler.devMessage(msg);
-
-        this.invincible = !this.invincible;
-
-        getDevInput = false;
-      }
-
-      if (manager.two) {
-        //clipping
-        let msg = this.clipping ? ' clipping disabled ' : ' clipping enabled ';
-
-        this.handler.devMessage(msg);
-
-        this.clipping = !this.clipping;
-        getDevInput = false;
-      }
-
-      if (manager.four) {
-        //super speed
-        let msg = this.superSpeed ? ' super speed disabled ' : ' super speed enabled ';
-
-        this.handler.devMessage(msg);
-
-        this.superSpeed = !this.superSpeed;
-        getDevInput = false;
-      }
-    }
   }
 }

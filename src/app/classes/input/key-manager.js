@@ -6,10 +6,6 @@ export class KeyManager {
     this.down = keys[40];
     this.left = keys[37];
     this.right = keys[39];
-    this.one = keys[49];
-    this.two = keys[50];
-    this.three = keys[51];
-    this.four = keys[52];
     this.a = keys[65];
     this.w = keys[87];
     this.s = keys[83];
