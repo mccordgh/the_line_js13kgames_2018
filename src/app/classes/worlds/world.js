@@ -187,7 +187,7 @@ export class World {
     if (!monstersCleared && this.level !== 1) {
       timeSpent++;
 
-      if ((timeSpent / 60) >= 300) {
+      if ((timeSpent / 60) >= this.level * 60) {
         alert('the monsters crumble all around you.');
         this.entityManager.removeEntitiesByType('monster');
         monstersCleared = true;
