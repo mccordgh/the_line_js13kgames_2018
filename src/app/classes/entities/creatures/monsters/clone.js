@@ -4,21 +4,17 @@ import { Creature } from '../creature';
 export class Clone extends Creature {
   constructor(handler, x, y) {
     super(handler, x, y, TILE_WIDTH, TILE_HEIGHT);
-    this.assets = Assets.getAssets('tiles');
+    this.a = Assets.getAssets('tiles');
     this.x = x;
     this.y = y;
     this.spawnX = x;
     this.spawnY = y;
-    this.bounds.x = 10;
-    this.bounds.y = 10;
-    this.bounds.width = TILE_WIDTH  - (this.bounds.x * 2);
-    this.bounds.height = TILE_HEIGHT - (this.bounds.y * 2);
     this.type = 'monster';
-    this.patrol = this.getPatrolPattern();
-    this.patrolLength = 100;
-    this.dirMoving = 0;
-    this.numberOfMoves = 0;
-    this.lastAnimation = 'cwalk_down';
+    this.p = this.getPatrolPattern(); // patrol
+    this.pL = 100; // patrolLength
+    this.dM = 0; // directionMoving
+    this.nom = 0; // numberOfMoves
+    this.lA = 'cwalk_down'; // lastAnimation
   }
 
   getPatrolPattern() {
@@ -29,7 +25,7 @@ export class Clone extends Creature {
 
   maybeChangePatrol() {
     if (Math.random() < 0.30) {
-      this.patrol = this.patrol === 'vertical' ? 'horizontal' : 'vertical';
+      this.p = this.p === 'vertical' ? 'horizontal' : 'vertical';
     }
   }
 
@@ -44,31 +40,31 @@ export class Clone extends Creature {
   }
 
   setPatrolMovement(dt) {
-    if (this.patrol === 'vertical') {
-      if (this.dirMoving === 0) {
+    if (this.p === 'vertical') {
+      if (this.dM === 0) {
         this.yMove = -this.speed * dt
       } else {
         this.yMove = this.speed * dt
       }
-      this.numberOfMoves++;
+      this.nom++;
 
-      if (this.numberOfMoves > this.patrolLength) {
-        this.dirMoving = this.dirMoving === 0 ? 1 : 0;
-        this.numberOfMoves = 0;
+      if (this.nom > this.pL) {
+        this.dM = this.dM === 0 ? 1 : 0;
+        this.nom = 0;
         this.maybeChangePatrol();
       }
 
-    } else if (this.patrol === 'horizontal') {
-      if (this.dirMoving === 0) {
+    } else if (this.p === 'horizontal') {
+      if (this.dM === 0) {
         this.xMove = -this.speed * dt;
       } else {
         this.xMove = this.speed * dt;
       }
-      this.numberOfMoves++;
+      this.nom++;
 
-      if (this.numberOfMoves > this.patrolLength) {
-        this.dirMoving = this.dirMoving === 0 ? 1 : 0;
-        this.numberOfMoves = 0;
+      if (this.nom > this.pL) {
+        this.dM = this.dM === 0 ? 1 : 0;
+        this.nom = 0;
         this.maybeChangePatrol();
       }
     }
@@ -113,7 +109,7 @@ export class Clone extends Creature {
 
     // ****** DRAW BOUNDING BOX DON'T DELETE!!
     // g.fillStyle = "blue";
-    // g.fillRect(this.bounds.x + this.x - this.handler.getGameCamera().getxOffset(), this.bounds.y + this.y - this.handler.getGameCamera().getyOffset(), this.bounds.width, this.bounds.height);
+    // g.fillRect(this.b.x + this.x - this.handler.getGameCamera().getxOffset(), this.b.y + this.y - this.handler.getGameCamera().getyOffset(), this.b.w, this.b.h);
     // ****** DRAW BOUNDING BOX DON'T DELETE!!
   }
 }

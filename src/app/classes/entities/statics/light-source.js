@@ -7,10 +7,10 @@ export class LightSource extends StaticEntity {
     this.manager = this.handler.getWorld().getLightManager();
     this.posX = Math.floor(x / TILE_WIDTH);
     this.posY = Math.floor(y / TILE_HEIGHT);
-    this.bounds.x = 0;
-    this.bounds.y = 0;
-    this.bounds.width = 0;
-    this.bounds.height = 0;
+    this.b.x = 0;
+    this.b.y = 0;
+    this.b.w = 0;
+    this.b.height = 0;
     this.flickering = false;
     this.lastFlickerCounter = 0;
     this.flickerToggle = 0;
@@ -18,7 +18,7 @@ export class LightSource extends StaticEntity {
     this.flickerTimes = 0;
     this.flickerLength = 0;
     this.moveThrough = true;
-    this.assets = Assets.getAssets('tiles');
+    this.a = Assets.getAssets('tiles');
     this.type = 'light';
     this.init();
   }
@@ -119,7 +119,7 @@ export class LightSource extends StaticEntity {
   }
 
   render(g) {
-		g.myDrawImage(this.assets.lantern,
+		g.myDrawImage(this.a.lantern,
 			this.x - this.handler.getGameCamera().getxOffset(),
 			this.y - this.handler.getGameCamera().getyOffset(),
 			this.width,
@@ -127,7 +127,7 @@ export class LightSource extends StaticEntity {
 
 		// ****** DRAW BOUNDING BOX DON'T DELETE!!
 		// g.fillStyle = "white";
-		// g.fillRect(this.bounds.x + this.x - this.handler.getGameCamera().getxOffset(), this.bounds.y + this.y - this.handler.getGameCamera().getyOffset(), this.bounds.width, this.bounds.height);
+		// g.fillRect(this.b.x + this.x - this.handler.getGameCamera().getxOffset(), this.b.y + this.y - this.handler.getGameCamera().getyOffset(), this.b.w, this.b.height);
 		// ****** DRAW BOUNDING BOX DON'T DELETE!!
 	}
 }

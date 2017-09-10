@@ -4,12 +4,12 @@ import { StaticEntity } from './static-entity';
 export class Exit extends StaticEntity {
   constructor(handler, x, y, width, height) {
     super(handler, x, y, width, height);
-    this.assets = Assets.getAssets('tiles');
+    this.a = Assets.getAssets('tiles');
     this.type = 'exit';
-    this.bounds.x = 15;
-    this.bounds.y = 15;
-    this.bounds.width = this.width - 30;
-    this.bounds.height = this.height - 30;
+    this.b.x = 15;
+    this.b.y = 15;
+    this.b.w = this.width - 30;
+    this.b.height = this.height - 30;
   }
 
   tick(){
@@ -17,7 +17,7 @@ export class Exit extends StaticEntity {
   }
 
   render(g) {
-    g.myDrawImage(this.assets.exit,
+    g.myDrawImage(this.a.exit,
       this.x - this.handler.getGameCamera().getxOffset(),
       this.y - this.handler.getGameCamera().getyOffset(),
       this.width,
@@ -25,7 +25,7 @@ export class Exit extends StaticEntity {
 
     // ****** DRAW BOUNDING BOX DON'T DELETE!!
     // g.fillStyle = "white";
-    // g.fillRect(this.bounds.x + this.x - this.handler.getGameCamera().getxOffset(), this.bounds.y + this.y - this.handler.getGameCamera().getyOffset(), this.bounds.width, this.bounds.height);
+    // g.fillRect(this.b.x + this.x - this.handler.getGameCamera().getxOffset(), this.b.y + this.y - this.handler.getGameCamera().getyOffset(), this.b.w, this.b.height);
     // ****** DRAW BOUNDING BOX DON'T DELETE!!
   }
 }

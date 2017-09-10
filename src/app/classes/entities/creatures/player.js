@@ -8,20 +8,12 @@ let getDevInput = false, inputCounter = 0;
 export class Player extends Creature {
   constructor(handler, x, y){
     super(handler, x, y);
-    this.assets = Assets.getAssets('tiles');
+    this.a = Assets.getAssets('tiles');
     this.x = x;
     this.y = y;
     this.speed = 140;
-    this.bounds.x = 14;
-    this.bounds.y = 24;
-    this.bounds.width = 36;
-    this.bounds.height = 39;
     this.type = 'player';
-    this.clipping = false;
-    this.invincible = false;
-    this.superSpeed = false;
-    this.allCheats = false;
-    this.lastAnimation = 'pwalk_down';
+    this.lA = 'pwalk_down';
   }
 
   tick(dt) {
@@ -45,7 +37,7 @@ export class Player extends Creature {
 
     // ****** DRAW BOUNDING BOX DON'T DELETE!!
     // g.fillStyle = "green";
-    // g.fillRect(this.bounds.x + this.x - this.handler.getGameCamera().getxOffset(), this.bounds.y + this.y - this.handler.getGameCamera().getyOffset(), this.bounds.width, this.bounds.height);
+    // g.fillRect(this.b.x + this.x - this.handler.getGameCamera().getxOffset(), this.b.y + this.y - this.handler.getGameCamera().getyOffset(), this.b.w, this.b.height);
     // ****** DRAW BOUNDING BOX DON'T DELETE!!
   }
 

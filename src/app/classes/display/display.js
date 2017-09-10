@@ -1,19 +1,19 @@
-let graphics = null;
+let graphics;
 
 export class Display {
   constructor(title, width, height) {
-    this.title = title;
-    this.width = width;
-    this.height = height;
-    this.paused = false;
+    this.t = title;
+    this.w = width;
+    this.h = height;
+    this.p = false;
     this.createDisplay();
   }
 
   createDisplay() {
-    document.title = this.title;
+    document.title = this.t;
     let myCanvas = document.getElementById("canvas");
-    myCanvas.setAttribute("height", this.height);
-    myCanvas.setAttribute("width", this.width);
+    myCanvas.setAttribute("height", this.h);
+    myCanvas.setAttribute("width", this.w);
     graphics = myCanvas.getContext("2d");
     graphics.webkitImageSmoothingEnabled = false;
     graphics.mozImageSmoothingEnabled = false;
@@ -27,23 +27,23 @@ export class Display {
   }
 
   pause() {
-    this.paused = true;
+    this.p = true;
   }
 
   unPause() {
-    this.paused = false;
+    this.p = false;
   }
 
   getTitle() {
-    return this.title;
+    return this.t;
   }
 
   getWidth() {
-    return this.width;
+    return this.w;
   }
 
   getHeight() {
-    return this.height;
+    return this.h;
   }
 
   getGraphics() {

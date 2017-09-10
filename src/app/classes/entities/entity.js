@@ -9,7 +9,7 @@ export class Entity {
     this.width = width;
     this.height = height;
     this.handler = handler;
-    this.bounds = new Rectangle(0, 0, width, height);
+    this.b = new Rectangle(0, 0, width, height);
     this.moveThrough = false;
   }
 
@@ -30,13 +30,13 @@ export class Entity {
   }
 
   getCollisionBounds(xOffset, yOffset) {
-    return new Rectangle(parseInt(this.x + this.bounds.x + xOffset),
-      parseInt(this.y + this.bounds.y + yOffset),
-      this.bounds.width, this.bounds.height);
+    return new Rectangle(parseInt(this.x + this.b.x + xOffset),
+      parseInt(this.y + this.b.y + yOffset),
+      this.b.w, this.b.height);
   }
 
   checkEntityCollisions(xOffset, yOffset) {
-    let candidates =  this.handler.getWorld().getSpatialGrid().retrieve(new Rectangle(this.x + this.bounds.x + xOffset, this.y + this.bounds.y + yOffset, this.bounds.width, this.bounds.height), this);
+    let candidates =  this.handler.getWorld().getSpatialGrid().retrieve(new Rectangle(this.x + this.b.x + xOffset, this.y + this.b.y + yOffset, this.b.w, this.b.height), this);
 
     for(let i = 0; i < candidates.length; i++) {
       let e = candidates[i];

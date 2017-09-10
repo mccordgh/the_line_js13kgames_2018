@@ -54,13 +54,13 @@ export class EntityManager {
 
   addEntity(e) {
     entities.push(e);
-    handler.getWorld().getSpatialGrid().insert(new Rectangle(e.x + e.bounds.x, e.y + e.bounds.y, e.bounds.width, e.bounds.height), e);
+    handler.getWorld().getSpatialGrid().insert(new Rectangle(e.x + e.b.x, e.y + e.b.y, e.b.w, e.b.height), e);
   }
 
   removeEntity(e) {
     let index = entities.indexOf(e);
 
-		handler.getWorld().getSpatialGrid().remove(new Rectangle(e.x + e.bounds.x, e.y + e.bounds.y, e.bounds.width, e.bounds.height), e);
+		handler.getWorld().getSpatialGrid().remove(new Rectangle(e.x + e.b.x, e.y + e.b.y, e.b.w, e.b.height), e);
 
     entities.splice(index, 1);
   }
@@ -68,7 +68,7 @@ export class EntityManager {
   removeEntitiesByType(type) {
     entities = entities.filter((e) => {
       if (e.type === type) {
-        handler.getWorld().getSpatialGrid().remove(new Rectangle(e.x + e.bounds.x, e.y + e.bounds.y, e.bounds.width, e.bounds.height), e);
+        handler.getWorld().getSpatialGrid().remove(new Rectangle(e.x + e.b.x, e.y + e.b.y, e.b.w, e.b.height), e);
       } else {
         return e;
       }
