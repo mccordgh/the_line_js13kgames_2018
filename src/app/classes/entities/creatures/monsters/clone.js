@@ -28,7 +28,7 @@ export class Clone extends Creature {
   }
 
   maybeChangePatrol() {
-    if (Math.random() < 0.41) {
+    if (Math.random() < 0.30) {
       this.patrol = this.patrol === 'vertical' ? 'horizontal' : 'vertical';
     }
   }

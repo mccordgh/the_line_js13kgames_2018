@@ -6,12 +6,12 @@ let speechTimer = 5, sentencePause = 0, textPrefix = '', textSuffix = '',
 
 export class Dialogue {
 	tick() {
-		if (speechTimer >= 4) {
+		if (speechTimer >= 2) {
 			if (words.length) {
 				if (words[0].length) {
 					this.speakNextLetter();
 				} else {
-					if (sentencePause >= 120) {
+					if (sentencePause >= 90) {
 						this.resetForNextSentence();
 					} else {
 						sentencePause++;
