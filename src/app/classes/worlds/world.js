@@ -8,7 +8,6 @@ import { LightManager } from '../lighting/light-manager';
 import { Exit } from '../entities/statics/exit';
 import { Dialogue } from "../dialogue/dialogue";
 import { GameOver } from '../menus/game-over';
-import { JournalPage } from "../entities/statics/journal-page";
 import { JournalOne } from "../dialogue/journals/journal-one";
 import { JournalTwo } from "../dialogue/journals/journal-two";
 import { JournalThree } from "../dialogue/journals/journal-three";
@@ -67,19 +66,19 @@ export class World {
     this.entityManager.addEntity(new Exit(this.handler, (this.width - 2) * TILE_WIDTH, (this.height - 2) * TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT));
     this.addEvenSpreadOfLightSources(7);
     if (this.level !== 1) this.addEvenSpreadOfMonsters(6);
-    this.spawnJournals();
+
+    let j = [
+      new JournalOne(),
+      new JournalTwo(),
+      new JournalThree(),
+      new JournalFour(),
+    ][this.level - 1];
+
+    let d = this.handler.getWorld().dialogue.addWords;
+
+    d('', '(You find a journal entry on the floor.)');
+    j.text.forEach(e => { d(j.name, e); });
   }
-
-  spawnJournals() {
-		let journals = [
-		  new JournalOne(),
-			new JournalTwo(),
-			new JournalThree(),
-			new JournalFour(),
-		];
-
-		this.entityManager.addEntity(new JournalPage(this.handler, 2 * TILE_WIDTH, 2 * TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT, journals[this.level - 1]));
-	}
 
   addEvenSpreadOfLightSources(spread) {
     for (let y = spread; y <= this.height; y += spread) {

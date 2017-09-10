@@ -11,7 +11,7 @@ export class JournalOne extends JournalParent {
 		return [
 			'I\'ve stayed alive longer than anyone else. Even with this broken leg.',
 			'The grotesque beings down here will poison your mind.',
-      'They are slow. The rotating walls help cut them off...',
+      'But they are slow; The rotating walls help cut them off...',
 		];
 	}
 }

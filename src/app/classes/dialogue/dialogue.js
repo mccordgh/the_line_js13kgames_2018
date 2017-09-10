@@ -11,7 +11,7 @@ export class Dialogue {
 				if (words[0].length) {
 					this.speakNextLetter();
 				} else {
-					if (sentencePause >= 90) {
+					if (sentencePause >= 120) {
 						this.resetForNextSentence();
 					} else {
 						sentencePause++;
@@ -36,7 +36,7 @@ export class Dialogue {
   }
 
 	speakNextLetter() {
-		speakerBox.innerHTML = speakers[0] + ':';
+		speakerBox.innerHTML = speakers[0] ? speakers[0] + ':' : '';
 
 		let n = words[0][0];
 
