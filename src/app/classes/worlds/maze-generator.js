@@ -6,7 +6,7 @@ let getRandomWallID = (i, j) => {
 
   let randomNum = Math.floor(Math.random() * 20);
 
-  return (randomNum < 10) ? 1 : 2;
+  return (randomNum < 16) ? 1 : 2;
 };
 
 export class MazeGenerator {

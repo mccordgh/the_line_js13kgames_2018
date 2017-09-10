@@ -75,7 +75,7 @@ export class World {
 
       let d = this.dialogue.addWords;
 
-      d('', '(You find a journal entry.)');
+      d('', '(You find a note on the floor.)');
       j.text.forEach(e => { d(j.name, e); });
     }
   }
