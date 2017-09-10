@@ -25,14 +25,24 @@ export class GameOver extends Menu {
         y: yPos,
       });
 
-      xPos = (screenWidth / 2) - (g.measureText(this.reason).width / 2);
+      xPos = (screenWidth / 2) - (g.measureText(this.reason[0]).width / 2);
       yPos = (screenHeight / 2);
       g.drawText({
         fillColor: 'yellow',
-        text: this.reason,
-        fontSize: 24,
+        text: this.reason[0],
+        fontSize: 22,
         x: xPos,
-        y: yPos,
+        y: yPos - 20,
+      });
+
+      xPos = (screenWidth / 2) - (g.measureText(this.reason[1]).width / 2);
+      yPos = (screenHeight / 2);
+      g.drawText({
+        fillColor: 'yellow',
+        text: this.reason[1],
+        fontSize: 18,
+        x: xPos,
+        y: yPos + 20,
       });
 
       text = 'press enter...';
