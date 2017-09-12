@@ -9,9 +9,9 @@ export class GameOver extends Menu {
   render(g) {
     super.draw(g, [
       'Y O U   D I E D',
-      this.reason[0],
-      this.reason[1],
-      'to live again [press enter]',
+      '"Another failure.",' +
+      '"Maybe the next one will succeed."',
+      'Live again [press enter]',
       ]
     );
   }

@@ -12,10 +12,11 @@ import { JournalTwo } from "../dialogue/journals/journal-two";
 import { JournalThree } from "../dialogue/journals/journal-three";
 import { JournalFour } from "../dialogue/journals/journal-four";
 
-let yellowTilesDown = false, yellowWallInterval = 0, yellowWallIntervalMax = 5 * 60, timeSpent = 0, tm = 5, ts = 0, tc = 0;
+let yellowTilesDown = false, yellowWallInterval = 0, yellowWallIntervalMax = 5 * 60, timeSpent = 0, tm = 5, ts = 0, tc = 0, cleared;
 
 export class World {
   constructor(handler) {
+    this.death = 0;
     this.width = null;
     this.height = null;
     this.tiles = [];
@@ -23,7 +24,7 @@ export class World {
     handler.setWorld(this);
     this.entityManager = new EntityManager(handler, new Player(handler, 20, 20));
     this.spatialGrid = new SpatialGrid(this.handler.getWidth() * TILE_WIDTH, this.handler.getHeight() * TILE_HEIGHT, 64);
-    this.level = 1;
+    this.level = 2;
     this.loadWorld();
     this.lightManager = new LightManager(handler);
     this.dialogue = handler.getGame().d;
@@ -38,7 +39,7 @@ export class World {
     this.setPlayerSpawn(this.spawnX, this.spawnY);
     this.level += 1;
     this.tiles = [];
-    timeSpent = 0;
+
     this.lightManager.removeSources();
     this.entityManager.removeEntitiesByType('exit');
     this.entityManager.removeEntitiesByType('journal');
@@ -49,6 +50,9 @@ export class World {
   }
 
   init() {
+    timeSpent = (tm * 60) + ts;
+    cleared = false;
+
     this.setPlayerSpawn(this.spawnX, this.spawnY);
 
     this.lightManager.init();
@@ -178,52 +182,62 @@ export class World {
     }
 
     if (ts <= 0 && tm <= 0) {
-      let gameOver = new GameOver(this.handler, ['"Time\'s up!"', '"This one didn\'t make it either..."']);
+      let gameOver = new GameOver(this.handler);
       this.dialogue.clear();
       this.handler.getGame().getGameState().setState(gameOver);
     }
   }
 
   tick(dt) {
-    this.checkForWallSwap();
-    this.entityManager.tick(dt);
-    this.lightManager.tick(dt);
-    this.plusTime();
+    if (this.death > 0) {
+      if (this.death === 1) {
+        this.entityManager.removeEntity(this.entityManager.getPlayer());
+        this.dialogue.clear();
+        this.dialogue.addWords('+It looks like this one, wasn\'t quick enough.+');
+      } else if (this.death === 220) {
+        let gameOver = new GameOver(this.handler);
+        this.handler.getGame().getGameState().setState(gameOver);
+      }
+      this.death++;
+    } else {
+      this.checkForWallSwap();
+      this.entityManager.tick(dt);
+      this.lightManager.tick(dt);
+      this.plusTime();
 
-    if (this.level !== 1) {
-      timeSpent++;
-
-      if ((timeSpent / 60) >= ((this.level * 60) + 60)) {
-        alert('the monsters crumble all around you.');
-        this.entityManager.removeEntitiesByType('monster');
+      if (!cleared && this.level !== 1 && timeSpent - (tm * 60 + ts) > 75) {
+          this.dialogue.addWords('(the monsters start to crumble all around you.)');
+          this.entityManager.removeEntitiesByType('monster');
+          cleared = true;
       }
     }
   }
 
   render(g) {
-    let xStart = parseInt(Math.max(0, this.handler.getGameCamera().getxOffset() / TILE_WIDTH));
-    let xEnd = parseInt(Math.min(this.width, (this.handler.getGameCamera().getxOffset() + this.handler.getWidth()) / TILE_WIDTH + 1));
-    let yStart = parseInt(Math.max(0, this.handler.getGameCamera().getyOffset() / TILE_HEIGHT));
-    let yEnd = parseInt(Math.min(this.height, (this.handler.getGameCamera().getyOffset() + this.handler.getHeight()) / TILE_HEIGHT + 1));
+    // if (this.death === 0) {
+      let xStart = parseInt(Math.max(0, this.handler.getGameCamera().getxOffset() / TILE_WIDTH));
+      let xEnd = parseInt(Math.min(this.width, (this.handler.getGameCamera().getxOffset() + this.handler.getWidth()) / TILE_WIDTH + 1));
+      let yStart = parseInt(Math.max(0, this.handler.getGameCamera().getyOffset() / TILE_HEIGHT));
+      let yEnd = parseInt(Math.min(this.height, (this.handler.getGameCamera().getyOffset() + this.handler.getHeight()) / TILE_HEIGHT + 1));
 
-    for (let y = yStart; y < yEnd; y++) {
-      for (let x = xStart; x < xEnd; x++) {
-        if (this.getTile(x, y) !== undefined)
-          this.getTile(x, y).render(g, x * TILE_WIDTH - this.handler.getGameCamera().getxOffset(), y * TILE_HEIGHT - this.handler.getGameCamera().getyOffset());
+      for (let y = yStart; y < yEnd; y++) {
+        for (let x = xStart; x < xEnd; x++) {
+          if (this.getTile(x, y) !== undefined)
+            this.getTile(x, y).render(g, x * TILE_WIDTH - this.handler.getGameCamera().getxOffset(), y * TILE_HEIGHT - this.handler.getGameCamera().getyOffset());
+        }
       }
-    }
 
-    this.entityManager.render(g);
-    this.lightManager.render(xStart, xEnd, yStart, yEnd, g);
+      this.entityManager.render(g);
+      this.lightManager.render(xStart, xEnd, yStart, yEnd, g);
 
-    g.drawText({
-      fillColor: 'white',
-      text: (tm.toString().length === 1 ? '0' + tm : tm) + ':' + (ts.toString().length === 1 ? '0' + ts : ts),
-      fontSize: 40,
-      x: 174,
-      y: 50,
-    });
-
+      g.drawText({
+        fillColor: 'white',
+        text: (tm.toString().length === 1 ? '0' + tm : tm) + ':' + (ts.toString().length === 1 ? '0' + ts : ts),
+        fontSize: 40,
+        x: 174,
+        y: 50,
+      });
+    // }
   }
 
   getTile(x, y) {

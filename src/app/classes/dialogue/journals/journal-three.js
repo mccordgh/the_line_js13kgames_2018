@@ -3,10 +3,10 @@ import { JournalParent } from "./journal-parent";
 export class JournalThree extends JournalParent {
 	constructor() {
 		super();
-		this.setText(this.myText());
+		this.setText(this.mT());
 	}
 
-	myText() {
+	mT() {
 		return [
       'Where\'s the exit? Why was this maze even built?',
       '...Is this some kind of sick joke?',

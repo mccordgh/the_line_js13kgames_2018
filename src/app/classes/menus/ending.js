@@ -4,14 +4,14 @@ export class Ending extends Menu {
   constructor(handler){
     super(handler);
     this.handler.getWorld().dialogue.addWords([
-      '+Results are inconclusive. Further tests are needed.+',
-      '+Seems I need to create more subjects.+',
+      '+Results are inconclusive. Further tests needed.+',
+      '+I must create more subjects.+',
       '+Let\'s put this one with the other failures for now.+',
       '....',
       '@WELCOME HoMe BRoTHeR@',
       '@you aRe oNe oF uS@',
       '@...FoReVeR...@',
-      'the end... the end... the end... the end... ?'
+      'the end...'
     ]);
   }
 
@@ -20,7 +20,7 @@ export class Ending extends Menu {
         'ahhh FiNaLLy ouT',
         'Oh my, our best one yet..',
         '',
-        '              ...',
+        '',
       ]
     );
   }

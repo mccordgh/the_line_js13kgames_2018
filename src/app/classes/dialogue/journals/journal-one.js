@@ -3,17 +3,17 @@ import { JournalParent } from "./journal-parent";
 export class JournalOne extends JournalParent {
   constructor() {
     super();
-    this.setText(this.myText());
+    this.setText(this.mT());
   }
 
-  myText() {
+  mT() {
     return [
-      'It looks like I survived the fall.',
-      'What is this strange fog, and this smell of decay?',
+      'I survived the fall...',
+      'What is this strange fog and smell of decay?',
       '....It\'s giving me migraines.',
-      'And these walls that move... gotta take care not to get crushed.',
+      'These walls that move... must take care not to get crushed.',
       'I must escape.',
-      '+How optimistic. He\'ll be mad within five minutes.+'
+      '+How optimistic. He\'ll go mad in minutes.+'
     ];
   }
 }

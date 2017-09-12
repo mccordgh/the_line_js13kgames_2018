@@ -1,9 +1,5 @@
 import { Assets } from '../../gfx/assets';
 import { Creature } from './creature';
-import { Rectangle } from '../../gfx/shapes/rectangle';
-
-
-let getDevInput = false, inputCounter = 0;
 
 export class Player extends Creature {
   constructor(handler, x, y){

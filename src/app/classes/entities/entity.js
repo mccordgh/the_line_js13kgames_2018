@@ -71,12 +71,9 @@ export class Entity {
     }
 
     if (this.checkCollidingTypes(e1, e2, 'player', 'monster')) {
-      if (e1.invincible || e2.invincible) return;
-
 			hW.dialogue.clear();
       // console.log(`${e1.type} at ${e1.x}, ${e1.y} and ${e2.type} at ${e2.x}, ${e2.y} `);
-			let gameOver = new GameOver(e1.handler, ['"Looks like this one',  'couldn\'t dodge his brothers..."']);
-      hG.getGameState().setState(gameOver);
+      this.handler.getWorld().death = 1;
     }
   }
 
