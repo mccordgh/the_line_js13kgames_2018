@@ -12,7 +12,7 @@ import { JournalTwo } from "../dialogue/journals/journal-two";
 import { JournalThree } from "../dialogue/journals/journal-three";
 import { JournalFour } from "../dialogue/journals/journal-four";
 
-let yellowTilesDown = false, yellowWallInterval = 0, yellowWallIntervalMax = 5 * 60, timeSpent = 0, tm = 8, ts = 0, tc = 0;
+let yellowTilesDown = false, yellowWallInterval = 0, yellowWallIntervalMax = 5 * 60, timeSpent = 0, tm = 5, ts = 0, tc = 0;
 
 export class World {
   constructor(handler) {
@@ -71,8 +71,8 @@ export class World {
     }
 
     this.entityManager.addEntity(new Exit(this.handler,  endX * TILE_WIDTH, endY * TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT));
-    this.addEvenSpreadOfLightSources(7);
-    if (this.level !== 1) this.addEvenSpreadOfMonsters(6);
+    this.addEvenSpreadOfLightSources(5);
+    if (this.level !== 1) this.addEvenSpreadOfMonsters(5);
 
     if (this.level <= 4) {
       let j = [

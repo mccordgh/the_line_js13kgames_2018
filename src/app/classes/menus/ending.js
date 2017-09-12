@@ -9,8 +9,9 @@ export class Ending extends Menu {
       '+Let\'s put this one with the other failures for now.+',
       '....',
       '@WELCOME HoMe BRoTHeR@',
-      '@you aRe oNe oF uS NoW@',
-      '@...FoReVeR...@'
+      '@you aRe oNe oF uS@',
+      '@...FoReVeR...@',
+      'the end... the end... the end... the end... ?'
     ]);
   }
 

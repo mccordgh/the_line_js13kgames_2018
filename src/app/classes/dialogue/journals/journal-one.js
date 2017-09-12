@@ -13,7 +13,7 @@ export class JournalOne extends JournalParent {
       '....It\'s giving me migraines.',
       'And these walls that move... gotta take care not to get crushed.',
       'I must escape.',
-      '+How optimistic.+'
+      '+How optimistic. He\'ll be mad within five minutes.+'
     ];
   }
 }
