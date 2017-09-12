@@ -23,7 +23,7 @@ export class World {
     handler.setWorld(this);
     this.entityManager = new EntityManager(handler, new Player(handler, 20, 20));
     this.spatialGrid = new SpatialGrid(this.handler.getWidth() * TILE_WIDTH, this.handler.getHeight() * TILE_HEIGHT, 64);
-    this.level = 4;
+    this.level = 1;
     this.loadWorld();
     this.lightManager = new LightManager(handler);
     this.dialogue = handler.getGame().d;
