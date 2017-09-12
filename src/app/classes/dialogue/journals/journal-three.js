@@ -4,19 +4,17 @@ export class JournalThree extends JournalParent {
 	constructor() {
 		super();
 		this.setText(this.myText());
-		this.name = 'EntRy o18';
 	}
 
 	myText() {
 		return [
-      '(You see words written in @blood@.)',
-      '@... ~HeHe. VeRy GooD!~@',
-      'These creatures all have the same face.',
-      '@~ALLLL~@',
-      'No help will come.',
-      '@~aLoNe!~@',
-      'These headaches are relentless.',
-      '@~%#**%*!%%!!~~@',
+      'Where\'s the exit? Why was this maze even built?',
+        '...Is this some kind of sick joke?',
+      '@funny you Say THat@',
+      'Who said that?!',
+      '@i THiNK you KNoW@',
+      'ARRGGGHHH THIS POUNDING HEADACHE! IT WON\'T STOP.',
+      '+He\'s progressed farther than expected.+'
 		];
 	}
 }

@@ -4,16 +4,16 @@ export class JournalTwo extends JournalParent {
 	constructor() {
 		super();
 		this.setText(this.myText());
-		this.name = 'Entry 11';
 	}
 
 	myText() {
 		return [
-      'I\'ve stayed alive longer than anyone else.',
-      'The strange beings down here are poisoning my mind.',
-      'They are slow; The rotating walls cut them off.',
-      'I am feeling migraines and hearing an eerie voice.',
-      'These creatures seem familiar.',
+      'What are these gross things?',
+      'It looks like they are rotting. Best to stay away.',
+      'Argh... My head... It\'s like someone knocking on door.',
+      '@you HaVeNT SeeN aNyTHiNG yeT@',
+      'Who said that?! Where..?',
+      '+..It has begun.+',
 		];
 	}
 }

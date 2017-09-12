@@ -1,8 +1,7 @@
 let dialogue = document.getElementById('dialogue');
-let speakerBox = document.getElementById('speaker');
 
 let speechTimer = 5, sentencePause = 0, textPrefix = '', textSuffix = '',
-	redToggle = false, yellowToggle = false, color = '', words = [], speakers = [];
+	redToggle = false, yellowToggle = false, color = '', words = [];
 
 export class Dialogue {
 	tick(h) {
@@ -26,29 +25,26 @@ export class Dialogue {
 
 	resetForNextSentence() {
 		words.splice(0, 1);
-		speakers.splice(0, 1);
     this.clean();
 	}
 
 	clean() {
     dialogue.innerHTML = '';
-    speakerBox.innerHTML = '';
     sentencePause = 0;
   }
 
 	speakNextLetter() {
-		speakerBox.innerHTML = speakers[0] ? speakers[0] + ':' : '';
-
 		let n = words[0][0];
 
 		redToggle = n === '@' ? !redToggle : redToggle;
 		yellowToggle = n === '+' ? !yellowToggle : yellowToggle;
 
+		color = '';
 		if (redToggle) color = 'red';
 		if (yellowToggle) color = 'yellow';
 
-		textPrefix = redToggle ? '<span style="color:' + color + '">' : '';
-		textSuffix = redToggle ? '</span>' : '';
+		textPrefix = '<span style="color:' + color + '">';
+		textSuffix = '</span>';
 
 		dialogue.innerHTML += textPrefix + n.replace('@', '').replace('+', '') + textSuffix;
 
@@ -57,14 +53,14 @@ export class Dialogue {
 		speechTimer = 0;
 	}
 
-	addWords(speaker, _words) {
-		words.push(_words.split(''));
-		speakers.push(speaker);
+	addWords(_words) {
+  if (!(_words instanceof Array)) _words = [_words];
+
+	  _words.forEach((w) => { words.push(w.split('')); });
 	}
 
 	clear() {
 		words = [];
-		speakers = [];
 	  this.clean();
 	}
 }

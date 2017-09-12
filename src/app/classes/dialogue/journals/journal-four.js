@@ -4,14 +4,17 @@ export class JournalFour extends JournalParent {
 	constructor() {
 		super();
 		this.setText(this.myText());
-		this.name = '~HEheHeh~';
 	}
 
 	myText() {
 		return [
-      '@~WoW. you MaDe iT. WHaT a ViLe JoKe aWaiTS.~',
-      '~i HaVE SeeN THE ANSweR!??!?~',
-      '~SCuRRy oN LiTTLe RaT anD LeaRN THe TRuTH.~@',
+      'I\'m exhausted..',
+      '..I need.. to...',
+      '@dont WoRRy We\'LL TaKe CaRe oF you@',
+      '..find... the exit..',
+      '@Let mE iN@',
+      '...',
+      '+Excellent results, comparatively.+',
 		];
 	}
 }

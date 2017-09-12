@@ -6,7 +6,7 @@ let n;
 export class Creature extends Entity {
   constructor(handler, x, y) {
     super(handler, x, y,64, 64);
-    this.speed = 50;
+    this.speed = 40;
     this.xMove = 0;
     this.yMove = 0;
     this.b.x = 16;

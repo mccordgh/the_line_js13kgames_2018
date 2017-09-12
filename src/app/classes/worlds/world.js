@@ -7,6 +7,7 @@ import { TileManager } from '../tiles/tile-manager';
 import { LightManager } from '../lighting/light-manager';
 import { Exit } from '../entities/statics/exit';
 import { GameOver } from '../menus/game-over';
+import { JournalOne } from '../dialogue/journals/journal-one';
 import { JournalTwo } from "../dialogue/journals/journal-two";
 import { JournalThree } from "../dialogue/journals/journal-three";
 import { JournalFour } from "../dialogue/journals/journal-four";
@@ -22,7 +23,7 @@ export class World {
     handler.setWorld(this);
     this.entityManager = new EntityManager(handler, new Player(handler, 20, 20));
     this.spatialGrid = new SpatialGrid(this.handler.getWidth() * TILE_WIDTH, this.handler.getHeight() * TILE_HEIGHT, 64);
-    this.level = 1;
+    this.level = 4;
     this.loadWorld();
     this.lightManager = new LightManager(handler);
     this.dialogue = handler.getGame().d;
@@ -54,11 +55,7 @@ export class World {
     this.lightManager.fillLightMap();
 
     if (this.level === 1) {
-      this.entityManager.addEntity(new Clone(this.handler, 6 * TILE_WIDTH, 3 * TILE_WIDTH));
-      this.entityManager.addEntity(new Clone(this.handler, 7 * TILE_WIDTH, 2 * TILE_WIDTH));
-      this.lightManager.addSource(2, 3);
-      this.lightManager.addSource(4, 6);
-      this.lightManager.addSource(6, 3);
+      this.lightManager.addSource(3, 3);
     }
 
     let endX, endY;
@@ -75,19 +72,18 @@ export class World {
 
     this.entityManager.addEntity(new Exit(this.handler,  endX * TILE_WIDTH, endY * TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT));
     this.addEvenSpreadOfLightSources(7);
-    if (this.level !== 1) this.addEvenSpreadOfMonsters(4);
+    if (this.level !== 1) this.addEvenSpreadOfMonsters(6);
 
-    if (this.level <= 4 && this.level !== 1) {
+    if (this.level <= 4) {
       let j = [
+        new JournalOne(),
         new JournalTwo(),
         new JournalThree(),
         new JournalFour(),
-      ][this.level - 2];
+      ][this.level - 1];
 
       let d = this.dialogue.addWords;
-
-      d('', '(You find a note on the floor.)');
-      j.text.forEach(e => { d(j.name, e); });
+      d(j.text);
     }
   }
 
