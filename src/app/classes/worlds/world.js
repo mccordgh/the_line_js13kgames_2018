@@ -61,7 +61,19 @@ export class World {
       this.lightManager.addSource(6, 3);
     }
 
-    this.entityManager.addEntity(new Exit(this.handler, (this.width - 2) * TILE_WIDTH, (this.height - 2) * TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT));
+    let endX, endY;
+
+    if (this.level === 1) {
+      endX = this.width - 2;
+      endY = this.width - 2;
+    } else {
+      endX = Math.random() < .5 ? 2 : this.width - 2;
+      endY = Math.random() < .5 ? 2 : this.height - 2;
+
+      if (endX === 2 && endY === 2) endX = this.width - 2;
+    }
+
+    this.entityManager.addEntity(new Exit(this.handler,  endX * TILE_WIDTH, endY * TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT));
     this.addEvenSpreadOfLightSources(7);
     if (this.level !== 1) this.addEvenSpreadOfMonsters(4);
 
