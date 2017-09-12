@@ -2,7 +2,7 @@ let dialogue = document.getElementById('dialogue');
 let speakerBox = document.getElementById('speaker');
 
 let speechTimer = 5, sentencePause = 0, textPrefix = '', textSuffix = '',
-	redToggle = false, words = [], speakers = [];
+	redToggle = false, yellowToggle = false, color = '', words = [], speakers = [];
 
 export class Dialogue {
 	tick(h) {
@@ -42,11 +42,15 @@ export class Dialogue {
 		let n = words[0][0];
 
 		redToggle = n === '@' ? !redToggle : redToggle;
+		yellowToggle = n === '+' ? !yellowToggle : yellowToggle;
 
-		textPrefix = redToggle ? '<span style="color:red">' : '';
+		if (redToggle) color = 'red';
+		if (yellowToggle) color = 'yellow';
+
+		textPrefix = redToggle ? '<span style="color:' + color + '">' : '';
 		textSuffix = redToggle ? '</span>' : '';
 
-		dialogue.innerHTML += textPrefix + n.replace('@', '') + textSuffix;
+		dialogue.innerHTML += textPrefix + n.replace('@', '').replace('+', '') + textSuffix;
 
 		words[0].splice(0, 1);
 

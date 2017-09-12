@@ -1,6 +1,5 @@
 import { GameState } from '../states/game-state';
 import { Menu } from './menu';
-let d = 0;
 
 export class MainMenu extends Menu {
   constructor(handler){
@@ -9,19 +8,12 @@ export class MainMenu extends Menu {
 
   render(g) {
     super.draw(g, [
-        'You are',
-        '"alone alone alone"',
-        '"aloNe AloNE? ALONe!!!"',
-        'to live again [press enter]',
-      ]
+        'Me, Myself, and i:',
+        '     Movement:',
+        'WASD, ZQSD, Arrows',
+        '             [Press enter to start.]',
+      ],
     );
-
-    if (d < 300) d++;
-
-    if (g && d === 300) {
-      d++;
-      this.handler.getGame().d.addWords('', 'Me, Myself, and I, and i...');
-    }
   }
 
   getInput() {

@@ -54,10 +54,11 @@ export class World {
     this.lightManager.fillLightMap();
 
     if (this.level === 1) {
-      this.dialogue.addWords('', 'To move: WASD, ZQSD, or arrow keys');
       this.entityManager.addEntity(new Clone(this.handler, 6 * TILE_WIDTH, 3 * TILE_WIDTH));
       this.entityManager.addEntity(new Clone(this.handler, 7 * TILE_WIDTH, 2 * TILE_WIDTH));
-      this.lightManager.addSource(4, 5);
+      this.lightManager.addSource(2, 3);
+      this.lightManager.addSource(4, 6);
+      this.lightManager.addSource(6, 3);
     }
 
     this.entityManager.addEntity(new Exit(this.handler, (this.width - 2) * TILE_WIDTH, (this.height - 2) * TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT));

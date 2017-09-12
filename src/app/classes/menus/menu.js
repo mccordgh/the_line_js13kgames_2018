@@ -1,20 +1,16 @@
 export class Menu {
   constructor(handler) {
     this.handler = handler;
-    this.cI = 0;
     this.c = 0;
   }
 
   tick() {
-    this.cI++;
-    if (this.cI > 8 && this.c > 479)
-      this.getInput();
-
+    this.getInput();
     this.render();
   }
 
   draw(g, text) {
-    if (this.c < 480) this.c++;
+    if (this.c < 240) this.c++;
 
     if (g) {
       g.fillStyle = "black";
@@ -28,7 +24,7 @@ export class Menu {
         y: 150,
       });
 
-      if (this.c > 119) g.drawText({
+      if (this.c > 59) g.drawText({
         fillColor: 'yellow',
         text: text[1],
         fontSize: 22,
@@ -36,7 +32,7 @@ export class Menu {
         y: 225,
       });
 
-      if (this.c > 239) g.drawText({
+      if (this.c > 119) g.drawText({
         fillColor: 'yellow',
         text: text[2],
         fontSize: 18,
@@ -44,7 +40,7 @@ export class Menu {
         y: 275,
       });
 
-      if (this.c > 479) g.drawText({
+      if (this.c > 239) g.drawText({
         fillColor: 'white',
         text: text[3],
         fontSize: 24,
