@@ -13,7 +13,7 @@ export class JournalThree extends JournalParent {
       '@funny you Say THat@',
       'Who said that?!',
       '@i THiNK you KNoW@',
-      'ARRGGGHHH! THIS POUNDING HEADACHE! IT WON\'T STOP!',
+      '...ARRGGGHHH! THIS POUNDING HEADACHE! IT WON\'T STOP!',
       '+He\'s progressed farther than expected.+'
 		];
 	}
