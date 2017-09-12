@@ -10,10 +10,10 @@ export class JournalTwo extends JournalParent {
 		return [
       'What are these gross things?',
       'It looks like they are rotting. Best to stay away.',
-      'Argh... My head... It\'s like someone knocking on door.',
+      'Argh... My head... It\'s like someone banging on a door.',
       '@you HaVeNT SeeN aNyTHiNG yeT@',
-      'Who said that?! Where..?',
-      '+..It has begun.+',
+      'Who said that?! Where..???',
+      '+It has begun.+',
 		];
 	}
 }

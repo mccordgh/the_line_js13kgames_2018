@@ -9,11 +9,11 @@ export class JournalThree extends JournalParent {
 	myText() {
 		return [
       'Where\'s the exit? Why was this maze even built?',
-        '...Is this some kind of sick joke?',
+      '...Is this some kind of sick joke?',
       '@funny you Say THat@',
       'Who said that?!',
       '@i THiNK you KNoW@',
-      'ARRGGGHHH THIS POUNDING HEADACHE! IT WON\'T STOP.',
+      'ARRGGGHHH! THIS POUNDING HEADACHE! IT WON\'T STOP!',
       '+He\'s progressed farther than expected.+'
 		];
 	}

@@ -10,8 +10,8 @@ export class JournalOne extends JournalParent {
     return [
       'It looks like I survived the fall.',
       'What is this strange fog, and this smell of decay?',
-      '....It\'s giving migraines.',
-      'And these walls that move... gotta take care not get crushed.',
+      '....It\'s giving me migraines.',
+      'And these walls that move... gotta take care not to get crushed.',
       'I must escape.',
       '+How optimistic+'
     ];
