@@ -11,7 +11,7 @@ export class Player extends Creature {
     this.a = Assets.getAssets('tiles');
     this.x = x;
     this.y = y;
-    this.speed = 140;
+    this.speed = 110;
     this.type = 'player';
     this.lA = 'pwalk_down';
   }
@@ -24,10 +24,6 @@ export class Player extends Creature {
     super.tick(dt);
 
     this.move();
-    if (this.superSpeed) {
-      this.move();
-      this.move();
-    }
 
     this.handler.getGameCamera().centerOnEntity(this);
   }

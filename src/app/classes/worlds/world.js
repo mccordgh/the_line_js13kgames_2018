@@ -63,7 +63,7 @@ export class World {
 
     this.entityManager.addEntity(new Exit(this.handler, (this.width - 2) * TILE_WIDTH, (this.height - 2) * TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT));
     this.addEvenSpreadOfLightSources(7);
-    if (this.level !== 1) this.addEvenSpreadOfMonsters(6);
+    if (this.level !== 1) this.addEvenSpreadOfMonsters(4);
 
     if (this.level <= 4 && this.level !== 1) {
       let j = [

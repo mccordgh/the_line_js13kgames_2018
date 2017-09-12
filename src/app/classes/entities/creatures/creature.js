@@ -6,7 +6,7 @@ let n;
 export class Creature extends Entity {
   constructor(handler, x, y) {
     super(handler, x, y,64, 64);
-    this.speed = 60;
+    this.speed = 50;
     this.xMove = 0;
     this.yMove = 0;
     this.b.x = 16;
@@ -40,11 +40,6 @@ export class Creature extends Entity {
   }
 
   moveX() {
-    if (this.clipping) {
-      this.x += this.xMove;
-      return;
-    }
-
     let tempX = this.xMove > 0
       ? parseInt((this.x + this.xMove + this.b.x + this.b.w) / TILE_WIDTH)
       : parseInt((this.x + this.xMove + this.b.x) / TILE_WIDTH);
@@ -64,11 +59,6 @@ export class Creature extends Entity {
   }
 
   moveY() {
-    if (this.clipping) {
-      this.y += this.yMove;
-      return;
-    }
-
     let tempY = this.yMove > 0
       ? parseInt((this.y + this.yMove + this.b.y + this.b.h) / TILE_HEIGHT)
       : parseInt((this.y + this.yMove + this.b.y) / TILE_HEIGHT);
