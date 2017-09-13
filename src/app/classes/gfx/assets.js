@@ -16,7 +16,7 @@ export class Assets {
     this.animations = {};
   }
 
-  addAnimation(name, animation) {
+  aA(name, animation) {
     this.animations[name] = animation;
   }
 
@@ -28,22 +28,22 @@ export class Assets {
     return SPRITE_HEIGHT;
   }
 
-  static getAssets(name) {
+  static gA(name) {
     return assets[name];
   }
 }
 
-let cropTile = (asset, x, y) => asset.sheet.crop(SPRITE_WIDTH * x, SPRITE_HEIGHT * y, SPRITE_WIDTH, SPRITE_HEIGHT);
+let cT = (asset, x, y) => asset.sheet.crop(SPRITE_WIDTH * x, SPRITE_HEIGHT * y, SPRITE_WIDTH, SPRITE_HEIGHT);
 
 let tiles = new Assets('tiles', PATH + "all_tiles.png", SPRITE_WIDTH, SPRITE_HEIGHT);
-tiles.path = cropTile(tiles, 1, 0);
-tiles.pathYellow = cropTile(tiles, 1, 1);
-tiles.wall = cropTile(tiles, 0, 0);
-tiles.wallYellow = cropTile(tiles, 0, 1);
-tiles.exit = cropTile(tiles, 1, 2);
-tiles.lantern = cropTile(tiles, 0, 2);
+tiles.path = cT(tiles, 1, 0);
+tiles.pathYellow = cT(tiles, 1, 1);
+tiles.wall = cT(tiles, 0, 0);
+tiles.wallYellow = cT(tiles, 0, 1);
+tiles.exit = cT(tiles, 1, 2);
+tiles.lantern = cT(tiles, 0, 2);
 
-let addAnimations = (sprites, n, wurow, wrrow, wdrow, wlrow) => {
+let aA = (sprites, n, wurow, wrrow, wdrow, wlrow) => {
   let framespeed = 200, wrframes = [], wlframes = [], wuframes = [], wdframes = [];
 
   for (let i = 0; i < 2; i++) {
@@ -65,11 +65,11 @@ let addAnimations = (sprites, n, wurow, wrrow, wdrow, wlrow) => {
     });
   }
 
-  sprites.addAnimation(n + "walk_up", new Animation(wuframes));
-  sprites.addAnimation(n + "walk_right", new Animation(wrframes));
-  sprites.addAnimation(n + "walk_down", new Animation(wdframes));
-  sprites.addAnimation(n + "walk_left", new Animation(wlframes));
+  sprites.aA(n + "walk_up", new Animation(wuframes));
+  sprites.aA(n + "walk_right", new Animation(wrframes));
+  sprites.aA(n + "walk_down", new Animation(wdframes));
+  sprites.aA(n + "walk_left", new Animation(wlframes));
 };
 
-addAnimations(tiles, 'p', 3, 4, 5, 6);
-addAnimations(tiles, 'c', 7, 8, 9, 10);
+aA(tiles, 'p', 3, 4, 5, 6);
+aA(tiles, 'c', 7, 8, 9, 10);

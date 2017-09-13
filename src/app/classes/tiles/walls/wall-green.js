@@ -3,7 +3,7 @@ import { Tile } from '../tile';
 
 export class WallGreen extends Tile {
   constructor(id) {
-    super(Assets.getAssets('tiles').wallGreen, id);
+    super(Assets.gA('tiles').wallGreen, id);
     this.isSolid = true;
   }
 }

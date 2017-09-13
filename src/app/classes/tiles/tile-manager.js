@@ -6,7 +6,7 @@ import { WallYellow } from './walls/wall-yellow';
 // import { PathGreen } from './paths/path-green';
 // import { WallGreen } from './walls/wall-green';
 
-let assets = Assets.getAssets("tiles");
+let assets = Assets.gA("tiles");
 let tiles = [];
 
 tiles[0] = new Path(0);

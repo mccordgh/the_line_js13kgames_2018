@@ -9,9 +9,9 @@ export class MainMenu extends Menu {
   render(g) {
     super.draw(g, [
         'Me, Myself, and i:',
-        '     Movement:',
+        'Movement:',
         'WASD, ZQSD, Arrows',
-        '             [Press enter to start.]',
+        '[Press enter to start.]',
       ],
     );
   }

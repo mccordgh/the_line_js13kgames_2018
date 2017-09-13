@@ -9,7 +9,7 @@ export class GameOver extends Menu {
   render(g) {
     super.draw(g, [
       'Y O U   D I E D',
-      '"Another failure.",' +
+      '"Another failure."',
       '"Maybe the next one will succeed."',
       'Live again [press enter]',
       ]

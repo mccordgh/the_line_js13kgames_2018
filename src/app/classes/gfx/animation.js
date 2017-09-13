@@ -1,26 +1,26 @@
 export class Animation {
   constructor(frames){
-    this.frames = frames;
-    this.index = 0;
-    this.lastTime = Date.now();
-    this.timer = 0;
-    this.speed = 1000;
+    this.f = frames;
+    this.i = 0;
+    this.l = Date.now();
+    this.t = 0;
+    this.s = 1000;
   }
 
   tick() {
-    this.timer += Date.now() - this.lastTime;
-    this.lastTime = Date.now();
+    this.t += Date.now() - this.l;
+    this.l = Date.now();
 
-    if (this.timer >= this.speed){
-      this.index++;
-      this.timer = 0;
-      if (this.index >= this.frames.length)
-        this.index = 0;
+    if (this.t >= this.s){
+      this.i++;
+      this.t = 0;
+      if (this.i >= this.f.length)
+        this.i = 0;
     }
   }
 
   getCurrentFrame() {
-    this.speed = this.frames[this.index].speed;
-    return this.frames[this.index].frame;
+    this.s = this.f[this.i].speed;
+    return this.f[this.i].frame;
   }
 }

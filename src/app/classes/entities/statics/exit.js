@@ -4,7 +4,7 @@ import { StaticEntity } from './static-entity';
 export class Exit extends StaticEntity {
   constructor(handler, x, y, width, height) {
     super(handler, x, y, width, height);
-    this.a = Assets.getAssets('tiles');
+    this.a = Assets.gA('tiles');
     this.type = 'exit';
     this.b.x = 15;
     this.b.y = 15;

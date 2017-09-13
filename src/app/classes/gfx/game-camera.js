@@ -1,72 +1,50 @@
 export class GameCamera {
-  constructor(handler, xOffset, yOffset){
-    this.xOffset = xOffset;
-    this.yOffset = yOffset;
-    this.handler = handler;
+  constructor(h, xO, yO){
+    this.xO = xO;
+    this.y0 = yO;
+    this.h = h;
   }
 
   centerOnEntity(entity) {
-    this.xOffset = entity.getX() - this.handler.getWidth() / 2 + entity.getWidth() / 2;
-    this.yOffset = entity.getY() - this.handler.getHeight() / 2 + entity.getHeight() / 2;
+    this.xO = entity.getX() - this.h.getWidth() / 2 + entity.getWidth() / 2;
+    this.y0 = entity.getY() - this.h.getHeight() / 2 + entity.getHeight() / 2;
     this.checkBlankSpace();
   }
 
-  // slowCenterOnEntity(entity) {
-  //   let startX = this.xOffset,
-  //     startY = this.yOffset,
-  //     goalX = entity.getX() - this.handler.getWidth() / 2 + entity.getWidth() / 2,
-  //     goalY = entity.getY() - this.handler.getHeight() / 2 + entity.getHeight() / 2;
-  //
-  //   if(startY > goalY && this.yOffset > goalY) {
-  //     this.yOffset -= 5;
-  //   }
-  //   if (goalY > startY && this.yOffset < goalY) {
-  //     this.yOffset += 5;
-  //   }
-  //   if(startX > goalX && this.xOffset > goalX) {
-  //     this.xOffset -= 5;
-  //   }
-  //   if (goalX > startX && this.xOffset < goalX) {
-  //     this.xOffset += 5;
-  //   }
-  //
-  //   this.checkBlankSpace();
-  // }
-
   move(xAmt, yAmt) {
-    this.xOffset += xAmt;
-    this.yOffset += yAmt;
+    this.xO += xAmt;
+    this.y0 += yAmt;
 
     this.checkBlankSpace();
   }
 
   getxOffset() {
-    return parseInt(this.xOffset);
+    return parseInt(this.xO);
   }
 
   getyOffset() {
-    return parseInt(this.yOffset);
+    return parseInt(this.y0);
   }
 
   setxOffset(offset) {
-    this.xOffset = offset;
+    this.xO = offset;
   }
 
   setyOffset(offset) {
-    this.yOffset = offset;
+    this.y0 = offset;
   }
 
   checkBlankSpace() {
-    if (this.xOffset < 0) {
-      this.xOffset = 0;
-    } else if (this.xOffset > this.handler.getWorld().getWidth() * TILE_WIDTH - this.handler.getWidth()) {
-      this.xOffset = this.handler.getWorld().getWidth() * TILE_WIDTH - this.handler.getWidth();
+    if (this.xO < 0) {
+      this.xO = 0;
+    } else if (this.xO > this.h.getWorld().getWidth() * TILE_WIDTH - this.h.getWidth()) {
+      this.xO = this.h.getWorld().getWidth() * TILE_WIDTH - this.h.getWidth();
     }
 
-    if (this.yOffset < 0){
-      this.yOffset = 0;
-    } else if (this.yOffset > this.handler.getWorld().getHeight() * TILE_HEIGHT - this.handler.getHeight()) {
-      this.yOffset = this.handler.getWorld().getHeight() * TILE_HEIGHT - this.handler.getHeight();
+    if (this.y0 < 0){
+      this.y0 = 0;
+    } else if (this.y0 > this.h.getWorld().getHeight() * TILE_HEIGHT - this.h.getHeight()) {
+      this.y0 = this.h.getWorld().getHeight() * TILE_HEIGHT - this.h.getHeight();
     }
   }
 }

@@ -12,13 +12,13 @@ export class LightSource extends StaticEntity {
     this.b.w = 0;
     this.b.h = 0;
     this.fl = false;
-    this.lastFlickerCounter = 0;
-    this.flickerToggle = 0;
-    this.flickerCount = 0;
-    this.flickerTimes = 0;
-    this.flickerLength = 0;
+    this.LFC = 0; // last flicker count
+    this.fT = 0; // flicker toggle
+    this.fC = 0; // flicker count
+    this.fTs = 0; // flicker times
+    this.fLe = 0; // flicker length
     this.moveThrough = true;
-    this.a = Assets.getAssets('tiles');
+    this.a = Assets.gA('tiles');
     this.type = 'light';
     this.init();
   }
@@ -77,31 +77,31 @@ export class LightSource extends StaticEntity {
     let max = 12;
     let min = 6;
 
-    this.lastFlickerCounter = 0;
-    this.flickerLength = Math.floor(Math.random() * (max - min + 1)) + min;
+    this.LFC = 0;
+    this.fLe = Math.floor(Math.random() * (max - min + 1)) + min;
     this.fl = true;
   }
 
   flickerLights() {
-    if (this.flickerCount === 0) {
-      if (this.flickerToggle === 0) {
+    if (this.fC === 0) {
+      if (this.fT === 0) {
         this.expandLight(0.25);
-        this.flickerToggle = 1;
+        this.fT = 1;
       } else {
         this.expandLight();
-        this.flickerToggle = 0;
+        this.fT = 0;
       }
     }
 
-    this.flickerCount++;
+    this.fC++;
 
-    if (this.flickerCount >= this.flickerLength) {
-      this.flickerCount = 0;
-      this.flickerTimes++;
+    if (this.fC >= this.fLe) {
+      this.fC = 0;
+      this.fTs++;
     }
 
-    if (this.flickerTimes >= 6) {
-      this.flickerTimes = 0;
+    if (this.fTs >= 6) {
+      this.fTs = 0;
       this.fl = false;
     }
   }
@@ -110,9 +110,9 @@ export class LightSource extends StaticEntity {
     if (this.fl) {
       this.flickerLights();
     } else {
-      this.lastFlickerCounter++;
+      this.LFC++;
 
-      if (this.lastFlickerCounter > 240) {
+      if (this.LFC > 240) {
         this.chanceToFlicker();
       }
     }

@@ -4,7 +4,7 @@ import { Creature } from './creature';
 export class Player extends Creature {
   constructor(handler, x, y){
     super(handler, x, y);
-    this.a = Assets.getAssets('tiles');
+    this.a = Assets.gA('tiles');
     this.x = x;
     this.y = y;
     this.speed = 110;

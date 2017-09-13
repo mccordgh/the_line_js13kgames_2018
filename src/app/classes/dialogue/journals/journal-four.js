@@ -9,10 +9,10 @@ export class JournalFour extends JournalParent {
 	mT() {
 		return [
       'I\'m exhausted..',
-      '..I need.. to...',
-      '@dont WoRRy We\'LL TaKe CaRe oF you@',
+      '..I must..',
+      '@~dont WoRRy We\'LL TaKe CaRe oF you~@',
       '..find... the exit..',
-      '@Let mE iN@',
+      '@~Let mE iN~@',
       '...',
       '+Excellent results, comparatively.+',
 		];

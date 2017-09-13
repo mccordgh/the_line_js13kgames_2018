@@ -3,6 +3,6 @@ import { Tile } from '../tile';
 
 export class PathGreen extends Tile {
   constructor(id) {
-    super(Assets.getAssets('tiles').pathGreen, id);
+    super(Assets.gA('tiles').pathGreen, id);
   }
 }

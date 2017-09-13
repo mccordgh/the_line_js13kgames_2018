@@ -3,15 +3,16 @@ import { Menu } from './menu';
 export class Ending extends Menu {
   constructor(handler){
     super(handler);
-    this.handler.getWorld().dialogue.addWords([
+    this.handler.getWorld().dialogue.aW([
       '+Results are inconclusive. Further tests needed.+',
       '+I must create more subjects.+',
-      '+Let\'s put this one with the other failures for now.+',
-      '....',
+      '+Put this one with the other failures.+',
+      '...',
       '@WELCOME HoMe BRoTHeR@',
       '@you aRe oNe oF uS@',
       '@...FoReVeR...@',
-      'the end...'
+      'the end...?',
+      'Live again [Press Enter]',
     ]);
   }
 

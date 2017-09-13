@@ -11,6 +11,7 @@ export class Menu {
 
   draw(g, text) {
     if (this.c < 240) this.c++;
+    let x = 50;
 
     if (g) {
       g.fillStyle = "black";
@@ -20,7 +21,7 @@ export class Menu {
         fillColor: 'red',
         text: text[0],
         fontSize: 32,
-        x: 150,
+        x,
         y: 150,
       });
 
@@ -28,7 +29,7 @@ export class Menu {
         fillColor: 'yellow',
         text: text[1],
         fontSize: 22,
-        x: 200,
+        x,
         y: 225,
       });
 
@@ -36,7 +37,7 @@ export class Menu {
         fillColor: 'yellow',
         text: text[2],
         fontSize: 18,
-        x: 125,
+        x,
         y: 275,
       });
 
@@ -44,7 +45,7 @@ export class Menu {
         fillColor: 'white',
         text: text[3],
         fontSize: 24,
-        x: 100,
+        x,
         y: 350,
       });
     }

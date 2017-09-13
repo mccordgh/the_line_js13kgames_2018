@@ -24,7 +24,7 @@ export class World {
     handler.setWorld(this);
     this.entityManager = new EntityManager(handler, new Player(handler, 20, 20));
     this.spatialGrid = new SpatialGrid(this.handler.getWidth() * TILE_WIDTH, this.handler.getHeight() * TILE_HEIGHT, 64);
-    this.level = 2;
+    this.level = 1;
     this.loadWorld();
     this.lightManager = new LightManager(handler);
     this.dialogue = handler.getGame().d;
@@ -86,7 +86,7 @@ export class World {
         new JournalFour(),
       ][this.level - 1];
 
-      let d = this.dialogue.addWords;
+      let d = this.dialogue.aW;
       d(j.text);
     }
   }
@@ -193,7 +193,7 @@ export class World {
       if (this.death === 1) {
         this.entityManager.removeEntity(this.entityManager.getPlayer());
         this.dialogue.clear();
-        this.dialogue.addWords('+It looks like this one, wasn\'t quick enough.+');
+        this.dialogue.aW('+It looks like this one, wasn\'t quick enough.+');
       } else if (this.death === 220) {
         let gameOver = new GameOver(this.handler);
         this.handler.getGame().getGameState().setState(gameOver);
@@ -206,7 +206,7 @@ export class World {
       this.plusTime();
 
       if (!cleared && this.level !== 1 && timeSpent - (tm * 60 + ts) > 75) {
-          this.dialogue.addWords('(the monsters start to crumble all around you.)');
+          this.dialogue.aW('(the monsters start to crumble all around you.)');
           this.entityManager.removeEntitiesByType('monster');
           cleared = true;
       }

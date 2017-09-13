@@ -11,9 +11,9 @@ export class JournalOne extends JournalParent {
       'I survived the fall...',
       'What is this strange fog and smell of decay?',
       '....It\'s giving me migraines.',
-      'These walls that move... must take care not to get crushed.',
+      'These walls move... must take care not to get crushed.',
       'I must escape.',
-      '+How optimistic. He\'ll go mad in minutes.+'
+      '+How optimistic.+'
     ];
   }
 }

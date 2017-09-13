@@ -1,16 +1,16 @@
 let maze = [], finalMaze = [], mazeWidth = 0, mazeHeight = 0;
 
-let getRandomWallID = (i, j) => {
+let getRW = (i, j) => {
   // make sure we don't build a passable wall on the outside border
   if (i === 0 || j === 0 || i === mazeWidth - 1 || j === mazeHeight - 1) return 1;
 
   let randomNum = Math.floor(Math.random() * 20);
 
-  return (randomNum < 12) ? 1 : 2;
+  return (randomNum < 15) ? 1 : 2;
 };
 
 export class MazeGenerator {
-  static createMaze() {
+  static cM() {
     let moves = [];
     for(let i = 0; i < mazeHeight; i ++){
       maze[i] = [];
@@ -78,50 +78,30 @@ export class MazeGenerator {
     for(let i = 0; i < mazeHeight; i ++){
       for(let j = 0; j < mazeWidth; j ++){
         if(!finalMaze[j]) finalMaze[j] = [];
-        finalMaze[j][i] = maze[i][j] === 1 ? getRandomWallID(i, j) : 0;
+        finalMaze[j][i] = maze[i][j] === 1 ? getRW(i, j) : 0;
       }
     }
   }
 
-  static createRooms() {
+  static cRs() {
     let roomSize = 3;
 
     // NW room
-    this.createRoom(1, 1, roomSize);
+    this.cR(1, 1, roomSize);
     // SW room
-    this.createRoom(1, mazeHeight - (roomSize + 1), roomSize);
+    this.cR(1, mazeHeight - (roomSize + 1), roomSize);
     // SE ROOM
-    this.createRoom(mazeWidth - (roomSize + 1), mazeHeight - (roomSize + 1), roomSize);
+    this.cR(mazeWidth - (roomSize + 1), mazeHeight - (roomSize + 1), roomSize);
     // NE ROOM
-    this.createRoom(mazeWidth - (roomSize + 1), 1, roomSize);
+    this.cR(mazeWidth - (roomSize + 1), 1, roomSize);
   }
 
-  static createRoom(startX, startY, size) {
+  static cR(startX, startY, size) {
     for(let i = startY; i < startY + size; i ++){
       for(let j = startX; j < startX +  size; j ++){
         finalMaze[j][i] = 0;
       }
     }
-  }
-
-  static createBarriers(level) {
-    if (level === 2) return;
-
-    //mid left
-    finalMaze[1][Math.ceil(mazeHeight / 2)] = 1;
-    finalMaze[1][Math.ceil(mazeHeight / 2) + 1] = 1;
-
-    //mid right
-    finalMaze[mazeWidth - 2][Math.ceil(mazeHeight / 2)] = 1;
-    finalMaze[mazeWidth - 2][Math.ceil(mazeHeight / 2) + 1] = 1;
-
-    //mid top
-    finalMaze[Math.ceil(mazeWidth / 2)][1] = 1;
-    finalMaze[Math.ceil(mazeWidth / 2) + 1][1] = 1;
-
-    //mid bottom
-    finalMaze[Math.ceil(mazeWidth / 2)][mazeHeight - 2] = 1;
-    finalMaze[Math.ceil(mazeWidth / 2) + 1][mazeHeight - 2] = 1;
   }
 
   static getIntroMaze() {
@@ -148,9 +128,8 @@ export class MazeGenerator {
     } else {
       mazeWidth = mazeHeight = (level * 10) - 1;
 
-      this.createMaze();
-      this.createRooms();
-      this.createBarriers(level);
+      this.cM();
+      this.cRs();
 
       return {
         mazeWidth,
