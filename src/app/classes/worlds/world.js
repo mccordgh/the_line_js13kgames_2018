@@ -12,7 +12,8 @@ import { JournalTwo } from "../dialogue/journals/journal-two";
 import { JournalThree } from "../dialogue/journals/journal-three";
 import { JournalFour } from "../dialogue/journals/journal-four";
 
-let yellowTilesDown = false, yellowWallInterval = 0, yellowWallIntervalMax = 5 * 60, timeSpent = 0, tm = 5, ts = 0, tc = 0, cleared;
+let yellowTilesDown = false, yellowWallInterval = 0, yellowWallIntervalMax = 3 * 60,
+  timeSpent = 0, tm = 5, ts = 0, tc = 0, cleared, flashWarning = false, flashOn = true;
 
 export class World {
   constructor(handler) {
@@ -39,6 +40,8 @@ export class World {
     this.setPlayerSpawn(this.spawnX, this.spawnY);
     this.level += 1;
     this.tiles = [];
+    flashWarning = false;
+    yellowWallInterval = 0;
 
     this.lightManager.removeSources();
     this.entityManager.removeEntitiesByType('exit');
@@ -158,7 +161,14 @@ export class World {
   checkForWallSwap() {
     yellowWallInterval++;
 
+    //check if it's 1 second before time to swap, so we can flash a warning
+    if (yellowWallInterval > (yellowWallIntervalMax - 60) && yellowWallInterval < yellowWallIntervalMax) {
+      flashWarning = true;
+    }
+
+    //check if it's time to swap
     if (yellowWallInterval > yellowWallIntervalMax) {
+      flashWarning = false;
       this.handler.getSM().play('wall');
       yellowWallInterval = 0;
 
@@ -222,10 +232,23 @@ export class World {
 
       for (let y = yStart; y < yEnd; y++) {
         for (let x = xStart; x < xEnd; x++) {
-          if (this.getTile(x, y) !== undefined)
-            this.getTile(x, y).render(g, x * TILE_WIDTH - this.handler.getGameCamera().getxOffset(), y * TILE_HEIGHT - this.handler.getGameCamera().getyOffset());
+          const tile = this.getTile(x, y);
+
+          if (tile) {
+            tile.render(g, x * TILE_WIDTH - this.handler.getGameCamera().getxOffset(), y * TILE_HEIGHT - this.handler.getGameCamera().getyOffset());
+          }
+
+          if (flashWarning && (tile.id === 4 || tile.id === 2)) {
+            if (flashOn) {
+              console.log('flash');
+              g.fillColor = 'white';
+              g.fillRect(x * TILE_WIDTH - this.handler.getGameCamera().getxOffset(), y * TILE_HEIGHT - this.handler.getGameCamera().getyOffset(), TILE_WIDTH, TILE_HEIGHT);
+            }
+          }
         }
       }
+
+      flashOn = !flashOn;
 
       this.entityManager.render(g);
       this.lightManager.render(xStart, xEnd, yStart, yEnd, g);
