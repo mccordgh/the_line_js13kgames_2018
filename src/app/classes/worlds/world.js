@@ -13,7 +13,8 @@ import { JournalThree } from "../dialogue/journals/journal-three";
 import { JournalFour } from "../dialogue/journals/journal-four";
 
 let yellowTilesDown = false, yellowWallInterval = 0, yellowWallIntervalMax = 3 * 60,
-  timeSpent = 0, tm = 5, ts = 0, tc = 0, cleared, flashWarning = false, flashOn = true;
+  timeSpent = 0, tm = 5, ts = 0, tc = 0, cleared, flashWarning = false, flashOn = true,
+  flashCount = 0;
 
 export class World {
   constructor(handler) {
@@ -239,16 +240,22 @@ export class World {
           }
 
           if (flashWarning && (tile.id === 4 || tile.id === 2)) {
-            if (flashOn) {
-              console.log('flash');
+            flashCount++;
+
+            if (flashCount < 20) {
+              g.globalAlpha = 0.6;
               g.fillColor = 'white';
               g.fillRect(x * TILE_WIDTH - this.handler.getGameCamera().getxOffset(), y * TILE_HEIGHT - this.handler.getGameCamera().getyOffset(), TILE_WIDTH, TILE_HEIGHT);
+            }
+
+            if (flashCount < 40) {
+              flashCount++;
+            } else {
+              flashCount = 0;
             }
           }
         }
       }
-
-      flashOn = !flashOn;
 
       this.entityManager.render(g);
       this.lightManager.render(xStart, xEnd, yStart, yEnd, g);
