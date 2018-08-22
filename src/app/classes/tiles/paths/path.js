@@ -7,9 +7,9 @@ export class Path extends Tile {
     super();
   }
 
-  // render() {
-    // g.strokeStyle = '#FFFFFF';
-    // g.rect(x, y, TILE_SIZE, TILE_SIZE);
-    // g.stroke();
-  // }
+  render(g, x, y) {
+    g.strokeStyle = 'white';
+    g.rect(x, y, TILE_SIZE, TILE_SIZE);
+    g.stroke();
+  }
 }
