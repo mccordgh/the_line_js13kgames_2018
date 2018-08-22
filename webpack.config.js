@@ -48,7 +48,7 @@ let config = {
     new HtmlWebpackPlugin(htmlConfig),
     new HtmlWebpackInlineSourcePlugin(),
     new CopyWebpackPlugin([
-      { from: 'src/res/all_tiles.png', to: 'src/res/all_tiles.png' },
+      { from: 'src/res/worker.png', to: 'src/res/worker.png' },
       ])
   ],
   stats: 'minimal',
