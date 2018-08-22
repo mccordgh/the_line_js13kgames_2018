@@ -5,8 +5,8 @@ export class LightSource extends StaticEntity {
   constructor(handler, x, y, width, height) {
     super(handler, x, y, width, height);
     this.m = this.handler.getWorld().getLightManager();
-    this.posX = Math.floor(x / TILE_WIDTH);
-    this.posY = Math.floor(y / TILE_HEIGHT);
+    this.posX = Math.floor(x / TILE_SIZE);
+    this.posY = Math.floor(y / TILE_SIZE);
     this.b.x = 0;
     this.b.y = 0;
     this.b.w = 0;

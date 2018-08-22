@@ -46,7 +46,7 @@ export class LightManager {
      for (let x = xStart; x < xEnd; x++) {
        g.globalAlpha = this.LM[x][y];
 
-       g.fillRect(x * TILE_WIDTH - this.handler.getGameCamera().getxOffset(), y * TILE_HEIGHT - this.handler.getGameCamera().getyOffset(), TILE_WIDTH, TILE_HEIGHT);
+       g.fillRect(x * TILE_SIZE - this.handler.getGameCamera().getxOffset(), y * TILE_SIZE - this.handler.getGameCamera().getyOffset(), TILE_SIZE, TILE_SIZE);
      }
    }
 
@@ -54,7 +54,7 @@ export class LightManager {
  }
   //
   addSource(x, y) {
-    let newSource = new LightSource(this.handler, x * TILE_WIDTH, y * TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT, this);
+    let newSource = new LightSource(this.handler, x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, TILE_SIZE, this);
     this.handler.getWorld().getEntityManager().addEntity(newSource);
     this.s.push(newSource);
   }

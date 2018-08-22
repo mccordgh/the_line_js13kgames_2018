@@ -3,7 +3,7 @@ import { Creature } from '../creature';
 
 export class Clone extends Creature {
   constructor(handler, x, y) {
-    super(handler, x, y, TILE_WIDTH, TILE_HEIGHT);
+    super(handler, x, y, TILE_SIZE, TILE_SIZE);
     this.a = Assets.gA('tiles');
     this.x = x;
     this.y = y;
@@ -26,8 +26,8 @@ export class Clone extends Creature {
   }
 
   cM() {
-    let width = this.handler.getWorld().getWorldWidth() * TILE_WIDTH;
-    let height = this.handler.getWorld().getWorldHeight() * TILE_HEIGHT;
+    let width = this.handler.getWorld().getWorldWidth() * TILE_SIZE;
+    let height = this.handler.getWorld().getWorldHeight() * TILE_SIZE;
 
     if (this.x < 1 || this.y < 1 || this.x > width || this.y > height) {
       this.x = this.sX;
@@ -67,8 +67,8 @@ export class Clone extends Creature {
   }
 
   cW() {
-    let xx = Math.round(this.x / TILE_WIDTH);
-    let yy = Math.round(this.y / TILE_HEIGHT);
+    let xx = Math.round(this.x / TILE_SIZE);
+    let yy = Math.round(this.y / TILE_SIZE);
     let tile = this.handler.getWorld().getTile(xx, yy);
 
     try {
@@ -86,8 +86,8 @@ export class Clone extends Creature {
       for (let i = startX; i < endX; i++) {
         try {
           if (!this.handler.getWorld().getTile(i, j).isSolid && !(i !== xx && j !== yy)) {
-            this.x = i * TILE_WIDTH;
-            this.y = j * TILE_HEIGHT;
+            this.x = i * TILE_SIZE;
+            this.y = j * TILE_SIZE;
             return;
           }
         } catch (e) {

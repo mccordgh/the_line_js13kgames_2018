@@ -37,14 +37,14 @@ export class GameCamera {
   checkBlankSpace() {
     if (this.xO < 0) {
       this.xO = 0;
-    } else if (this.xO > this.h.getWorld().getWidth() * TILE_WIDTH - this.h.getWidth()) {
-      this.xO = this.h.getWorld().getWidth() * TILE_WIDTH - this.h.getWidth();
+    } else if (this.xO > this.h.getWorld().getWidth() * TILE_SIZE - this.h.getWidth()) {
+      this.xO = this.h.getWorld().getWidth() * TILE_SIZE - this.h.getWidth();
     }
 
     if (this.y0 < 0){
       this.y0 = 0;
-    } else if (this.y0 > this.h.getWorld().getHeight() * TILE_HEIGHT - this.h.getHeight()) {
-      this.y0 = this.h.getWorld().getHeight() * TILE_HEIGHT - this.h.getHeight();
+    } else if (this.y0 > this.h.getWorld().getHeight() * TILE_SIZE - this.h.getHeight()) {
+      this.y0 = this.h.getWorld().getHeight() * TILE_SIZE - this.h.getHeight();
     }
   }
 }

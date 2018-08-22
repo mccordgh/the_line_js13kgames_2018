@@ -1,4 +1,4 @@
-let sm;
+// let sm;
 
 export class Handler {
   constructor(game) {
@@ -17,9 +17,9 @@ export class Handler {
     return this.game.getKeyManager();
   }
 
-  getGameCamera() {
-    return this.game.getGameCamera();
-  }
+  // getGameCamera() {
+  //   return this.game.getGameCamera();
+  // }
 
   getWorld() {
     return this.world;
@@ -33,11 +33,11 @@ export class Handler {
     return this.game;
   }
 
-  getSM(){
-    return sm;
-  }
+  // getSM(){
+  //   return sm;
+  // }
 
-  setSM(s) {
-    sm = s;
-  }
+  // setSM(s) {
+  //   sm = s;
+  // }
 }

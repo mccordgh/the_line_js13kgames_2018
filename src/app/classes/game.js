@@ -1,24 +1,23 @@
-import { Dialogue } from './dialogue/dialogue';
+// import { Dialogue } from './dialogue/dialogue';
 import { Display } from './display/display';
 import { GameState } from './states/game-state';
-import { GameCamera } from './gfx/game-camera';
+// import { GameCamera } from './gfx/game-camera';
 import { Handler } from './handler';
-import { KeyManager } from './input/key-manager';
-import { MainMenu } from './menus/main-menu';
+// import { KeyManager } from './input/key-manager';
+// import { MainMenu } from './menus/main-menu';
 import { State } from './states/state';
-import { SoundManager } from './sounds/sound-manager';
+// import { SoundManager } from './sounds/sound-manager';
 
-let running = false;
-let g, display, keyManager, handler, gameCamera, soundManager;
-let state, gameState, mainMenu;
+// let g, display, keyManager, handler, gameCamera, soundManager;
+// let state, gameState, mainMenu;
+
+let display,
+  gameState,
+  graphics,
+  handler,
+  state;
 
 export class Game {
-  constructor(title, width, height){
-    this.height = height;
-    this.title = title;
-    this.width = width;
-  }
-
   run() {
     this.init();
     let fps = 60;
@@ -30,14 +29,12 @@ export class Game {
     let timer = 0;
 
     let loop = () => {
-      if(running) {
-        now = Date.now();
-        delta = now - lastTime;
-        timer += delta;
-        lastTime = now;
-      }
+      now = Date.now();
+      delta = now - lastTime;
+      timer += delta;
+      lastTime = now;
 
-      if(timer >= timePerTick){
+      if(timer >= timePerTick) {
         dt = timer / 1000;
         this.tick(dt);
         this.render();
@@ -47,13 +44,6 @@ export class Game {
     };
 
     loop();
-
-  }
-
-  start() {
-    if (running) return;
-    running = true;
-    this.run();
   }
 
   getKeyManager() {
@@ -64,47 +54,47 @@ export class Game {
     return display;
   }
 
-  getWidth() {
-    return this.width;
-  }
+  // getWidth() {
+  //   return this.width;
+  // }
 
-  getHeight() {
-    return this.height;
-  }
+  // getHeight() {
+  //   return this.height;
+  // }
 
-  getGameCamera() {
-    return gameCamera;
-  }
+  // getGameCamera() {
+  //   return gameCamera;
+  // }
 
-  getGameState() {
-    return state;
-  }
+  // getGameState() {
+  //   return state;
+  // }
 
   init() {
     handler = new Handler(this);
-    display = new Display(this.title, this.width, this.height);
-    keyManager = new KeyManager();
-    this.d = new Dialogue();
-    g = display.getGraphics();
+    display = new Display();
+    // keyManager = new KeyManager();
+    // this.d = new Dialogue();
+    graphics = display.getGraphics();
     state = new State();
-    gameCamera = new GameCamera(handler, 0, 0);
-    soundManager = new SoundManager();
-    handler.setSM(soundManager);
-    mainMenu = new MainMenu(handler);
-    state.setState(mainMenu);
-    // gameState = new GameState(handler);
-    // state.setState(gameState);
+    // gameCamera = new GameCamera(handler, 0, 0);
+    // soundManager = new SoundManager();
+    // handler.setSM(soundManager);
+    // mainMenu = new MainMenu(handler);
+    // state.setState(mainMenu);
+    gameState = new GameState(handler);
+    state.setState(gameState);
   }
 
   tick(dt) {
-    this.d.tick(handler);
-    keyManager.tick();
-    if (state.getState() && !display.paused)
-      state.getState().tick(dt);
+    // this.d.tick(handler);
+    // keyManager.tick();
+    // if (state.getState() && !display.paused)
+    state.getState().tick(dt);
   }
 
   render(){
-    if (state.getState() && !display.paused)
-      state.getState().render(g);
+  //   if (state.getState() && !display.paused)
+      state.getState().render(graphics);
   }
 }

@@ -25,7 +25,7 @@ export class Player extends Creature {
   }
 
   render(g) {
-    g.myDrawImage(this.getCurrentAnimationFrame(), this.x - this.handler.getGameCamera().getxOffset(), this.y - this.handler.getGameCamera().getyOffset(), TILE_WIDTH, TILE_HEIGHT);
+    g.myDrawImage(this.getCurrentAnimationFrame(), this.x - this.handler.getGameCamera().getxOffset(), this.y - this.handler.getGameCamera().getyOffset(), TILE_SIZE, TILE_SIZE);
 
     // ****** DRAW BOUNDING BOX DON'T DELETE!!
     // g.fillStyle = "green";
