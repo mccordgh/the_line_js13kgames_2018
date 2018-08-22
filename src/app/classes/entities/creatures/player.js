@@ -14,7 +14,7 @@ export class Player extends Creature {
 
   tick(dt) {
     this.xMove = this.yMove = 0;
-    // this.getInput(dt);
+    this.getInput();
     super.tick(dt);
     this.move();
   }
@@ -25,20 +25,23 @@ export class Player extends Creature {
     // g.myDrawImage(this.getCurrentAnimationFrame(), this.x, this.y, TILE_SIZE, TILE_SIZE);
   }
 
-  // getInput(dt) {
-  //   let manager = this.handler.getKeyManager();
+  getInput() {
+    let manager = this.handler.getKeyManager();
 
-  //   if(manager.up || manager.w || manager.z) {
-  //     this.yMove = -this.speed * dt;
-  //   }
-  //   if (manager.down || manager.s) {
-  //     this.yMove = this.speed * dt;
-  //   }
-  //   if(manager.left || manager.a || manager.q) {
-  //     this.xMove = -this.speed * dt;
-  //   }
-  //   if (manager.right || manager.d) {
-  //     this.xMove = this.speed * dt;
-  //   }
-  // }
+    if(manager.w || manager.z) {
+      this.yMove = -TILE_SIZE;
+    }
+
+    if (manager.s) {
+      this.yMove = TILE_SIZE;
+    }
+
+    if(manager.left || manager.a || manager.q) {
+      this.xMove = -TILE_SIZE;
+    }
+
+    if (manager.right || manager.d) {
+      this.xMove = TILE_SIZE;
+    }
+  }
 }

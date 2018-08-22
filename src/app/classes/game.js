@@ -3,18 +3,19 @@ import { Display } from './display/display';
 import { GameState } from './states/game-state';
 // import { GameCamera } from './gfx/game-camera';
 import { Handler } from './handler';
-// import { KeyManager } from './input/key-manager';
+import { KeyManager } from './input/key-manager';
 // import { MainMenu } from './menus/main-menu';
 import { State } from './states/state';
 // import { SoundManager } from './sounds/sound-manager';
 
 // let g, display, keyManager, handler, gameCamera, soundManager;
 // let state, gameState, mainMenu;
-
+let i = 0;
 let display,
   gameState,
   graphics,
   handler,
+  keyManager,
   state;
 
 export class Game {
@@ -34,6 +35,7 @@ export class Game {
       timer += delta;
       lastTime = now;
 
+      console.log(timer, timePerTick);
       if(timer >= timePerTick) {
         dt = timer / 1000;
         this.tick(dt);
@@ -73,7 +75,7 @@ export class Game {
   init() {
     handler = new Handler(this);
     display = new Display();
-    // keyManager = new KeyManager();
+    keyManager = new KeyManager();
     // this.d = new Dialogue();
     graphics = display.getGraphics();
     state = new State();
@@ -88,7 +90,7 @@ export class Game {
 
   tick(dt) {
     // this.d.tick(handler);
-    // keyManager.tick();
+    keyManager.tick();
     // if (state.getState() && !display.paused)
     state.getState().tick(dt);
   }

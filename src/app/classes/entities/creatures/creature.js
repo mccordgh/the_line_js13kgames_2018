@@ -29,6 +29,9 @@ export class Creature extends Entity {
   }
 
   move() {
+    this.x += this.xMove;
+    this.y += this.yMove;
+    // console.log(this.x, this.xMove);
     // if(Math.abs(this.xMove) > 0 || Math.abs(this.yMove) > 0){
     //   this.handler.getWorld().getSpatialGrid().remove(new Rectangle(this.x + this.b.x, this.y + this.b.y, this.b.w, this.b.h), this);
     //   if(!(this.checkEntityCollisions(this.xMove, 0)))

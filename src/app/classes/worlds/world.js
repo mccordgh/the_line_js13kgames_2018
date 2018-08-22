@@ -51,7 +51,7 @@ export class World {
   renderTiles(g) {
     for (let y = 0; y < TILE_COUNT; y++) {
       for (let x = 0; x < TILE_COUNT; x++) {
-        TileManager.getTiles()[this.tiles[y][x]].render(g, x * TILE_SIZE, y * TILE_SIZE);
+        // TileManager.getTiles()[this.tiles[y][x]].render(g, x * TILE_SIZE, y * TILE_SIZE);
       }
     }
   }
