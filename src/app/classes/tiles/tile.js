@@ -1,16 +1,18 @@
-// import { Assets } from '../gfx/assets';
+import { Assets } from '../gfx/assets';
 
 export class Tile {
   constructor(texture, id) {
     this.isSolid = false;
-    // this.texture = texture;
-    // this.id = id;
-    // this.a = Assets.gA("tiles");
+    this.texture = texture;
+    this.id = id;
+    // this.a = Assets.getAssets("tiles");
   }
 
-  render() {}
+  render(g, x, y) {
+    g.myDrawImage(this.texture, x, y, TILE_SIZE, TILE_SIZE);
+  }
 
-  // getId() {
-  //   return this.id;
-  // }
+  getId() {
+    return this.id;
+  }
 }

@@ -1,12 +1,15 @@
 import { EntityManager } from '../entities/entity-manager';
 import { Player } from '../entities/creatures/player';
+import { SpatialGrid } from '../utils/spatial-grid';
 import { TileManager } from '../tiles/tile-manager';
 
 export class World {
   constructor(handler) {
     this.tiles = [];
     this.handler = handler;
-    this.entityManager = new EntityManager(handler, new Player(handler, 6, 6));
+    this.entityManager = new EntityManager(handler, new Player(handler, 4, 4));
+    this.spatialGrid = new SpatialGrid(GAME_SIZE, GAME_SIZE, TILE_SIZE);
+
     handler.setWorld(this);
     this.loadWorld();
   }
@@ -51,8 +54,24 @@ export class World {
   renderTiles(g) {
     for (let y = 0; y < TILE_COUNT; y++) {
       for (let x = 0; x < TILE_COUNT; x++) {
-        // TileManager.getTiles()[this.tiles[y][x]].render(g, x * TILE_SIZE, y * TILE_SIZE);
+        TileManager.getTiles()[this.tiles[y][x]].render(g, x * TILE_SIZE, y * TILE_SIZE);
       }
     }
+  }
+
+  getTile(x, y) {
+    // try {
+      return TileManager.getTiles()[this.tiles[x][y]];
+    // }
+    // catch(e) {
+    // }
+  }
+
+  getEntityManager() {
+    return this.entityManager;
+  }
+
+  getSpatialGrid() {
+    return this.spatialGrid;
   }
 }

@@ -35,7 +35,6 @@ export class Game {
       timer += delta;
       lastTime = now;
 
-      console.log(timer, timePerTick);
       if(timer >= timePerTick) {
         dt = timer / 1000;
         this.tick(dt);
@@ -97,6 +96,7 @@ export class Game {
 
   render(){
   //   if (state.getState() && !display.paused)
-      state.getState().render(graphics);
+    graphics.clearRect(0,0,GAME_SIZE,GAME_SIZE);
+    state.getState().render(graphics);
   }
 }

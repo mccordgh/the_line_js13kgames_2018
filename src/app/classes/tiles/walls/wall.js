@@ -1,13 +1,9 @@
+import { Assets } from '../../gfx/assets';
 import { Tile } from '../tile';
 
 export class Wall extends Tile {
   constructor(id) {
-    super();
+    super(Assets.getAssets('wall').wall, id);
     this.isSolid = true;
-  }
-
-  render(g, x, y) {
-    g.fillStyle = 'white';
-    g.fillRect(x, y, TILE_SIZE, TILE_SIZE);
   }
 }

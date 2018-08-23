@@ -48,8 +48,11 @@ export class Display {
   }
 }
 
-CanvasRenderingContext2D.prototype.myDrawImage = (asset, x, y, width, height) => {
-  graphics.drawImage(asset.sheet, asset.x, asset.y, asset.width, asset.height, x, y, width, height);
+// CanvasRenderingContext2D.prototype.myDrawImage = (asset, x, y, width, height) => {
+  // graphics.drawImage(asset.sheet, asset.x, asset.y, asset.width, asset.height, x, y, width, height);
+// };
+CanvasRenderingContext2D.prototype.myDrawImage = (asset, x, y) => {
+  graphics.drawImage(asset.sheet, asset.x, asset.y, asset.width, asset.height, x, y, TILE_SIZE, TILE_SIZE);
 };
 
 // CanvasRenderingContext2D.prototype.drawText = (txtObj) => {

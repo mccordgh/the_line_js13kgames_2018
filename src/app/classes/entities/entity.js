@@ -9,7 +9,7 @@ export class Entity {
     this.width = width;
     this.height = height;
     this.handler = handler;
-    // this.b = new Rectangle(0, 0, width, height);
+    this.b = new Rectangle(0, 0, width, height);
     // this.moveThrough = false;
   }
 

@@ -4,6 +4,7 @@ export class SpriteSheet {
   }
 
   crop(x, y, width, height) {
-    return {"sheet": this.sheet, "x": x, "y": y, "width": width, "height": height};
+    // return {"sheet": this.sheet, "x": x, "y": y, "width": width, "height": height};
+    return {sheet: this.sheet, x, y, width, height};
   }
 }
