@@ -4,12 +4,12 @@ import { Creature } from './creature';
 export class Player extends Creature {
   constructor(handler, x, y){
     super(handler, x, y);
-    this.assets = Assets.getAssets('player');
+    this.a = Assets.getAssets('all');
     this.x = x * TILE_SIZE;
     this.y = y * TILE_SIZE;
     this.speed = 140;
     // this.type = 'player';
-    // this.lA = 'pwalk_down';
+    this.lastAnim = 'pright';
   }
 
   tick(dt) {
@@ -21,7 +21,8 @@ export class Player extends Creature {
   }
 
   render(g) {
-    g.myDrawImage(this.assets.idle, this.x, this.y, TILE_SIZE, TILE_SIZE);
+    // g.myDrawImage(this.a.idle, this.x, this.y, TILE_SIZE, TILE_SIZE);
+    g.myDrawImage(this.frame('p'), this.x, this.y, TILE_SIZE, TILE_SIZE);
 
     // ****** DRAW BOUNDING BOX DON'T DELETE!!
     // g.fillStyle = "green";
