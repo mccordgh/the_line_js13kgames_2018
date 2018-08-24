@@ -71,7 +71,7 @@ export class Entity {
     //   hW.changeLevel();
     //   return;
     // }
-    console.log(e1, e2);
+    console.log(e1.type, e2.type);
     if (this.checkCollidingTypes(e1, e2, 'p', 'g')) {
       this.handler.getWorld().getEntityManager().getPlayer().state = 2; // 2 = dead
     }
