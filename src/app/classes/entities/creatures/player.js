@@ -1,4 +1,3 @@
-import { Assets } from '../../gfx/assets';
 import { Creature } from './creature';
 
 let gA = 1;
@@ -6,12 +5,7 @@ let gA = 1;
 export class Player extends Creature {
   constructor(handler, x, y){
     super(handler, x, y);
-    this.a = Assets.getAssets('all');
-    this.x = x * TILE_SIZE;
-    this.y = y * TILE_SIZE;
-    this.speed = 200;
     this.lastAnim = 'pright';
-    this.state = 1 // 1 = move
     this.type = 'p';
   }
 

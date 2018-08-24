@@ -1,14 +1,9 @@
-import { Assets } from '../../../gfx/assets';
 import { Creature } from '.././creature';
 
 export class Guard extends Creature {
   constructor(handler, x, y){
     super(handler, x, y);
-    this.a = Assets.getAssets('all');
-    this.x = x * TILE_SIZE;
-    this.y = y * TILE_SIZE;
-    this.speed = 140;
-    this.lastAnim = (Math.random() < .5) ? 'gright' : 'gleft';
+    this.lastAnim = 'gleft';
   }
 
   tick(dt) {

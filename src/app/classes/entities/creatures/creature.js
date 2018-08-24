@@ -1,3 +1,4 @@
+import { Assets } from '../../gfx/assets';
 import { Entity } from '../entity';
 import { Rectangle } from '../../gfx/shapes/rectangle';
 
@@ -6,10 +7,16 @@ let n;
 export class Creature extends Entity {
   constructor(handler, x, y) {
     super(handler, x, y, TILE_SIZE, TILE_SIZE);
-    this.speed = 40;
     this.xMove = 0;
     this.yMove = 0;
-    this.type = 'm';
+    this.type = 'g';
+
+    this.a = Assets.getAssets('all');
+    this.x = x * TILE_SIZE;
+    this.y = y * TILE_SIZE;
+    this.speed = 200;
+    this.lastAnim = this.type + 'right';
+    this.state = 1 // 1 = move
 
     /* COLLISION BOUNDS */
     this.b.x = 16;

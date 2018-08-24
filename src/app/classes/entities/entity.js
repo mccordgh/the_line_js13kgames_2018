@@ -54,7 +54,7 @@ export class Entity {
   }
 
   checkForCollisionEvents(e1, e2) {
-    if (this.checkCollidingTypes(e1, e2, 'm', 'm')) return;
+    if (this.checkCollidingTypes(e1, e2, 'g', 'g')) return;
 
     let h = this.handler;
     let hG = h.getGame();
@@ -72,7 +72,7 @@ export class Entity {
     //   return;
     // }
     console.log(e1, e2);
-    if (this.checkCollidingTypes(e1, e2, 'p', 'm')) {
+    if (this.checkCollidingTypes(e1, e2, 'p', 'g')) {
       this.handler.getWorld().getEntityManager().getPlayer().state = 2; // 2 = dead
     }
   }
