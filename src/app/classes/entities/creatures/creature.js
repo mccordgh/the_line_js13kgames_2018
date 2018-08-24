@@ -9,11 +9,12 @@ export class Creature extends Entity {
     this.speed = 40;
     this.xMove = 0;
     this.yMove = 0;
+    this.type = 'm';
 
     /* COLLISION BOUNDS */
     this.b.x = 16;
     this.b.y = 32;
-    this.b.size = 32;
+    this.b.s = 32; // size
     /* COLLISION BOUNDS */
   }
 
@@ -41,25 +42,25 @@ export class Creature extends Entity {
     }
 
     if(Math.abs(this.xMove) > 0 || Math.abs(this.yMove) > 0){
-      this.handler.getWorld().getSpatialGrid().remove(new Rectangle(this.x + this.b.x, this.y + this.b.y, this.b.size, this.b.size), this);
+      this.handler.getWorld().getSpatialGrid().remove(new Rectangle(this.x + this.b.x, this.y + this.b.y, this.b.s, this.b.s), this);
       if(!(this.checkEntityCollisions(this.xMove, 0)))
         this.moveX();
       if(!(this.checkEntityCollisions(0, this.yMove)))
         this.moveY();
-      this.handler.getWorld().getSpatialGrid().insert(new Rectangle(this.x + this.b.x, this.y + this.b.y, this.b.size, this.b.size), this);
+      this.handler.getWorld().getSpatialGrid().insert(new Rectangle(this.x + this.b.x, this.y + this.b.y, this.b.s, this.b.s), this);
     }
   }
 
   moveX() {
     let tempX = this.xMove > 0
-      ? parseInt((this.x + this.xMove + this.b.x + this.b.size) / TILE_SIZE)
+      ? parseInt((this.x + this.xMove + this.b.x + this.b.s) / TILE_SIZE)
       : parseInt((this.x + this.xMove + this.b.x) / TILE_SIZE);
 
     let c1 = parseInt((this.y + this.b.y) / TILE_SIZE);
-    let c2 = parseInt((this.y + this.b.y + this.b.size) / TILE_SIZE);
+    let c2 = parseInt((this.y + this.b.y + this.b.s) / TILE_SIZE);
 
     let setX = this.xMove > 0
-      ? tempX * TILE_SIZE - this.b.x - this.b.size - 1
+      ? tempX * TILE_SIZE - this.b.x - this.b.s - 1
       : tempX * TILE_SIZE + TILE_SIZE - this.b.x;
 
       if(!this.collisionWithTile(tempX, c1) && !this.collisionWithTile(tempX, c2)) {
@@ -71,14 +72,14 @@ export class Creature extends Entity {
 
   moveY() {
     let tempY = this.yMove > 0
-      ? parseInt((this.y + this.yMove + this.b.y + this.b.size) / TILE_SIZE)
+      ? parseInt((this.y + this.yMove + this.b.y + this.b.s) / TILE_SIZE)
       : parseInt((this.y + this.yMove + this.b.y) / TILE_SIZE);
 
     let c1 = parseInt((this.x + this.b.x) / TILE_SIZE);
-    let c2 = parseInt((this.x + this.b.x + this.b.size) / TILE_SIZE);
+    let c2 = parseInt((this.x + this.b.x + this.b.s) / TILE_SIZE);
 
     let setY = this.yMove > 0
-      ? tempY * TILE_SIZE - this.b.y - this.b.size - 1
+      ? tempY * TILE_SIZE - this.b.y - this.b.s - 1
       : tempY * TILE_SIZE + TILE_SIZE - this.b.y;
 
     if (!this.collisionWithTile(c1, tempY) && !this.collisionWithTile(c2, tempY)) {
