@@ -2,6 +2,7 @@ import { EntityManager } from '../entities/entity-manager';
 import { Player } from '../entities/creatures/player';
 import { SpatialGrid } from '../utils/spatial-grid';
 import { TileManager } from '../tiles/tile-manager';
+import { Guard } from '../entities/creatures/monsters/guard';
 
 export class World {
   constructor(handler) {
@@ -24,6 +25,10 @@ export class World {
     this.entityManager.render(g);
   }
 
+  changeRooms(dir) {
+    // dir will be: 1 = north, 2 = east, 3 = south, 4 = west
+  }
+
   loadWorld() {
     let pieces = this.fillWorld();
 
@@ -33,6 +38,9 @@ export class World {
         this.tiles[x][y] = pieces[x][y];
       }
     }
+
+    this.entityManager.addEntity(new Guard(this.handler, 8, 3))
+    this.entityManager.addEntity(new Guard(this.handler, 3, 8))
   }
 
   fillWorld() {

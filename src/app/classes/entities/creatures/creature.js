@@ -32,6 +32,14 @@ export class Creature extends Entity {
   }
 
   move() {
+    let os = this.isOffScreen();
+
+    if (os) {
+      this.handler.getWorld().changeRooms(os);
+
+      return;
+    }
+
     if(Math.abs(this.xMove) > 0 || Math.abs(this.yMove) > 0){
       this.handler.getWorld().getSpatialGrid().remove(new Rectangle(this.x + this.b.x, this.y + this.b.y, this.b.size, this.b.size), this);
       if(!(this.checkEntityCollisions(this.xMove, 0)))
@@ -81,11 +89,21 @@ export class Creature extends Entity {
   }
 
   collisionWithTile(x, y) {
-    // try {
+    try {
       return this.handler.getWorld().getTile(x, y).isSolid;
-    // }
-    // catch(e) {
-    // }
+    }
+    catch(e) {
+    }
+  }
+
+  isOffScreen() {
+    let t = TILE_SIZE;
+
+    return (this.y + t < 0) ? 1 : // 1 = north
+      (this.x > GAME_SIZE) ? 2 : // 2 = east
+      (this.y > GAME_SIZE) ? 3 : // 3 = south
+      (this.x + t < 0) ? 4 : // 4 = west
+      0;
   }
 
   frame(type) {

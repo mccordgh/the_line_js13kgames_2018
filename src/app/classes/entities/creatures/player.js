@@ -7,7 +7,7 @@ export class Player extends Creature {
     this.a = Assets.getAssets('all');
     this.x = x * TILE_SIZE;
     this.y = y * TILE_SIZE;
-    this.speed = 140;
+    this.speed = 200;
     // this.type = 'player';
     this.lastAnim = 'pright';
   }
