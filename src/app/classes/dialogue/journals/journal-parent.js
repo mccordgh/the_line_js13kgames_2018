@@ -1,9 +1,9 @@
-export class JournalParent {
-	getText() {
-		return this.text;
-	}
+// export class JournalParent {
+// 	getText() {
+// 		return this.text;
+// 	}
 
-	setText(text) {
-		this.text = text;
-	}
-}
+// 	setText(text) {
+// 		this.text = text;
+// 	}
+// }

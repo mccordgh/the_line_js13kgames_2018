@@ -69,11 +69,11 @@ export class World {
   }
 
   getTile(x, y) {
-    // try {
+    try {
       return TileManager.getTiles()[this.tiles[x][y]];
-    // }
-    // catch(e) {
-    // }
+    }
+    catch(e) {
+    }
   }
 
   getEntityManager() {
