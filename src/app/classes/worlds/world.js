@@ -15,6 +15,7 @@ export class World {
   }
 
   tick(dt) {
+    this.tickTiles();
     this.entityManager.tick(dt);
   }
 
@@ -55,6 +56,14 @@ export class World {
     for (let y = 0; y < TILE_COUNT; y++) {
       for (let x = 0; x < TILE_COUNT; x++) {
         TileManager.getTiles()[this.tiles[y][x]].render(g, x * TILE_SIZE, y * TILE_SIZE);
+      }
+    }
+  }
+
+  tickTiles(g) {
+    for (let y = 0; y < TILE_COUNT; y++) {
+      for (let x = 0; x < TILE_COUNT; x++) {
+        TileManager.getTiles()[this.tiles[y][x]].tick();
       }
     }
   }
