@@ -1,6 +1,8 @@
 import { Assets } from '../../gfx/assets';
 import { Creature } from './creature';
 
+let gA = 1;
+
 export class Player extends Creature {
   constructor(handler, x, y){
     super(handler, x, y);
@@ -8,25 +10,42 @@ export class Player extends Creature {
     this.x = x * TILE_SIZE;
     this.y = y * TILE_SIZE;
     this.speed = 200;
-    // this.type = 'player';
     this.lastAnim = 'pright';
+    this.state = 1 // 1 = move
+    this.type = 'p';
   }
 
   tick(dt) {
-    this.xMove = this.yMove = 0;
-
-    this.getInput(dt);
     super.tick(dt);
-    this.move();
+
+    switch (this.state) {
+      case 1: // 1 = move
+        this.xMove = this.yMove = 0;
+
+        this.getInput(dt);
+        this.move();
+        break;
+
+      case 2: // 2 = dead
+        if (gA > 0.02) gA -= 0.02;
+    }
   }
 
   render(g) {
-    // g.myDrawImage(this.a.idle, this.x, this.y, TILE_SIZE, TILE_SIZE);
-    g.myDrawImage(this.frame('p'), this.x, this.y, TILE_SIZE, TILE_SIZE);
+    switch (this.state) {
+      case 1:
+        g.myDrawImage(this.frame('p'), this.x, this.y, TILE_SIZE, TILE_SIZE);
+        break;
+
+      case 2:
+        g.globalAlpha = gA;
+        g.myDrawImage(this.frame('p'), this.x, this.y, TILE_SIZE, TILE_SIZE);
+        g.globalAlpha = 1;
+    }
 
     // ****** DRAW BOUNDING BOX DON'T DELETE!!
     // g.fillStyle = "green";
-    // g.fillRect(this.b.x + this.x, this.b.y + this.y, this.b.size, this.b.size);
+    // g.fillRect(this.b.x + this.x, this.b.y + this.y, this.b.s, this.b.s);
     // ****** DRAW BOUNDING BOX DON'T DELETE!!
   }
 
