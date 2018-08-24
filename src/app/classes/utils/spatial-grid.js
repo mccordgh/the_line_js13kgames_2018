@@ -70,4 +70,19 @@ export class SpatialGrid {
   getSize() {
     return this.size;
   }
+
+  //Render Grid Squares
+  // render(_g,){
+  //   for (var y = 0; y <= this.height; y++){
+  //     for (var x = 0; x <= this.width; x++){
+  //       var xpos = (x * this.size);
+  //       var ypos = (y * this.size);
+  //       _g.strokeRect(xpos, ypos, this.size, this.size);
+  //       if (this.grid[x][y].length > 0){
+  //         _g.fillStyle = "blue";
+  //         _g.fillRect(xpos, ypos, this.size, this.size);
+  //       }
+  //     }
+  //   }
+  // }
 }

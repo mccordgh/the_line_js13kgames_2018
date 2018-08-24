@@ -22,6 +22,7 @@ export class World {
 
   render(g) {
     this.renderTiles(g);
+    // this.spatialGrid.render(g);
     this.entityManager.render(g);
   }
 
