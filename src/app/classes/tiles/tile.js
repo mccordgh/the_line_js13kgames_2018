@@ -1,15 +1,21 @@
-import { Assets } from '../gfx/assets';
-
 export class Tile {
-  constructor(texture, id) {
+  constructor(id, texture) {
+    this.anim = false;
     this.isSolid = false;
     this.texture = texture;
     this.id = id;
-    // this.a = Assets.getAssets("tiles");
+  }
+
+  tick() {
+    if (this.anim) {
+      this.texture.tick();
+    }
   }
 
   render(g, x, y) {
-    g.myDrawImage(this.texture, x, y, TILE_SIZE, TILE_SIZE);
+    let t = this.anim ? this.texture.getCurrentFrame() : this.texture;
+
+    g.myDrawImage(t, x, y, TILE_SIZE, TILE_SIZE);
   }
 
   getId() {
