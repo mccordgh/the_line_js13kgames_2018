@@ -29,34 +29,36 @@ export class Entity {
     return this.height;
   }
 
-  getCollisionBounds(xOffset, yOffset) {
-    // return new Rectangle(parseInt(this.x + this.b.x + xOffset),
-    //   parseInt(this.y + this.b.y + yOffset),
-    //   this.b.w, this.b.h);
+  getCollisionBounds() {
+    return new Rectangle(parseInt(this.x + this.b.x),
+      parseInt(this.y + this.b.y),
+      this.b.s, this.b.s);
   }
 
   checkEntityCollisions(xOffset, yOffset) {
-    // let candidates =  this.handler.getWorld().getSpatialGrid().retrieve(new Rectangle(this.x + this.b.x + xOffset, this.y + this.b.y + yOffset, this.b.w, this.b.h), this);
+    // console.log(this.x + this.b.x + xOffset, this.y + this.b.y + yOffset, this.b.s, this.b.s, this)
+    let candidates =  this.handler.getWorld().getSpatialGrid().retrieve(new Rectangle(this.x + this.b.x + xOffset, this.y + this.b.y + yOffset, this.b.s, this.b.s), this);
 
-    // for(let i = 0; i < candidates.length; i++) {
-    //   let e = candidates[i];
-    //     if (e.moveThrough) return false;
+    // console.log(candidates);
+    for(let i = 0; i < candidates.length; i++) {
+      let e = candidates[i];
+        // if (e.moveThrough) return false;
 
-    //     if (e.getCollisionBounds(0, 0).intersects(this.getCollisionBounds(xOffset, yOffset))) {
-    //         this.checkForCollisionEvents(this, e);
+        if (e.getCollisionBounds(0, 0).intersects(this.getCollisionBounds(xOffset, yOffset))) {
+            this.checkForCollisionEvents(this, e);
 
-    //         return true;
-    //     }
-    // }
-    // return false;
+            return true;
+        }
+    }
+    return false;
   }
 
   checkForCollisionEvents(e1, e2) {
-    // if (this.checkCollidingTypes(e1, e2, 'monster', 'monster')) return;
+    if (this.checkCollidingTypes(e1, e2, 'm', 'm')) return;
 
-    // let h = this.handler;
-    // let hG = h.getGame();
-    // let hW = h.getWorld();
+    let h = this.handler;
+    let hG = h.getGame();
+    let hW = h.getWorld();
 
     // if (this.checkCollidingTypes(e1, e2, 'player', 'exit')) {
     //   if (hW.level >= 4) {
@@ -69,15 +71,14 @@ export class Entity {
     //   hW.changeLevel();
     //   return;
     // }
-
-    // if (this.checkCollidingTypes(e1, e2, 'player', 'monster')) {
-		// 	hW.dialogue.clear();
-    //   this.handler.getWorld().death = 1;
-    // }
+    console.log(e1, e2);
+    if (this.checkCollidingTypes(e1, e2, 'p', 'm')) {
+      this.handler.getWorld().getEntityManager().getPlayer().state = 2; // 2 = dead
+    }
   }
 
   checkCollidingTypes(e1, e2, type1, type2) {
-    // return ((e1.type === type1 && e2.type === type2) || (e1.type === type2 && e2.type === type1));
+    return ((e1.type === type1 && e2.type === type2) || (e1.type === type2 && e2.type === type1));
   }
 
   setX(x) {

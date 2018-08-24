@@ -35,13 +35,13 @@ export class EntityManager {
 
   addEntity(e) {
     entities.push(e);
-    // handler.getWorld().getSpatialGrid().insert(new Rectangle(e.x + e.b.x, e.y + e.b.y, e.b.w, e.b.h), e);
+    handler.getWorld().getSpatialGrid().insert(new Rectangle(e.x + e.b.x, e.y + e.b.y, e.b.s, e.b.s), e);
   }
 
   removeEntity(e) {
     let index = entities.indexOf(e);
 
-		// handler.getWorld().getSpatialGrid().remove(new Rectangle(e.x + e.b.x, e.y + e.b.y, e.b.w, e.b.h), e);
+		handler.getWorld().getSpatialGrid().remove(new Rectangle(e.x + e.b.x, e.y + e.b.y, e.b.s, e.b.s), e);
 
     entities.splice(index, 1);
   }
