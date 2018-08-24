@@ -18,6 +18,7 @@ export class Creature extends Entity {
   }
 
   tick() {
+    this.a.anim[this.lastAnim].tick();
     // n = this.type === 'player' ? 'p' : 'c';
 
     // if (this.yMove < 0)
@@ -87,23 +88,17 @@ export class Creature extends Entity {
     // }
   }
 
-  // getCurrentAnimationFrame() {
-  //   n = this.type === 'player' ? 'p' : 'c';
+  frame(type) {
+    if (this.xMove < 0){
+      this.lastAnim = type + "left";
+      return this.a.anim[this.lastAnim].getCurrentFrame();
+    }
 
-  //   if (this.xMove < 0){
-  //     this.lA = n + "walk_left";
-  //     return this.a.animations[n + "walk_left"].getCurrentFrame();
-  //   } else if (this.xMove > 0) {
-	//     this.lA = n + "walk_right";
-	//     return this.a.animations[n + "walk_right"].getCurrentFrame();
-  //   } else if (this.yMove < 0){
-  //     this.lA = n + "walk_up";
-  //     return this.a.animations[n + "walk_up"].getCurrentFrame();
-  //   } else if (this.yMove > 0){
-  //     this.lA = n + "walk_down";
-  //     return this.a.animations[n + "walk_down"].getCurrentFrame();
-  //   } else {
-  //     return this.a.animations[this.lA].getCurrentFrame();
-  //   }
-  // }
+    if (this.xMove > 0) {
+	    this.lastAnim = type + "right";
+	    return this.a.anim[this.lastAnim].getCurrentFrame();
+    }
+
+    return this.a.anim[this.lastAnim].getCurrentFrame();
+  }
 }
