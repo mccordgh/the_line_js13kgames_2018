@@ -9,8 +9,8 @@
 //     this.posY = Math.floor(y / TILE_SIZE);
 //     this.b.x = 0;
 //     this.b.y = 0;
-//     this.b.w = 0;
-//     this.b.h = 0;
+//     this.b.s = 0;
+//     this.b.s = 0;
 //     this.fl = false;
 //     this.LFC = 0; // last flicker count
 //     this.fT = 0; // flicker toggle
@@ -127,7 +127,7 @@
 
 // 		// ****** DRAW BOUNDING BOX DON'T DELETE!!
 // 		// g.fillStyle = "white";
-// 		// g.fillRect(this.b.x + this.x - this.handler.getGameCamera().getxOffset(), this.b.y + this.y - this.handler.getGameCamera().getyOffset(), this.b.w, this.b.h);
+// 		// g.fillRect(this.b.x + this.x - this.handler.getGameCamera().getxOffset(), this.b.y + this.y - this.handler.getGameCamera().getyOffset(), this.b.s, this.b.s);
 // 		// ****** DRAW BOUNDING BOX DON'T DELETE!!
 // 	}
 // }

@@ -8,8 +8,8 @@
 //     this.type = 'exit';
 //     this.b.x = 15;
 //     this.b.y = 15;
-//     this.b.w = this.width - 30;
-//     this.b.h = this.height - 30;
+//     this.b.s = this.width - 30;
+//     this.b.s = this.height - 30;
 //   }
 
 //   tick(){
@@ -25,7 +25,7 @@
 
 //     // ****** DRAW BOUNDING BOX DON'T DELETE!!
 //     // g.fillStyle = "white";
-//     // g.fillRect(this.b.x + this.x - this.handler.getGameCamera().getxOffset(), this.b.y + this.y - this.handler.getGameCamera().getyOffset(), this.b.w, this.b.h);
+//     // g.fillRect(this.b.x + this.x - this.handler.getGameCamera().getxOffset(), this.b.y + this.y - this.handler.getGameCamera().getyOffset(), this.b.s, this.b.s);
 //     // ****** DRAW BOUNDING BOX DON'T DELETE!!
 //   }
 // }
