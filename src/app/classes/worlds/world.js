@@ -14,6 +14,7 @@ export class World {
     this.spatialGrid = new SpatialGrid(GAME_SIZE, GAME_SIZE, TILE_SIZE);
     this.rooms = roomSet;
     this.room = rndInt([5,6,9,10]);
+    console.log({roomSet});
     handler.setWorld(this);
     this.loadWorld();
   }
@@ -47,7 +48,7 @@ export class World {
     // dir will be: 1 = north, 2 = east, 3 = south, 4 = west
   }
 
-  // loadWorld() {
+  loadWorld() {
     // let pieces = this.fillWorld();
 
     // for (let y = 0; y < TILE_COUNT; y++) {
@@ -66,7 +67,7 @@ export class World {
     // console.log(index);
 
     // return this.rooms[this.room];
-  // }
+  }
 
   // rooms() {
   //   return {
@@ -91,7 +92,12 @@ export class World {
     for (let y = 0; y < TILE_COUNT; y++) {
       for (let x = 0; x < TILE_COUNT; x++) {
         // TileManager.getTiles()[this.tiles[y][x]].render(g, x * TILE_SIZE, y * TILE_SIZE);
-        TileManager.getTiles()[this.rooms[this.room][y][x]].render(g, x * TILE_SIZE, y * TILE_SIZE);
+        // console.log('room', this.rooms);
+        try {
+          TileManager.getTiles()[this.rooms[this.room][y][x]].render(g, x * TILE_SIZE, y * TILE_SIZE);
+        } catch(e) {
+          
+        }
       }
     }
   }
@@ -99,14 +105,24 @@ export class World {
   tickTiles(g) {
     for (let y = 0; y < TILE_COUNT; y++) {
       for (let x = 0; x < TILE_COUNT; x++) {
-        TileManager.getTiles()[this.rooms[this.room][y][x]].tick();
+
+        // try {
+          TileManager.getTiles()[this.rooms[this.room][y][x]].tick();
+        // } catch(e) {
+          // console.log('tiles', TileManager.getTiles());
+          // console.log(this.room, this.rooms, x, y);
+          // console.log("TileManager.getTiles()[this.rooms[this.room][y][x]]");
+          // console.log(TileManager.getTiles()[this.rooms[this.room][y][x]]);
+          // debugger;
+          // console.log('ERROR room', this.room, this.rooms[this.room], y, x);
+        // }
       }
     }
   }
 
   getTile(x, y) {
     try {
-      return TileManager.getTiles()[this.tiles[x][y]];
+      return TileManager.getTiles()[this.rooms[this.room][y][x]];
     }
     catch(e) {
     }
