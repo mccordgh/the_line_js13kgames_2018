@@ -13,10 +13,9 @@ export class World {
     this.entityManager = new EntityManager(handler, new Player(handler, 4, 4));
     this.spatialGrid = new SpatialGrid(GAME_SIZE, GAME_SIZE, TILE_SIZE);
     this.rooms = roomSet;
-    this.room = rndInt(4, 11);
-
+    this.room = rndInt([5,6,9,10]);
     handler.setWorld(this);
-    // this.loadWorld();
+    this.loadWorld();
   }
 
   tick(dt) {

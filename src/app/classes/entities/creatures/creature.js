@@ -14,7 +14,7 @@ export class Creature extends Entity {
     this.a = Assets.getAssets('all');
     this.x = x * TILE_SIZE;
     this.y = y * TILE_SIZE;
-    this.speed = 900;
+    this.speed = 800;
     this.lastAnim = this.type + 'right';
     this.state = 1 // 1 = move
 
@@ -25,10 +25,10 @@ export class Creature extends Entity {
     /* COLLISION BOUNDS */
 
     this.dirs = {
-      1: { mod: -4, y: 11.5 * TILE_SIZE }, // north
+      1: { mod: -4, y: 11 * TILE_SIZE }, // north
       2: { mod: 1, x: 0.5 * TILE_SIZE }, // east
       3: { mod: 4, y: 0.5 * TILE_SIZE }, // south
-      4: { mod: -1, x: 11.5 * TILE_SIZE } // west
+      4: { mod: -1, x: 11 * TILE_SIZE } // west
     }
   }
 
@@ -78,8 +78,8 @@ export class Creature extends Entity {
       : tempX * TILE_SIZE + TILE_SIZE - this.b.x;
 
       if(!this.collisionWithTile(tempX, c1) && !this.collisionWithTile(tempX, c2)) {
-      this.x += this.xMove;
-    } else {
+        this.x += this.xMove;
+      } else {
       this.x = setX;
     }
   }
