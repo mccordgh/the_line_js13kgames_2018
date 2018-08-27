@@ -4,29 +4,57 @@ import { SpatialGrid } from '../utils/spatial-grid';
 import { TileManager } from '../tiles/tile-manager';
 import { Guard } from '../entities/creatures/monsters/guard';
 
-import roomSet from './rooms.js';
+import generateRooms from './generate-rooms';
 
 export class World {
   constructor(handler) {
-    // this.tiles = [];
     this.handler = handler;
-    this.entityManager = new EntityManager(handler, new Player(handler, 4, 4));
+    this.entityManager = new EntityManager(handler, new Player(handler, 6, 6));
     this.spatialGrid = new SpatialGrid(GAME_SIZE, GAME_SIZE, TILE_SIZE);
-    this.rooms = roomSet;
-    this.room = rndInt([5,6,9,10]);
-    console.log({roomSet});
+
+    this.start = rndIndex([5,6,9,10]);
+    this.rooms = generateRooms(handler, this.start);
+    // console.log(this.rooms,);
+    // console.log(this.start);
+    this.room = this.rooms[this.start];
+
     handler.setWorld(this);
     this.loadWorld();
   }
 
+  // generateRooms() {
+  //   let rooms = {
+  //     0: new Room(0, [noTop, noLeft]),
+  //     1: new Room(1,[noTop]),
+  //     2: new Room(2,[noTop]),
+  //     3: new Room(3,[noTop, noRight]),
+  //     4: new Room(4,[noLeft]),
+  //     5: new Room(5),
+  //     6: new Room(6),
+  //     7: new Room(7,[noRight]),
+  //     8: new Room(8,[noLeft]),
+  //     9: new Room(9,),
+  //     10: new Room(10),
+  //     11: new Room(11,[noRight]),
+  //     12: new Room(12,[noBottom, noLeft]),
+  //     13: new Room(13,[noBottom]),
+  //     14: new Room(14,[noBottom]),
+  //     15: new Room(15,[noRight, noBottom]),
+  //   };
+
+  //   rooms[this.start] = new Room(this.start)
+  // }
+
   tick(dt) {
-    this.tickTiles();
+    this.room.tick();
+    // this.tickTiles();
     this.entityManager.tick(dt);
   }
 
   render(g) {
     if (!this.changeRoom) {
-      this.renderTiles(g);
+      this.room.render(g);
+      // this.renderTiles(g);
       // this.spatialGrid.render(g);
       this.entityManager.render(g);
     }
