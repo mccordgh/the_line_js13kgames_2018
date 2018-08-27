@@ -67,16 +67,18 @@ export class World {
   }
 
   changeRooms(dir) {
+    // dir will be: 1 = north, 2 = east, 3 = south, 4 = west
     this.changeRoom = true;
-    // console.log(this.rooms, this.room, dir.mod);
-    this.room = this.room + dir.mod;
+    this.room = this.rooms[this.room.id + dir.mod];
     this.setPlayerSpawn(dir);
     this.changeRoom = false;
-    console.log('now in room', this.room);
-    // dir will be: 1 = north, 2 = east, 3 = south, 4 = west
   }
 
   loadWorld() {
+    this.room.entities.forEach((e) => {
+      console.log(e.x, e.y);
+      this.entityManager.addEntity(e);
+    });
     // let pieces = this.fillWorld();
 
     // for (let y = 0; y < TILE_COUNT; y++) {
@@ -116,41 +118,41 @@ export class World {
   //   };
   // }
 
-  renderTiles(g) {
-    for (let y = 0; y < TILE_COUNT; y++) {
-      for (let x = 0; x < TILE_COUNT; x++) {
-        // TileManager.getTiles()[this.tiles[y][x]].render(g, x * TILE_SIZE, y * TILE_SIZE);
-        // console.log('room', this.rooms);
-        try {
-          TileManager.getTiles()[this.rooms[this.room][y][x]].render(g, x * TILE_SIZE, y * TILE_SIZE);
-        } catch(e) {
-          
-        }
-      }
-    }
-  }
+  // renderTiles(g) {
+  //   for (let y = 0; y < TILE_COUNT; y++) {
+  //     for (let x = 0; x < TILE_COUNT; x++) {
+  //       // TileManager.getTiles()[this.tiles[y][x]].render(g, x * TILE_SIZE, y * TILE_SIZE);
+  //       // console.log('room', this.rooms);
+  //       try {
+  //         TileManager.getTiles()[this.room.tiles()[y][x]].render(g, x * TILE_SIZE, y * TILE_SIZE);
+  //       } catch(e) {
 
-  tickTiles(g) {
-    for (let y = 0; y < TILE_COUNT; y++) {
-      for (let x = 0; x < TILE_COUNT; x++) {
+  //       }
+  //     }
+  //   }
+  // }
 
-        // try {
-          TileManager.getTiles()[this.rooms[this.room][y][x]].tick();
-        // } catch(e) {
-          // console.log('tiles', TileManager.getTiles());
-          // console.log(this.room, this.rooms, x, y);
-          // console.log("TileManager.getTiles()[this.rooms[this.room][y][x]]");
-          // console.log(TileManager.getTiles()[this.rooms[this.room][y][x]]);
-          // debugger;
-          // console.log('ERROR room', this.room, this.rooms[this.room], y, x);
-        // }
-      }
-    }
-  }
+  // tickTiles(g) {
+  //   for (let y = 0; y < TILE_COUNT; y++) {
+  //     for (let x = 0; x < TILE_COUNT; x++) {
+
+  //       // try {
+  //         TileManager.getTiles()[this.room.tiles()[y][x]].tick();
+  //       // } catch(e) {
+  //         // console.log('tiles', TileManager.getTiles());
+  //         // console.log(this.room, this.rooms, x, y);
+  //         // console.log("TileManager.getTiles()[this.rooms[this.room][y][x]]");
+  //         // console.log(TileManager.getTiles()[this.rooms[this.room][y][x]]);
+  //         // debugger;
+  //         // console.log('ERROR room', this.room, this.rooms[this.room], y, x);
+  //       // }
+  //     }
+  //   }
+  // }
 
   getTile(x, y) {
     try {
-      return TileManager.getTiles()[this.rooms[this.room][y][x]];
+      return TileManager.getTiles()[this.room.tiles()[y][x]];
     }
     catch(e) {
     }
