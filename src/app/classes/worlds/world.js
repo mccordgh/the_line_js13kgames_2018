@@ -71,14 +71,12 @@ export class World {
     this.changeRoom = true;
     this.room = this.rooms[this.room.id + dir.mod];
     this.setPlayerSpawn(dir);
+    this.loadWorld();
     this.changeRoom = false;
   }
 
   loadWorld() {
-    this.room.entities.forEach((e) => {
-      console.log(e.x, e.y);
-      this.entityManager.addEntity(e);
-    });
+    this.entityManager.newRoom(this.room);
     // let pieces = this.fillWorld();
 
     // for (let y = 0; y < TILE_COUNT; y++) {
