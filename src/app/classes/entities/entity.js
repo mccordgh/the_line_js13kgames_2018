@@ -3,13 +3,11 @@ import { GameOver } from '../menus/game-over';
 import { Rectangle } from '../gfx/shapes/rectangle';
 
 export class Entity {
-  constructor(handler, x, y, width, height) {
-    this.x = x;
-    this.y = y;
-    this.width = width;
-    this.height = height;
+  constructor(handler, x, y) {
+    this.x = x * TILE_SIZE;
+    this.y = y * TILE_SIZE;
     this.handler = handler;
-    this.b = new Rectangle(0, 0, width, height);
+    this.b = new Rectangle(0, 0, TILE_SIZE, TILE_SIZE);
     // this.moveThrough = false;
   }
 
