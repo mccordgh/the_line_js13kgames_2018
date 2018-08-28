@@ -38,6 +38,15 @@ export class EntityManager {
     handler.getWorld().getSpatialGrid().insert(new Rectangle(e.x + e.b.x, e.y + e.b.y, e.b.s, e.b.s), e);
   }
 
+  newRoom(room) {
+    entities = [];
+    entities.push(player);
+
+    room.entities.forEach((e) => {
+      entities.push(e);
+    });
+  }
+
   removeEntity(e) {
     let index = entities.indexOf(e);
 

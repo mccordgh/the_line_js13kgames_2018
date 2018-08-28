@@ -6,4 +6,4 @@ window.TILE_COUNT = 12; //tiles
 window.TILE_SIZE = 64; //px
 
 window.rndIndex = (nums) => nums[Math.floor(Math.random() * (nums.length))];
-window.rndInt = (nums) => nums[Math.floor(Math.random() * (nums.length))];
+window.rndInt = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;;
