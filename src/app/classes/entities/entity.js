@@ -1,5 +1,5 @@
-import { Ending } from '../menus/ending';
-import { GameOver } from '../menus/game-over';
+// import { Ending } from '../menus/ending';
+// import { GameOver } from '../menus/game-over';
 import { Rectangle } from '../gfx/shapes/rectangle';
 
 export class Entity {
