@@ -1,5 +1,6 @@
 import { Room } from './room';
 import { Guard } from '../entities/creatures/monsters/guard';
+import Key from '../entities/statics/key';
 
 /* BUILDING A ROOM
   1. fill in standard room with 4 exits
@@ -18,11 +19,16 @@ import { Guard } from '../entities/creatures/monsters/guard';
 
 let handler;
 let roomNumbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
-let keys = ['red', 'green', 'blue', 'yellow'];
+let keys = [
+  new Key(handler, rndInt(2, 10), rndInt(2, 10), 'pink'),
+  new Key(handler, rndInt(2, 10), rndInt(2, 10), 'green'),
+  new Key(handler, rndInt(2, 10), rndInt(2, 10), 'yellow'),
+  new Key(handler, rndInt(2, 10), rndInt(2, 10), 'blue'),
+];
 
 let pullRoom = () => {
   let r = rndIndex(roomNumbers);
-  roomNumbers.splice(r + 1, 1);
+  roomNumbers = roomNumbers.filter(i => i != r);
 
   return r;
 }
@@ -63,7 +69,9 @@ let startRoom = (room) => {
 let createKeyRooms = (rooms) => {
   for (let i = 0; i < 4; i++) {
     let r = pullRoom();
-    rooms[r].items.push(keys[i]);
+    console.log(keys[0].type, 'in room', r);
+    rooms[r].entities.push(keys[0]);
+    keys.shift();
   }
 
   return rooms;
