@@ -40,10 +40,16 @@ export class EntityManager {
 
   newRoom(room) {
     entities = [];
-    entities.push(player);
+    this.addEntity(player);
+
+    console.log('1111', player.item);
+    if (player.item.type) {
+      console.log('add item');
+      this.addEntity(player.item);
+    }
 
     room.entities.forEach((e) => {
-      entities.push(e);
+      this.addEntity(e);
     });
   }
 
@@ -55,7 +61,7 @@ export class EntityManager {
     entities.splice(index, 1);
   }
 
-  removeEntitiesByType(type) {
+  // removeEntitiesByType(type) {
     // entities = entities.filter((e) => {
     //   if (e.type === type) {
     //     handler.getWorld().getSpatialGrid().remove(new Rectangle(e.x + e.b.x, e.y + e.b.y, e.b.w, e.b.h), e);
@@ -63,5 +69,5 @@ export class EntityManager {
     //     return e;
     //   }
     // });
-  }
+  // }
 }

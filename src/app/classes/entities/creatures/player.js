@@ -5,6 +5,7 @@ let gA = 1;
 export class Player extends Creature {
   constructor(handler, x, y){
     super(handler, x, y);
+    this.item = {};
     this.lastAnim = 'pright';
     this.type = 'p';
   }
@@ -23,6 +24,11 @@ export class Player extends Creature {
       case 2: // 2 = dead
         if (gA > 0.02) gA -= 0.02;
     }
+
+    if (this.item) {
+      this.item.x = this.x + 6;
+      this.item.y = this.y - 62;
+    }
   }
 
   render(g) {
@@ -38,9 +44,15 @@ export class Player extends Creature {
     }
 
     // ****** DRAW BOUNDING BOX DON'T DELETE!!
-    // g.fillStyle = "green";
-    // g.fillRect(this.b.x + this.x, this.b.y + this.y, this.b.s, this.b.s);
+    g.fillStyle = "green";
+    g.fillRect(this.b.x + this.x, this.b.y + this.y, this.b.s, this.b.s);
     // ****** DRAW BOUNDING BOX DON'T DELETE!!
+  }
+
+  setItem(item) {
+    console.log({item})
+    this.item = item;
+    this.item.b = {x: 0, y: 0, s: 0};
   }
 
   getInput(dt) {

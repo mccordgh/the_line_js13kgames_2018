@@ -20,10 +20,10 @@ import Key from '../entities/statics/key';
 let handler;
 let roomNumbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
 let keys = [
-  new Key(handler, rndInt(3, 9), rndInt(3, 9), 'p_key'),
-  new Key(handler, rndInt(3, 9), rndInt(3, 9), 'g_key'),
-  new Key(handler, rndInt(3, 9), rndInt(3, 9), 'y_key'),
-  new Key(handler, rndInt(3, 9), rndInt(3, 9), 'b_key'),
+  new Key(handler, rndInt(3, 9), rndInt(3, 9), 'p'),
+  new Key(handler, rndInt(3, 9), rndInt(3, 9), 'g'),
+  new Key(handler, rndInt(3, 9), rndInt(3, 9), 'y'),
+  new Key(handler, rndInt(3, 9), rndInt(3, 9), 'b'),
 ];
 
 let pullRoom = () => {
@@ -69,7 +69,7 @@ let startRoom = (room) => {
 let createKeyRooms = (rooms) => {
   for (let i = 0; i < 4; i++) {
     let r = pullRoom();
-    console.log(keys[0].type, 'in room', r);
+    console.log(keys[0].type, 'in room', r + 1);
     rooms[r].entities.push(keys[0]);
     keys.shift();
   }

@@ -76,7 +76,9 @@ export class World {
   }
 
   loadWorld() {
+    this.spatialGrid.reset();
     this.entityManager.newRoom(this.room);
+
     // let pieces = this.fillWorld();
 
     // for (let y = 0; y < TILE_COUNT; y++) {
