@@ -8,7 +8,7 @@ export class Player extends Creature {
     this.item = null;
     this.lastAnim = 'pright';
     this.type = 'p';
-    this.noCollide = [];
+    // this.noCollide = [];
   }
 
   tick(dt) {
@@ -46,9 +46,14 @@ export class Player extends Creature {
   }
 
   setItem(item) {
-    console.log({item})
     this.item = item;
-    this.noCollide.push(item.type);
+    // this.noCollide.push(item.type);
+  }
+
+  dropItem(item) {
+    this.item = null;
+    // this.noCollide.shift();
+    // console.log('drop', this.noCollide);
   }
 
   getInput(dt) {

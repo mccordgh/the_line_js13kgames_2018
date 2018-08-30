@@ -38,12 +38,14 @@ export class EntityManager {
     handler.getWorld().getSpatialGrid().insert(new Rectangle(e.x + e.b.x, e.y + e.b.y, e.b.s, e.b.s), e);
   }
 
-  newRoom(room) {
+  newRoom(prevRoom, room) {
     entities = [];
     this.addEntity(player);
 
-    if (player.item) {
-      this.addEntity(player.item);
+    if (player.item && (prevRoom != null)) {
+      // this.addEntity(player.item);
+      prevRoom.removeEntity(player.item);
+      room.addEntity(player.item);
     }
 
     room.entities.forEach((e) => {

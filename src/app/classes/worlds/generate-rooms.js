@@ -65,6 +65,7 @@ let startRoom = (room) => {
   room.addEntity(new Guard(handler, 8, 3));
   spawnRoom = room.id;
   roomNumbers = roomNumbers.filter(r => r != room.id);
+  console.log('spawned in room', spawnRoom);
 
   return room;
 }
@@ -125,7 +126,7 @@ export default function(_handler, start) {
   rooms = createKeyRooms(rooms);
   rooms = createMachineRoom(rooms);
 
-  rooms = spawnGuards(rooms);
+  // rooms = spawnGuards(rooms);
 
   return rooms;
 };
