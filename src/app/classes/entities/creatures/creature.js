@@ -77,32 +77,34 @@ export class Creature extends Entity {
       : tempX * TILE_SIZE + TILE_SIZE - this.b.x;
 
       if(!this.collisionWithTile(tempX, c1) && !this.collisionWithTile(tempX, c2)) {
+        console.log(this.xMove);
         this.x += this.xMove;
       } else {
-      this.x = setX;
+        this.x = setX;
+      }
     }
-  }
-
-  moveY() {
-    let tempY = this.yMove > 0
+    
+    moveY() {
+      let tempY = this.yMove > 0
       ? parseInt((this.y + this.yMove + this.b.y + this.b.s) / TILE_SIZE)
       : parseInt((this.y + this.yMove + this.b.y) / TILE_SIZE);
-
-    let c1 = parseInt((this.x + this.b.x) / TILE_SIZE);
-    let c2 = parseInt((this.x + this.b.x + this.b.s) / TILE_SIZE);
-
-    let setY = this.yMove > 0
+      
+      let c1 = parseInt((this.x + this.b.x) / TILE_SIZE);
+      let c2 = parseInt((this.x + this.b.x + this.b.s) / TILE_SIZE);
+      
+      let setY = this.yMove > 0
       ? tempY * TILE_SIZE - this.b.y - this.b.s - 1
       : tempY * TILE_SIZE + TILE_SIZE - this.b.y;
-
-    if (!this.collisionWithTile(c1, tempY) && !this.collisionWithTile(c2, tempY)) {
-      this.y += this.yMove;
-    } else {
-      this.y = setY;
+      
+      if (!this.collisionWithTile(c1, tempY) && !this.collisionWithTile(c2, tempY)) {
+        // console.log(this.yMove);
+        this.y += this.yMove;
+      } else {
+        this.y = setY;
+      }
     }
-  }
-
-  collisionWithTile(x, y) {
+    
+    collisionWithTile(x, y) {
     try {
       return this.handler.getWorld().getTile(x, y).isSolid;
     }

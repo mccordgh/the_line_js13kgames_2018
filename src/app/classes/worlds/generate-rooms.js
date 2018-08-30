@@ -1,6 +1,7 @@
 import { Room } from './room';
 import { Guard } from '../entities/creatures/monsters/guard';
 import Key from '../entities/statics/key';
+import Machine from '../entities/statics/machine';
 
 /* BUILDING A ROOM
   1. fill in standard room with 4 exits
@@ -77,6 +78,15 @@ let createKeyRooms = (rooms) => {
   return rooms;
 }
 
+let createMachineRoom = (rooms) => {
+    let r = pullRoom();
+    console.log('MACHINE in room', r);
+    rooms[r].entities.push(new Machine(handler, 5, 5));
+
+  return rooms;
+}
+
+
 let spawnGuards = (rooms) => {
   roomNumbers.forEach(r => rooms[r].entities.push(
     new Guard(handler, rndInt(2, 10), rndInt(2, 10))
@@ -111,6 +121,8 @@ export default function(_handler, start) {
   rooms[start] = new Room(handler, r.id, r.traits, r.entities, start);
 
   rooms = createKeyRooms(rooms);
+  rooms = createMachineRoom(rooms);
+
   rooms = spawnGuards(rooms);
 
   return rooms;
