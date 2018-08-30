@@ -9,7 +9,7 @@ import generateRooms from './generate-rooms';
 export class World {
   constructor(handler) {
     this.handler = handler;
-    this.entityManager = new EntityManager(handler, new Player(handler, 6, 6));
+    this.entityManager = new EntityManager(handler, new Player(handler, 2, 2));
     this.spatialGrid = new SpatialGrid(GAME_SIZE, GAME_SIZE, TILE_SIZE);
 
     this.start = rndIndex([5,6,9,10]);
@@ -70,13 +70,16 @@ export class World {
     // dir will be: 1 = north, 2 = east, 3 = south, 4 = west
     this.changeRoom = true;
     this.room = this.rooms[this.room.id + dir.mod];
+    console.log('entered Room: ', this.room.id);
     this.setPlayerSpawn(dir);
     this.loadWorld();
     this.changeRoom = false;
   }
 
   loadWorld() {
+    this.spatialGrid.reset();
     this.entityManager.newRoom(this.room);
+
     // let pieces = this.fillWorld();
 
     // for (let y = 0; y < TILE_COUNT; y++) {

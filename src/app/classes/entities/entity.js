@@ -27,25 +27,30 @@ export class Entity {
     return this.height;
   }
 
-  getCollisionBounds() {
-    return new Rectangle(parseInt(this.x + this.b.x),
-      parseInt(this.y + this.b.y),
+  getCollisionBounds(xOffset, yOffset) {
+    return new Rectangle(parseInt(this.x + this.b.x + xOffset),
+      parseInt(this.y + this.b.y + yOffset),
       this.b.s, this.b.s);
   }
 
   checkEntityCollisions(xOffset, yOffset) {
     // console.log(this.x + this.b.x + xOffset, this.y + this.b.y + yOffset, this.b.s, this.b.s, this)
-    let candidates =  this.handler.getWorld().getSpatialGrid().retrieve(new Rectangle(this.x + this.b.x + xOffset, this.y + this.b.y + yOffset, this.b.s, this.b.s), this);
+    let candidates =  this.handler.getWorld().getSpatialGrid().retrieve(new Rectangle(this.x + this.b.x, this.y + this.b.y, this.b.s, this.b.s), this);
 
     // console.log(candidates);
     for(let i = 0; i < candidates.length; i++) {
       let e = candidates[i];
-        // if (e.moveThrough) return false;
+        // console.log('HERE', this.type, this.noCollide, this.noCollide.find(ent => ent.type === e.type));
+
+        // if the player is colliding with an entity of the type in his no collision list
+        if (this.type === 'p' && this.noCollide.find(type => type === e.type)) {
+          return false;
+        }
 
         if (e.getCollisionBounds(0, 0).intersects(this.getCollisionBounds(xOffset, yOffset))) {
-            this.checkForCollisionEvents(this, e);
+          this.checkForCollisionEvents(this, e);
 
-            return true;
+          return true;
         }
     }
     return false;
@@ -69,9 +74,20 @@ export class Entity {
     //   hW.changeLevel();
     //   return;
     // }
-    console.log(e1.type, e2.type);
+    // console.log(e1.type, e2.type);
     if (this.checkCollidingTypes(e1, e2, 'p', 'g')) {
       this.handler.getWorld().getEntityManager().getPlayer().state = 2; // 2 = dead
+    }
+
+    if (this.checkCollidingTypes(e1, e2, 'p', 'key')) {
+      let player = e1.type === 'p' ? e1 : e2;
+
+      if (player.item) return;
+
+      let key = e1.type === 'key' ? e1 : e2;
+
+      player.setItem(e2.type === 'key' ? e2 : e1);
+      key.setTarget(player);
     }
   }
 

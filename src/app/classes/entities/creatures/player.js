@@ -5,8 +5,10 @@ let gA = 1;
 export class Player extends Creature {
   constructor(handler, x, y){
     super(handler, x, y);
+    this.item = null;
     this.lastAnim = 'pright';
     this.type = 'p';
+    this.noCollide = [];
   }
 
   tick(dt) {
@@ -41,6 +43,12 @@ export class Player extends Creature {
     // g.fillStyle = "green";
     // g.fillRect(this.b.x + this.x, this.b.y + this.y, this.b.s, this.b.s);
     // ****** DRAW BOUNDING BOX DON'T DELETE!!
+  }
+
+  setItem(item) {
+    console.log({item})
+    this.item = item;
+    this.noCollide.push(item.type);
   }
 
   getInput(dt) {

@@ -79,3 +79,7 @@ addAnimations('p_key', 5, 0, false)
 addAnimations('g_key', 6, 0, false)
 addAnimations('y_key', 7, 0, false)
 addAnimations('b_key', 8, 0, false)
+addAnimations('p_m', 9, 0, false);
+addAnimations('g_m', 10, 0, false);
+addAnimations('y_m', 11, 0, false);
+addAnimations('b_m', 12, 0, false);
