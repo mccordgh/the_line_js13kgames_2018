@@ -13,7 +13,6 @@ export class StaticEntity extends Entity {
 
   render(g) {
     // let t = this.anim ? this.texture.getCurrentFrame() : this.texture;
-
     g.myDrawImage(this.assets.getCurrentFrame(), this.x, this.y, TILE_SIZE, TILE_SIZE);
 
     // ****** DRAW BOUNDING BOX DON'T DELETE!!

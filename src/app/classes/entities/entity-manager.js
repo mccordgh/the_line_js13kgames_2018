@@ -42,9 +42,7 @@ export class EntityManager {
     entities = [];
     this.addEntity(player);
 
-    console.log('1111', player.item);
-    if (player.item.type) {
-      console.log('add item');
+    if (player.item) {
       this.addEntity(player.item);
     }
 
