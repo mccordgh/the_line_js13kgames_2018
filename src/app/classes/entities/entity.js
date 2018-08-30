@@ -37,7 +37,7 @@ export class Entity {
     // console.log(this.x + this.b.x + xOffset, this.y + this.b.y + yOffset, this.b.s, this.b.s, this)
     let candidates =  this.handler.getWorld().getSpatialGrid().retrieve(new Rectangle(this.x + this.b.x + xOffset, this.y + this.b.y + yOffset, this.b.s, this.b.s), this);
 
-    console.log(candidates);
+    // console.log(candidates);
     for(let i = 0; i < candidates.length; i++) {
       let e = candidates[i];
         // if (e.moveThrough) return false;

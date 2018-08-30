@@ -26,7 +26,7 @@ export class Player extends Creature {
     }
 
     if (this.item) {
-      this.item.x = this.x + 6;
+      this.item.x = this.x + 4;
       this.item.y = this.y - 62;
     }
   }

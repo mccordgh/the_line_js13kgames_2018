@@ -70,6 +70,7 @@ export class World {
     // dir will be: 1 = north, 2 = east, 3 = south, 4 = west
     this.changeRoom = true;
     this.room = this.rooms[this.room.id + dir.mod];
+    console.log('entered Room: ', this.room.id);
     this.setPlayerSpawn(dir);
     this.loadWorld();
     this.changeRoom = false;

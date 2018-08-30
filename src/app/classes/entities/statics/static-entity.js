@@ -7,7 +7,7 @@ export class StaticEntity extends Entity {
 
   tick() {
     // if (this.anim) {
-      this.assets.tick();
+      // this.assets.tick();
     // }
   }
 
