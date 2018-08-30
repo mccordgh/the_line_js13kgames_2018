@@ -32,7 +32,7 @@ export class Creature extends Entity {
   }
 
   tick() {
-    this.a.anim[this.lastAnim].tick();
+    // this.a.anim[this.lastAnim].tick();
     // n = this.type === 'player' ? 'p' : 'c';
 
     // if (this.yMove < 0)

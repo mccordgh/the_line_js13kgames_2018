@@ -6,11 +6,11 @@ export class Tile {
     this.id = id;
   }
 
-  tick() {
-    if (this.anim) {
-      this.texture.tick();
-    }
-  }
+  // tick() {
+    // if (this.anim) {
+      // this.texture.tick();
+    // }
+  // }
 
   render(g, x, y) {
     let t = this.anim ? this.texture.getCurrentFrame() : this.texture;
