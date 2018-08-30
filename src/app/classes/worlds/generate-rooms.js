@@ -18,6 +18,7 @@ import Machine from '../entities/statics/machine';
   [12 ] [13 ] [14 ] [15 ]
 */
 
+let spawnRoom = {};
 let handler;
 let roomNumbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
 let keys = [
@@ -62,6 +63,7 @@ let noLeft = (room) => {
 
 let startRoom = (room) => {
   room.addEntity(new Guard(handler, 8, 3));
+  spawnRoom = room.id;
   roomNumbers = roomNumbers.filter(r => r != room.id);
 
   return room;
@@ -79,9 +81,9 @@ let createKeyRooms = (rooms) => {
 }
 
 let createMachineRoom = (rooms) => {
-    let r = pullRoom();
-    console.log('MACHINE in room', r);
-    rooms[r].entities.push(new Machine(handler, 5, 5));
+    // let r = pullRoom();
+    // console.log('MACHINE in room', r);
+    rooms[spawnRoom].entities.push(new Machine(handler, 5, 5));
 
   return rooms;
 }

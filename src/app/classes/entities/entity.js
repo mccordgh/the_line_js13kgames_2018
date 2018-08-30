@@ -27,15 +27,15 @@ export class Entity {
     return this.height;
   }
 
-  getCollisionBounds() {
-    return new Rectangle(parseInt(this.x + this.b.x),
-      parseInt(this.y + this.b.y),
+  getCollisionBounds(xOffset, yOffset) {
+    return new Rectangle(parseInt(this.x + this.b.x + xOffset),
+      parseInt(this.y + this.b.y + yOffset),
       this.b.s, this.b.s);
   }
 
   checkEntityCollisions(xOffset, yOffset) {
     // console.log(this.x + this.b.x + xOffset, this.y + this.b.y + yOffset, this.b.s, this.b.s, this)
-    let candidates =  this.handler.getWorld().getSpatialGrid().retrieve(new Rectangle(this.x + this.b.x + xOffset, this.y + this.b.y + yOffset, this.b.s, this.b.s), this);
+    let candidates =  this.handler.getWorld().getSpatialGrid().retrieve(new Rectangle(this.x + this.b.x, this.y + this.b.y, this.b.s, this.b.s), this);
 
     // console.log(candidates);
     for(let i = 0; i < candidates.length; i++) {
@@ -48,9 +48,9 @@ export class Entity {
         }
 
         if (e.getCollisionBounds(0, 0).intersects(this.getCollisionBounds(xOffset, yOffset))) {
-            this.checkForCollisionEvents(this, e);
+          this.checkForCollisionEvents(this, e);
 
-            return true;
+          return true;
         }
     }
     return false;
@@ -74,7 +74,7 @@ export class Entity {
     //   hW.changeLevel();
     //   return;
     // }
-    console.log(e1.type, e2.type);
+    // console.log(e1.type, e2.type);
     if (this.checkCollidingTypes(e1, e2, 'p', 'g')) {
       this.handler.getWorld().getEntityManager().getPlayer().state = 2; // 2 = dead
     }

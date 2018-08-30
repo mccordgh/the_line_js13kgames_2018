@@ -29,8 +29,8 @@ export default class Machine extends StaticEntity {
 
 
         // ****** DRAW BOUNDING BOX DON'T DELETE!!
-        g.fillStyle = 'orange';
-        g.fillRect(this.b.x + this.x, this.b.y + this.y, this.b.s, this.b.s);
+        // g.fillStyle = 'orange';
+        // g.fillRect(this.b.x + this.x, this.b.y + this.y, this.b.s, this.b.s);
         // ****** DRAW BOUNDING BOX DON'T DELETE!!
     }
 

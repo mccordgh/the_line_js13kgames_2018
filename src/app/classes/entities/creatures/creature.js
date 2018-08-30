@@ -77,7 +77,7 @@ export class Creature extends Entity {
       : tempX * TILE_SIZE + TILE_SIZE - this.b.x;
 
       if(!this.collisionWithTile(tempX, c1) && !this.collisionWithTile(tempX, c2)) {
-        console.log(this.xMove);
+        // console.log(this.x, this.y, );
         this.x += this.xMove;
       } else {
         this.x = setX;
