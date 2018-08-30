@@ -57,7 +57,7 @@ export class Room {
   }
 
   tick() {
-      this.tickTiles();
+      // this.tickTiles();
   }
 
 

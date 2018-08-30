@@ -90,6 +90,7 @@ export class Game {
   tick(dt) {
     // this.d.tick(handler);
     keyManager.tick();
+    ANIMATION_TIMER.tick();
     // if (state.getState() && !display.paused)
     state.getState().tick(dt);
   }
