@@ -5,9 +5,10 @@ let gA = 1;
 export class Player extends Creature {
   constructor(handler, x, y){
     super(handler, x, y);
-    this.item = {};
+    this.item = null;
     this.lastAnim = 'pright';
     this.type = 'p';
+    this.noCollide = [];
   }
 
   tick(dt) {
@@ -25,10 +26,6 @@ export class Player extends Creature {
         if (gA > 0.02) gA -= 0.02;
     }
 
-    if (this.item) {
-      this.item.x = this.x + 4;
-      this.item.y = this.y - 62;
-    }
   }
 
   render(g) {
@@ -52,7 +49,7 @@ export class Player extends Creature {
   setItem(item) {
     console.log({item})
     this.item = item;
-    this.item.b = {x: 0, y: 0, s: 0};
+    this.noCollide.push(item.type);
   }
 
   getInput(dt) {
