@@ -1,4 +1,5 @@
 import { Creature } from './creature';
+import { GameOver } from '../../menus/game-over';
 
 let gA = 1;
 
@@ -24,6 +25,11 @@ export class Player extends Creature {
 
       case 2: // 2 = dead
         if (gA > 0.02) gA -= 0.02;
+
+        if (gA <= 0.02) {
+          let gameOver = new GameOver(this.handler, 'dead');
+          this.handler.getGame().getGameState().setState(gameOver);
+        }
     }
   }
 
