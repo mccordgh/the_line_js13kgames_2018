@@ -15,6 +15,15 @@ export class GameOver extends Menu {
           ]
         );
         break;
+      case 'machine':
+        super.draw(g, [
+          'You activated the machine!',
+          'Now everyone can escape!',
+          'T H E   E N D',
+          'Escape again [press enter]',
+          ]
+        );
+        break;
     }
   }
 

@@ -1,4 +1,5 @@
 import { StaticEntity } from "./static-entity";
+import { GameOver } from '../../menus/game-over';
 import { Assets } from "../../gfx/assets";
 
 export default class Machine extends StaticEntity {
@@ -21,7 +22,8 @@ export default class Machine extends StaticEntity {
 
     tick() {
         if (this.keys.length > 3) {
-            // console.log('machine has ' + this.keys.length + ' keys!');
+            let gameOver = new GameOver(this.handler, 'machine');
+            this.handler.getGame().getGameState().setState(gameOver)
         }
     }
 

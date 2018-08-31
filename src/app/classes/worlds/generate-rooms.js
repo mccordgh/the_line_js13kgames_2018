@@ -126,7 +126,7 @@ export default function(_handler, start) {
   rooms = createKeyRooms(rooms);
   rooms = createMachineRoom(rooms);
 
-  // rooms = spawnGuards(rooms);
+  rooms = spawnGuards(rooms);
 
   return rooms;
 };
