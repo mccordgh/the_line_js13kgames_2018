@@ -24,10 +24,10 @@ export class Assets {
   }
 }
 
-let cropTile = (asset, x, y) => asset.sheet.crop(SPRITE_SIZE * x, SPRITE_SIZE * y, SPRITE_SIZE, SPRITE_SIZE);
+// let cropTile = (asset, x, y) => asset.sheet.crop(SPRITE_SIZE * x, SPRITE_SIZE * y, SPRITE_SIZE, SPRITE_SIZE);
 
 let addAnimations = (name, right, left, multi = true) => {
-  let speed = 300, wrframes = [], wlframes = [];
+  let wrframes = [], wlframes = [];
   let cropFrame = (pos, i) => {
     return all.sheet.crop(SPRITE_SIZE * i, SPRITE_SIZE * pos, SPRITE_SIZE, SPRITE_SIZE);
   }
@@ -35,12 +35,10 @@ let addAnimations = (name, right, left, multi = true) => {
   for (let i = 0; i < 2; i++) {
     wrframes.push({
       frame: cropFrame(right, i),
-      speed
     });
     if (multi) {
       wlframes.push({
         frame: cropFrame(left, i),
-        speed
       });
     }
   }

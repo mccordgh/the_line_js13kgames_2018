@@ -1,4 +1,4 @@
-// let sm;
+let sm;
 
 export class Handler {
   constructor(game) {
@@ -33,11 +33,11 @@ export class Handler {
     return this.game;
   }
 
-  // getSM(){
-  //   return sm;
-  // }
+  getSoundManager(){
+    return sm;
+  }
 
-  // setSM(s) {
-  //   sm = s;
-  // }
+  setSoundManager(s) {
+    sm = s;
+  }
 }
