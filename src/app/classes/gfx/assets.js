@@ -24,10 +24,10 @@ export class Assets {
   }
 }
 
-let cropTile = (asset, x, y) => asset.sheet.crop(SPRITE_SIZE * x, SPRITE_SIZE * y, SPRITE_SIZE, SPRITE_SIZE);
+// let cropTile = (asset, x, y) => asset.sheet.crop(SPRITE_SIZE * x, SPRITE_SIZE * y, SPRITE_SIZE, SPRITE_SIZE);
 
 let addAnimations = (name, right, left, multi = true) => {
-  let speed = 300, wrframes = [], wlframes = [];
+  let speed = 250, wrframes = [], wlframes = [];
   let cropFrame = (pos, i) => {
     return all.sheet.crop(SPRITE_SIZE * i, SPRITE_SIZE * pos, SPRITE_SIZE, SPRITE_SIZE);
   }
