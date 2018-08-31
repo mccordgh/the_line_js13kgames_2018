@@ -69,16 +69,17 @@ export class World {
   changeRooms(dir) {
     // dir will be: 1 = north, 2 = east, 3 = south, 4 = west
     this.changeRoom = true;
+    let prevRoom = this.room;
     this.room = this.rooms[this.room.id + dir.mod];
     console.log('entered Room: ', this.room.id);
     this.setPlayerSpawn(dir);
-    this.loadWorld();
+    this.loadWorld(prevRoom);
     this.changeRoom = false;
   }
 
-  loadWorld() {
+  loadWorld(prevRoom = null) {
     this.spatialGrid.reset();
-    this.entityManager.newRoom(this.room);
+    this.entityManager.newRoom(prevRoom, this.room);
 
     // let pieces = this.fillWorld();
 

@@ -4,6 +4,12 @@ export class StaticEntity extends Entity {
   constructor(handler, x, y){
     super(handler, x, y);
     this.assets = {};
+
+    /* COLLISION BOUNDS */
+      this.b.x = 0;
+      this.b.y = 0;
+      this.b.s = TILE_SIZE; // size
+    /* COLLISION BOUNDS */
   }
 
   tick() {

@@ -1,4 +1,5 @@
 import { StaticEntity } from "./static-entity";
+import { GameOver } from '../../menus/game-over';
 import { Assets } from "../../gfx/assets";
 
 export default class Machine extends StaticEntity {
@@ -11,14 +12,20 @@ export default class Machine extends StaticEntity {
         this.assets.g = Assets.getAssets('all').anim['g_mright'];
         this.assets.y = Assets.getAssets('all').anim['y_mright'];
         this.assets.b = Assets.getAssets('all').anim['b_mright'];
-        console.log(Assets.getAssets('all').anim);
 
         /* COLLISION BOUNDS */
         this.b.x = 0;
         this.b.y = 0;
         this.b.s = 128; // size
         /* COLLISION BOUNDS */
-      }
+    }
+
+    tick() {
+        if (this.keys.length > 3) {
+            let gameOver = new GameOver(this.handler, 'machine');
+            this.handler.getGame().getGameState().setState(gameOver)
+        }
+    }
 
     render(g) {
         // let t = this.anim ? this.texture.getCurrentFrame() : this.texture;
@@ -32,6 +39,10 @@ export default class Machine extends StaticEntity {
         // g.fillStyle = 'orange';
         // g.fillRect(this.b.x + this.x, this.b.y + this.y, this.b.s, this.b.s);
         // ****** DRAW BOUNDING BOX DON'T DELETE!!
+    }
+
+    addKey(item) {
+        this.keys.push(item);
     }
 
     // tick() {

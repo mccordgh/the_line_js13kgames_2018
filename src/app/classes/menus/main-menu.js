@@ -1,25 +1,22 @@
-// import { GameState } from '../states/game-state';
-// import { Menu } from './menu';
+import { GameState } from '../states/game-state';
+import { Menu } from './menu';
 
-// export class MainMenu extends Menu {
-//   constructor(handler){
-//     super(handler);
-//   }
+export class MainMenu extends Menu {
+  constructor(handler){
+    super(handler);
+  }
 
-//   render(g) {
-//     super.draw(g, [
-//         'Me, Myself, and i:',
-//         'Movement:',
-//         'WASD, ZQSD, Arrows',
-//         '[Press enter to start.]',
-//       ],
-//     );
-//   }
+  render(g) {
+    // let s = 4 * TILE_SIZE;
+    super.draw(g, ['THE LINE', 'PRESS ENTER']);
 
-//   getInput() {
-//     if (this.handler.getKeyManager().enter) {
-//       let gameState = new GameState(this.handler);
-//       this.handler.getGame().getGameState().setState(gameState);
-//     }
-//   }
-// }
+    // g.drawText('THE LINE', s, s);
+  }
+
+  getInput() {
+    if(this.handler.getKeyManager().enter) {
+      let gameState = new GameState(this.handler);
+      this.handler.getGame().getGameState().setState(gameState);
+    }
+  }
+}

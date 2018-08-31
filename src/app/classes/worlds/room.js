@@ -29,6 +29,14 @@ export class Room {
       this.entities.push(e);
   }
 
+  removeEntity(e) {
+    let index = this.entities.indexOf(e);
+
+		// handler.getWorld().getSpatialGrid().remove(new Rectangle(e.x + e.b.x, e.y + e.b.y, e.b.s, e.b.s), e);
+
+    this.entities.splice(index, 1);
+  }
+
   init() {
       this.tileSet = [
         [1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1],

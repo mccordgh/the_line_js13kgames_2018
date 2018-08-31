@@ -43,9 +43,9 @@ export class Entity {
         // console.log('HERE', this.type, this.noCollide, this.noCollide.find(ent => ent.type === e.type));
 
         // if the player is colliding with an entity of the type in his no collision list
-        if (this.type === 'p' && this.noCollide.find(type => type === e.type)) {
-          return false;
-        }
+        // if (this.type === 'p' && this.noCollide.find(type => type === e.type)) {
+        //   return false;
+        // }
 
         if (e.getCollisionBounds(0, 0).intersects(this.getCollisionBounds(xOffset, yOffset))) {
           this.checkForCollisionEvents(this, e);
@@ -57,11 +57,13 @@ export class Entity {
   }
 
   checkForCollisionEvents(e1, e2) {
+    // if two guards bump, ignore
     if (this.checkCollidingTypes(e1, e2, 'g', 'g')) return;
 
     let h = this.handler;
     let hG = h.getGame();
     let hW = h.getWorld();
+    let player = e1.type === 'p' ? e1 : e2;
 
     // if (this.checkCollidingTypes(e1, e2, 'player', 'exit')) {
     //   if (hW.level >= 4) {
@@ -75,19 +77,35 @@ export class Entity {
     //   return;
     // }
     // console.log(e1.type, e2.type);
+
+    // if player and guard bump
     if (this.checkCollidingTypes(e1, e2, 'p', 'g')) {
-      this.handler.getWorld().getEntityManager().getPlayer().state = 2; // 2 = dead
+      player.state = 2; // 2 = dead
     }
 
+    // if player and a key bump
     if (this.checkCollidingTypes(e1, e2, 'p', 'key')) {
-      let player = e1.type === 'p' ? e1 : e2;
+      let item = e1.type === 'key' ? e1 : e2;
+      if (player.item || item.locked) return;
 
-      if (player.item) return;
 
-      let key = e1.type === 'key' ? e1 : e2;
+      player.setItem(item);
+      item.setTarget(player);
+    }
 
-      player.setItem(e2.type === 'key' ? e2 : e1);
-      key.setTarget(player);
+    // if player and the machine bump
+    if (this.checkCollidingTypes(e1, e2, 'p', 'm')) {
+      if (!player.item) return;
+
+      let machine = e1.type === 'm' ? e1 : e2;
+      let item = player.item;
+      // console.log({player, machine, item});
+
+      item.setTarget(machine);
+      item.locked = true;
+      machine.addKey(item);
+      player.dropItem(item);
+      // this.handler.getWorld().add
     }
   }
 

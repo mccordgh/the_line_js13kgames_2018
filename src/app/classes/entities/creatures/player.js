@@ -1,4 +1,5 @@
 import { Creature } from './creature';
+import { GameOver } from '../../menus/game-over';
 
 let gA = 1;
 
@@ -8,7 +9,7 @@ export class Player extends Creature {
     this.item = null;
     this.lastAnim = 'pright';
     this.type = 'p';
-    this.noCollide = [];
+    // this.noCollide = [];
   }
 
   tick(dt) {
@@ -24,6 +25,11 @@ export class Player extends Creature {
 
       case 2: // 2 = dead
         if (gA > 0.02) gA -= 0.02;
+
+        if (gA <= 0.02) {
+          let gameOver = new GameOver(this.handler, 'dead');
+          this.handler.getGame().getGameState().setState(gameOver);
+        }
     }
   }
 
@@ -46,24 +52,29 @@ export class Player extends Creature {
   }
 
   setItem(item) {
-    console.log({item})
     this.item = item;
-    this.noCollide.push(item.type);
+    // this.noCollide.push(item.type);
+  }
+
+  dropItem(item) {
+    this.item = null;
+    // this.noCollide.shift();
+    // console.log('drop', this.noCollide);
   }
 
   getInput(dt) {
     let manager = this.handler.getKeyManager();
 
-    if(manager.up || manager.w || manager.z) {
+    if(manager.w || manager.z) {
       this.yMove = -this.speed * dt;
     }
-    if (manager.down || manager.s) {
+    if (manager.s) {
       this.yMove = this.speed * dt;
     }
-    if(manager.left || manager.a || manager.q) {
+    if(manager.a || manager.q) {
       this.xMove = -this.speed * dt;
     }
-    if (manager.right || manager.d) {
+    if (manager.d) {
       this.xMove = this.speed * dt;
     }
   }

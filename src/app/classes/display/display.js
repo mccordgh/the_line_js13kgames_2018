@@ -55,9 +55,9 @@ CanvasRenderingContext2D.prototype.myDrawImage = (asset, x, y) => {
   graphics.drawImage(asset.sheet, asset.x, asset.y, asset.width, asset.height, x, y, TILE_SIZE, TILE_SIZE);
 };
 
-// CanvasRenderingContext2D.prototype.drawText = (txtObj) => {
-//   graphics.font = `${txtObj.fontSize}px Arial`;
-//   graphics.fillStyle = txtObj.fillColor;
-//   graphics.strokeText(txtObj.text, txtObj.x, txtObj.y);
-//   graphics.fillText(txtObj.text,  txtObj.x, txtObj.y);
-// };
+CanvasRenderingContext2D.prototype.drawText = (text, x, y) => {
+  graphics.font = `24px Arial`;
+  graphics.fillStyle = 'white';
+  graphics.strokeText(text, x, y);
+  graphics.fillText(text,  x, y);
+};
