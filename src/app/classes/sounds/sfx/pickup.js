@@ -5,49 +5,49 @@
     // use it in a demo.
 
     // Song data
-    var song = {
+    export default {
       songData: [
         { // Instrument 0
           i: [
-          2, // OSC1_WAVEFORM
-          40, // OSC1_VOL
-          140, // OSC1_SEMI
-          1, // OSC1_XENV
-          0, // OSC2_WAVEFORM
-          0, // OSC2_VOL
-          140, // OSC2_SEMI
-          0, // OSC2_DETUNE
+          1, // OSC1_WAVEFORM
+          192, // OSC1_VOL
+          128, // OSC1_SEMI
+          0, // OSC1_XENV
+          1, // OSC2_WAVEFORM
+          191, // OSC2_VOL
+          116, // OSC2_SEMI
+          9, // OSC2_DETUNE
           0, // OSC2_XENV
           255, // NOISE_VOL
-          5, // ENV_ATTACK
-          0, // ENV_SUSTAIN
-          48, // ENV_RELEASE
+          6, // ENV_ATTACK
+          16, // ENV_SUSTAIN
+          20, // ENV_RELEASE
           0, // ARP_CHORD
           0, // ARP_SPEED
           0, // LFO_WAVEFORM
-          0, // LFO_AMT
-          0, // LFO_FREQ
-          0, // LFO_FX_FREQ
-          3, // FX_FILTER
-          17, // FX_FREQ
-          48, // FX_RESONANCE
+          69, // LFO_AMT
+          3, // LFO_FREQ
+          1, // LFO_FX_FREQ
+          1, // FX_FILTER
+          35, // FX_FREQ
+          125, // FX_RESONANCE
           0, // FX_DIST
           32, // FX_DRIVE
           0, // FX_PAN_AMT
-          11, // FX_PAN_FREQ
-          71, // FX_DELAY_AMT
-          1 // FX_DELAY_TIME
+          12, // FX_PAN_FREQ
+          0, // FX_DELAY_AMT
+          0 // FX_DELAY_TIME
           ],
           // Patterns
           p: [1],
           // Columns
           c: [
-            {n: [140],
+            {n: [137,139,140],
              f: []}
           ]
         },
       ],
-      rowLen: 5513,   // In sample lengths
+      rowLen: 1378,   // In sample lengths
       patternLen: 32,  // Rows per pattern
       endPattern: 0,  // End pattern
       numChannels: 1  // Number of channels

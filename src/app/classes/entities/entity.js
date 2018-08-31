@@ -89,6 +89,7 @@ export class Entity {
       if (player.item || item.locked) return;
 
 
+      this.handler.getSoundManager().play('pickup');
       player.setItem(item);
       item.setTarget(player);
     }
@@ -101,6 +102,7 @@ export class Entity {
       let item = player.item;
       // console.log({player, machine, item});
 
+      this.handler.getSoundManager().play('place');
       item.setTarget(machine);
       item.locked = true;
       machine.addKey(item);

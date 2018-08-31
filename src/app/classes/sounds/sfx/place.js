@@ -5,44 +5,44 @@
     // use it in a demo.
 
     // Song data
-    var song = {
+    export default {
       songData: [
         { // Instrument 0
           i: [
           2, // OSC1_WAVEFORM
-          40, // OSC1_VOL
-          140, // OSC1_SEMI
-          1, // OSC1_XENV
-          0, // OSC2_WAVEFORM
-          0, // OSC2_VOL
-          140, // OSC2_SEMI
-          0, // OSC2_DETUNE
+          138, // OSC1_VOL
+          116, // OSC1_SEMI
+          0, // OSC1_XENV
+          2, // OSC2_WAVEFORM
+          138, // OSC2_VOL
+          128, // OSC2_SEMI
+          4, // OSC2_DETUNE
           0, // OSC2_XENV
-          255, // NOISE_VOL
-          5, // ENV_ATTACK
-          0, // ENV_SUSTAIN
-          48, // ENV_RELEASE
-          0, // ARP_CHORD
-          0, // ARP_SPEED
+          0, // NOISE_VOL
+          47, // ENV_ATTACK
+          48, // ENV_SUSTAIN
+          75, // ENV_RELEASE
+          124, // ARP_CHORD
+          3, // ARP_SPEED
           0, // LFO_WAVEFORM
-          0, // LFO_AMT
-          0, // LFO_FREQ
-          0, // LFO_FX_FREQ
-          2, // FX_FILTER
-          161, // FX_FREQ
-          192, // FX_RESONANCE
-          0, // FX_DIST
+          139, // LFO_AMT
+          4, // LFO_FREQ
+          1, // LFO_FX_FREQ
+          3, // FX_FILTER
+          64, // FX_FREQ
+          160, // FX_RESONANCE
+          3, // FX_DIST
           32, // FX_DRIVE
-          0, // FX_PAN_AMT
-          0, // FX_PAN_FREQ
-          71, // FX_DELAY_AMT
-          1 // FX_DELAY_TIME
+          147, // FX_PAN_AMT
+          4, // FX_PAN_FREQ
+          91, // FX_DELAY_AMT
+          4 // FX_DELAY_TIME
           ],
           // Patterns
           p: [1],
           // Columns
           c: [
-            {n: [164],
+            {n: [162],
              f: []}
           ]
         },
