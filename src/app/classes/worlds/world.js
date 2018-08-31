@@ -80,7 +80,6 @@ export class World {
   loadWorld(prevRoom = null) {
     this.spatialGrid.reset();
     this.entityManager.newRoom(prevRoom, this.room);
-    console.log(this.rooms)
 
     // let pieces = this.fillWorld();
 

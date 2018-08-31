@@ -21,7 +21,7 @@ export default class Machine extends StaticEntity {
 
     tick() {
         if (this.keys.length > 3) {
-            console.log('machine has ' + this.keys.length + ' keys!');
+            // console.log('machine has ' + this.keys.length + ' keys!');
         }
     }
 

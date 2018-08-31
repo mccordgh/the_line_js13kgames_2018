@@ -59,16 +59,16 @@ export class Player extends Creature {
   getInput(dt) {
     let manager = this.handler.getKeyManager();
 
-    if(manager.up || manager.w || manager.z) {
+    if(manager.w || manager.z) {
       this.yMove = -this.speed * dt;
     }
-    if (manager.down || manager.s) {
+    if (manager.s) {
       this.yMove = this.speed * dt;
     }
-    if(manager.left || manager.a || manager.q) {
+    if(manager.a || manager.q) {
       this.xMove = -this.speed * dt;
     }
-    if (manager.right || manager.d) {
+    if (manager.d) {
       this.xMove = this.speed * dt;
     }
   }

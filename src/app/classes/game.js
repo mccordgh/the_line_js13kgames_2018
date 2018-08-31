@@ -4,7 +4,7 @@ import { GameState } from './states/game-state';
 // import { GameCamera } from './gfx/game-camera';
 import { Handler } from './handler';
 import { KeyManager } from './input/key-manager';
-// import { MainMenu } from './menus/main-menu';
+import { MainMenu } from './menus/main-menu';
 import { State } from './states/state';
 // import { SoundManager } from './sounds/sound-manager';
 
@@ -16,6 +16,7 @@ let display,
   graphics,
   handler,
   keyManager,
+  mainMenu,
   state;
 
 export class Game {
@@ -67,9 +68,9 @@ export class Game {
   //   return gameCamera;
   // }
 
-  // getGameState() {
-  //   return state;
-  // }
+  getGameState() {
+    return state;
+  }
 
   init() {
     handler = new Handler(this);
@@ -81,10 +82,10 @@ export class Game {
     // gameCamera = new GameCamera(handler, 0, 0);
     // soundManager = new SoundManager();
     // handler.setSM(soundManager);
-    // mainMenu = new MainMenu(handler);
-    // state.setState(mainMenu);
-    gameState = new GameState(handler);
-    state.setState(gameState);
+    mainMenu = new MainMenu(handler);
+    state.setState(mainMenu);
+    // gameState = new GameState(handler);
+    // state.setState(gameState);
   }
 
   tick(dt) {
