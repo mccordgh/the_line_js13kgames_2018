@@ -50,6 +50,10 @@ export class EntityManager {
 
     room.entities.forEach((e) => {
       this.addEntity(e);
+
+      if (e.type === 'g') {
+        e.resetPos();
+      }
     });
   }
 

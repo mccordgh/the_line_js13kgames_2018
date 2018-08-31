@@ -83,11 +83,11 @@ export class Entity {
       player.state = 2; // 2 = dead
     }
 
-    if (this.checkCollidingTypes(e1, e2, 'g', 'm')) {
-      let g = e1.type === 'g' ? e1 : e2;
+    // if (this.checkCollidingTypes(e1, e2, 'g', 'm')) {
+    //   let g = e1.type === 'g' ? e1 : e2;
 
-      g.changeDirection();
-    }
+    //   g.changeDirection();
+    // }
 
     // if player and a key bump
     if (this.checkCollidingTypes(e1, e2, 'p', 'key')) {

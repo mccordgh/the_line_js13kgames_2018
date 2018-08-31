@@ -9,7 +9,7 @@ import generateRooms from './generate-rooms';
 export class World {
   constructor(handler) {
     this.handler = handler;
-    this.entityManager = new EntityManager(handler, new Player(handler, 2, 2));
+    this.entityManager = new EntityManager(handler, new Player(handler, 4, 8));
     this.spatialGrid = new SpatialGrid(GAME_SIZE, GAME_SIZE, TILE_SIZE);
 
     this.start = rndIndex([5,6,9,10]);

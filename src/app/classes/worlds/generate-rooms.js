@@ -19,6 +19,7 @@ import Machine from '../entities/statics/machine';
 */
 
 let spawnRoom = {};
+let guardSpawns = [3, 8];
 let handler;
 let roomNumbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
 let keys = [
@@ -92,7 +93,7 @@ let createMachineRoom = (rooms) => {
 
 let spawnGuards = (rooms) => {
   roomNumbers.forEach(r => rooms[r].entities.push(
-    new Guard(handler, rndInt(2, 10), rndInt(2, 10))
+    new Guard(handler, rndIndex(guardSpawns), rndIndex(guardSpawns))
   ));
 
   return rooms;

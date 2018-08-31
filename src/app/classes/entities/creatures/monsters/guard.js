@@ -1,48 +1,77 @@
 import { Creature } from '.././creature';
 
+let opposites = {
+  e: 'w',
+  w: 'e',
+  n: 's',
+  s: 'n'
+};
+
+let westOrEast = () => rndIndex(['w', 'e']);
+let northOrSouth = () => rndIndex(['n', 's']);
+
+let moveAround = {
+  n: westOrEast,
+  e: northOrSouth,
+  s: westOrEast,
+  w: northOrSouth,
+}
+
+let stuckCount = 0, movingAround = false;
+
 export class Guard extends Creature {
   constructor(handler, x, y){
     super(handler, x, y);
     this.lastAnim = 'gleft';
     this.state = 2;
-    this.patrolDirs = Math.random() < .5 ? ['w', 'e'] : ['n', 's'];
+    this.speed = 90;
+    this.start = { x: this.x, y: this.y };
+    this.last = {};
+    // this.patrolDirs = Math.random() < .5 ? ['w', 'e'] : ['n', 's'];
+    this.patrolDirs = ['w', 'e'];
+    this.patrolDir = rndIndex(this.patrolDirs);
     this.dir = {}
     this.resetDir();
-    this.target = null;
   }
 
   tick(dt) {
-    // this.xMove = this.yMove = 0;
+    if (!this.target) {
+      this.target = this.handler.getWorld().getEntityManager().getPlayer();
+    }
 
-    // this.getInput(dt);
     super.tick(dt);
     this.xMove = this.yMove = 0;
+    // this.patrol(dt);
 
     switch (this.state) {
       case 1: // 1 = patrol
-        let p = this.patrolDirs;
-        this.speed = 70;
-        this.dir[p[0]] = true;
-        this.dir[p[1]] = true;
+        let p = this.patrolDir;
+        this.dir[p] = true;
         this.patrol(dt);
+        this.checkForTarget();
         this.move();
         break;
       case 2: // 2 = chase
-        this.target = this.handler.getWorld().getEntityManager().getPlayer();
-        this.speed = 60;
         this.persue();
+        this.checkStuck();
         this.patrol(dt);
         this.move();
         this.resetDir();
         break;
-        // this.move();
+      case 3: // 3 = moving around object
+        stuckCount++;
+        this.persue();
+        this.patrol(dt);
+        this.move();
+        if (stuckCount > 120) {
+          stuckCount = 0;
+          this.state = 2;
+        }
       }
 
-    // this.move();
   }
 
   render(g) {
-    // g.myDrawImage(this.a.idle, this.x, this.y, TILE_SIZE, TILE_SIZE);
     g.myDrawImage(this.frame('g'), this.x, this.y, TILE_SIZE, TILE_SIZE);
 
     // ****** DRAW BOUNDING BOX DON'T DELETE!!
@@ -51,7 +80,20 @@ export class Guard extends Creature {
     // ****** DRAW BOUNDING BOX DON'T DELETE!!
   }
 
-  persue(dt) {
+  checkForTarget() {
+    let t = this.target;
+    let g = this;
+
+    //if guard gets within 3 tiles of player change to chasing state
+    if (
+      Math.abs(t.x - g.x) < (TILE_SIZE * 3)
+      && Math.abs(t.y - g.y) < (TILE_SIZE * 3)
+    ) {
+      this.state = 2; // 2 = chase
+    }
+  }
+
+  persue() {
     let p = this.target;
     let closeOnX = (Math.abs(p.x - this.x) < 8);
     let closeOnY = (Math.abs(p.y - this.y) < 8);
@@ -60,6 +102,35 @@ export class Guard extends Creature {
     this.dir.e = (p.x > this.x) && !closeOnX;
     this.dir.s = (p.y > this.y) && !closeOnY;
     this.dir.w = (p.x < this.x) && !closeOnX;
+  }
+
+  checkStuck() {
+    let xx = this.last.x == this.x;
+    let yy = this.last.y == this.y;
+    if (xx && yy) {
+      stuckCount++;
+
+      if (stuckCount > 60) {
+        console.log('b4', this.dir);
+        this.changeDirection();
+
+        console.log('after', this.dir);
+        stuckCount = 0;
+        this.state = 3; // 3 = moving around object
+      }
+    }
+
+    this.last.x = this.x;
+    this.last.y = this.y;
+  }
+
+  resetPos() {
+    let s = this.start;
+
+    this.x = s.x;
+    this.y = s.y;
+
+    this.state = 1 // 1 = patrolling
   }
 
   resetDir() {
@@ -95,33 +166,21 @@ export class Guard extends Creature {
     }
   }
 
-  changeDirection(prev = null) {
-    console.log('change dir!');
-    let d = Array.from(this.dirs);
+  changeDirection() {
+    let dir = this.dir;
+    let prevDir = Object.keys(dir).find(x => dir[x]);
 
-    if (prev) {
-      let index = d.indexOf(prev);
+    dir[prevDir] = false;
 
-      d.splice(index, 1);
+    switch (this.state) {
+      case 1:
+        dir[opposites[prevDir]] = true;
+
+        this.patrolDir = this.patrolDirs.filter(d => d !== prevDir)[0];
+        break;
+      case 2:
+        dir[moveAround[prevDir]()] = true;
+        break;
     }
-
-    this.dir = rndIndex(d);
   }
-
-  // getInput(dt) {
-  //   let manager = this.handler.getKeyManager();
-
-  //   if(manager.up || manager.w || manager.z) {
-  //     this.yMove = -this.speed * dt;
-  //   }
-  //   if (manager.down || manager.s) {
-  //     this.yMove = this.speed * dt;
-  //   }
-  //   if(manager.left || manager.a || manager.q) {
-  //     this.xMove = -this.speed * dt;
-  //   }
-  //   if (manager.right || manager.d) {
-  //     this.xMove = this.speed * dt;
-  //   }
-  // }
 }
