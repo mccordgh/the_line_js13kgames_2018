@@ -17,7 +17,7 @@ export class MainMenu extends Menu {
     if(this.handler.getKeyManager().enter) {
       let gameState = new GameState(this.handler);
       this.handler.getGame().getGameState().setState(gameState);
-      this.handler.getSoundManager().play('bg');
+      // this.handler.getSoundManager().play('bg');
     }
   }
 }

@@ -6,5 +6,8 @@ export class Path extends Tile {
     this.isSolid = false;
   }
 
-  render() {}
+  render(g, x, y) {
+    g.fillStyle = 'black';
+    g.fillRect(x, y, TILE_SIZE, TILE_SIZE);
+  }
 }

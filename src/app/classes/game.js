@@ -83,11 +83,11 @@ export class Game {
     // gameCamera = new GameCamera(handler, 0, 0);
     soundManager = new SoundManager();
     handler.setSoundManager(soundManager);
-    mainMenu = new MainMenu(handler);
-    state.setState(mainMenu);
+    // mainMenu = new MainMenu(handler);
+    // state.setState(mainMenu);
     ANIMATION_TIMER.init(handler);
-    // gameState = new GameState(handler);
-    // state.setState(gameState);
+    gameState = new GameState(handler);
+    state.setState(gameState);
   }
 
   tick(dt) {

@@ -10,10 +10,11 @@ export class Creature extends Entity {
     this.xMove = 0;
     this.yMove = 0;
     this.type = 'g';
+    this.handler = handler;
 
     this.a = Assets.getAssets('all');
 
-    this.speed = 800;
+    this.speed = 140;
     this.lastAnim = this.type + 'right';
     this.state = 1 // 1 = move
 
@@ -48,7 +49,7 @@ export class Creature extends Entity {
   move() {
     let os = this.isOffScreen();
 
-    if (os) {
+    if (os && this.type == 'p') {
       this.handler.getWorld().changeRooms(os);
 
       return;
@@ -80,6 +81,7 @@ export class Creature extends Entity {
         // console.log(this.x, this.y, );
         this.x += this.xMove;
       } else {
+        if (this.type == 'g') this.changeDirection(this.xMove < 0 ? 'w' : 'e');
         this.x = setX;
       }
     }
@@ -100,6 +102,7 @@ export class Creature extends Entity {
         // console.log(this.yMove);
         this.y += this.yMove;
       } else {
+        if (this.type == 'g') this.changeDirection(this.yMove < 0 ? 'n' : 's');
         this.y = setY;
       }
     }
