@@ -5,8 +5,9 @@ export class Guard extends Creature {
     super(handler, x, y);
     this.lastAnim = 'gleft';
     this.state = 2;
-    this.dirs = Math.random() < .5 ? ['w', 'e'] : ['n', 's'];
-    this.dir = rndIndex(this.dirs);
+    this.patrolDirs = Math.random() < .5 ? ['w', 'e'] : ['n', 's'];
+    this.dir = {}
+    this.resetDir();
     this.target = null;
   }
 
@@ -19,18 +20,25 @@ export class Guard extends Creature {
 
     switch (this.state) {
       case 1: // 1 = patrol
+        let p = this.patrolDirs;
         this.speed = 70;
+        this.dir[p[0]] = true;
+        this.dir[p[1]] = true;
         this.patrol(dt);
+        this.move();
         break;
       case 2: // 2 = chase
         this.target = this.handler.getWorld().getEntityManager().getPlayer();
-        this.speed = 120;
-        this.persue(dt);
+        this.speed = 60;
+        this.persue();
+        this.patrol(dt);
+        this.move();
+        this.resetDir();
         break;
         // this.move();
       }
 
-    this.move();
+    // this.move();
   }
 
   render(g) {
@@ -45,47 +53,50 @@ export class Guard extends Creature {
 
   persue(dt) {
     let p = this.target;
+    let closeOnX = (Math.abs(p.x - this.x) < 8);
+    let closeOnY = (Math.abs(p.y - this.y) < 8);
 
-    if (p.x < this.x) {
-      this.dir = 'w';
+    this.dir.n = (p.y < this.y) && !closeOnY;
+    this.dir.e = (p.x > this.x) && !closeOnX;
+    this.dir.s = (p.y > this.y) && !closeOnY;
+    this.dir.w = (p.x < this.x) && !closeOnX;
+  }
+
+  resetDir() {
+    this.dir = {
+      n: false,
+      e: false,
+      s: false,
+      w: false
     }
-
-    if (p.x > this.x) {
-      this.dir = 'e';
-    }
-
-    if (p.y < this.y) {
-      this.dir = 's';
-    }
-
-    if (p.y < this.y) {
-      this.dir = 'n';
-    }
-
-    this.patrol(dt);
   }
 
   patrol(dt) {
     let d = this.dir;
-    //up
-    if (d == 'n') {
+
+    //north
+    if (d.n) {
       this.yMove = -this.speed * dt;
     }
-    //down
-    if (d == 's') {
+
+    //east
+    if (d.e) {
+      this.xMove = this.speed * dt;
+    }
+
+    //south
+    if (d.s) {
       this.yMove = this.speed * dt;
     }
-    //left
-    if (d == 'w') {
+
+    //west
+    if (d.w) {
       this.xMove = -this.speed * dt;
-    }
-    //right
-    if (d == 'e') {
-      this.xMove = this.speed * dt;
     }
   }
 
   changeDirection(prev = null) {
+    console.log('change dir!');
     let d = Array.from(this.dirs);
 
     if (prev) {
