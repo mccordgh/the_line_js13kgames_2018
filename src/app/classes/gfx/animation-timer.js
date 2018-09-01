@@ -6,20 +6,29 @@ export class AnimationTimer {
     this.index = 0;
     this.lastTime = Date.now();
     this.timer = 0;
-    this.speed = 250;
+    this.speed = 300;
+    this.keys = 0;
     this.beats = {
       //sounds on the 1 beat
       2: [
-        { name: 'steam2', loaded: false },
+        { name: 'steamLow', keysReq: 0 },
+        { name: 'bassC', keysReq: 1 },
+        { name: 'arpFsG', keysReq: 3 },
       ],
       //sounds on the 2 beat
-      4: [],
+      4: [
+        { name: 'bassDs', keysReq: 2 },
+      ],
       //sounds on the 3 beat
       6: [
-        { name: 'steam1', loaded: false },
+        { name: 'steamHigh', keysReq: 0 },
+        { name: 'bassF', keysReq: 1 },
       ],
       //sounds on the 4 beat
-      8: [],
+      8: [
+        { name: 'bassFs', keysReq: 2 },
+        { name: 'arpAsC', keysReq: 4 },
+      ],
     }
     // this.soundsOnTwo = [
     //   { name: 'steam2', loaded: false },
@@ -63,8 +72,15 @@ export class AnimationTimer {
     let sm = this.sounds;
 
     for (let i = 0; i < s.length; i++) {
-      sm.load(s[i].name);
-      sm.play(s[i].name);
+      if (this.keys >= s[i].keysReq) {
+        sm.load(s[i].name);
+        sm.play(s[i].name);
+      }
     }
+  }
+
+  keyAdded() {
+    this.keys++;
+    this.speed -= 35;
   }
 }

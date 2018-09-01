@@ -43,6 +43,7 @@ export default class Machine extends StaticEntity {
 
     addKey(item) {
         this.keys.push(item);
+        ANIMATION_TIMER.keyAdded(this.keys.length - 1);
     }
 
     // tick() {

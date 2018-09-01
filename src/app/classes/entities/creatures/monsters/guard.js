@@ -10,10 +10,11 @@ let opposites = {
 let stuckCount = 0, dontChaseCount = 0, stuckAt = null, changeCount = 0, changedDirs = false;
 
 export class Guard extends Creature {
-  constructor(handler, x, y){
+  constructor(handler, x, y, state = 1){
     super(handler, x, y);
     this.lastAnim = 'gleft';
-    this.state = 2;
+    console.log('setting to', state);
+    this.state = state;
     this.speed = 90;
     this.start = { x: this.x, y: this.y };
     this.last = {};
@@ -23,6 +24,7 @@ export class Guard extends Creature {
     this.dir = {}
     this.offScreen = false;
     this.resetDir();
+    console.log(this.state);
   }
 
   tick(dt) {
@@ -32,8 +34,11 @@ export class Guard extends Creature {
     }
 
     this.xMove = this.yMove = 0;
-
+    console.log(this.state);
     switch (this.state) {
+      case 0: // chill brahhhh
+        console.log('chillin?');
+        break;
       case 1: // 1 = patrol
         if (dontChaseCount < 60) dontChaseCount++;
         let p = stuckAt || this.patrolDir;

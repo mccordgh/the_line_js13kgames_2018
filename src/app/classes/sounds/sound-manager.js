@@ -1,8 +1,14 @@
 import { CPlayer } from './player-small';
-import steam1 from './sfx/steam1.js';
-import steam2 from './sfx/steam2.js';
-import placefx from './sfx/place.js';
-import pickupfx from './sfx/pickup.js';
+import steamHigh from './sfx/steamHigh';
+import steamLow from './sfx/steamLow';
+import bassC from './sfx/bassC';
+import bassDs from './sfx/bassDs';
+import bassFs from './sfx/bassFs';
+import bassF from './sfx/bassF';
+import placefx from './sfx/place';
+import pickupfx from './sfx/pickup';
+import arpFsG from './sfx/arpFsG'
+import arpAsC from './sfx/arpAsC'
 
 let sounds = {};
 
@@ -13,10 +19,16 @@ export class SoundManager {
 
   init() {
     sounds = {
-      pickup: this.create(.5, 'pickup', false, pickupfx),
-      place: this.create(.55, 'place', false, placefx),
-      steam1: this.create(.2, 'steam1', false, steam1),
-      steam2: this.create(.4, 'steam2', false, steam2)
+      pickup: this.create(.15, 'pickup', false, pickupfx),
+      place: this.create(.3, 'place', false, placefx),
+      steamHigh: this.create(.2, 'steamHigh', false, steamHigh),
+      steamLow: this.create(.4, 'steamLow', false, steamLow),
+      bassC: this.create(.2, 'bassC', false, bassC),
+      bassDs: this.create(.2, 'bassDs', false, bassDs),
+      bassFs: this.create(.2, 'bassFs', false, bassFs),
+      bassF: this.create(.2, 'bassF', false, bassF),
+      arpFsG: this.create(.2, 'arpFsG', false, arpFsG),
+      arpAsC: this.create(.2, 'arpAsC', false, arpAsC),
     }
   }
 

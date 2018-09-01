@@ -14,7 +14,7 @@ export class Creature extends Entity {
 
     this.a = Assets.getAssets('all');
 
-    this.speed = 140;
+    this.speed = 840;
     this.lastAnim = this.type + 'right';
     this.state = 1 // 1 = move
 
