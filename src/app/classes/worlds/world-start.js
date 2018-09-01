@@ -1,15 +1,13 @@
 import { EntityManager } from '../entities/entity-manager';
 import { Player } from '../entities/creatures/player';
 import { SpatialGrid } from '../utils/spatial-grid';
-import { TileManager } from '../tiles/tile-manager';
-import { Guard } from '../entities/creatures/monsters/guard';
-
-import generateRooms from './generate-rooms';
 
 import { Room } from './room';
 import { GameState } from '../states/game-state';
 import { World } from './world';
 import Key from '../entities/statics/key';
+
+let pauser = 199, change = false;
 
 export class WorldStart {
     constructor(handler) {
@@ -19,18 +17,45 @@ export class WorldStart {
         this.entityManager = new EntityManager(handler, new Player(handler, 9, 2));
         this.spatialGrid = new SpatialGrid(GAME_SIZE, GAME_SIZE, TILE_SIZE);
         handler.setWorld(this);
+        this.state = 1;
 
         this.init();
     }
 
     tick(dt) {
-        this.getInput();
-        this.room.tick();
-        this.entityManager.tick(dt);
+        let e = this.entityManager;
+        // this.getInput();
+        
+        switch (this.state) {
+            case 1:
+                this.room.tick();
+                e.tick(dt);
+
+                if (e.getPlayer().item) {
+                    this.handler.getSoundManager().play('place');
+                    this.state = 2; // pause before starting game
+                }
+
+                break;
+            case 2:
+                pauser--;
+                
+                if (change) {
+                    let gameState = new GameState(this.handler, new World(this.handler));
+                    this.handler.getGame().getGameState().setState(gameState); 
+                }
+            break;
+        }
         // console.log(dt);
     }
 
     render(g) {
+        g.globalAlpha = pauser == 119 ? 1 : (pauser / 119);
+        if (pauser == 0) {
+            g.globalAlpha = 1;
+            change = true;
+        }
+
         this.room.render(g);
         this.entityManager.render(g);
 
@@ -41,25 +66,25 @@ export class WorldStart {
             blue = #29adff
         */
 
-        // g.drawText('Move with WASD or ZQSD keys', 126, 73)
-        // g.drawText('WASD', 261, 73, '#ff77a8')
-        // g.drawText('ZQSD', 385, 73, '#00e436')
-        g.drawText('PRESS [ENTER] TO START THE REVOLUTION!', 76, 538, '#ffec27')
-        g.drawText('ENTER', 187, 538, '#00e436')
+        g.drawText('Move with WASD or ZQSD !', 126, 538, '#ffec27')
+        g.drawText('WASD', 261, 538, '#ff77a8')
+        g.drawText('ZQSD', 385, 538, '#00e436')
+        // g.drawText('PRESS [ENTER] TO START THE REVOLUTION!', 76, 538, '#ffec27')
+        // g.drawText('ENTER', 187, 538, '#00e436')
         // g.drawText('REVOLUTION !', 465, 555, '#ff77a8')
-        g.drawText('GRAB THE KEYS!', 274, 680)
-        // g.drawText('FI', 320, 680, '#29adff')
+        g.drawText('GRAB THE KEYS !', 264, 680, '#ffec27')
+        g.drawText('KEYS', 414, 680, '#29adff')
         
     }
 
-    getInput() {
-        let m = this.keyManager;
+    // getInput() {
+    //     let m = this.keyManager;
 
-        if (m.enter) {
-            let gameState = new GameState(this.handler, new World(this.handler));
-            this.handler.getGame().getGameState().setState(gameState);
-        }
-    }
+    //     if (m.enter) {
+    //         let gameState = new GameState(this.handler, new World(this.handler));
+    //         this.handler.getGame().getGameState().setState(gameState);
+    //     }
+    // }
 
     init() {
         let h = this.handler;
@@ -67,10 +92,10 @@ export class WorldStart {
 
         this.setTiles();
         [
-            new Key(h, 1, 10, 'p'),
-            new Key(h, 3, 10, 'g'),
-            new Key(h, 8, 10, 'b'),
-            new Key(h, 10, 10, 'y'),
+            new Key(h, 1, 10, 'p', true),
+            new Key(h, 3, 10, 'g', true),
+            new Key(h, 8, 10, 'b', true),
+            new Key(h, 10, 10, 'y', true),
         ].forEach((e) => { r.addEntity(e) });
 
         this.entityManager.newRoom(null, this.room);

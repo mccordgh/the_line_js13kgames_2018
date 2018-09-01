@@ -94,8 +94,7 @@ export class Entity {
       let item = e1.type === 'key' ? e1 : e2;
       if (player.item || item.locked) return;
 
-
-      this.handler.getSoundManager().play('pickup');
+      if (!item.prop) this.handler.getSoundManager().play('pickup');
       player.setItem(item);
       item.setTarget(player);
     }

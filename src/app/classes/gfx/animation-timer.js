@@ -6,47 +6,41 @@ export class AnimationTimer {
     this.index = 0;
     this.lastTime = Date.now();
     this.timer = 0;
-    this.speed = 230;
+    this.speed = 300;
     this.keys = 0;
     this.stop = false;
     this.beats = {
-      //sounds on the 1 beat
-      2: [
+      1: [
       ],
-      4: [
+      //sounds on the 1.5 beat
+      2: [
         { name: 'steamLow', condition(k) { return k >= 0 }},
         { name: 'bassC', condition(k) { return k >= 1 }},
       ],
-      6: [
+      3: [
         { name: 'arpFsG', condition(k) { return k >= 3 }},
       ],
-      //sounds on the 2 beat
-      8: [
+      //sounds on the 2.5 beat
+      4: [
         // { name: 'arpFsG', condition(k) { return k == 3 }},
         { name: 'bassDs', condition(k) { return k >= 2 }},
       ],
-      10: [
+      5: [
         { name: 'arpAsC', condition(k) { return k >= 3 }},
       ],
-      //sounds on the 3 beat
-      12: [
+      //sounds on the 3.5 beat
+      6: [
         { name: 'steamHigh', condition(k) { return k >= 0}},
         { name: 'bassDs', condition(k) { return k == 1}},
         { name: 'bassF', condition(k) { return k >= 2 }},
       ],
-      14: [
+      7: [
       ],
-      //sounds on the 4 beat
-      16: [
+      //sounds on the 4.5 beat
+      8: [
         { name: 'bassFs', condition(k) { return k >= 2 }},
       ],
     }
-    // this.soundsOnTwo = [
-    //   { name: 'steam2', loaded: false },
-    // ];
-    // this.soundsOnFour = [
-    //   { name: 'steam1', loaded: false },
-    // ];
   }
 
   init(handler) {
@@ -79,8 +73,8 @@ export class AnimationTimer {
   factoryNoise() {
     c++;
 
-    if (this.index % 2 != 0) this.playAll(this.beats[c]);
-    if (c == 16) c = 0;
+    this.playAll(this.beats[c]);
+    if (c == 8) c = 0;
   }
 
   playAll(s){
@@ -99,6 +93,6 @@ export class AnimationTimer {
 
   keyAdded() {
     this.keys++;
-    this.speed -= 30;
+    this.speed -= 20;
   }
 }

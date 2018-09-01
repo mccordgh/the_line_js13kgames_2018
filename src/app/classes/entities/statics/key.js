@@ -2,14 +2,15 @@ import { StaticEntity } from "./static-entity";
 import { Assets } from "../../gfx/assets";
 
 export default class Key extends StaticEntity {
-    constructor(handler, x, y, color){
+    constructor(handler, x, y, color, prop = false){
         super(handler, x, y);
         this.type = 'key';
         this.target = null;
         this.color = color;
         this.locked = false;
         this.assets = Assets.getAssets('all').anim[`${this.color}_${this.type}right`];
-
+        this.prop = prop;
+        console.log('prop?', this.prop);
         this.typePos = {
             p: { x: 4, y: -64 },
             m: {
