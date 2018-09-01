@@ -127,7 +127,7 @@ export default function(_handler, start) {
   };
 
   let r = startRoom(rooms[start]);
-  rooms[start] = new Room(handler, r.id, r.traits, r.entities, start);
+  rooms[start] = new Room(handler, r.id, r.traits, r.entities);
 
   rooms = createKeyRooms(rooms);
   rooms = createMachineRoom(rooms);

@@ -12,10 +12,10 @@ export class Tile {
     // }
   // }
 
-  render(g, x, y) {
+  render(g, x, y, size) {
     let t = this.anim ? this.texture.getCurrentFrame() : this.texture;
 
-    g.myDrawImage(t, x, y, TILE_SIZE, TILE_SIZE);
+    g.myDrawImage(t, x, y, size);
   }
 
   getId() {

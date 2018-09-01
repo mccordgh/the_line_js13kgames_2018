@@ -51,7 +51,6 @@ export class AnimationTimer {
 
   init(handler) {
     this.sounds = handler.getSoundManager();
-    console.log('init', this.sounds);
   }
 
   tick() {

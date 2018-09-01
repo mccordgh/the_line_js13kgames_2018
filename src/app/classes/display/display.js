@@ -51,13 +51,13 @@ export class Display {
 // CanvasRenderingContext2D.prototype.myDrawImage = (asset, x, y, width, height) => {
   // graphics.drawImage(asset.sheet, asset.x, asset.y, asset.width, asset.height, x, y, width, height);
 // };
-CanvasRenderingContext2D.prototype.myDrawImage = (asset, x, y) => {
-  graphics.drawImage(asset.sheet, asset.x, asset.y, asset.width, asset.height, x, y, TILE_SIZE, TILE_SIZE);
+CanvasRenderingContext2D.prototype.myDrawImage = (asset, x, y, size = TILE_SIZE) => {
+  graphics.drawImage(asset.sheet, asset.x, asset.y, asset.width, asset.height, x, y, size, size);
 };
 
-CanvasRenderingContext2D.prototype.drawText = (text, x, y) => {
-  graphics.font = `24px Arial`;
-  graphics.fillStyle = 'white';
+CanvasRenderingContext2D.prototype.drawText = (text, x, y, color = 'white') => {
+  graphics.font = `28px Arial`;
+  graphics.fillStyle = color;
   graphics.strokeText(text, x, y);
   graphics.fillText(text,  x, y);
 };

@@ -1,9 +1,9 @@
 import { World } from '../worlds/world';
 
 export class GameState {
-  constructor(handler) {
+  constructor(handler, world) {
     this.handler = handler;
-    this.world = new World(handler);
+    this.world = world;
   }
 
   tick(dt) {

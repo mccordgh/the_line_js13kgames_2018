@@ -4,19 +4,17 @@ import { GameState } from './states/game-state';
 // import { GameCamera } from './gfx/game-camera';
 import { Handler } from './handler';
 import { KeyManager } from './input/key-manager';
-import { MainMenu } from './menus/main-menu';
+import { StartMenu } from './menus/start-menu';
 import { State } from './states/state';
 import { SoundManager } from './sounds/sound-manager';
 
-// let g, display, keyManager, handler, gameCamera, soundManager;
-// let state, gameState, mainMenu;
 let i = 0;
 let display,
   gameState,
   graphics,
   handler,
   keyManager,
-  mainMenu,
+  startMenu,
   soundManager,
   state;
 
@@ -83,11 +81,11 @@ export class Game {
     // gameCamera = new GameCamera(handler, 0, 0);
     soundManager = new SoundManager();
     handler.setSoundManager(soundManager);
-    // mainMenu = new MainMenu(handler);
-    // state.setState(mainMenu);
+    startMenu = new StartMenu(handler);
+    state.setState(startMenu);
     ANIMATION_TIMER.init(handler);
-    gameState = new GameState(handler);
-    state.setState(gameState);
+    // gameState = new GameState(handler);
+    // state.setState(gameState);
   }
 
   tick(dt) {

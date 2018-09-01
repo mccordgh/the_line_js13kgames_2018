@@ -8,12 +8,14 @@ import { Guard } from '../entities/creatures/monsters/guard';
 // import roomSet from './room-creator';
 
 export class Room {
-  constructor(handler, id, traits = [], entities = [], start = false) {
+  constructor(handler, id, traits = [], entities = [], tileSize = TILE_SIZE, tileCount = TILE_COUNT) {
     this.id = id;
     this.tileSet = [];
     this.items = [];
     this.traits = traits;
     this.entities = entities;
+    this.tileSize = tileSize;
+    this.tileCount = tileCount
     // this.handler = handler;
     // this.entityManager = new EntityManager(handler, new Player(handler, 6, 6));
     // this.spatialGrid = new SpatialGrid(GAME_SIZE, GAME_SIZE, TILE_SIZE);
@@ -70,17 +72,17 @@ export class Room {
 
 
   render(g) {
-      this.renderTiles(g);
+    this.renderTiles(g, this.tileSize, this.tileCount);
   }
 
-  renderTiles(g) {
-    for (let y = 0; y < TILE_COUNT; y++) {
-      for (let x = 0; x < TILE_COUNT; x++) {
+  renderTiles(g, size, count) {
+    for (let y = 0; y < count; y++) {
+      for (let x = 0; x < count; x++) {
         // TileManager.getTiles()[this.tiles[y][x]].render(g, x * TILE_SIZE, y * TILE_SIZE);
         // console.log('room', this.rooms);
         // try {
             // console.log(TileManager.getTiles()[this.tileSet[y][x]])
-          TileManager.getTiles()[this.tileSet[y][x]].render(g, x * TILE_SIZE, y * TILE_SIZE);
+          TileManager.getTiles()[this.tileSet[y][x]].render(g, x * size, y * size, size);
         // } catch(e) {
 
         // }
