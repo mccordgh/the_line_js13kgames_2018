@@ -37,6 +37,7 @@ export class Guard extends Creature {
         if (dontChaseCount < 60) dontChaseCount++;
         let p = stuckAt || this.patrolDir;
         this.dir[p] = true;
+        this.patrolDir;
         this.patrol(dt);
         if (dontChaseCount >= 60) {
           stuckAt = null;
@@ -126,6 +127,9 @@ export class Guard extends Creature {
     this.x = s.x;
     this.y = s.y;
     dontChaseCount = 0;
+    this.patrolDir = rndIndex(this.patrolDirs);
+    this.stuckAt = null;
+    this.resetDir();
     this.state = 1 // 1 = patrolling
   }
 

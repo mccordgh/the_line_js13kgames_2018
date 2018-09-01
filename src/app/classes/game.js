@@ -7,6 +7,7 @@ import { KeyManager } from './input/key-manager';
 import { StartMenu } from './menus/start-menu';
 import { State } from './states/state';
 import { SoundManager } from './sounds/sound-manager';
+import { GameOver } from './menus/game-over';
 
 let i = 0;
 let display,
@@ -83,6 +84,8 @@ export class Game {
     handler.setSoundManager(soundManager);
     startMenu = new StartMenu(handler);
     state.setState(startMenu);
+    // let gameOver = new GameOver(handler, 'death');
+    // state.setState(gameOver);
     ANIMATION_TIMER.init(handler);
     // gameState = new GameState(handler);
     // state.setState(gameState);

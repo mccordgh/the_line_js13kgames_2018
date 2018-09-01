@@ -99,7 +99,6 @@ export class AnimationTimer {
 
   keyAdded() {
     this.keys++;
-    console.log(this.keys);
     this.speed -= 30;
   }
 }
