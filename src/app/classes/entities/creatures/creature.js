@@ -2,8 +2,6 @@ import { Assets } from '../../gfx/assets';
 import { Entity } from '../entity';
 import { Rectangle } from '../../gfx/shapes/rectangle';
 
-let n;
-
 export class Creature extends Entity {
   constructor(handler, x, y) {
     super(handler, x, y, TILE_SIZE, TILE_SIZE);

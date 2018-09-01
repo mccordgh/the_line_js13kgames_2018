@@ -7,14 +7,14 @@ let opposites = {
   s: 'n'
 };
 
-let stuckCount = 0, dontChaseCount = 0, stuckAt = null, changeCount = 0, changedDirs = false;
+let stuckCount = 0, dontChaseCount = 0, stuckAt = null, changeCount = 0, sirenCount = 0;
 
 export class Guard extends Creature {
   constructor(handler, x, y, state = 1){
     super(handler, x, y);
     this.lastAnim = 'gleft';
     this.state = state;
-    this.speed = 100;
+    this.speed = 10;
     this.start = { x: this.x, y: this.y };
     this.last = {};
     // this.patrolDirs = Math.random() < .5 ? ['w', 'e'] : ['n', 's'];
@@ -34,12 +34,12 @@ export class Guard extends Creature {
     this.xMove = this.yMove = 0;
     switch (this.state) {
       case 1: // 1 = patrol
-        if (dontChaseCount < 60) dontChaseCount++;
+        if (dontChaseCount < 40) dontChaseCount++;
         let p = stuckAt || this.patrolDir;
         this.dir[p] = true;
         this.patrolDir;
         this.patrol(dt);
-        if (dontChaseCount >= 60) {
+        if (dontChaseCount >= 40) {
           stuckAt = null;
           this.checkStuck();
           this.checkForTarget();
@@ -68,8 +68,41 @@ export class Guard extends Creature {
   }
 
   render(g) {
+      /*
+          pink = #ff77a8
+          green = #00e436
+          yellow = #ffec27
+          blue = #29adff
+      */
     g.myDrawImage(this.frame('g'), this.x, this.y, TILE_SIZE, TILE_SIZE);
 
+    if (this.state == 2) {
+      sirenCount++;
+      let max = 8;
+      let c1 = sirenCount <= max ? '#ff77a8' : '#29adff';
+      let c2 = sirenCount > max ? '#ff77a8' : '#29adff';
+
+
+      g.fillStyle = c1;
+      g.fillRect(this.x + 24, this.y, 8, 8);
+      
+      g.fillStyle = c2;
+      g.fillRect(this.x + 32, this.y, 8, 8);
+
+      g.globalAlpha = 0.5;
+
+      g.fillStyle = c1;
+      g.fillRect(this.x + 16, this.y, 8, 8);
+      g.fillRect(this.x + 24, this.y - 8, 8, 8);
+
+      g.fillStyle = c2;
+      g.fillRect(this.x + 32, this.y - 8, 8, 8);
+      g.fillRect(this.x + 40, this.y, 8, 8);
+
+      g.globalAlpha = 1;
+
+      if (sirenCount >= max * 2) sirenCount = 0;
+    }
     // ****** DRAW BOUNDING BOX DON'T DELETE!!
     // g.fillStyle = "red";
     // g.fillRect(this.b.x + this.x, this.b.y + this.y, this.b.s, this.b.s);

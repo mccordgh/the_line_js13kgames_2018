@@ -63,7 +63,7 @@ let noLeft = (room) => {
 /* TRAITS */
 
 let startRoom = (room) => {
-  // room.addEntity(new Guard(handler, 8, 3));
+  room.addEntity(new Guard(handler, 3, 3));
   spawnRoom = room.id;
   roomNumbers = roomNumbers.filter(r => r != room.id);
   console.log('spawned in room', spawnRoom);
