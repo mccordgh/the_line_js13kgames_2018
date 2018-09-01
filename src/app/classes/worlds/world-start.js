@@ -24,13 +24,15 @@ export class WorldStart {
     }
 
     tick(dt) {
+        this.getInput();
         this.room.tick();
         this.entityManager.tick(dt);
-        this.getInput();
+        // console.log(dt);
     }
 
     render(g) {
         this.room.render(g);
+        this.entityManager.render(g);
 
         /*
             pink = #ff77a8
@@ -45,10 +47,9 @@ export class WorldStart {
         g.drawText('PRESS [ENTER] TO START THE REVOLUTION!', 76, 538, '#ffec27')
         g.drawText('ENTER', 187, 538, '#00e436')
         // g.drawText('REVOLUTION !', 465, 555, '#ff77a8')
-        g.drawText('FIND THE KEYS!', 274, 680)
+        g.drawText('GRAB THE KEYS!', 274, 680)
         // g.drawText('FI', 320, 680, '#29adff')
         
-        this.entityManager.render(g);
     }
 
     getInput() {

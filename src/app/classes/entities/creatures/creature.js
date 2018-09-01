@@ -47,6 +47,12 @@ export class Creature extends Entity {
   }
 
   move() {
+    if (this.moveThrough) {
+      this.moveX();
+      this.moveY();
+      return;
+    }
+
     let os = this.isOffScreen();
 
     if (os && this.type == 'p') {
@@ -82,6 +88,11 @@ export class Creature extends Entity {
       ? tempX * TILE_SIZE - this.b.x - this.b.s - 1
       : tempX * TILE_SIZE + TILE_SIZE - this.b.x;
 
+      if (this.moveThrough) {
+        this.x += this.xMove;
+        return;
+      }
+
       if(!this.collisionWithTile(tempX, c1) && !this.collisionWithTile(tempX, c2)) {
         this.x += this.xMove;
       } else {
@@ -102,6 +113,11 @@ export class Creature extends Entity {
       ? tempY * TILE_SIZE - this.b.y - this.b.s - 1
       : tempY * TILE_SIZE + TILE_SIZE - this.b.y;
 
+      if (this.moveThrough) {
+        this.y += this.yMove;
+        return;
+      }
+      
       if (!this.collisionWithTile(c1, tempY) && !this.collisionWithTile(c2, tempY)) {
         this.y += this.yMove;
       } else {

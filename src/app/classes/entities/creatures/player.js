@@ -10,12 +10,14 @@ export class Player extends Creature {
     this.lastAnim = 'pright';
     this.type = 'p';
     this.speed = 160;
-    // this.noCollide = [];
+    this.moveThrough = false;
+    this.state = 1;
   }
 
   tick(dt) {
     super.tick(dt);
-
+    // console.log(dt);
+    // console.log(this.x, this.y, this.xMove, this.yMove, this.speed);
     switch (this.state) {
       case 1: // 1 = move
         this.xMove = this.yMove = 0;

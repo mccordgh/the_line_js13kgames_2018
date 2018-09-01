@@ -8,7 +8,7 @@ export class StartMenu extends Menu {
   }
 
   tick(dt) {
-    this.world.tick();
+    this.world.tick(dt);
     // this.tickTiles();
     // this.entityManager.tick(dt);
   }
