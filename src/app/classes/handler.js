@@ -3,6 +3,7 @@ let sm;
 export class Handler {
   constructor(game) {
     this.game = game;
+    this.machine = null;
   }
 
   getWidth() {
@@ -20,6 +21,10 @@ export class Handler {
   // getGameCamera() {
   //   return this.game.getGameCamera();
   // }
+
+  getMachine() {
+    return this.machine;
+  }
 
   getWorld() {
     return this.world;

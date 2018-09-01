@@ -6,7 +6,7 @@
 
     // Song data
     export default {
-        songData: [
+      songData: [
         { // Instrument 0
           i: [
           2, // OSC1_WAVEFORM
@@ -28,13 +28,13 @@
           0, // LFO_AMT
           0, // LFO_FREQ
           0, // LFO_FX_FREQ
-          3, // FX_FILTER
-          17, // FX_FREQ
-          48, // FX_RESONANCE
+          2, // FX_FILTER
+          161, // FX_FREQ
+          192, // FX_RESONANCE
           0, // FX_DIST
           32, // FX_DRIVE
           0, // FX_PAN_AMT
-          11, // FX_PAN_FREQ
+          0, // FX_PAN_FREQ
           71, // FX_DELAY_AMT
           1 // FX_DELAY_TIME
           ],
@@ -42,7 +42,7 @@
           p: [1],
           // Columns
           c: [
-            {n: [140],
+            {n: [164],
              f: []}
           ]
         },

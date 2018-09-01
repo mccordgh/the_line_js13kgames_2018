@@ -1,5 +1,6 @@
 import { CPlayer } from './player-small';
-import outrunfx from './sfx/outrun.js';
+import steam1 from './sfx/steam1.js';
+import steam2 from './sfx/steam2.js';
 import placefx from './sfx/place.js';
 import pickupfx from './sfx/pickup.js';
 
@@ -14,19 +15,24 @@ export class SoundManager {
     sounds = {
       pickup: this.create(.5, 'pickup', false, pickupfx),
       place: this.create(.55, 'place', false, placefx),
-      bg: this.create(.5, 'bg', true, outrunfx)
+      steam1: this.create(.2, 'steam1', false, steam1),
+      steam2: this.create(.4, 'steam2', false, steam2)
     }
   }
 
   play(s) {
-    if (sounds[s]) {
-      try {
-        sounds[s].load();
+    // if (sounds[s]) {
+      // try {
+        // sounds[s].load();
         sounds[s].play();
-      } catch (e) {
+      // } catch (e) {
         //
-      }
-    }
+      // }
+    // }
+  }
+
+  load(s) {
+    sounds[s].load();
   }
 
   create(vol, name, loops, obj) {

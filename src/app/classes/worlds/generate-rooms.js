@@ -85,7 +85,9 @@ let createKeyRooms = (rooms) => {
 let createMachineRoom = (rooms) => {
     // let r = pullRoom();
     // console.log('MACHINE in room', r);
-    rooms[spawnRoom].entities.push(new Machine(handler, 5, 5));
+    let m = new Machine(handler, 5, 5);
+    handler.machine = m;
+    rooms[spawnRoom].entities.push(m);
 
   return rooms;
 }
