@@ -13,7 +13,6 @@ export class Guard extends Creature {
   constructor(handler, x, y, state = 1){
     super(handler, x, y);
     this.lastAnim = 'gleft';
-    console.log('setting to', state);
     this.state = state;
     this.speed = 90;
     this.start = { x: this.x, y: this.y };
@@ -24,7 +23,6 @@ export class Guard extends Creature {
     this.dir = {}
     this.offScreen = false;
     this.resetDir();
-    console.log(this.state);
   }
 
   tick(dt) {
@@ -34,7 +32,6 @@ export class Guard extends Creature {
     }
 
     this.xMove = this.yMove = 0;
-    console.log(this.state);
     switch (this.state) {
       case 0: // chill brahhhh
         console.log('chillin?');

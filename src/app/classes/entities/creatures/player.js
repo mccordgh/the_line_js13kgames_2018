@@ -9,6 +9,7 @@ export class Player extends Creature {
     this.item = null;
     this.lastAnim = 'pright';
     this.type = 'p';
+    this.speed = 160;
     // this.noCollide = [];
   }
 

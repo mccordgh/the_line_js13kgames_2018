@@ -6,28 +6,32 @@ export class AnimationTimer {
     this.index = 0;
     this.lastTime = Date.now();
     this.timer = 0;
-    this.speed = 300;
+    this.speed = 265;
     this.keys = 0;
     this.beats = {
       //sounds on the 1 beat
-      2: [
+      2: [],
+      4: [
         { name: 'steamLow', keysReq: 0 },
         { name: 'bassC', keysReq: 1 },
         { name: 'arpFsG', keysReq: 3 },
       ],
+      6: [],
       //sounds on the 2 beat
-      4: [
+      8: [
         { name: 'bassDs', keysReq: 2 },
       ],
+      10: [],
       //sounds on the 3 beat
-      6: [
+      12: [
         { name: 'steamHigh', keysReq: 0 },
         { name: 'bassF', keysReq: 1 },
       ],
+      14: [],
       //sounds on the 4 beat
-      8: [
+      16: [
         { name: 'bassFs', keysReq: 2 },
-        { name: 'arpAsC', keysReq: 4 },
+        { name: 'arpAsC', keysReq: 3 },
       ],
     }
     // this.soundsOnTwo = [
@@ -63,12 +67,15 @@ export class AnimationTimer {
   factoryNoise() {
     c++;
 
-    if (this.index % 2 != 0) this.playAll(this.beats[c], this.sounds);
+    if (this.index % 2 != 0) {
+      console.log(c);
+      this.playAll(this.beats[c])};
 
-    if (c == 8) c = 0;
+    if (c == 16) c = 0;
   }
 
   playAll(s){
+    console.log({beats: this.beats, s});
     let sm = this.sounds;
 
     for (let i = 0; i < s.length; i++) {
