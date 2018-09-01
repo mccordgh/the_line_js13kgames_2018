@@ -6,32 +6,38 @@ export class AnimationTimer {
     this.index = 0;
     this.lastTime = Date.now();
     this.timer = 0;
-    this.speed = 265;
+    this.speed = 230;
     this.keys = 0;
     this.beats = {
       //sounds on the 1 beat
-      2: [],
-      4: [
-        { name: 'steamLow', keysReq: 0 },
-        { name: 'bassC', keysReq: 1 },
-        { name: 'arpFsG', keysReq: 3 },
+      2: [
       ],
-      6: [],
+      4: [
+        { name: 'steamLow', condition(k) { return k >= 0 }},
+        { name: 'bassC', condition(k) { return k >= 1 }},
+      ],
+      6: [
+        { name: 'arpFsG', condition(k) { return k >= 3 }},
+      ],
       //sounds on the 2 beat
       8: [
-        { name: 'bassDs', keysReq: 2 },
+        // { name: 'arpFsG', condition(k) { return k == 3 }},
+        { name: 'bassDs', condition(k) { return k >= 2 }},
       ],
-      10: [],
+      10: [
+        { name: 'arpAsC', condition(k) { return k >= 3 }},
+      ],
       //sounds on the 3 beat
       12: [
-        { name: 'steamHigh', keysReq: 0 },
-        { name: 'bassF', keysReq: 1 },
+        { name: 'steamHigh', condition(k) { return k >= 0}},
+        { name: 'bassDs', condition(k) { return k == 1}},
+        { name: 'bassF', condition(k) { return k >= 2 }},
       ],
-      14: [],
+      14: [
+      ],
       //sounds on the 4 beat
       16: [
-        { name: 'bassFs', keysReq: 2 },
-        { name: 'arpAsC', keysReq: 3 },
+        { name: 'bassFs', condition(k) { return k >= 2 }},
       ],
     }
     // this.soundsOnTwo = [
@@ -67,19 +73,18 @@ export class AnimationTimer {
   factoryNoise() {
     c++;
 
-    if (this.index % 2 != 0) {
-      console.log(c);
-      this.playAll(this.beats[c])};
-
+    if (this.index % 2 != 0) this.playAll(this.beats[c]);
     if (c == 16) c = 0;
   }
 
   playAll(s){
-    console.log({beats: this.beats, s});
     let sm = this.sounds;
+    let k = this.keys;
+
+    if (k >= 4) return;
 
     for (let i = 0; i < s.length; i++) {
-      if (this.keys >= s[i].keysReq) {
+      if (s[i].condition(k)) {
         sm.load(s[i].name);
         sm.play(s[i].name);
       }
@@ -88,6 +93,7 @@ export class AnimationTimer {
 
   keyAdded() {
     this.keys++;
-    this.speed -= 35;
+    console.log(this.keys);
+    this.speed -= 30;
   }
 }
