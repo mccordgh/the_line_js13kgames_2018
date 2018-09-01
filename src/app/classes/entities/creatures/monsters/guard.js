@@ -14,11 +14,11 @@ export class Guard extends Creature {
     super(handler, x, y);
     this.lastAnim = 'gleft';
     this.state = state;
-    this.speed = 90;
+    this.speed = 100;
     this.start = { x: this.x, y: this.y };
     this.last = {};
-    this.patrolDirs = Math.random() < .5 ? ['w', 'e'] : ['n', 's'];
-    // this.patrolDirs = ['w', 'e'];
+    // this.patrolDirs = Math.random() < .5 ? ['w', 'e'] : ['n', 's'];
+    this.patrolDirs = ['n', 's', 'w', 'e'];
     this.patrolDir = rndIndex(this.patrolDirs);
     this.dir = {}
     this.offScreen = false;
@@ -33,9 +33,6 @@ export class Guard extends Creature {
 
     this.xMove = this.yMove = 0;
     switch (this.state) {
-      case 0: // chill brahhhh
-        console.log('chillin?');
-        break;
       case 1: // 1 = patrol
         if (dontChaseCount < 60) dontChaseCount++;
         let p = stuckAt || this.patrolDir;
@@ -84,8 +81,8 @@ export class Guard extends Creature {
 
     //if guard gets within X tiles of player change to chasing state
     if (
-      Math.abs(t.x - g.x) < (TILE_SIZE * 3)
-      && Math.abs(t.y - g.y) < (TILE_SIZE * 3)
+      Math.abs(t.x - g.x) < (TILE_SIZE * 4)
+      && Math.abs(t.y - g.y) < (TILE_SIZE * 4)
     ) {
       this.state = 2; // 2 = chase
     }

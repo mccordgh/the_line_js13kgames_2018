@@ -8,6 +8,7 @@ export class AnimationTimer {
     this.timer = 0;
     this.speed = 230;
     this.keys = 0;
+    this.stop = false;
     this.beats = {
       //sounds on the 1 beat
       2: [
@@ -54,20 +55,26 @@ export class AnimationTimer {
   }
 
   tick() {
-    if (machine) {
-      machine = this.handler.getMachine();
-    }
+    if (!this.stop) {
+      if (machine) {
+        machine = this.handler.getMachine();
+      }
 
-    this.timer += Date.now() - this.lastTime;
-    this.lastTime = Date.now();
+      this.timer += Date.now() - this.lastTime;
+      this.lastTime = Date.now();
 
-    if (this.timer >= this.speed){
-      if (this.sounds) this.factoryNoise();
-      this.index++;
-      this.timer = 0;
-      if (this.index >= this.frames)
-        this.index = 0;
+      if (this.timer >= this.speed){
+        if (this.sounds) this.factoryNoise();
+        this.index++;
+        this.timer = 0;
+        if (this.index >= this.frames)
+          this.index = 0;
+      }
     }
+  }
+
+  stopMe() {
+    this.stop = true;
   }
 
   factoryNoise() {

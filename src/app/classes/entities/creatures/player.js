@@ -29,6 +29,7 @@ export class Player extends Creature {
 
         if (gA <= 0.02) {
           let gameOver = new GameOver(this.handler, 'dead');
+          ANIMATION_TIMER.stopMe();
           this.handler.getGame().getGameState().setState(gameOver);
         }
     }
