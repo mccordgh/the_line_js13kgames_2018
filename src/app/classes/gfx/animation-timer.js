@@ -6,7 +6,7 @@ export class AnimationTimer {
     this.index = 0;
     this.lastTime = Date.now();
     this.timer = 0;
-    this.speed = 300;
+    this.speed = 270;
     this.keys = 0;
     this.stop = false;
     this.beats = {
@@ -93,6 +93,6 @@ export class AnimationTimer {
 
   keyAdded() {
     this.keys++;
-    this.speed -= 20;
+    this.speed -= 10;
   }
 }
