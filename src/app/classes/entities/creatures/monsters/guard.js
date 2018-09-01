@@ -7,17 +7,7 @@ let opposites = {
   s: 'n'
 };
 
-let westOrEast = () => rndIndex(['w', 'e']);
-let northOrSouth = () => rndIndex(['n', 's']);
-
-let moveAround = {
-  n: westOrEast,
-  e: northOrSouth,
-  s: westOrEast,
-  w: northOrSouth,
-}
-
-let stuckCount = 0, movingAround = false;
+let stuckCount = 0, dontChaseCount = 0, stuckAt = null, changeCount = 0, changedDirs = false;
 
 export class Guard extends Creature {
   constructor(handler, x, y){
@@ -27,28 +17,33 @@ export class Guard extends Creature {
     this.speed = 90;
     this.start = { x: this.x, y: this.y };
     this.last = {};
-    // this.patrolDirs = Math.random() < .5 ? ['w', 'e'] : ['n', 's'];
-    this.patrolDirs = ['w', 'e'];
+    this.patrolDirs = Math.random() < .5 ? ['w', 'e'] : ['n', 's'];
+    // this.patrolDirs = ['w', 'e'];
     this.patrolDir = rndIndex(this.patrolDirs);
     this.dir = {}
+    this.offScreen = false;
     this.resetDir();
   }
 
   tick(dt) {
+    super.tick(dt);
     if (!this.target) {
       this.target = this.handler.getWorld().getEntityManager().getPlayer();
     }
 
-    super.tick(dt);
     this.xMove = this.yMove = 0;
-    // this.patrol(dt);
 
     switch (this.state) {
       case 1: // 1 = patrol
-        let p = this.patrolDir;
+        if (dontChaseCount < 60) dontChaseCount++;
+        let p = stuckAt || this.patrolDir;
         this.dir[p] = true;
         this.patrol(dt);
-        this.checkForTarget();
+        if (dontChaseCount >= 60) {
+          stuckAt = null;
+          this.checkStuck();
+          this.checkForTarget();
+        }
         this.move();
         break;
       case 2: // 2 = chase
@@ -58,15 +53,16 @@ export class Guard extends Creature {
         this.move();
         this.resetDir();
         break;
-      case 3: // 3 = moving around object
-        stuckCount++;
-        this.persue();
-        this.patrol(dt);
-        this.move();
-        if (stuckCount > 120) {
-          stuckCount = 0;
-          this.state = 2;
-        }
+      // case 3: // 3 = moving around object
+      //   stuckCount++;
+      //   this.persue();
+      //   this.patrol(dt);
+      //   this.move();
+      //   if (stuckCount > 120) {
+      //     stuckCount = 0;
+      //     this.state = 2;
+      //   }
+      //   break;
       }
 
   }
@@ -84,7 +80,7 @@ export class Guard extends Creature {
     let t = this.target;
     let g = this;
 
-    //if guard gets within 3 tiles of player change to chasing state
+    //if guard gets within X tiles of player change to chasing state
     if (
       Math.abs(t.x - g.x) < (TILE_SIZE * 3)
       && Math.abs(t.y - g.y) < (TILE_SIZE * 3)
@@ -110,13 +106,14 @@ export class Guard extends Creature {
     if (xx && yy) {
       stuckCount++;
 
-      if (stuckCount > 60) {
-        console.log('b4', this.dir);
+      if (stuckCount > 15) {
+        stuckAt = Object.keys(this.dir).find(x => this.dir[x]);
         this.changeDirection();
-
-        console.log('after', this.dir);
+        this.resetDir();
+        this.patrolDir = opposites[stuckAt];
         stuckCount = 0;
-        this.state = 3; // 3 = moving around object
+        dontChaseCount = 0;
+        this.state = 1; // patrolling;
       }
     }
 
@@ -129,7 +126,7 @@ export class Guard extends Creature {
 
     this.x = s.x;
     this.y = s.y;
-
+    dontChaseCount = 0;
     this.state = 1 // 1 = patrolling
   }
 
@@ -167,20 +164,21 @@ export class Guard extends Creature {
   }
 
   changeDirection() {
-    let dir = this.dir;
-    let prevDir = Object.keys(dir).find(x => dir[x]);
+    if (this.offScreen) {
+      changeCount++;
+    }
 
-    dir[prevDir] = false;
+    if (changeCount > 60 || !this.offScreen) {
+      let dir = this.dir;
+      let prevDir = Object.keys(dir).find(x => dir[x]);
 
-    switch (this.state) {
-      case 1:
-        dir[opposites[prevDir]] = true;
+      dir[prevDir] = false;
+      dir[opposites[prevDir]] = true;
 
-        this.patrolDir = this.patrolDirs.filter(d => d !== prevDir)[0];
-        break;
-      case 2:
-        dir[moveAround[prevDir]()] = true;
-        break;
+      this.patrolDir = this.patrolDirs.filter(d => d !== prevDir)[0];
+
+      this.offScreen = false;
+      changeCount = 0;
     }
   }
 }

@@ -55,6 +55,11 @@ export class Creature extends Entity {
       return;
     }
 
+    if (os && this.type == 'g') {
+      this.offScreen = true;
+      this.changeDirection();
+    }
+
     if(Math.abs(this.xMove) > 0 || Math.abs(this.yMove) > 0){
       this.handler.getWorld().getSpatialGrid().remove(new Rectangle(this.x + this.b.x, this.y + this.b.y, this.b.s, this.b.s), this);
       if(!(this.checkEntityCollisions(this.xMove, 0)))
