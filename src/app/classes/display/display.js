@@ -1,4 +1,4 @@
-let graphics;
+let graphics, canvas = null;
 
 export class Display {
   constructor() {
@@ -8,7 +8,7 @@ export class Display {
 
   createDisplay() {
     // document.title = this.t;
-    let canvas = document.getElementById("canvas");
+    canvas = document.getElementById("canvas");
     canvas.setAttribute("height", GAME_SIZE);
     canvas.setAttribute("width", GAME_SIZE);
     graphics = canvas.getContext("2d");
@@ -61,3 +61,12 @@ CanvasRenderingContext2D.prototype.drawText = (text, x, y, color = 'white') => {
   graphics.strokeText(text, x, y);
   graphics.fillText(text,  x, y);
 };
+
+CanvasRenderingContext2D.prototype.shakeScreen = (x, y) => {
+  let imgData=graphics.getImageData(0,0, GAME_SIZE, GAME_SIZE);
+
+  graphics.fillStyle = 'black';
+  graphics.fillRect(0, 0, GAME_SIZE, GAME_SIZE);
+
+  graphics.putImageData(imgData, x, y);
+}

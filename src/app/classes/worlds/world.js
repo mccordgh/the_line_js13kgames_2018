@@ -6,7 +6,7 @@ import { Guard } from '../entities/creatures/monsters/guard';
 
 import generateRooms from './generate-rooms';
 
-let rectSize = 0;
+let rectSize = 0, screenCap = null;
 
 export class World {
   constructor(handler) {
@@ -14,6 +14,7 @@ export class World {
     this.entityManager = new EntityManager(handler, new Player(handler, 4, 8));
     this.spatialGrid = new SpatialGrid(GAME_SIZE, GAME_SIZE, TILE_SIZE);
     this.playerDied = false;
+    this.machineFilled = false;
 
     this.start = rndIndex([5,6,9,10]);
     this.rooms = generateRooms(handler, this.start);
@@ -51,7 +52,7 @@ export class World {
   tick(dt) {
     this.room.tick();
     // this.tickTiles();
-    this.entityManager.tick(dt);
+    if (!this.machineFilled) this.entityManager.tick(dt);
   }
 
   render(g) {
@@ -68,7 +69,18 @@ export class World {
         g.fillRect(0, 0, rectSize, GAME_SIZE);
         g.fillRect(GAME_SIZE - rectSize, 0, GAME_SIZE, GAME_SIZE)
       }
-    }    
+
+      // return;
+    } 
+
+    if (this.machineFilled) {
+      let shakeX = rndInt(-25, 25);
+      let shakeY = rndInt(-25, 25);
+
+      g.shakeScreen(shakeX, shakeY);
+      // return;
+    }
+
   }
 
   setPlayerSpawn(dir) {

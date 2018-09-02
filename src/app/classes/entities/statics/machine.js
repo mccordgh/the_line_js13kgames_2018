@@ -23,8 +23,9 @@ export default class Machine extends StaticEntity {
     tick() {
         if (this.keys.length > 3) {
             ANIMATION_TIMER.stopMe();
-            let gameOver = new GameOver(this.handler, 'machine');
-            this.handler.getGame().getGameState().setState(gameOver)
+            this.handler.getWorld().machineFilled = true;
+            // let gameOver = new GameOver(this.handler, 'machine');
+            // this.handler.getGame().getGameState().setState(gameOver)
         }
     }
 
