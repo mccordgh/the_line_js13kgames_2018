@@ -26,7 +26,8 @@ export class Player extends Creature {
         break;
 
       case 2: // 2 = dead
-        if (deathCount ++ > 240) {
+      this.xMove = this.yMove = 0;
+        if (deathCount++ > 240) {
           window.location.reload();
           // let gameOver = new GameOver(this.handler, 'dead');
           // ANIMATION_TIMER.stopMe();
@@ -67,16 +68,16 @@ export class Player extends Creature {
   getInput(dt) {
     let manager = this.handler.getKeyManager();
 
-    if(manager.w || manager.z) {
+    if(manager.up || manager.w || manager.z) {
       this.yMove = -this.speed * dt;
     }
-    if (manager.s) {
+    if (manager.down || manager.s) {
       this.yMove = this.speed * dt;
     }
-    if(manager.a || manager.q) {
+    if(manager.left || manager.a || manager.q) {
       this.xMove = -this.speed * dt;
     }
-    if (manager.d) {
+    if (manager.right || manager.d) {
       this.xMove = this.speed * dt;
     }
   }
