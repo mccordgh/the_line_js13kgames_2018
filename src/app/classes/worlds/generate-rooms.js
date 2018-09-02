@@ -69,7 +69,7 @@ let startRoom = (room) => {
   room.addEntity(new Guard(handler, 3, 3));
   spawnRoom = room.id;
   roomNumbers = roomNumbers.filter(r => r != room.id);
-  console.log('spawned in room', spawnRoom);
+  // console.log('spawned in room', spawnRoom);
 
   return room;
 }
@@ -77,7 +77,7 @@ let startRoom = (room) => {
 let createKeyRooms = (rooms) => {
   for (let i = 0; i < 4; i++) {
     let r = pullRoom();
-    console.log(keys[0].color, 'key in room', r);
+    // console.log(keys[0].color, 'key in room', r);
     rooms[r].entities.push(keys[0]);
 
     // rooms[spawnRoom].entities.push(keys[0]);
@@ -117,7 +117,8 @@ let addProps = (rooms) => {
     let r = rooms[k];
     
     if (!hasMachine(r)) {
-      r.entities.push(new PropMachine(handler, 5, 5, 1));
+      let num = Math.random() <= .5 ? 1 : 2;
+      r.entities.push(new PropMachine(handler, 5, 5, num));
       r.entities.push(new Worker(handler, 4, 5))
       r.entities.push(new Worker(handler, 7, 5, 'pleft'))
     }

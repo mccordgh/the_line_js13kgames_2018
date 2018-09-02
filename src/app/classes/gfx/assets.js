@@ -83,3 +83,4 @@ addAnimations('y_m', 11, 0);
 addAnimations('b_m', 12, 0);
 addAnimations('s', 13, 0);
 addAnimations('prop1', 14, 15)
+addAnimations('prop2', 16, 17)

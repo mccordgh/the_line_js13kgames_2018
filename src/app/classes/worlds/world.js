@@ -82,7 +82,7 @@ export class World {
     this.changeRoom = true;
     let prevRoom = this.room;
     this.room = this.rooms[this.room.id + dir.mod];
-    console.log('entered Room: ', this.room.id);
+    // console.log('entered Room: ', this.room.id);
     this.setPlayerSpawn(dir);
     this.loadWorld(prevRoom);
     this.changeRoom = false;

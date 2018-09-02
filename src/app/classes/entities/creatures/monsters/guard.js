@@ -108,8 +108,8 @@ export class Guard extends Creature {
 
     //if guard gets within X tiles of player change to chasing state
     if (
-      Math.abs(t.x - g.x) < (TILE_SIZE * 3)
-      && Math.abs(t.y - g.y) < (TILE_SIZE * 3)
+      Math.abs(t.x - g.x) < (TILE_SIZE * 4)
+      && Math.abs(t.y - g.y) < (TILE_SIZE * 4)
     ) {
       this.state = 2; // 2 = chase
     }

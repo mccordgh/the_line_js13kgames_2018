@@ -8,7 +8,7 @@ import { World } from './world';
 import Key from '../entities/statics/key';
 
 let pauser = 199, change = false;
-change = true;
+// change = true;
 
 export class WorldStart {
     constructor(handler) {
@@ -18,8 +18,8 @@ export class WorldStart {
         this.entityManager = new EntityManager(handler, new Player(handler, 9, 2));
         this.spatialGrid = new SpatialGrid(GAME_SIZE, GAME_SIZE, TILE_SIZE);
         handler.setWorld(this);
-        // this.state = 1;
-        this.state = 2;
+        this.state = 1;
+        // this.state = 2;
 
         this.init();
     }

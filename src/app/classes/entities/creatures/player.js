@@ -1,5 +1,5 @@
 import { Creature } from './creature';
-import { GameOver } from '../../menus/game-over';
+// import { GameOver } from '../../menus/game-over';
 
 let gA = 1, deathCount = 0;
 
@@ -9,7 +9,8 @@ export class Player extends Creature {
     this.item = null;
     this.lastAnim = 'pright';
     this.type = 'p';
-    this.speed = 900;
+    // this.speed = 900;
+    this.speed = 180;
     this.moveThrough = false;
     this.state = 1;
   }
