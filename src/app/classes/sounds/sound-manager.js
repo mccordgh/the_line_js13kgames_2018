@@ -3,6 +3,7 @@ import steamHigh from './sfx/steamHigh';
 import steamLow from './sfx/steamLow';
 import bassC from './sfx/bassC';
 import bassDs from './sfx/bassDs';
+import siren from './sfx/siren';
 import bassFs from './sfx/bassFs';
 import bassF from './sfx/bassF';
 import placefx from './sfx/place';
@@ -29,6 +30,7 @@ export class SoundManager {
       bassF: this.create(.2, 'bassF', false, bassF),
       arpFsG: this.create(.2, 'arpFsG', false, arpFsG),
       arpAsC: this.create(.2, 'arpAsC', false, arpAsC),
+      siren: this.create(1, 'siren', false, siren),
     }
   }
 

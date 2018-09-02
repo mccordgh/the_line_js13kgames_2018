@@ -14,7 +14,7 @@ export class Guard extends Creature {
     super(handler, x, y);
     this.lastAnim = 'gleft';
     this.state = state;
-    this.speed = 10;
+    this.speed = 80;
     this.start = { x: this.x, y: this.y };
     this.last = {};
     // this.patrolDirs = Math.random() < .5 ? ['w', 'e'] : ['n', 's'];
@@ -22,6 +22,7 @@ export class Guard extends Creature {
     this.patrolDir = rndIndex(this.patrolDirs);
     this.dir = {}
     this.offScreen = false;
+    this.sm = this.handler.getSoundManager();
     this.resetDir();
   }
 
@@ -47,6 +48,7 @@ export class Guard extends Creature {
         this.move();
         break;
       case 2: // 2 = chase
+        this.speed = 120;
         this.persue();
         this.checkStuck();
         this.patrol(dt);
@@ -77,32 +79,37 @@ export class Guard extends Creature {
     g.myDrawImage(this.frame('g'), this.x, this.y, TILE_SIZE, TILE_SIZE);
 
     if (this.state == 2) {
-      sirenCount++;
-      let max = 8;
-      let c1 = sirenCount <= max ? '#ff77a8' : '#29adff';
-      let c2 = sirenCount > max ? '#ff77a8' : '#29adff';
+      g.myDrawImage(this.a.anim['sright'].getCurrentFrame(), this.x, this.y - 16, TILE_SIZE, TILE_SIZE);
 
-
-      g.fillStyle = c1;
-      g.fillRect(this.x + 24, this.y, 8, 8);
-      
-      g.fillStyle = c2;
-      g.fillRect(this.x + 32, this.y, 8, 8);
-
-      g.globalAlpha = 0.5;
-
-      g.fillStyle = c1;
-      g.fillRect(this.x + 16, this.y, 8, 8);
-      g.fillRect(this.x + 24, this.y - 8, 8, 8);
-
-      g.fillStyle = c2;
-      g.fillRect(this.x + 32, this.y - 8, 8, 8);
-      g.fillRect(this.x + 40, this.y, 8, 8);
-
-      g.globalAlpha = 1;
-
-      if (sirenCount >= max * 2) sirenCount = 0;
+      if (sirenCount++ > 20) {
+        this.sm.play('siren');
+      }
     }
+      // sirenCount++;
+      // let max = 8;
+      // let c1 = sirenCount <= max ? '#ff77a8' : '#29adff';
+      // let c2 = sirenCount > max ? '#ff77a8' : '#29adff';
+
+
+      // g.fillStyle = c1;
+      // g.fillRect(this.x + 24, this.y, 16, 16);
+      
+      // g.fillStyle = c2;
+      // g.fillRect(this.x + 32, this.y, 16, 16);
+
+      // g.globalAlpha = 0.5;
+
+      // g.fillStyle = c1;
+      // g.fillRect(this.x + 24, this.y, 8, 8);
+      // g.fillRect(this.x + 24, this.y - 16, 16, 16);
+
+      // g.fillStyle = c2;
+      // // g.fillRect(this.x + 32, this.y, 8, 8);
+      // g.fillRect(this.x + 32, this.y - 16, 16, 16);
+
+      // g.globalAlpha = 1;
+
+      // if (sirenCount >= max * 2) sirenCount = 0;
     // ****** DRAW BOUNDING BOX DON'T DELETE!!
     // g.fillStyle = "red";
     // g.fillRect(this.b.x + this.x, this.b.y + this.y, this.b.s, this.b.s);

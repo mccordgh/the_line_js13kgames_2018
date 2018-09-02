@@ -81,3 +81,4 @@ addAnimations('p_m', 9, 0, false);
 addAnimations('g_m', 10, 0, false);
 addAnimations('y_m', 11, 0, false);
 addAnimations('b_m', 12, 0, false);
+addAnimations('s', 13, 0, false);
