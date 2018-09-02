@@ -9,20 +9,12 @@ export class GameOver extends Menu {
   render(g) {
     switch (this.reason) {
       case 'dead':
-        super.draw(g, [
-          'Y O U   D I E D',
-          'Try again [press enter]',
-          ]
-        );
+        g.drawText('Y O U   D I E D', 100, 100);
+        g.drawText('Try again [press enter]', 100, 200);
         break;
       case 'machine':
-        super.draw(g, [
-          'You activated the machine!',
-          'Now everyone can escape!',
-          'T H E   E N D',
-          'Escape again [press enter]',
-          ]
-        );
+        g.drawText('Y O U W I N !!!', 100, 100);
+        g.drawText('Try again [press enter]', 100, 200);
         break;
     }
   }

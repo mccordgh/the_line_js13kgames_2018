@@ -81,6 +81,12 @@ export class Entity {
     // if player and guard bump
     if (this.checkCollidingTypes(e1, e2, 'p', 'g')) {
       player.state = 2; // 2 = dead
+      player.b = { x: 0, y: 0, s: 0 };
+
+      hW.playerDied = true;
+
+      let guard = e1.type == 'g' ? e1 : e2;
+      guard.state = 3; // hauling player away;
     }
 
     // if (this.checkCollidingTypes(e1, e2, 'g', 'm')) {

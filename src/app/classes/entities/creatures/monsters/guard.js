@@ -35,17 +35,7 @@ export class Guard extends Creature {
     this.xMove = this.yMove = 0;
     switch (this.state) {
       case 1: // 1 = patrol
-        if (dontChaseCount < 40) dontChaseCount++;
-        let p = stuckAt || this.patrolDir;
-        this.dir[p] = true;
-        this.patrolDir;
-        this.patrol(dt);
-        if (dontChaseCount >= 40) {
-          stuckAt = null;
-          this.checkStuck();
-          this.checkForTarget();
-        }
-        this.move();
+        this.patrolState(dt);
         break;
       case 2: // 2 = chase
         this.speed = 120;
@@ -55,6 +45,13 @@ export class Guard extends Creature {
         this.move();
         this.resetDir();
         break;
+      case 3:
+        dontChaseCount = 0;
+        // this.patrolState(dt);
+        this.speed = 50;
+        this.x += this.speed * dt;
+        this.target.x = this.x + 16;
+        this.target.y = this.y + 16;
       // case 3: // 3 = moving around object
       //   stuckCount++;
       //   this.persue();
@@ -66,7 +63,6 @@ export class Guard extends Creature {
       //   }
       //   break;
       }
-
   }
 
   render(g) {
@@ -78,42 +74,32 @@ export class Guard extends Creature {
       */
     g.myDrawImage(this.frame('g'), this.x, this.y, TILE_SIZE, TILE_SIZE);
 
-    if (this.state == 2) {
+    if (this.state == 2 || this.state == 3) {
       g.myDrawImage(this.a.anim['sright'].getCurrentFrame(), this.x, this.y - 16, TILE_SIZE, TILE_SIZE);
 
       if (sirenCount++ > 20) {
         this.sm.play('siren');
       }
     }
-      // sirenCount++;
-      // let max = 8;
-      // let c1 = sirenCount <= max ? '#ff77a8' : '#29adff';
-      // let c2 = sirenCount > max ? '#ff77a8' : '#29adff';
 
-
-      // g.fillStyle = c1;
-      // g.fillRect(this.x + 24, this.y, 16, 16);
-      
-      // g.fillStyle = c2;
-      // g.fillRect(this.x + 32, this.y, 16, 16);
-
-      // g.globalAlpha = 0.5;
-
-      // g.fillStyle = c1;
-      // g.fillRect(this.x + 24, this.y, 8, 8);
-      // g.fillRect(this.x + 24, this.y - 16, 16, 16);
-
-      // g.fillStyle = c2;
-      // // g.fillRect(this.x + 32, this.y, 8, 8);
-      // g.fillRect(this.x + 32, this.y - 16, 16, 16);
-
-      // g.globalAlpha = 1;
-
-      // if (sirenCount >= max * 2) sirenCount = 0;
     // ****** DRAW BOUNDING BOX DON'T DELETE!!
     // g.fillStyle = "red";
     // g.fillRect(this.b.x + this.x, this.b.y + this.y, this.b.s, this.b.s);
     // ****** DRAW BOUNDING BOX DON'T DELETE!!
+  }
+
+  patrolState(dt) {
+    if (dontChaseCount < 40) dontChaseCount++;
+    let p = stuckAt || this.patrolDir;
+    this.dir[p] = true;
+    this.patrolDir;
+    this.patrol(dt);
+    if (dontChaseCount >= 40) {
+      stuckAt = null;
+      this.checkStuck();
+      this.checkForTarget();
+    }
+    this.move();
   }
 
   checkForTarget() {

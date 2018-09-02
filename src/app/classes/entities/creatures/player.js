@@ -1,7 +1,7 @@
 import { Creature } from './creature';
 import { GameOver } from '../../menus/game-over';
 
-let gA = 1;
+let gA = 1, deathCount = 0;
 
 export class Player extends Creature {
   constructor(handler, x, y){
@@ -9,15 +9,13 @@ export class Player extends Creature {
     this.item = null;
     this.lastAnim = 'pright';
     this.type = 'p';
-    this.speed = 160;
+    this.speed = 900;
     this.moveThrough = false;
     this.state = 1;
   }
 
   tick(dt) {
     super.tick(dt);
-    // console.log(dt);
-    // console.log(this.x, this.y, this.xMove, this.yMove, this.speed);
     switch (this.state) {
       case 1: // 1 = move
         this.xMove = this.yMove = 0;
@@ -27,12 +25,11 @@ export class Player extends Creature {
         break;
 
       case 2: // 2 = dead
-        if (gA > 0.02) gA -= 0.02;
-
-        if (gA <= 0.02) {
-          let gameOver = new GameOver(this.handler, 'dead');
-          ANIMATION_TIMER.stopMe();
-          this.handler.getGame().getGameState().setState(gameOver);
+        if (deathCount ++ > 240) {
+          window.location.reload();
+          // let gameOver = new GameOver(this.handler, 'dead');
+          // ANIMATION_TIMER.stopMe();
+          // this.handler.getGame().getGameState().setState(gameOver);
         }
     }
   }

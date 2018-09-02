@@ -20,13 +20,14 @@ import Machine from '../entities/statics/machine';
 
 let spawnRoom = {};
 let guardSpawns = [3, 8];
+let keySpawns = [4, 7];
 let handler;
 let roomNumbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
 let keys = [
-  new Key(handler, rndInt(3, 9), rndInt(3, 9), 'p'),
-  new Key(handler, rndInt(3, 9), rndInt(3, 9), 'g'),
-  new Key(handler, rndInt(3, 9), rndInt(3, 9), 'y'),
-  new Key(handler, rndInt(3, 9), rndInt(3, 9), 'b'),
+  new Key(handler, rndIndex(guardSpawns), rndIndex(guardSpawns), 'p'),
+  new Key(handler, rndIndex(guardSpawns), rndIndex(guardSpawns), 'g'),
+  new Key(handler, rndIndex(guardSpawns), rndIndex(guardSpawns), 'y'),
+  new Key(handler, rndIndex(guardSpawns), rndIndex(guardSpawns), 'b'),
 ];
 
 let pullRoom = () => {

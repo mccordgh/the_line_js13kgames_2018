@@ -10,7 +10,7 @@ export default class Key extends StaticEntity {
         this.locked = false;
         this.assets = Assets.getAssets('all').anim[`${this.color}_${this.type}right`];
         this.prop = prop;
-        console.log('prop?', this.prop);
+
         this.typePos = {
             p: { x: 4, y: -64 },
             m: {
