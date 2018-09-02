@@ -26,8 +26,8 @@ export class Assets {
 
 // let cropTile = (asset, x, y) => asset.sheet.crop(SPRITE_SIZE * x, SPRITE_SIZE * y, SPRITE_SIZE, SPRITE_SIZE);
 
-let addAnimations = (name, right, left, multi = true) => {
-  let wrframes = [], wlframes = [];
+let addAnimations = (name, right, left) => {
+  let wrframes = [], wlframes = [], multi = left != 0;
   let cropFrame = (pos, i) => {
     return all.sheet.crop(SPRITE_SIZE * i, SPRITE_SIZE * pos, SPRITE_SIZE, SPRITE_SIZE);
   }
@@ -72,13 +72,14 @@ let addAnimations = (name, right, left, multi = true) => {
 let all = new Assets('all', PATH + 'all.png');
 addAnimations('p', 0, 1);
 addAnimations('g', 2, 3);
-addAnimations('w', 4, 0, false)
-addAnimations('p_key', 5, 0, false)
-addAnimations('g_key', 6, 0, false)
-addAnimations('y_key', 7, 0, false)
-addAnimations('b_key', 8, 0, false)
-addAnimations('p_m', 9, 0, false);
-addAnimations('g_m', 10, 0, false);
-addAnimations('y_m', 11, 0, false);
-addAnimations('b_m', 12, 0, false);
-addAnimations('s', 13, 0, false);
+addAnimations('w', 4, 0)
+addAnimations('p_key', 5, 0);
+addAnimations('g_key', 6, 0)
+addAnimations('y_key', 7, 0)
+addAnimations('b_key', 8, 0)
+addAnimations('p_m', 9, 0);
+addAnimations('g_m', 10, 0);
+addAnimations('y_m', 11, 0);
+addAnimations('b_m', 12, 0);
+addAnimations('s', 13, 0);
+addAnimations('prop1', 14, 15)

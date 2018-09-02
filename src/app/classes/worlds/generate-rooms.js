@@ -2,6 +2,8 @@ import { Room } from './room';
 import { Guard } from '../entities/creatures/monsters/guard';
 import Key from '../entities/statics/key';
 import Machine from '../entities/statics/machine';
+import PropMachine from '../entities/statics/prop-machine';
+import { Worker } from '../entities/creatures/worker';
 
 /* BUILDING A ROOM
   1. fill in standard room with 4 exits
@@ -105,6 +107,29 @@ let spawnGuards = (rooms) => {
   return rooms;
 }
 
+let hasMachine = (room) => {
+  return !!room.entities.find(e => e.type == 'm');
+}
+
+let addProps = (rooms) => {
+  Object.keys(rooms).forEach((k) => {
+    let n = Math.random();
+    let r = rooms[k];
+    
+    if (!hasMachine(r)) {
+      r.entities.push(new PropMachine(handler, 5, 5, 1));
+      r.entities.push(new Worker(handler, 4, 5))
+      r.entities.push(new Worker(handler, 7, 5, 'pleft'))
+    }
+
+    // if (n < .3) {
+
+    // }
+  });
+
+  return rooms;
+}
+
 export default function(_handler, start) {
   handler = _handler;
 
@@ -132,8 +157,8 @@ export default function(_handler, start) {
 
   rooms = createKeyRooms(rooms);
   rooms = createMachineRoom(rooms);
-
   rooms = spawnGuards(rooms);
+  rooms = addProps(rooms);
 
   return rooms;
 };
