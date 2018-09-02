@@ -8,6 +8,7 @@ import { World } from './world';
 import Key from '../entities/statics/key';
 
 let pauser = 199, change = false;
+change = true;
 
 export class WorldStart {
     constructor(handler) {
@@ -41,10 +42,10 @@ export class WorldStart {
             case 2:
                 pauser--;
                 
-                // if (change) {
+                if (change) {
                     let gameState = new GameState(this.handler, new World(this.handler));
                     this.handler.getGame().getGameState().setState(gameState); 
-                // }
+                }
             break;
         }
         // console.log(dt);
@@ -52,6 +53,7 @@ export class WorldStart {
 
     render(g) {
         g.globalAlpha = pauser == 119 ? 1 : (pauser / 119);
+
         if (pauser == 0) {
             g.globalAlpha = 1;
             change = true;
