@@ -1,7 +1,7 @@
 import { Creature } from './creature';
 // import { GameOver } from '../../menus/game-over';
 
-let gA = 1, deathCount = 0;
+let gA = 1, deathCount = 0, sirenCount = 0, spaceInput = 0;
 
 export class Player extends Creature {
   constructor(handler, x, y){
@@ -13,6 +13,7 @@ export class Player extends Creature {
     // this.speed = 180;
     this.moveThrough = false;
     this.state = 1;
+    this.sm = this.handler.getSoundManager();
   }
 
   tick(dt) {
@@ -40,6 +41,14 @@ export class Player extends Creature {
     switch (this.state) {
       case 1:
         g.myDrawImage(this.frame('p'), this.x, this.y, TILE_SIZE, TILE_SIZE);
+
+        if (this.sirenHat) {
+          g.myDrawImage(this.a.anim['sright'].getCurrentFrame(), this.x, this.y - 16, TILE_SIZE, TILE_SIZE);
+
+          if (sirenCount++ > 20) {
+            this.sm.play('siren');
+          }
+        }
         break;
 
       case 2:
@@ -79,6 +88,15 @@ export class Player extends Creature {
     }
     if (manager.right || manager.d) {
       this.xMove = this.speed * dt;
+    }
+
+    if (this.item.type == 'siren') spaceInput = spaceInput > 30 ? 30 : spaceInput += 1;
+
+    if (manager.space && this.item && this.item.type == 'siren') {
+      if (spaceInput == 30) {
+        this.sirenHat = !this.sirenHat;
+        spaceInput = 0;
+      }
     }
   }
 }

@@ -12,7 +12,7 @@ let rectSize = 0, whiteFade = 1;
 export class World {
   constructor(handler) {
     this.handler = handler;
-    this.entityManager = new EntityManager(handler, new Player(handler, 4, 8));
+    this.entityManager = new EntityManager(handler, new Player(handler, 4, 4));
     this.spatialGrid = new SpatialGrid(GAME_SIZE, GAME_SIZE, TILE_SIZE);
     this.playerDied = false;
     this.machineFilled = false;

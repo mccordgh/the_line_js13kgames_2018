@@ -75,7 +75,7 @@ export class Entity {
     let player = e1.type === 'p' ? e1 : e2;
 
     // if player and guard bump
-    if (this.checkCollidingTypes(e1, e2, 'p', 'g') && !this.pacified) {
+    if (this.checkCollidingTypes(e1, e2, 'p', 'g')) {
       player.state = 2; // 2 = dead
       player.b = { x: 0, y: 0, s: 0 };
 
@@ -111,7 +111,25 @@ export class Entity {
   }
 
   endingEvents(e1, e2) {
-    
+    let eM = this.handler.getWorld().getEntityManager();
+
+    if (this.checkCollidingTypes(e1, e2, 'p', 'g')) {
+      let guard = e1.type == 'g' ? e1 : e2;
+
+      let exists = !!(eM.findEntitiesByType('speech').find(s => s.entity == guard));
+      if (exists) return;
+
+      let player = e1.type == 'p' ? e1 : e2;
+      let text = ['Guard: Thank you for saving us!']
+
+      if (!player.item || player.item.type != 'siren') {
+        text.push('Please take this siren hat.');
+        text.push('To use it, just hit [spacebar]!');
+        player.setItem({type: 'siren'});
+      }
+
+      eM.addSpeech(guard, text);
+    }
   }
 
   checkCollidingTypes(e1, e2, type1, type2) {

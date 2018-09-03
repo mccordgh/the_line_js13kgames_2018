@@ -1,4 +1,5 @@
 import { Rectangle } from '../gfx/shapes/rectangle';
+import SpeechBox from './statics/speech-box';
 
 let handler, player, entities;
 
@@ -32,6 +33,10 @@ export class EntityManager {
   getEntities() {
     return entities;
   }
+  
+  findEntitiesByType(t) {
+    return entities.filter(e => e.type == t);
+  }
 
   addEntity(e) {
     entities.push(e);
@@ -42,7 +47,7 @@ export class EntityManager {
     entities = [];
     this.addEntity(player);
 
-    if (player.item && (prevRoom != null)) {
+    if (player.item && (prevRoom != null) && player.item.type != 'siren') {
       // this.addEntity(player.item);
       prevRoom.removeEntity(player.item);
       room.addEntity(player.item);
@@ -85,5 +90,9 @@ export class EntityManager {
         rooms[i].entities[j].pacified = true;
       }
     }
+  }
+
+  addSpeech(entity, text) {
+    this.addEntity(new SpeechBox(handler, entity, text));
   }
 }

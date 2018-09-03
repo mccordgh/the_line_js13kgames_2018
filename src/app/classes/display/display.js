@@ -58,7 +58,7 @@ CanvasRenderingContext2D.prototype.myDrawImage = (asset, x, y, size = TILE_SIZE)
 CanvasRenderingContext2D.prototype.drawText = (text, x, y, color = 'white') => {
   graphics.font = `28px Arial`;
   graphics.fillStyle = color;
-  graphics.strokeText(text, x, y);
+  // graphics.strokeText(text, x, y);
   graphics.fillText(text,  x, y);
 };
 
