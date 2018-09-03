@@ -1,7 +1,7 @@
 import { Creature } from './creature';
 
 export class Manager extends Creature {
-  constructor(handler, x, y, lastAnim = 'pright'){
+  constructor(handler, x, y, lastAnim = 'maright'){
     super(handler, x, y);
     this.lastAnim = lastAnim;
     this.type = 'w';
@@ -14,7 +14,8 @@ export class Manager extends Creature {
   }
 
   render(g) {
-    g.myDrawImage(this.frame('p'), this.x, this.y, TILE_SIZE, TILE_SIZE);
+    //   console.log(this.frame('mana'));
+    g.myDrawImage(this.frame('ma'), this.x, this.y, TILE_SIZE, TILE_SIZE);
 
     // ****** DRAW BOUNDING BOX DON'T DELETE!!
     // g.fillStyle = "green";

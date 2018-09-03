@@ -149,7 +149,7 @@ export class Creature extends Entity {
     }
 
     if (this.xMove > 0) {
-	    this.lastAnim = type + "right";
+      this.lastAnim = type + "right";
 	    return this.a.anim[this.lastAnim].getCurrentFrame();
     }
 
