@@ -16,8 +16,6 @@ export class Manager extends Creature {
   }
 
   render(g) {
-    this.pacified = false;
-
     if (this.pacified) {
         g.myDrawImage(this.frame('ma'), this.x, this.y, TILE_SIZE, TILE_SIZE);
         return;
@@ -27,24 +25,11 @@ export class Manager extends Creature {
     g.fillStyle = 'white';
     g.fillRect(this.x + 16, this.y + 16, 24, 8);
 
-    let z = '';
-    sleepCount++;
-
-    if (sleepCount > 30) {
-        z = 'Z';
-    }
-
-    if (sleepCount > 60) {
-        z = 'Zz';
-    }
-
-    if (sleepCount > 90) {
-        z = 'Zzz';
-    }
-
-    if (sleepCount > 120) {
-        z = '';
-        sleepCount = 0;
+    let z = ''
+    
+    if (sleepCount++ > 30) {
+        z = 'Zzz'
+        if (sleepCount > 60) sleepCount = 0
     }
 
     g.drawText(z, this.x + 8, this.y);
@@ -56,8 +41,6 @@ export class Manager extends Creature {
   }
 
   getRndSpeech() {
-    return 'Manager: ' + rndIndex([
-      'I\'m the manager!',
-    ]);
+    return this.speak('Manager: ');
   }
 }

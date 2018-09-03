@@ -1,5 +1,4 @@
 import { StaticEntity } from "./static-entity";
-import { GameOver } from '../../menus/game-over';
 import { Assets } from "../../gfx/assets";
 
 export default class Machine extends StaticEntity {
@@ -25,8 +24,6 @@ export default class Machine extends StaticEntity {
         if (this.keys.length > 3) {
             ANIMATION_TIMER.stop = true;
             this.handler.getWorld().machineFilled = true;
-            // let gameOver = new GameOver(this.handler, 'machine');
-            // this.handler.getGame().getGameState().setState(gameOver)
         }
     }
 

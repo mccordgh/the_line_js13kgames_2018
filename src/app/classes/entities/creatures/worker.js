@@ -21,16 +21,8 @@ export class Worker extends Creature {
     // g.fillRect(this.b.x + this.x, this.b.y + this.y, this.b.s, this.b.s);
     // ****** DRAW BOUNDING BOX DON'T DELETE!!
   }
-
+  
   getRndSpeech() {
-    return 'Worker: ' + rndIndex([
-      'You did it!',
-      'You saved us all!',
-      'Thanks, I guess...',
-      'My hero!',
-      'What... What happened?!',
-      'Let\'s get outta here!',
-      'Did you stop the machine??',
-    ]);
+    return this.speak('Worker: ');
   }
 }

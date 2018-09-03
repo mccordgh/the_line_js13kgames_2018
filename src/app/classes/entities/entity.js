@@ -1,7 +1,5 @@
-// import { Ending } from '../menus/ending';
-// import { GameOver } from '../menus/game-over';
 import { Rectangle } from '../gfx/shapes/rectangle';
-import { GameOver } from '../menus/game-over';
+// import { GameOver, Info } from '../menus/info';
 
 export class Entity {
   constructor(handler, x, y) {
@@ -91,7 +89,7 @@ export class Entity {
       let item = e1.type === 'key' ? e1 : e2;
       if (player.item || item.locked) return;
 
-      if (!item.prop) this.handler.getSoundManager().play('pickup');
+      if (!item.prop) h.getSoundManager().play('pickup');
       player.setItem(item);
       item.setTarget(player);
     }
@@ -103,7 +101,7 @@ export class Entity {
       let machine = e1.type === 'm' ? e1 : e2;
       let item = player.item;
 
-      this.handler.getSoundManager().play('place');
+      h.getSoundManager().play('place');
       item.setTarget(machine);
       item.locked = true;
       machine.addKey(item);
@@ -146,8 +144,9 @@ export class Entity {
       }
 
       if (this.checkCollidingTypes(e1, e2, 'p', 'exit')) {
-        let gameOver = new GameOver(this.handler, 'machine');
-        this.handler.getGame().getGameState().setState(gameOver)
+        // this.handler.getGame().getGameState().setState(new Info(this.handler, [
+          // 'Everyone escaped yay',
+        // ]));
       }
   }
 

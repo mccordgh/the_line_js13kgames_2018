@@ -155,4 +155,13 @@ export class Creature extends Entity {
 
     return this.a.anim[this.lastAnim].getCurrentFrame();
   }
+
+  speak(n = 'Worker: ') {
+    return n + rndIndex([
+      'You did it!',
+      'My hero!',
+      'What... What happened?!',
+      "Let's find the exit outta here!",
+    ]);
+  }
 }
