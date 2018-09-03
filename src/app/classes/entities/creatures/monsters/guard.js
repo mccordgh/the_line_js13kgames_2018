@@ -73,8 +73,8 @@ export class Guard extends Creature {
     }
 
     // ****** DRAW BOUNDING BOX DON'T DELETE!!
-    g.fillStyle = "red";
-    g.fillRect(this.b.x + this.x, this.b.y + this.y, this.b.s, this.b.s);
+    // g.fillStyle = "red";
+    // g.fillRect(this.b.x + this.x, this.b.y + this.y, this.b.s, this.b.s);
     // ****** DRAW BOUNDING BOX DON'T DELETE!!
   }
 
@@ -98,8 +98,8 @@ export class Guard extends Creature {
 
     //if guard gets within X tiles of player change to chasing state
     if (
-      Math.abs(t.x - g.x) < (TILE_SIZE * 4)
-      && Math.abs(t.y - g.y) < (TILE_SIZE * 4)
+      Math.abs(t.x - g.x) < (TILE_SIZE * 5)
+      && Math.abs(t.y - g.y) < (TILE_SIZE * 5)
     ) {
       this.state = 2; // 2 = chase
     }
