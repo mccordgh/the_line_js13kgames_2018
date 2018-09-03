@@ -6,7 +6,7 @@ export class AnimationTimer {
     this.index = 0;
     this.lastTime = Date.now();
     this.timer = 0;
-    this.speed = 270;
+    this.speed = 240;
     this.keys = 0;
     this.stop = false;
     this.beats = {
@@ -15,30 +15,30 @@ export class AnimationTimer {
       //sounds on the 1.5 beat
       2: [
         { name: 'steamLow', condition(k) { return k >= 0 }},
-        { name: 'bassC', condition(k) { return k >= 1 }},
+        { name: 'bassC', condition(k) { return k <= 3 }},
       ],
       3: [
-        { name: 'arpFsG', condition(k) { return k >= 3 }},
+        { name: 'arpFsG', condition(k) { return k == 0 }},
       ],
       //sounds on the 2.5 beat
       4: [
         // { name: 'arpFsG', condition(k) { return k == 3 }},
-        { name: 'bassDs', condition(k) { return k >= 2 }},
+        { name: 'bassDs', condition(k) { return k <= 1 }},
       ],
       5: [
-        { name: 'arpAsC', condition(k) { return k >= 3 }},
+        { name: 'arpAsC', condition(k) { return k == 0 }},
       ],
       //sounds on the 3.5 beat
       6: [
         { name: 'steamHigh', condition(k) { return k >= 0}},
-        { name: 'bassDs', condition(k) { return k == 1}},
-        { name: 'bassF', condition(k) { return k >= 2 }},
+        { name: 'bassDs', condition(k) { return k > 1 && k < 3}},
+        { name: 'bassF', condition(k) { return k <= 1 }},
       ],
       7: [
       ],
       //sounds on the 4.5 beat
       8: [
-        { name: 'bassFs', condition(k) { return k >= 2 }},
+        { name: 'bassFs', condition(k) { return k <= 2 }},
       ],
     }
   }
@@ -93,6 +93,7 @@ export class AnimationTimer {
 
   keyAdded() {
     this.keys++;
-    this.speed -= 10;
+    this.speed += 10;
+    console.log('keys: ', this.keys);
   }
 }

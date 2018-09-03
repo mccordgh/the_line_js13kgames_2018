@@ -26,10 +26,10 @@ let keySpawns = [4, 7];
 let handler;
 let roomNumbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
 let keys = [
-  new Key(handler, rndIndex(guardSpawns), rndIndex(guardSpawns), 'p'),
-  new Key(handler, rndIndex(guardSpawns), rndIndex(guardSpawns), 'g'),
-  new Key(handler, rndIndex(guardSpawns), rndIndex(guardSpawns), 'y'),
-  new Key(handler, rndIndex(guardSpawns), rndIndex(guardSpawns), 'b'),
+  new Key(handler, rndIndex(keySpawns), rndIndex(keySpawns), 'p'),
+  new Key(handler, rndIndex(keySpawns), rndIndex(keySpawns), 'g'),
+  new Key(handler, rndIndex(keySpawns), rndIndex(keySpawns), 'y'),
+  new Key(handler, rndIndex(keySpawns), rndIndex(keySpawns), 'b'),
 ];
 
 let pullRoom = () => {
@@ -66,7 +66,7 @@ let noLeft = (room) => {
 /* TRAITS */
 
 let startRoom = (room) => {
-  room.addEntity(new Guard(handler, 3, 3));
+  // room.addEntity(new Guard(handler, 3, 3));
   spawnRoom = room.id;
   roomNumbers = roomNumbers.filter(r => r != room.id);
   // console.log('spawned in room', spawnRoom);
@@ -76,11 +76,11 @@ let startRoom = (room) => {
 
 let createKeyRooms = (rooms) => {
   for (let i = 0; i < 4; i++) {
-    let r = pullRoom();
+    // let r = pullRoom();
     // console.log(keys[0].color, 'key in room', r);
-    rooms[r].entities.push(keys[0]);
+    // rooms[r].entities.push(keys[0]);
 
-    // rooms[spawnRoom].entities.push(keys[0]);
+    rooms[spawnRoom].entities.push(keys[0]);
 
     keys.shift();
   }
