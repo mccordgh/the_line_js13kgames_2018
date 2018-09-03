@@ -66,10 +66,6 @@ export class AnimationTimer {
     }
   }
 
-  stopMe() {
-    this.stop = true;
-  }
-
   factoryNoise() {
     c++;
 

@@ -62,7 +62,10 @@ CanvasRenderingContext2D.prototype.drawText = (text, x, y, color = 'white') => {
   graphics.fillText(text,  x, y);
 };
 
-CanvasRenderingContext2D.prototype.shakeScreen = (x, y) => {
+CanvasRenderingContext2D.prototype.shakeScreen = () => {
+  let x = rndInt(-15, 15);
+  let y = rndInt(-15, 15);
+
   let imgData=graphics.getImageData(0,0, GAME_SIZE, GAME_SIZE);
 
   graphics.fillStyle = 'black';

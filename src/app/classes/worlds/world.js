@@ -6,7 +6,8 @@ import { Guard } from '../entities/creatures/monsters/guard';
 
 import generateRooms from './generate-rooms';
 
-let rectSize = 0, whiteFade = -1;
+// let rectSize = 0, whiteFade = -1;
+let rectSize = 0, whiteFade = 1;
 
 export class World {
   constructor(handler) {
@@ -52,7 +53,10 @@ export class World {
   tick(dt) {
     this.room.tick();
     // this.tickTiles();
-    if (!this.machineFilled) this.entityManager.tick(dt);
+    if (!this.machineFilled) {
+      // console.log('eM tick')
+      this.entityManager.tick(dt);
+    }
   }
 
   render(g) {
@@ -74,22 +78,23 @@ export class World {
     } 
 
     if (this.machineFilled) {
-      let shakeX = rndInt(-25, 25);
-      let shakeY = rndInt(-25, 25);
+      if (whiteFade >= 1) {
+        // this.entityManager.removeEntitiesByType('m');
+        this.machineFilled = false;
+        this.entityManager.pacifyAll();
+        ANIMATION_TIMER.stop = false;
+        return;
+      }
+
       whiteFade += .005;
 
-      g.shakeScreen(shakeX, shakeY);
+      g.shakeScreen();
 
       g.fillStyle = 'white';
       g.globalAlpha = whiteFade > 0 ? whiteFade : 0;
       g.fillRect(0, 0, GAME_SIZE, GAME_SIZE);
 
       g.globalAlpha = 1;
-
-      if (whiteFade >= 1) {
-        this.entityManager.removeEntitiesByType('m');
-        this.machineFilled = false;
-      }
     }
 
   }

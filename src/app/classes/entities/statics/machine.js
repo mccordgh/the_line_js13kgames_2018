@@ -15,15 +15,15 @@ export default class Machine extends StaticEntity {
         this.assets.b = Assets.getAssets('all').anim['b_mright'];
 
         /* COLLISION BOUNDS */
-        this.b.x = 0;
+        this.b.x = -1;
         this.b.y = 0;
-        this.b.s = 128; // size
+        this.b.s = 130; // size
         /* COLLISION BOUNDS */
     }
 
     tick() {
         if (this.keys.length > 3) {
-            ANIMATION_TIMER.stopMe();
+            ANIMATION_TIMER.stop = true;
             this.handler.getWorld().machineFilled = true;
             // let gameOver = new GameOver(this.handler, 'machine');
             // this.handler.getGame().getGameState().setState(gameOver)
@@ -31,12 +31,12 @@ export default class Machine extends StaticEntity {
     }
 
     render(g) {
-        // let t = this.anim ? this.texture.getCurrentFrame() : this.texture;
-        g.myDrawImage(this.assets.p.getCurrentFrame(), this.x, this.y, TILE_SIZE, TILE_SIZE);
-        g.myDrawImage(this.assets.g.getCurrentFrame(), this.x + TILE_SIZE, this.y, TILE_SIZE, TILE_SIZE);
-        g.myDrawImage(this.assets.y.getCurrentFrame(), this.x + TILE_SIZE, this.y + TILE_SIZE, TILE_SIZE, TILE_SIZE);
-        g.myDrawImage(this.assets.b.getCurrentFrame(), this.x, this.y + TILE_SIZE, TILE_SIZE, TILE_SIZE);
-
+        let frame = this.myFrame();
+       
+        g.myDrawImage(this.assets.p[frame](), this.x, this.y, TILE_SIZE, TILE_SIZE);
+        g.myDrawImage(this.assets.g[frame](), this.x + TILE_SIZE, this.y, TILE_SIZE, TILE_SIZE);
+        g.myDrawImage(this.assets.y[frame](), this.x + TILE_SIZE, this.y + TILE_SIZE, TILE_SIZE, TILE_SIZE);
+        g.myDrawImage(this.assets.b[frame](), this.x, this.y + TILE_SIZE, TILE_SIZE, TILE_SIZE);
 
         // ****** DRAW BOUNDING BOX DON'T DELETE!!
         // g.fillStyle = 'orange';

@@ -25,4 +25,8 @@ export class Animation {
     let a = ANIMATION_TIMER;
     return this.frames[a.index].frame;
   }
+
+  getStillFrame() {
+    return this.frames[0].frame;
+  }
 }

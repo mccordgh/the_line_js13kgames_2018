@@ -8,6 +8,7 @@ export class Entity {
     this.y = y * TILE_SIZE;
     this.handler = handler;
     this.b = new Rectangle(0, 0, TILE_SIZE, TILE_SIZE);
+    this.pacified = false;
     // this.moveThrough = false;
   }
 
@@ -57,6 +58,14 @@ export class Entity {
   }
 
   checkForCollisionEvents(e1, e2) {
+    if (e1.pacified) {
+      this.endingEvents(e1, e2);
+    } else {
+      this.gameEvents(e1, e2);
+    }
+  }
+
+  gameEvents(e1, e2) {
     // if two guards bump, ignore
     if (this.checkCollidingTypes(e1, e2, 'g', 'g')) return;
 
@@ -65,21 +74,8 @@ export class Entity {
     let hW = h.getWorld();
     let player = e1.type === 'p' ? e1 : e2;
 
-    // if (this.checkCollidingTypes(e1, e2, 'player', 'exit')) {
-    //   if (hW.level >= 4) {
-    //     hW.dialogue.clear();
-
-    //     let ending = new Ending(this.handler);
-    //     hG.getGameState().setState(ending);
-    //   }
-
-    //   hW.changeLevel();
-    //   return;
-    // }
-    // console.log(e1.type, e2.type);
-
     // if player and guard bump
-    if (this.checkCollidingTypes(e1, e2, 'p', 'g')) {
+    if (this.checkCollidingTypes(e1, e2, 'p', 'g') && !this.pacified) {
       player.state = 2; // 2 = dead
       player.b = { x: 0, y: 0, s: 0 };
 
@@ -88,12 +84,6 @@ export class Entity {
       let guard = e1.type == 'g' ? e1 : e2;
       guard.state = 3; // hauling player away;
     }
-
-    // if (this.checkCollidingTypes(e1, e2, 'g', 'm')) {
-    //   let g = e1.type === 'g' ? e1 : e2;
-
-    //   g.changeDirection();
-    // }
 
     // if player and a key bump
     if (this.checkCollidingTypes(e1, e2, 'p', 'key')) {
@@ -111,15 +101,17 @@ export class Entity {
 
       let machine = e1.type === 'm' ? e1 : e2;
       let item = player.item;
-      // console.log({player, machine, item});
 
       this.handler.getSoundManager().play('place');
       item.setTarget(machine);
       item.locked = true;
       machine.addKey(item);
       player.dropItem(item);
-      // this.handler.getWorld().add
     }
+  }
+
+  endingEvents(e1, e2) {
+    
   }
 
   checkCollidingTypes(e1, e2, type1, type2) {

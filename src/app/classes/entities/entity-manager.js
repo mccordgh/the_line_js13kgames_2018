@@ -66,10 +66,24 @@ export class EntityManager {
   removeEntitiesByType(type) {
     entities = entities.filter((e) => {
       if (e.type === type) {
-        handler.getWorld().getSpatialGrid().remove(new Rectangle(e.x + e.b.x, e.y + e.b.y, e.b.w, e.b.h), e);
+        handler.getWorld().getSpatialGrid().remove(new Rectangle(e.x + e.b.x, e.y + e.b.y, e.b.s, e.b.s), e);
+        return false;
       } else {
         return e;
       }
     });
+  }
+
+  pacifyAll() {
+    let rooms = handler.getWorld().rooms;
+    let keys = Object.keys(rooms);
+    
+    player.pacified = true;
+
+    for (let i = 0; i < keys.length; i++) {
+      for (let j = 0; j < rooms[i].entities.length; j++) {
+        rooms[i].entities[j].pacified = true;
+      }
+    }
   }
 }

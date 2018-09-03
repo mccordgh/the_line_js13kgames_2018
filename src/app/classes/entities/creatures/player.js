@@ -30,7 +30,7 @@ export class Player extends Creature {
         if (deathCount++ > 120) {
           window.location.reload();
           // let gameOver = new GameOver(this.handler, 'dead');
-          // ANIMATION_TIMER.stopMe();
+          // ANIMATION_TIMER.stop = true;
           // this.handler.getGame().getGameState().setState(gameOver);
         }
     }
