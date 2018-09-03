@@ -1,31 +1,38 @@
-// import { Assets } from '../../gfx/assets';
-// import { StaticEntity } from './static-entity';
+import { StaticEntity } from './static-entity';
 
-// export class Exit extends StaticEntity {
-//   constructor(handler, x, y, width, height) {
-//     super(handler, x, y, width, height);
-//     this.a = Assets.gA('tiles');
-//     this.type = 'exit';
-//     this.b.x = 15;
-//     this.b.y = 15;
-//     this.b.s = this.width - 30;
-//     this.b.s = this.height - 30;
-//   }
+export class Exit extends StaticEntity {
+  constructor(handler, x, y) {
+    super(handler, x, y);
+    this.type = 'exit';
+    this.b.x = 0;
+    this.b.y = 0;
+    this.b.s = TILE_SIZE;
+    console.log(this.x, this.y);
+  }
 
-//   tick(){
-//     //
-//   }
+  tick(){}
 
-//   render(g) {
-//     g.myDrawImage(this.a.exit,
-//       this.x - this.handler.getGameCamera().getxOffset(),
-//       this.y - this.handler.getGameCamera().getyOffset(),
-//       this.width,
-//       this.height);
+  render(g) {
+    for (let i = 0; i < 2; i++) {
+        g.fillStyle = i == 0 ? '#ffec27' : 'white';
+        
+        g.globalAlpha = .4;
+        g.fillRect(this.x, this.y, this.b.s, this.b.s);
 
-//     // ****** DRAW BOUNDING BOX DON'T DELETE!!
-//     // g.fillStyle = "white";
-//     // g.fillRect(this.b.x + this.x - this.handler.getGameCamera().getxOffset(), this.b.y + this.y - this.handler.getGameCamera().getyOffset(), this.b.s, this.b.s);
-//     // ****** DRAW BOUNDING BOX DON'T DELETE!!
-//   }
-// }
+        g.globalAlpha = .3;
+        g.fillRect(this.x, this.y - TILE_SIZE, this.b.s, this.b.s);
+        g.fillRect(this.x, this.y + TILE_SIZE, this.b.s, this.b.s);
+
+        g.globalAlpha = .2;
+        g.fillRect(this.x, this.y - (TILE_SIZE * 2), this.b.s, this.b.s);
+        g.fillRect(this.x, this.y + (TILE_SIZE * 2), this.b.s, this.b.s);
+    }
+
+    g.globalAlpha = 1;
+
+    // ****** DRAW BOUNDING BOX DON'T DELETE!!
+    // g.fillStyle = "yellow";
+    // g.fillRect(this.b.x + this.x, this.b.y + this.y, this.b.s, this.b.s);
+    // ****** DRAW BOUNDING BOX DON'T DELETE!!
+  }
+}

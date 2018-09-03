@@ -5,6 +5,7 @@ import Machine from '../entities/statics/machine';
 import PropMachine from '../entities/statics/prop-machine';
 import { Worker } from '../entities/creatures/worker';
 import { Manager } from '../entities/creatures/manager';
+import Desk from '../entities/statics/desk';
 
 /* BUILDING A ROOM
   1. fill in standard room with 4 exits
@@ -23,7 +24,7 @@ import { Manager } from '../entities/creatures/manager';
 
 let spawnRoom = {};
 let guardSpawns = [3, 8];
-let keySpawns = [4, 7];
+let keySpawns = [3, 8];
 let handler;
 let roomNumbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
 let keys = [
@@ -67,8 +68,8 @@ let noLeft = (room) => {
 /* TRAITS */
 
 let startRoom = (room) => {
-  // room.addEntity(new Guard(handler, 3, 3));
-  room.addEntity(new Manager(handler, 3, 3));
+  room.addEntity(new Guard(handler, 3, 3));
+  // room.addEntity(new Manager(handler, 3, 3));
   spawnRoom = room.id;
   roomNumbers = roomNumbers.filter(r => r != room.id);
   // console.log('spawned in room', spawnRoom);
@@ -137,7 +138,9 @@ let addManagers = (rooms) => {
     let r = rooms[k];
     
     if (!hasMachine(r) && hasKey(r)) {
-      r.entities.push(new Manager(handler, 5, 5));
+      let ma = new Manager(handler, 5, 5);
+      r.entities.push(ma);
+      r.entities.push(new Desk(handler, ma));
     }
   });
 

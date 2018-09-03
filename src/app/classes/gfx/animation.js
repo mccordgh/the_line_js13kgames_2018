@@ -26,7 +26,7 @@ export class Animation {
     return this.frames[a.index].frame;
   }
 
-  getStillFrame() {
-    return this.frames[0].frame;
+  getStillFrame(f = 0) {
+    return this.frames[f].frame;
   }
 }

@@ -85,3 +85,4 @@ addAnimations('s', 13);
 addAnimations('prop1', 14, 15)
 addAnimations('prop2', 16, 17)
 addAnimations('ma', 18)
+addAnimations('desk', 19)

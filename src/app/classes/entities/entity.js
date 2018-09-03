@@ -1,6 +1,7 @@
 // import { Ending } from '../menus/ending';
 // import { GameOver } from '../menus/game-over';
 import { Rectangle } from '../gfx/shapes/rectangle';
+import { GameOver } from '../menus/game-over';
 
 export class Entity {
   constructor(handler, x, y) {
@@ -142,6 +143,11 @@ export class Entity {
         let text = [worker.getRndSpeech()]
   
         eM.addSpeech(worker, text);
+      }
+
+      if (this.checkCollidingTypes(e1, e2, 'p', 'exit')) {
+        let gameOver = new GameOver(this.handler, 'machine');
+        this.handler.getGame().getGameState().setState(gameOver)
       }
   }
 

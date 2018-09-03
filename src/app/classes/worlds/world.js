@@ -5,9 +5,10 @@ import { TileManager } from '../tiles/tile-manager';
 import { Guard } from '../entities/creatures/monsters/guard';
 
 import generateRooms from './generate-rooms';
+import { Exit } from '../entities/statics/exit';
 
 // let rectSize = 0, whiteFade = -1;
-let rectSize = 0, whiteFade = 1;
+let rectSize = 0, whiteFade = 1, didEnd = false;
 
 export class World {
   constructor(handler) {
@@ -83,6 +84,7 @@ export class World {
         this.machineFilled = false;
         this.entityManager.pacifyAll();
         ANIMATION_TIMER.stop = false;
+        if (!didEnd) this.createFinalExit();
         return;
       }
 
@@ -96,7 +98,21 @@ export class World {
 
       g.globalAlpha = 1;
     }
+  }
 
+  createFinalExit() {
+    let num = rndIndex([0, 3, 12, 15]);
+    let room = this.rooms[num];
+    let x = TILE_SIZE * 5;
+    let y = (num == 0 || num == 3) ? 0 : GAME_SIZE - TILE_SIZE;
+
+    console.log('exit in room', num);
+    room.tileSet[11][5] = room.tileSet[11][6] = 0;
+    room.tileSet[0][5] = room.tileSet[0][6] = 0;
+    
+    room.addEntity(new Exit(this.handler, x / TILE_SIZE, (y / TILE_SIZE)));
+    room.addEntity(new Exit(this.handler, (x + TILE_SIZE) / TILE_SIZE, (y / TILE_SIZE)));
+    didEnd = true;
   }
 
   setPlayerSpawn(dir) {
