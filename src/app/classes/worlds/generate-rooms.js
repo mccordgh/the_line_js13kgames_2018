@@ -4,6 +4,7 @@ import Key from '../entities/statics/key';
 import Machine from '../entities/statics/machine';
 import PropMachine from '../entities/statics/prop-machine';
 import { Worker } from '../entities/creatures/worker';
+import { Manager } from '../entities/creatures/manager';
 
 /* BUILDING A ROOM
   1. fill in standard room with 4 exits
@@ -111,25 +112,35 @@ let hasMachine = (room) => {
   return !!room.entities.find(e => e.type == 'm');
 }
 
+let hasKey = (room) => {
+  return !!room.entities.find(e => e.type == 'key');
+}
+
 let addProps = (rooms) => {
   Object.keys(rooms).forEach((k) => {
-    let n = Math.random();
     let r = rooms[k];
     
-    if (!hasMachine(r)) {
+    if (!hasMachine(r) && !hasKey(r)) {
       let num = Math.random() <= .5 ? 1 : 2;
       r.entities.push(new PropMachine(handler, 5, 5, num));
       r.entities.push(new Worker(handler, 4, 5))
       r.entities.push(new Worker(handler, 7, 5, 'pleft'))
     }
-
-    // if (n < .3) {
-
-    // }
   });
 
   return rooms;
 }
+
+let addManagers = (rooms) => {
+  Object.keys(rooms).forEach((k) => {
+    let r = rooms[k];
+    
+    if (!hasMachine(r) && hasKey(r)) {
+      r.entities.push(new Manager(handler, 5, 5));
+    }
+  });
+
+  return rooms;}
 
 export default function(_handler, start) {
   handler = _handler;
@@ -160,6 +171,7 @@ export default function(_handler, start) {
   rooms = createMachineRoom(rooms);
   rooms = spawnGuards(rooms);
   rooms = addProps(rooms);
+  rooms = addManagers(rooms);
 
   return rooms;
 };
