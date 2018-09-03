@@ -63,7 +63,7 @@ export class World {
       this.entityManager.render(g);
 
       if (this.playerDied) {
-        rectSize += 1.75;
+        rectSize += 3.5;
   
         g.fillStyle = 'black';
         g.fillRect(0, 0, rectSize, GAME_SIZE);

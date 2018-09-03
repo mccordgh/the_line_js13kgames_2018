@@ -47,21 +47,10 @@ export class Guard extends Creature {
         break;
       case 3:
         dontChaseCount = 0;
-        // this.patrolState(dt);
         this.speed = 50;
         this.x += this.speed * dt;
         this.target.x = this.x + 16;
         this.target.y = this.y + 16;
-      // case 3: // 3 = moving around object
-      //   stuckCount++;
-      //   this.persue();
-      //   this.patrol(dt);
-      //   this.move();
-      //   if (stuckCount > 120) {
-      //     stuckCount = 0;
-      //     this.state = 2;
-      //   }
-      //   break;
       }
   }
 
@@ -74,7 +63,7 @@ export class Guard extends Creature {
       */
     g.myDrawImage(this.frame('g'), this.x, this.y, TILE_SIZE, TILE_SIZE);
 
-    if (this.state == 2 || this.state == 3) {
+    if (this.state == 2) {
       g.myDrawImage(this.a.anim['sright'].getCurrentFrame(), this.x, this.y - 16, TILE_SIZE, TILE_SIZE);
 
       if (sirenCount++ > 20) {

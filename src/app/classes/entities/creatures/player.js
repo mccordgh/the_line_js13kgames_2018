@@ -27,7 +27,7 @@ export class Player extends Creature {
 
       case 2: // 2 = dead
       this.xMove = this.yMove = 0;
-        if (deathCount++ > 240) {
+        if (deathCount++ > 120) {
           window.location.reload();
           // let gameOver = new GameOver(this.handler, 'dead');
           // ANIMATION_TIMER.stopMe();
