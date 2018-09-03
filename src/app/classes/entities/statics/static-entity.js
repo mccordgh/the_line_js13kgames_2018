@@ -12,16 +12,11 @@ export class StaticEntity extends Entity {
     /* COLLISION BOUNDS */
   }
 
-  tick() {
-    // if (this.anim) {
-      // this.assets.tick();
-    // }
-  }
+  tick() {}
 
   render(g) {
     let frame = this.myFrame();
        
-    // g.myDrawImage(this.assets.p[frame](), this.x, this.y, TILE_SIZE, TILE_SIZE);
     g.myDrawImage(this.assets[this.myFrame()](), this.x, this.y, TILE_SIZE, TILE_SIZE);
     
     // ****** DRAW BOUNDING BOX DON'T DELETE!!
@@ -31,10 +26,7 @@ export class StaticEntity extends Entity {
   }
   
   myFrame() {
-    // let p =this.pacified ? 'getStillFrame' : 'getCurrentFrame';
-    // console.log(this.type, this.pacified, p);
     return this.pacified ? 'getStillFrame' : 'getCurrentFrame';
-    // return p;
   }
 
 }

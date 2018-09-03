@@ -68,11 +68,12 @@ let noLeft = (room) => {
 /* TRAITS */
 
 let startRoom = (room) => {
-  room.addEntity(new Guard(handler, 3, 3));
-  // room.addEntity(new Manager(handler, 3, 3));
+  room.entities.push(new Worker(handler, 4, 5))
+  room.entities.push(new Worker(handler, 7, 5, 'pleft'))
+  room.entities.push(new Worker(handler, 7, 6, 'pleft'))
+
   spawnRoom = room.id;
   roomNumbers = roomNumbers.filter(r => r != room.id);
-  // console.log('spawned in room', spawnRoom);
 
   return room;
 }
@@ -82,7 +83,6 @@ let createKeyRooms = (rooms) => {
     let r = pullRoom();
     // console.log(keys[0].color, 'key in room', r);
     rooms[r].entities.push(keys[0]);
-
     // rooms[spawnRoom].entities.push(keys[0]);
 
     keys.shift();
@@ -92,8 +92,6 @@ let createKeyRooms = (rooms) => {
 }
 
 let createMachineRoom = (rooms) => {
-    // let r = pullRoom();
-    // console.log('MACHINE in room', r);
     let m = new Machine(handler, 5, 5);
     handler.machine = m;
     rooms[spawnRoom].entities.push(m);
@@ -144,7 +142,34 @@ let addManagers = (rooms) => {
     }
   });
 
-  return rooms;}
+  return rooms;
+}
+
+let finalRoom = (rooms) => {
+  rooms[16].text = 'THE END!';
+  rooms[16].entities = [];
+
+  rooms[16].tileSet[0][5] = rooms[16].tileSet[0][6] = 3;
+  rooms[16].tileSet[5][11] = rooms[16].tileSet[6][11] = 3;
+  rooms[16].tileSet[11][5] = rooms[16].tileSet[11][6] = 3;
+  rooms[16].tileSet[5][0] = rooms[16].tileSet[6][0] = 3;
+
+  for (let y = 5; y < 10; y++) {
+    for (let x = 2; x < 10; x++) {
+        let r = rndInt(1, 7), e;
+
+        if (r < 6) e = new Worker(handler, x, y);
+        if (r == 6) e = new Guard(handler, x, y);
+        if (r == 7) e = new Manager(handler, x, y);
+
+        e.pacified = true;
+        rooms[16].addEntity(e);
+    }
+  }
+
+  rooms[16].addEntity(new Guard(handler, 2, 9));
+  return rooms;
+}
 
 export default function(_handler, start) {
   handler = _handler;
@@ -166,6 +191,7 @@ export default function(_handler, start) {
     13: new Room( 13, [noBottom]),
     14: new Room( 14, [noBottom]),
     15: new Room( 15, [noRight, noBottom]),
+    16: new Room( 16, [], [], TILE_SIZE, TILE_COUNT, {p: 2, w: 3})
   };
 
   let r = startRoom(rooms[start]);
@@ -176,6 +202,7 @@ export default function(_handler, start) {
   rooms = spawnGuards(rooms);
   rooms = addProps(rooms);
   rooms = addManagers(rooms);
+  rooms = finalRoom(rooms);
 
   return rooms;
 };

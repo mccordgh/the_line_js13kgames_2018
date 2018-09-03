@@ -30,19 +30,7 @@ export class Creature extends Entity {
     }
   }
 
-  tick() {
-    // this.a.anim[this.lastAnim].tick();
-    // n = this.type === 'player' ? 'p' : 'c';
-
-    // if (this.yMove < 0)
-    //   this.a.animations[n + 'walk_up'].tick();
-    // if (this.yMove > 0)
-    //   this.a.animations[n + 'walk_down'].tick();
-    // if (this.xMove > 0)
-    //   this.a.animations[n + 'walk_right'].tick();
-    // if (this.xMove < 0)
-    //   this.a.animations[n + 'walk_left'].tick();
-  }
+  tick() {}
 
   move() {
     if (this.moveThrough) {
@@ -159,9 +147,8 @@ export class Creature extends Entity {
   speak(n = 'Worker: ') {
     return n + rndIndex([
       'You did it!',
-      'My hero!',
       'What... What happened?!',
-      "Let's find the exit outta here!",
+      "Let's find the exit!",
     ]);
   }
 }

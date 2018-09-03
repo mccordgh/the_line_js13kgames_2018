@@ -10,6 +10,9 @@ import placefx from './sfx/place';
 import pickupfx from './sfx/pickup';
 import arpFsG from './sfx/arpFsG'
 import arpAsC from './sfx/arpAsC'
+import stabFACD from './sfx/stabFACD'
+import endBassC from './sfx/endBassC'
+import endBassF from './sfx/endBassF'
 
 let sounds = {};
 
@@ -28,6 +31,9 @@ export class SoundManager {
       bassDs: this.create(.2, 'bassDs', false, bassDs),
       bassFs: this.create(.2, 'bassFs', false, bassFs),
       bassF: this.create(.2, 'bassF', false, bassF),
+      endBassC: this.create(.2, 'endBassC', false, endBassC),
+      endBassF: this.create(.2, 'endBassF', false, endBassF),
+      stabFACD: this.create(.2, 'stabFACD', false, stabFACD),
       arpFsG: this.create(.2, 'arpFsG', false, arpFsG),
       arpAsC: this.create(.2, 'arpAsC', false, arpAsC),
       siren: this.create(1, 'siren', false, siren),

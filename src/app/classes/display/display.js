@@ -55,10 +55,9 @@ CanvasRenderingContext2D.prototype.myDrawImage = (asset, x, y, size = TILE_SIZE)
   graphics.drawImage(asset.sheet, asset.x, asset.y, asset.width, asset.height, x, y, size, size);
 };
 
-CanvasRenderingContext2D.prototype.drawText = (text, x, y, color = 'white') => {
-  graphics.font = `28px Arial`;
+CanvasRenderingContext2D.prototype.drawText = (text, x, y, color = 'white', s = '28') => {
+  graphics.font = s + 'px Arial';
   graphics.fillStyle = color;
-  // graphics.strokeText(text, x, y);
   graphics.fillText(text,  x, y);
 };
 

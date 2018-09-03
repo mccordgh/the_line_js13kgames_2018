@@ -48,7 +48,6 @@ export class WorldStart {
                 }
             break;
         }
-        // console.log(dt);
     }
 
     render(g) {

@@ -39,6 +39,7 @@ export class EntityManager {
   }
 
   addEntity(e) {
+    // console.log(e);
     entities.push(e);
     handler.getWorld().getSpatialGrid().insert(new Rectangle(e.x + e.b.x, e.y + e.b.y, e.b.s, e.b.s), e);
   }
@@ -48,7 +49,6 @@ export class EntityManager {
     this.addEntity(player);
 
     if (player.item && (prevRoom != null) && player.item.type != 'siren') {
-      // this.addEntity(player.item);
       prevRoom.removeEntity(player.item);
       room.addEntity(player.item);
     }

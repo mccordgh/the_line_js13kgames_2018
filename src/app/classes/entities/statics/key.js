@@ -32,7 +32,6 @@ export default class Key extends StaticEntity {
         let tp = this.typePos;
 
         if (t) {
-            // console.log(t, t.type, this.xOffset(t.type), this.yOffset(t.type))
             this.x = this.target.x + this.xOffset(t, tp);
             this.y = this.target.y + this.yOffset(t, tp);
         }

@@ -7,15 +7,16 @@ export class AnimationTimer {
     this.lastTime = Date.now();
     this.timer = 0;
     this.speed = 240;
-    this.keys = 4;
+    this.keys = 0;
     this.stop = false;
     this.beats = {
       1: [
       ],
       //sounds on the 1.5 beat
       2: [
-        { name: 'steamLow', condition(k) { return k < 4 }},
+        { name: 'steamLow', condition(k) { return true }},
         { name: 'bassC', condition(k) { return k <= 3 }},
+        { name: 'endBassC', condition(k) { return k > 4 }},
       ],
       3: [
         { name: 'arpFsG', condition(k) { return k == 0 }},
@@ -24,6 +25,7 @@ export class AnimationTimer {
       4: [
         // { name: 'arpFsG', condition(k) { return k == 3 }},
         { name: 'bassDs', condition(k) { return k <= 1 }},
+        { name: 'stabFACD', condition(k) { return k > 4 }},
       ],
       5: [
         { name: 'arpAsC', condition(k) { return k == 0 }},
@@ -33,6 +35,7 @@ export class AnimationTimer {
         { name: 'steamHigh', condition() { return true}},
         { name: 'bassDs', condition(k) { return k > 1 && k < 3}},
         { name: 'bassF', condition(k) { return k <= 1 }},
+        { name: 'endBassF', condition(k) { return k > 4 }},
       ],
       7: [
       ],

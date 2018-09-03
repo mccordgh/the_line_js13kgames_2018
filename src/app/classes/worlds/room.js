@@ -1,7 +1,7 @@
 import { TileManager } from '../tiles/tile-manager';
 
 export class Room {
-  constructor(id, traits = [], entities = [], tileSize = TILE_SIZE, tileCount = TILE_COUNT) {
+  constructor(id, traits = [], entities = [], tileSize = TILE_SIZE, tileCount = TILE_COUNT, initObj = {p: 0, w: 1}) {
     this.id = id;
     this.tileSet = [];
     this.items = [];
@@ -9,7 +9,8 @@ export class Room {
     this.entities = entities;
     this.tileSize = tileSize;
     this.tileCount = tileCount
-    this.init();
+    this.text = null;
+    this.init(initObj);
     this.apply(traits);
   }
 
@@ -23,20 +24,22 @@ export class Room {
     this.entities.splice(index, 1);
   }
 
-  init() {
+  init(obj) {
+      let p = obj.p, w = obj.w;
+
       this.tileSet = [
-        [1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1],
-        [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-        [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-        [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-        [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-        [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-        [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-        [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-        [1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1]
+        [w, w, w, w, w, p, p, w, w, w, w, w],
+        [w, p, p, p, p, p, p, p, p, p, p, w],
+        [w, p, p, p, p, p, p, p, p, p, p, w],
+        [w, p, p, p, p, p, p, p, p, p, p, w],
+        [w, p, p, p, p, p, p, p, p, p, p, w],
+        [p, p, p, p, p, p, p, p, p, p, p, p],
+        [p, p, p, p, p, p, p, p, p, p, p, p],
+        [w, p, p, p, p, p, p, p, p, p, p, w],
+        [w, p, p, p, p, p, p, p, p, p, p, w],
+        [w, p, p, p, p, p, p, p, p, p, p, w],
+        [w, p, p, p, p, p, p, p, p, p, p, w],
+        [w, w, w, w, w, p, p, w, w, w, w, w]
       ];
   }
 
@@ -58,6 +61,16 @@ export class Room {
       for (let x = 0; x < count; x++) {
           TileManager.getTiles()[this.tileSet[y][x]].render(g, x * size, y * size, size);
       }
+    }
+
+    if (this.text) {
+      g.fillStyle = 'white';
+      g.fillRect(220, 80, 340, 100);
+
+      g.fillStyle = 'black';
+      g.fillRect(230, 90, 320, 80);
+
+      g.drawText(this.text, 240, 150, 'white', '64');
     }
   }
 }

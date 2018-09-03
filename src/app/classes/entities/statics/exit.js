@@ -7,7 +7,6 @@ export class Exit extends StaticEntity {
     this.b.x = 0;
     this.b.y = 0;
     this.b.s = TILE_SIZE;
-    // console.log(this.x, this.y);
   }
 
   tick(){}

@@ -34,18 +34,10 @@ export class Entity {
   }
 
   checkEntityCollisions(xOffset, yOffset) {
-    // console.log(this.x + this.b.x + xOffset, this.y + this.b.y + yOffset, this.b.s, this.b.s, this)
     let candidates =  this.handler.getWorld().getSpatialGrid().retrieve(new Rectangle(this.x + this.b.x, this.y + this.b.y, this.b.s, this.b.s), this);
 
-    // console.log(candidates);
     for(let i = 0; i < candidates.length; i++) {
       let e = candidates[i];
-        // console.log('HERE', this.type, this.noCollide, this.noCollide.find(ent => ent.type === e.type));
-
-        // if the player is colliding with an entity of the type in his no collision list
-        // if (this.type === 'p' && this.noCollide.find(type => type === e.type)) {
-        //   return false;
-        // }
 
         if (e.getCollisionBounds(0, 0).intersects(this.getCollisionBounds(xOffset, yOffset))) {
           this.checkForCollisionEvents(this, e);
@@ -144,6 +136,13 @@ export class Entity {
       }
 
       if (this.checkCollidingTypes(e1, e2, 'p', 'exit')) {
+        let player = e1.type === 'p' ? e1 : e2;
+        ANIMATION_TIMER.keyAdded();
+
+        // eM.newRoom(null, this.handler.getWorld().rooms[16])
+        this.handler.getWorld().changeRooms(null, 16);
+        player.x = 2 * TILE_SIZE;
+        player.y = 2 * TILE_SIZE;
         // this.handler.getGame().getGameState().setState(new Info(this.handler, [
           // 'Everyone escaped yay',
         // ]));

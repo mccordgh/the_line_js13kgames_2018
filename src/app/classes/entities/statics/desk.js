@@ -18,7 +18,6 @@ export default class Desk extends StaticEntity {
     tick() {}
 
     render(g) {
-        // console.log(this.x, this.y);
         g.myDrawImage(this.assets.getStillFrame(), this.x, this.y, TILE_SIZE, TILE_SIZE);
         g.myDrawImage(this.assets.getStillFrame(1), this.x + TILE_SIZE, this.y, TILE_SIZE, TILE_SIZE);
 

@@ -9,9 +9,7 @@ export class Worker extends Creature {
     this.moveThrough = false;
   }
 
-  tick(dt) {
-    super.tick(dt);
-  }
+  tick() {}
 
   render(g) {
     g.myDrawImage(this.frame('p'), this.x, this.y, TILE_SIZE, TILE_SIZE);

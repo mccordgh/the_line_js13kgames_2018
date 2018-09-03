@@ -73,8 +73,8 @@ export class Guard extends Creature {
     }
 
     // ****** DRAW BOUNDING BOX DON'T DELETE!!
-    // g.fillStyle = "red";
-    // g.fillRect(this.b.x + this.x, this.b.y + this.y, this.b.s, this.b.s);
+    g.fillStyle = "red";
+    g.fillRect(this.b.x + this.x, this.b.y + this.y, this.b.s, this.b.s);
     // ****** DRAW BOUNDING BOX DON'T DELETE!!
   }
 

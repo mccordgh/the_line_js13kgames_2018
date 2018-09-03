@@ -66,11 +66,6 @@ export class SpatialGrid {
         this.grid[i][j] = [];
       }
     }
-    // return;
-    // console.log('br', this.grid);
-    // debugger;
-    // this.grid = this.grid.filter(e => e.type === 'p');
-    // console.log('after', this.grid);
   }
 
   getWidth() {

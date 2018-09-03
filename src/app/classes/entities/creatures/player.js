@@ -9,8 +9,8 @@ export class Player extends Creature {
     this.item = null;
     this.lastAnim = 'pright';
     this.type = 'p';
-    this.speed = 900;
-    // this.speed = 180;
+    // this.speed = 900;
+    this.speed = 180;
     this.moveThrough = false;
     this.state = 1;
     this.sm = this.handler.getSoundManager();
@@ -68,10 +68,8 @@ export class Player extends Creature {
     // this.noCollide.push(item.type);
   }
 
-  dropItem(item) {
+  dropItem() {
     this.item = null;
-    // this.noCollide.shift();
-    // console.log('drop', this.noCollide);
   }
 
   getInput(dt) {
