@@ -150,26 +150,26 @@ export default function(_handler, start) {
   handler = _handler;
 
   let rooms = {
-    0: new Room( handler,  0, [noTop, noLeft]),
-    1: new Room( handler,  1, [noTop]),
-    2: new Room( handler,  2, [noTop]),
-    3: new Room( handler,  3, [noTop, noRight]),
-    4: new Room( handler,  4, [noLeft]),
-    5: new Room( handler,  5, [noRight]),
-    6: new Room( handler,  6, [noLeft]),
-    7: new Room( handler,  7, [noRight]),
-    8: new Room( handler,  8, [noLeft]),
-    9: new Room( handler,  9, [noRight]),
-    10: new Room(handler, 10, [noLeft]),
-    11: new Room(handler, 11, [noRight]),
-    12: new Room(handler, 12, [noBottom, noLeft]),
-    13: new Room(handler, 13, [noBottom]),
-    14: new Room(handler, 14, [noBottom]),
-    15: new Room(handler, 15, [noRight, noBottom]),
+    0: new Room(  0, [noTop, noLeft]),
+    1: new Room(  1, [noTop]),
+    2: new Room(  2, [noTop]),
+    3: new Room(  3, [noTop, noRight]),
+    4: new Room(  4, [noLeft]),
+    5: new Room(  5, [noRight]),
+    6: new Room(  6, [noLeft]),
+    7: new Room(  7, [noRight]),
+    8: new Room(  8, [noLeft]),
+    9: new Room(  9, [noRight]),
+    10: new Room( 10, [noLeft]),
+    11: new Room( 11, [noRight]),
+    12: new Room( 12, [noBottom, noLeft]),
+    13: new Room( 13, [noBottom]),
+    14: new Room( 14, [noBottom]),
+    15: new Room( 15, [noRight, noBottom]),
   };
 
   let r = startRoom(rooms[start]);
-  rooms[start] = new Room(handler, r.id, r.traits, r.entities);
+  rooms[start] = new Room( r.id, r.traits, r.entities);
 
   rooms = createKeyRooms(rooms);
   rooms = createMachineRoom(rooms);

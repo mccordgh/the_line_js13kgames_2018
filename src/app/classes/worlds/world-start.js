@@ -14,7 +14,7 @@ export class WorldStart {
     constructor(handler) {
         this.handler = handler;
         this.keyManager = handler.getKeyManager();
-        this.room = new Room(handler, 0, [], [], 32, 24);
+        this.room = new Room(0, [], [], 32, 24);
         this.entityManager = new EntityManager(handler, new Player(handler, 9, 2));
         this.spatialGrid = new SpatialGrid(GAME_SIZE, GAME_SIZE, TILE_SIZE);
         handler.setWorld(this);
