@@ -6,7 +6,7 @@ import { Guard } from '../entities/creatures/monsters/guard';
 
 import generateRooms from './generate-rooms';
 
-let rectSize = 0, screenCap = null;
+let rectSize = 0, whiteFade = -1;
 
 export class World {
   constructor(handler) {
@@ -76,9 +76,20 @@ export class World {
     if (this.machineFilled) {
       let shakeX = rndInt(-25, 25);
       let shakeY = rndInt(-25, 25);
+      whiteFade += .005;
 
       g.shakeScreen(shakeX, shakeY);
-      // return;
+
+      g.fillStyle = 'white';
+      g.globalAlpha = whiteFade > 0 ? whiteFade : 0;
+      g.fillRect(0, 0, GAME_SIZE, GAME_SIZE);
+
+      g.globalAlpha = 1;
+
+      if (whiteFade >= 1) {
+        this.entityManager.removeEntitiesByType('m');
+        this.machineFilled = false;
+      }
     }
 
   }

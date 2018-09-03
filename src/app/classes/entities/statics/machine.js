@@ -7,7 +7,8 @@ export default class Machine extends StaticEntity {
         super(handler, x, y);
         this.type = 'm';
         // this.target = null;
-        this.keys = [];
+        // this.keys = [];
+        this.keys = ['test', 'test', 'test', 'test'];
         this.assets.p = Assets.getAssets('all').anim['p_mright'];
         this.assets.g = Assets.getAssets('all').anim['g_mright'];
         this.assets.y = Assets.getAssets('all').anim['y_mright'];

@@ -63,13 +63,13 @@ export class EntityManager {
     entities.splice(index, 1);
   }
 
-  // removeEntitiesByType(type) {
-    // entities = entities.filter((e) => {
-    //   if (e.type === type) {
-    //     handler.getWorld().getSpatialGrid().remove(new Rectangle(e.x + e.b.x, e.y + e.b.y, e.b.w, e.b.h), e);
-    //   } else {
-    //     return e;
-    //   }
-    // });
-  // }
+  removeEntitiesByType(type) {
+    entities = entities.filter((e) => {
+      if (e.type === type) {
+        handler.getWorld().getSpatialGrid().remove(new Rectangle(e.x + e.b.x, e.y + e.b.y, e.b.w, e.b.h), e);
+      } else {
+        return e;
+      }
+    });
+  }
 }
