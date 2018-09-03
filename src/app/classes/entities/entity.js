@@ -113,6 +113,7 @@ export class Entity {
   endingEvents(e1, e2) {
     let eM = this.handler.getWorld().getEntityManager();
 
+    //guard and player bump
     if (this.checkCollidingTypes(e1, e2, 'p', 'g')) {
       let guard = e1.type == 'g' ? e1 : e2;
 
@@ -130,6 +131,18 @@ export class Entity {
 
       eM.addSpeech(guard, text);
     }
+
+      //guard and worker bump
+      if (this.checkCollidingTypes(e1, e2, 'p', 'w')) {
+        let worker = e1.type == 'w' ? e1 : e2;
+  
+        let exists = !!(eM.findEntitiesByType('speech').find(s => s.entity == worker));
+        if (exists) return;
+  
+        let text = [worker.getRndSpeech()]
+  
+        eM.addSpeech(worker, text);
+      }
   }
 
   checkCollidingTypes(e1, e2, type1, type2) {

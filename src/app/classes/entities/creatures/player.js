@@ -76,6 +76,7 @@ export class Player extends Creature {
 
   getInput(dt) {
     let manager = this.handler.getKeyManager();
+    let hasSiren = this.item && this.item.type == 'siren';
 
     if(manager.up || manager.w || manager.z) {
       this.yMove = -this.speed * dt;
@@ -90,12 +91,12 @@ export class Player extends Creature {
       this.xMove = this.speed * dt;
     }
 
-    if (this.item.type == 'siren') spaceInput = spaceInput > 30 ? 30 : spaceInput += 1;
+    if (hasSiren) {
+      spaceInput = spaceInput > 30 ? 30 : spaceInput += 1;
 
-    if (manager.space && this.item && this.item.type == 'siren') {
-      if (spaceInput == 30) {
-        this.sirenHat = !this.sirenHat;
-        spaceInput = 0;
+      if (manager.space && spaceInput == 30) {
+          this.sirenHat = !this.sirenHat;
+          spaceInput = 0;
       }
     }
   }

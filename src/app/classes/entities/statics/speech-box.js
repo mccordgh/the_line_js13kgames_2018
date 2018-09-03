@@ -7,7 +7,7 @@ export default class SpeechBox extends StaticEntity {
         super(handler, entity.x, entity.y);
         this.text = text;
         this.type = 'speech';
-        // this.hideAt = this.text.length * 160;
+        this.hideAt = this.text.length * 40;
         this.entity = entity;
 
         /* COLLISION BOUNDS */
@@ -22,9 +22,9 @@ export default class SpeechBox extends StaticEntity {
         let e = this.handler.getWorld().getEntityManager();
         let p = e.getPlayer();
 
-        if (alive < 40) alive++;
+        if (alive < this.hideAt) alive++;
 
-        if ((p.xMove != 0 || p.yMove != 0) && alive >= 40) {
+        if ((p.xMove != 0 || p.yMove != 0) && alive >= this.hideAt) {
             alive = 0;
             e.removeEntity(this);
         }

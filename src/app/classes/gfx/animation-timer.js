@@ -14,7 +14,7 @@ export class AnimationTimer {
       ],
       //sounds on the 1.5 beat
       2: [
-        { name: 'steamLow', condition() { return true }},
+        { name: 'steamLow', condition(k) { return k < 4 }},
         { name: 'bassC', condition(k) { return k <= 3 }},
       ],
       3: [
