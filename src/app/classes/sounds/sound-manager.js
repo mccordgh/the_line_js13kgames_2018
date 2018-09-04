@@ -5,7 +5,7 @@ import bassC from './sfx/bassC';
 import bassDs from './sfx/bassDs';
 import siren from './sfx/siren';
 import bassFs from './sfx/bassFs';
-import bassF from './sfx/bassF';
+// import bassF from './sfx/bassF';
 import placefx from './sfx/place';
 import pickupfx from './sfx/pickup';
 import arpFsG from './sfx/arpFsG'
@@ -31,7 +31,7 @@ export class SoundManager {
       bassC: this.create(.2, 'bassC', false, bassC),
       bassDs: this.create(.2, 'bassDs', false, bassDs),
       bassFs: this.create(.2, 'bassFs', false, bassFs),
-      bassF: this.create(.2, 'bassF', false, bassF),
+      // bassF: this.create(.2, 'bassF', false, bassF),
       endBassC: this.create(.2, 'endBassC', false, endBassC),
       endBassF: this.create(.2, 'endBassF', false, endBassF),
       stabFACD: this.create(.2, 'stabFACD', false, stabFACD),

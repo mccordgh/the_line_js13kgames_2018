@@ -34,14 +34,14 @@ export class AnimationTimer {
       6: [
         { name: 'steamHigh', condition() { return true}},
         { name: 'bassDs', condition(k) { return k > 1 && k < 3}},
-        { name: 'bassF', condition(k) { return k <= 1 }},
+        { name: 'bassFs', condition(k) { return k <= 1 }},
         { name: 'endBassF', condition(k) { return k > 4 }},
       ],
       7: [
       ],
       //sounds on the 4.5 beat
       8: [
-        { name: 'bassFs', condition(k) { return k <= 2 }},
+        { name: 'bassDs', condition(k) { return k <= 2 }},
       ],
     }
   }
