@@ -8,7 +8,7 @@ import { World } from './world';
 import Key from '../entities/statics/key';
 
 let pauser = 199, change = false;
-change = true;
+// change = true;
 
 export class WorldStart {
     constructor(handler) {
@@ -18,8 +18,8 @@ export class WorldStart {
         this.entityManager = new EntityManager(handler, new Player(handler, 9, 2));
         this.spatialGrid = new SpatialGrid(GAME_SIZE, GAME_SIZE, TILE_SIZE);
         handler.setWorld(this);
-        // this.state = 1;
-        this.state = 2;
+        this.state = 1;
+        // this.state = 2;
 
         this.init();
     }
@@ -27,7 +27,7 @@ export class WorldStart {
     tick(dt) {
         let e = this.entityManager;
         // this.getInput();
-        
+
         switch (this.state) {
             case 1:
                 this.room.tick();
@@ -41,10 +41,10 @@ export class WorldStart {
                 break;
             case 2:
                 pauser--;
-                
+
                 if (change) {
                     let gameState = new GameState(this.handler, new World(this.handler));
-                    this.handler.getGame().getGameState().setState(gameState); 
+                    this.handler.getGame().getGameState().setState(gameState);
                 }
             break;
         }
@@ -76,7 +76,7 @@ export class WorldStart {
         // g.drawText('REVOLUTION !', 465, 555, '#ff77a8')
         g.drawText('GRAB THE KEYS !', 264, 680, '#ffec27')
         g.drawText('KEYS', 414, 680, '#29adff')
-        
+
     }
 
     // getInput() {

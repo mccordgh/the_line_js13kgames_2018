@@ -39,7 +39,7 @@ export class Guard extends Creature {
         if (!this.pacified) this.patrolState(dt);
         break;
       case 2: // 2 = chase
-        this.speed = 120;
+        this.speed = 140;
         this.persue();
         this.checkStuck();
         this.patrol(dt);
