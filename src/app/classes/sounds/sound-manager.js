@@ -13,6 +13,7 @@ import arpAsC from './sfx/arpAsC'
 import stabFACD from './sfx/stabFACD'
 import endBassC from './sfx/endBassC'
 import endBassF from './sfx/endBassF'
+import boom from './sfx/boom';
 
 let sounds = {};
 
@@ -37,6 +38,7 @@ export class SoundManager {
       arpFsG: this.create(.2, 'arpFsG', false, arpFsG),
       arpAsC: this.create(.2, 'arpAsC', false, arpAsC),
       siren: this.create(1, 'siren', false, siren),
+      boom: this.create(.8, 'boom', false, boom),
     }
   }
 

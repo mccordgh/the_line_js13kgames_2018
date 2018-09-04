@@ -2,13 +2,12 @@ import { EntityManager } from '../entities/entity-manager';
 import { Player } from '../entities/creatures/player';
 import { SpatialGrid } from '../utils/spatial-grid';
 import { TileManager } from '../tiles/tile-manager';
-import { Guard } from '../entities/creatures/monsters/guard';
 
 import generateRooms from './generate-rooms';
 import { Exit } from '../entities/statics/exit';
 
-// let rectSize = 0, whiteFade = -1;
-let rectSize = 0, whiteFade = 1, didEnd = false;
+let rectSize = 0, whiteFade = -1, didEnd = false, boomer = false;
+// let rectSize = 0, whiteFade = 1, didEnd = false;
 
 export class World {
   constructor(handler) {
@@ -21,7 +20,7 @@ export class World {
     this.start = rndIndex([5,6,9,10]);
     this.rooms = generateRooms(handler, this.start);
     this.room = this.rooms[this.start];
-    // ANIMATION_TIMER.speed = 460;
+    this.sm = this.handler.getSoundManager();
 
     handler.setWorld(this);
     this.loadWorld();
@@ -42,23 +41,40 @@ export class World {
 
       if (this.playerDied) {
         rectSize += 3.5;
-  
+
         g.fillStyle = 'black';
         g.fillRect(0, 0, rectSize, GAME_SIZE);
         g.fillRect(GAME_SIZE - rectSize, 0, GAME_SIZE, GAME_SIZE)
       }
-    // } 
+    // }
 
     if (this.machineFilled) {
       if (whiteFade >= 1) {
         this.machineFilled = false;
         this.entityManager.pacifyAll();
         ANIMATION_TIMER.stop = false;
+        ANIMATION_TIMER.keyAdded();
+        ANIMATION_TIMER.speed = 460;
+
         if (!didEnd) this.createFinalExit();
+
+        let worker = this.entityManager.findEntitiesByType('w')[0];
+        let text = [
+          'Worker: Such a loud explosion!',
+          'Sounds like the exit to the outside is open!',
+          'Let\'s get out of this place!'
+        ];
+
+        this.entityManager.addSpeech(worker, text);
         return;
       }
 
-      whiteFade += .005;
+      if (!boomer) {
+        this.sm.play('boom');
+        boomer = true;
+      }
+
+      whiteFade += .006;
 
       g.shakeScreen();
 
@@ -69,7 +85,7 @@ export class World {
       g.globalAlpha = 1;
     }
   }
-  
+
   createFinalExit() {
     let num = rndIndex([0, 3, 12, 15]);
     let room = this.rooms[num];
@@ -79,7 +95,7 @@ export class World {
     // console.log('exit in room', num);
     room.tileSet[11][5] = room.tileSet[11][6] = 0;
     room.tileSet[0][5] = room.tileSet[0][6] = 0;
-    
+
     room.addEntity(new Exit(this.handler, x / TILE_SIZE, (y / TILE_SIZE)));
     room.addEntity(new Exit(this.handler, (x + TILE_SIZE) / TILE_SIZE, (y / TILE_SIZE)));
     didEnd = true;

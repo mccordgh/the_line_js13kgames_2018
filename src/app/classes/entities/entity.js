@@ -126,18 +126,17 @@ export class Entity {
       //guard and worker bump
       if (this.checkCollidingTypes(e1, e2, 'p', 'w')) {
         let worker = e1.type == 'w' ? e1 : e2;
-  
+
         let exists = !!(eM.findEntitiesByType('speech').find(s => s.entity == worker));
         if (exists) return;
-  
+
         let text = [worker.getRndSpeech()]
-  
+
         eM.addSpeech(worker, text);
       }
 
       if (this.checkCollidingTypes(e1, e2, 'p', 'exit')) {
         let player = e1.type === 'p' ? e1 : e2;
-        ANIMATION_TIMER.keyAdded();
 
         // eM.newRoom(null, this.handler.getWorld().rooms[16])
         this.handler.getWorld().changeRooms(null, 16);

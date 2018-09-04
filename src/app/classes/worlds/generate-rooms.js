@@ -80,10 +80,10 @@ let startRoom = (room) => {
 
 let createKeyRooms = (rooms) => {
   for (let i = 0; i < 4; i++) {
-    let r = pullRoom();
+    // let r = pullRoom();
     // console.log(keys[0].color, 'key in room', r);
-    rooms[r].entities.push(keys[0]);
-    // rooms[spawnRoom].entities.push(keys[0]);
+    // rooms[r].entities.push(keys[0]);
+    rooms[spawnRoom].entities.push(keys[0]);
 
     keys.shift();
   }
@@ -119,7 +119,7 @@ let hasKey = (room) => {
 let addProps = (rooms) => {
   Object.keys(rooms).forEach((k) => {
     let r = rooms[k];
-    
+
     if (!hasMachine(r) && !hasKey(r)) {
       let num = Math.random() <= .5 ? 1 : 2;
       r.entities.push(new PropMachine(handler, 5, 5, num));
@@ -134,7 +134,7 @@ let addProps = (rooms) => {
 let addManagers = (rooms) => {
   Object.keys(rooms).forEach((k) => {
     let r = rooms[k];
-    
+
     if (!hasMachine(r) && hasKey(r)) {
       let ma = new Manager(handler, 5, 5);
       r.entities.push(ma);
