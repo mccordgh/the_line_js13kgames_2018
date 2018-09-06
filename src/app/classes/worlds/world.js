@@ -6,8 +6,8 @@ import { TileManager } from '../tiles/tile-manager';
 import generateRooms from './generate-rooms';
 import { Exit } from '../entities/statics/exit';
 
-let rectSize = 0, whiteFade = -1, didEnd = false, boomer = false;
-// let rectSize = 0, whiteFade = 1, didEnd = false;
+// let rectSize = 0, whiteFade = -1, didEnd = false, boomer = false;
+let rectSize = 0, whiteFade = 1, didEnd = false, boomer = false;
 
 export class World {
   constructor(handler) {
@@ -56,16 +56,19 @@ export class World {
         ANIMATION_TIMER.keyAdded();
         ANIMATION_TIMER.speed = 460;
 
-        if (!didEnd) this.createFinalExit();
+        if (!didEnd) {
+          this.createFinalExit();
 
-        let worker = this.entityManager.findEntitiesByType('w')[0];
-        let text = [
-          'Worker: Such a loud explosion!',
-          'Sounds like the exit to the outside is open!',
-          'Let\'s get out of this place!'
-        ];
+          let worker = this.entityManager.findEntitiesByType('w')[0];
+          let text = [
+            'Worker: Such a loud explosion!',
+            'Sounds like the exit to the outside is open!',
+            'Let\'s get out of this place!'
+          ];
 
-        this.entityManager.addSpeech(worker, text);
+          this.entityManager.addSpeech(worker, text);
+        }
+
         return;
       }
 

@@ -13,7 +13,6 @@ export class Display {
     canvas.setAttribute("width", GAME_SIZE);
     graphics = canvas.getContext("2d");
     graphics.webkitImageSmoothingEnabled = false;
-    graphics.mozImageSmoothingEnabled = false;
     graphics.imageSmoothingEnabled = false;
     // this.setEventListeners();
   };

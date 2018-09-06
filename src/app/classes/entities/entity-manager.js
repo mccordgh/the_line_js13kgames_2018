@@ -33,7 +33,7 @@ export class EntityManager {
   getEntities() {
     return entities;
   }
-  
+
   findEntitiesByType(t) {
     return entities.filter(e => e.type == t);
   }
@@ -41,6 +41,7 @@ export class EntityManager {
   addEntity(e) {
     // console.log(e);
     entities.push(e);
+    // console.log(e, e.b.x, e.b.y, e.b.s);
     handler.getWorld().getSpatialGrid().insert(new Rectangle(e.x + e.b.x, e.y + e.b.y, e.b.s, e.b.s), e);
   }
 
@@ -58,6 +59,9 @@ export class EntityManager {
 
       if (e.type === 'g') e.resetPos();
     });
+
+    // console.log({entities: room.entities});
+    // window.ee = room.entities;
   }
 
   removeEntity(e) {
@@ -82,12 +86,14 @@ export class EntityManager {
   pacifyAll() {
     let rooms = handler.getWorld().rooms;
     let keys = Object.keys(rooms);
-    
+
     player.pacified = true;
 
     for (let i = 0; i < keys.length; i++) {
       for (let j = 0; j < rooms[i].entities.length; j++) {
-        rooms[i].entities[j].pacified = true;
+        let ent = rooms[i].entities[j];
+        ent.pacified = true;
+        if (ent.type == 'g') ent.speed = 40;
       }
     }
   }

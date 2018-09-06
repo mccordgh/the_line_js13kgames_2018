@@ -35,7 +35,7 @@ export class Entity {
 
   checkEntityCollisions(xOffset, yOffset) {
     let candidates =  this.handler.getWorld().getSpatialGrid().retrieve(new Rectangle(this.x + this.b.x, this.y + this.b.y, this.b.s, this.b.s), this);
-
+    // console.log(candidates);
     for(let i = 0; i < candidates.length; i++) {
       let e = candidates[i];
 
@@ -49,7 +49,8 @@ export class Entity {
   }
 
   checkForCollisionEvents(e1, e2) {
-    if (e1.pacified) {
+    // console.log('checking collisions', e1.pacified, e2.pacified);
+    if (e1.pacified || e2.pacified) {
       this.endingEvents(e1, e2);
     } else {
       this.gameEvents(e1, e2);
@@ -57,6 +58,7 @@ export class Entity {
   }
 
   gameEvents(e1, e2) {
+    // console.log('game events!', e1.type, '>', e2.type);
     let h = this.handler;
     let hW = h.getWorld();
     let player = e1.type === 'p' ? e1 : e2;
@@ -98,6 +100,8 @@ export class Entity {
   }
 
   endingEvents(e1, e2) {
+    // console.log('game events!', e1.type, '>', e2.type);
+
     let eM = this.handler.getWorld().getEntityManager();
 
     //guard and player bump

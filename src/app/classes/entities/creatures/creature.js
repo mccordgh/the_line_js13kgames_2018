@@ -136,15 +136,17 @@ export class Creature extends Entity {
   }
 
   frame(type) {
-    if (this.xMove < 0){
-      this.lastAnim = type + "left";
-      return this.a.anim[this.lastAnim].getCurrentFrame();
-    }
+    // if (this.xMove < 0){
+      // this.lastAnim = type + "left";
+      // return this.a.anim[this.lastAnim].getCurrentFrame();
+    // }
 
-    if (this.xMove > 0) {
-      this.lastAnim = type + "right";
-	    return this.a.anim[this.lastAnim].getCurrentFrame();
-    }
+    this.lastAnim = this.xMove < 0 ? type + 'left' : type + 'right';
+
+    // if (this.xMove > 0) {
+    // this.lastAnim = type + "right";
+	    // return this.a.anim[this.lastAnim].getCurrentFrame();
+    // }
 
     return this.a.anim[this.lastAnim].getCurrentFrame();
   }
@@ -153,7 +155,7 @@ export class Creature extends Entity {
     return n + rndIndex([
       'You did it!',
       'What... What happened?!',
-      "Let's find the exit!",
+      "Noice!",
     ]);
   }
 }

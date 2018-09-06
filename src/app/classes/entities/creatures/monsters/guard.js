@@ -27,7 +27,7 @@ export class Guard extends Creature {
   }
 
   tick(dt) {
-    this.pacified;
+    // this.pacified;
     super.tick(dt);
     if (!this.target) {
       this.target = this.handler.getWorld().getEntityManager().getPlayer();
@@ -36,7 +36,7 @@ export class Guard extends Creature {
     this.xMove = this.yMove = 0;
     switch (this.state) {
       case 1: // 1 = patrol
-        if (!this.pacified) this.patrolState(dt);
+        this.patrolState(dt);
         break;
       case 2: // 2 = chase
         this.speed = 140;
@@ -84,7 +84,7 @@ export class Guard extends Creature {
     this.dir[p] = true;
     this.patrolDir;
     this.patrol(dt);
-    if (dontChaseCount >= 40) {
+    if (dontChaseCount >= 40 && !this.pacified) {
       stuckAt = null;
       this.checkStuck();
       this.checkForTarget();
