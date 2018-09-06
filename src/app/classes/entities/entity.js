@@ -57,11 +57,7 @@ export class Entity {
   }
 
   gameEvents(e1, e2) {
-    // if two guards bump, ignore
-    if (this.checkCollidingTypes(e1, e2, 'g', 'g')) return;
-
     let h = this.handler;
-    let hG = h.getGame();
     let hW = h.getWorld();
     let player = e1.type === 'p' ? e1 : e2;
 
@@ -152,19 +148,19 @@ export class Entity {
     return ((e1.type === type1 && e2.type === type2) || (e1.type === type2 && e2.type === type1));
   }
 
-  setX(x) {
-    this.x = x;
-  }
+  // setX(x) {
+  //   this.x = x;
+  // }
 
-  setY(y) {
-    this.y = y;
-  }
+  // setY(y) {
+  //   this.y = y;
+  // }
 
-  setWidth(width) {
-    this.width = width;
-  }
+  // setWidth(width) {
+  //   this.width = width;
+  // }
 
-  setHeight(height) {
-    this.height = height;
-  }
+  // setHeight(height) {
+  //   this.height = height;
+  // }
 }

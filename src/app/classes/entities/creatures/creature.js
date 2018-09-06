@@ -42,7 +42,12 @@ export class Creature extends Entity {
     let os = this.isOffScreen();
 
     if (os && this.type == 'p') {
-      this.handler.getWorld().changeRooms(os);
+      try {
+        this.handler.getWorld().changeRooms(os);
+      } catch(e) {
+        this.x = 576;
+        this.y = 128;
+      }
 
       return;
     }
@@ -103,7 +108,7 @@ export class Creature extends Entity {
         this.y += this.yMove;
         return;
       }
-      
+
       if (!this.collisionWithTile(c1, tempY) && !this.collisionWithTile(c2, tempY)) {
         this.y += this.yMove;
       } else {

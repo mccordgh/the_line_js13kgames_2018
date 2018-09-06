@@ -1,18 +1,19 @@
 import { Display } from './display/display';
 import { Handler } from './handler';
 import { KeyManager } from './input/key-manager';
+import { Info } from './menus/info';
 import { StartMenu } from './menus/start-menu';
 import { State } from './states/state';
 import { SoundManager } from './sounds/sound-manager';
 
-let i = 0;
+// let i = 0;
 let display,
-  gameState,
+//   gameState,
   graphics,
-  handler,
+//   handler,
   keyManager,
-  startMenu,
-  soundManager,
+//   startMenu,
+//   soundManager,
   state;
 
 export class Game {
@@ -69,20 +70,22 @@ export class Game {
   }
 
   init() {
-    handler = new Handler(this);
+    let handler = new Handler(this);
     display = new Display();
     keyManager = new KeyManager();
     // this.d = new Dialogue();
     graphics = display.getGraphics();
     state = new State();
     // gameCamera = new GameCamera(handler, 0, 0);
-    soundManager = new SoundManager();
+    let soundManager = new SoundManager();
     handler.setSoundManager(soundManager);
-    startMenu = new StartMenu(handler);
-    state.setState(startMenu);
+
+    let info = new Info(handler, keyManager);
+    state.setState(info);
+    // let startMenu = new StartMenu(handler);
+    // state.setState(startMenu);
     // let gameOver = new GameOver(handler, 'death');
     // state.setState(gameOver);
-    ANIMATION_TIMER.init(handler);
     // gameState = new GameState(handler);
     // state.setState(gameState);
   }

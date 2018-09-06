@@ -12,7 +12,7 @@ export class KeyManager {
     this.d = keys[68];
     this.z = keys[90];
     this.q = keys[81];
-    this.enter = keys[13];
+    // this.enter = keys[13];
     this.space = keys[32];
   }
 }

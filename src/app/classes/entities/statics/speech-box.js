@@ -36,7 +36,7 @@ export default class SpeechBox extends StaticEntity {
     //    let t = this.text;
     //    let text = this.text.substr(0, Math.floor(alive / 5));
 
-       g.fillStyle = 'white';
+       g.fillStyle = '#ffec27';
        g.fillRect(0, GAME_SIZE - height, GAME_SIZE, height);
 
        g.fillStyle = 'black';
@@ -44,7 +44,7 @@ export default class SpeechBox extends StaticEntity {
 
     //    g.drawText(this.text.name + ':', TILE_SIZE, TILE_SIZE * 11 - (TILE_SIZE / 2), '');
        for (let i = 0; i < this.text.length; i++) {
-           g.drawText(this.text[i], TILE_SIZE, TILE_SIZE * 10 + (i * 40), '#ffec27');
+           g.drawText(this.text[i], TILE_SIZE, TILE_SIZE * 10 + (i * 40));
        }
    }
 }

@@ -24,21 +24,21 @@ export class SoundManager {
 
   init() {
     sounds = {
-      pickup: this.create(.15, 'pickup', false, pickupfx),
-      place: this.create(.3, 'place', false, placefx),
-      steamHigh: this.create(.2, 'steamHigh', false, steamHigh),
-      steamLow: this.create(.4, 'steamLow', false, steamLow),
-      bassC: this.create(.2, 'bassC', false, bassC),
-      bassDs: this.create(.2, 'bassDs', false, bassDs),
-      bassFs: this.create(.2, 'bassFs', false, bassFs),
-      // bassF: this.create(.2, 'bassF', false, bassF),
-      endBassC: this.create(.2, 'endBassC', false, endBassC),
-      endBassF: this.create(.2, 'endBassF', false, endBassF),
-      stabFACD: this.create(.2, 'stabFACD', false, stabFACD),
-      arpFsG: this.create(.2, 'arpFsG', false, arpFsG),
-      arpAsC: this.create(.2, 'arpAsC', false, arpAsC),
-      siren: this.create(1, 'siren', false, siren),
-      boom: this.create(.8, 'boom', false, boom),
+      pickup: this.create(.15, 'pickup', pickupfx),
+      place: this.create(.3, 'place', placefx),
+      steamHigh: this.create(.2, 'steamHigh', steamHigh),
+      steamLow: this.create(.4, 'steamLow', steamLow),
+      bassC: this.create(.2, 'bassC', bassC),
+      bassDs: this.create(.2, 'bassDs', bassDs),
+      bassFs: this.create(.2, 'bassFs', bassFs),
+      // bassF: this.create(.2, 'bassF', bassF),
+      endBassC: this.create(.2, 'endBassC', endBassC),
+      endBassF: this.create(.2, 'endBassF', endBassF),
+      stabFACD: this.create(.2, 'stabFACD', stabFACD),
+      arpFsG: this.create(.2, 'arpFsG', arpFsG),
+      arpAsC: this.create(.2, 'arpAsC', arpAsC),
+      siren: this.create(1, 'siren', siren),
+      boom: this.create(.8, 'boom', boom),
     }
   }
 
@@ -57,7 +57,7 @@ export class SoundManager {
     sounds[s].load();
   }
 
-  create(vol, name, loops, obj) {
+  create(vol, name, obj) {
     // Initialize music generation (player).
     let player = new CPlayer();
     player.init(obj);
@@ -79,9 +79,6 @@ export class SoundManager {
 
         audio.src = URL.createObjectURL(new Blob([wave], {type: "audio/wav"}));
         audio.volume = vol;
-        if (loops) {
-          audio.loop = true;
-        }
 
         sounds[name] = audio;
         clearInterval(inter);
