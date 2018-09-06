@@ -4,3 +4,4 @@ rando_tiles/
 *DS_STORE*
 node_modules/
 .idea/
+dist/
