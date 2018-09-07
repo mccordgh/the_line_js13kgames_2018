@@ -187,7 +187,7 @@ export class Guard extends Creature {
       changeCount++;
     }
 
-    if (changeCount > 60 || !this.offScreen) {
+    if (changeCount > 30 || !this.offScreen) {
       let dir = this.dir;
       let prevDir = Object.keys(dir).find(x => dir[x]);
 

@@ -22,8 +22,8 @@ export default class Desk extends StaticEntity {
         g.myDrawImage(this.assets.getStillFrame(1), this.x + TILE_SIZE, this.y, TILE_SIZE, TILE_SIZE);
 
         // ****** DRAW BOUNDING BOX DON'T DELETE!!
-        g.fillStyle = 'blue';
-        g.fillRect(this.b.x + this.x, this.b.y + this.y, this.b.s, this.b.s);
+        // g.fillStyle = 'blue';
+        // g.fillRect(this.b.x + this.x, this.b.y + this.y, this.b.s, this.b.s);
         // ****** DRAW BOUNDING BOX DON'T DELETE!!
     }
 }

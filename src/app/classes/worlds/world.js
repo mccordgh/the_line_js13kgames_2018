@@ -94,6 +94,17 @@ export class World {
     this.playerDied = false;
     this.machineFilled = false;
     p.setBox();
+    // console.log(p.item);
+    if (p.item.type) {
+      // console.log('move back', this.room);
+      this.room.removeEntity(p.item);
+      p.item.target = null;
+      this.rooms[p.item.start.room].addEntity(p.item);
+      p.item.x = p.item.start.x;
+      p.item.y = p.item.start.y;
+      p.item = null;
+      // console.log(p.item);
+    }
     // this.room = this.rooms[this.start];
     // this.sm = this.handler.getSoundManager();
     this.changeRooms(null, this.start, true);

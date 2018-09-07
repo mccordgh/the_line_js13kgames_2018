@@ -82,12 +82,15 @@ let createKeyRooms = (rooms) => {
   for (let i = 0; i < 4; i++) {
     let r = pullRoom();
     // console.log(keys[0].color, 'key in room', r);
+    keys[0].start.room = r;
     rooms[r].entities.push(keys[0]);
+    // console.log(r);
     // rooms[spawnRoom].entities.push(keys[0]);
 
     keys.shift();
   }
 
+  // console.log(rooms);
   return rooms;
 }
 

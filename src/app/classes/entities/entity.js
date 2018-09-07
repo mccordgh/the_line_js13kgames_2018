@@ -80,6 +80,7 @@ export class Entity {
       if (player.item || item.locked) return;
 
       if (!item.prop) h.getSoundManager().play('pickup');
+      // item.start.x item.x, y: item.y };
       player.setItem(item);
       item.setTarget(player);
     }

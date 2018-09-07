@@ -16,15 +16,15 @@ export class StaticEntity extends Entity {
 
   render(g) {
     let frame = this.myFrame();
-       
+
     g.myDrawImage(this.assets[this.myFrame()](), this.x, this.y, TILE_SIZE, TILE_SIZE);
-    
+
     // ****** DRAW BOUNDING BOX DON'T DELETE!!
-    // g.fillStyle = 'white';
-    // g.fillRect(this.b.x + this.x, this.b.y + this.y, this.b.s, this.b.s);
+    g.fillStyle = 'white';
+    g.fillRect(this.b.x + this.x, this.b.y + this.y, this.b.s, this.b.s);
     // ****** DRAW BOUNDING BOX DON'T DELETE!!
   }
-  
+
   myFrame() {
     return this.pacified ? 'getStillFrame' : 'getCurrentFrame';
   }

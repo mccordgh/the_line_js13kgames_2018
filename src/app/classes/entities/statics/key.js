@@ -4,6 +4,7 @@ import { Assets } from "../../gfx/assets";
 export default class Key extends StaticEntity {
     constructor(handler, x, y, color, prop = false){
         super(handler, x, y);
+        this.start = {x: this.x, y: this.y};
         this.type = 'key';
         this.target = null;
         this.color = color;
