@@ -90,6 +90,7 @@ export class World {
   }
 
   startAgain() {
+    rectSize = 0;
     let p = this.entityManager.getPlayer();
     this.playerDied = false;
     this.machineFilled = false;
