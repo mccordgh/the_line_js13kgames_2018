@@ -1,12 +1,13 @@
 import { Rectangle } from '../gfx/shapes/rectangle';
 import SpeechBox from './statics/speech-box';
 
-let handler, player, entities;
+let handler, player, entities, playerStart;
 
 export class EntityManager {
   constructor(_handler, _player){
     handler = _handler;
     player = _player;
+    playerStart = { x: player.x, y: player.y };
     entities = new Array(player);
   }
 
@@ -45,8 +46,9 @@ export class EntityManager {
     handler.getWorld().getSpatialGrid().insert(new Rectangle(e.x + e.b.x, e.y + e.b.y, e.b.s, e.b.s), e);
   }
 
-  newRoom(prevRoom, room) {
+  newRoom(prevRoom, room, respawn = false) {
     entities = [];
+    if (respawn) this.respawn();
     this.addEntity(player);
 
     if (player.item && (prevRoom != null) && player.item.type != 'siren') {
@@ -100,5 +102,10 @@ export class EntityManager {
 
   addSpeech(entity, text) {
     this.addEntity(new SpeechBox(handler, entity, text));
+  }
+
+  respawn() {
+    player.x = playerStart.x;
+    player.y = playerStart.y;
   }
 }

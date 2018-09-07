@@ -6,8 +6,8 @@ import { TileManager } from '../tiles/tile-manager';
 import generateRooms from './generate-rooms';
 import { Exit } from '../entities/statics/exit';
 
-// let rectSize = 0, whiteFade = -1, didEnd = false, boomer = false;
-let rectSize = 0, whiteFade = 1, didEnd = false, boomer = false;
+let rectSize = 0, whiteFade = -1, didEnd = false, boomer = false;
+// let rectSize = 0, whiteFade = 1, didEnd = false, boomer = false;
 
 export class World {
   constructor(handler) {
@@ -89,6 +89,19 @@ export class World {
     }
   }
 
+  startAgain() {
+    let p = this.entityManager.getPlayer();
+    this.playerDied = false;
+    this.machineFilled = false;
+    p.setBox();
+    // this.room = this.rooms[this.start];
+    // this.sm = this.handler.getSoundManager();
+    this.changeRooms(null, this.start, true);
+    // this.handler.setWorld(this);
+    this.loadWorld();
+    p.state = 1 // moving
+  }
+
   createFinalExit() {
     let num = rndIndex([0, 3, 12, 15]);
     let room = this.rooms[num];
@@ -110,19 +123,19 @@ export class World {
     p.y = dir.y || p.y;
   }
 
-  changeRooms(dir, roomNum = null) {
+  changeRooms(dir, roomNum = null, respawn = false) {
     // dir will be: 1 = north, 2 = east, 3 = south, 4 = west
     this.changeRoom = true;
     let prevRoom = this.room;
     this.room = roomNum ? this.rooms[roomNum] : this.rooms[this.room.id + dir.mod];
     if (dir) this.setPlayerSpawn(dir);
-    this.loadWorld(prevRoom);
+    this.loadWorld(prevRoom, respawn);
     this.changeRoom = false;
   }
 
-  loadWorld(prevRoom = null) {
+  loadWorld(prevRoom = null, respawn = false) {
     this.spatialGrid.reset();
-    this.entityManager.newRoom(prevRoom, this.room);
+    this.entityManager.newRoom(prevRoom, this.room, respawn);
   }
 
   getTile(x, y) {

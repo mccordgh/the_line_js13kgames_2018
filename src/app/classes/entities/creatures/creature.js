@@ -16,11 +16,7 @@ export class Creature extends Entity {
     this.lastAnim = this.type + 'right';
     this.state = 1 // 1 = move
 
-    /* COLLISION BOUNDS */
-    this.b.x = 16;
-    this.b.y = 32;
-    this.b.s = 32; // size
-    /* COLLISION BOUNDS */
+    this.setBox();
 
     this.dirs = {
       1: { mod: -4, y: 11 * TILE_SIZE }, // north
@@ -28,6 +24,14 @@ export class Creature extends Entity {
       3: { mod: 4, y: 0.5 * TILE_SIZE }, // south
       4: { mod: -1, x: 11 * TILE_SIZE } // west
     }
+  }
+
+  setBox() {
+    /* COLLISION BOUNDS */
+    this.b.x = 16;
+    this.b.y = 32;
+    this.b.s = 32; // size
+    /* COLLISION BOUNDS */
   }
 
   tick() {}

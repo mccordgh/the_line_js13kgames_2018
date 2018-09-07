@@ -9,14 +9,15 @@ export class Player extends Creature {
     this.item = null;
     this.lastAnim = 'pright';
     this.type = 'p';
-    this.speed = 900;
-    // this.speed = 190;
+    // this.speed = 900;
+    this.speed = 190;
     this.moveThrough = false;
     this.state = 1;
     this.sm = this.handler.getSoundManager();
   }
 
   tick(dt) {
+    // console.log(this.x, this.y, this.b.x, this.b.y, this.b.s)
     super.tick(dt);
     switch (this.state) {
       case 1: // 1 = move
@@ -29,7 +30,9 @@ export class Player extends Creature {
       case 2: // 2 = dead
       this.xMove = this.yMove = 0;
         if (deathCount++ > 120) {
-          window.location.reload();
+          deathCount = 0;
+          this.handler.getWorld().startAgain();
+          // window.location.reload();
           // let gameOver = new GameOver(this.handler, 'dead');
           // ANIMATION_TIMER.stop = true;
           // this.handler.getGame().getGameState().setState(gameOver);
