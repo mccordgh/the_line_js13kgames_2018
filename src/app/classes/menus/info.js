@@ -9,7 +9,7 @@ export class Info {
   }
 
   tick() {
-    if (this.km.space) {
+    if (this.km.w) {
       ANIMATION_TIMER.init(this.h);
       this.h.getGame().getGameState().setState(new StartMenu(this.h));
     }
@@ -19,11 +19,10 @@ export class Info {
     let i = 0;
 
     [
-      'You\'ve been under their control for a long time.',
+      'Break free of their control!',
       'Find the four keys!',
       'Use them on the machine!',
-      '',
-      'press [spacebar]',
+      'Press [w] to accept this mission.'
     ].forEach(t => {
       g.drawText(t, 100, 100 + (i * 90));
       i++;

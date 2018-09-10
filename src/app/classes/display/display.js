@@ -1,21 +1,20 @@
-let graphics, canvas;
+let graphics, canvas, ctx = CanvasRenderingContext2D.prototype;
 
 export class Display {
   constructor() {
     // this.p = false;
-    this.createDisplay();
-  }
-
-  createDisplay() {
-    // document.title = this.t;
     canvas = document.getElementById("canvas");
     canvas.setAttribute("height", GAME_SIZE);
     canvas.setAttribute("width", GAME_SIZE);
     graphics = canvas.getContext("2d");
     graphics.webkitImageSmoothingEnabled = false;
     graphics.imageSmoothingEnabled = false;
-    // this.setEventListeners();
-  };
+  }
+
+  // createDisplay() {
+    // document.title = this.t;
+   
+  // };
 
   // setEventListeners() {
   //   window.onblur = this.pause;
@@ -50,28 +49,28 @@ export class Display {
 // CanvasRenderingContext2D.prototype.myDrawImage = (asset, x, y, width, height) => {
   // graphics.drawImage(asset.sheet, asset.x, asset.y, asset.width, asset.height, x, y, width, height);
 // };
-CanvasRenderingContext2D.prototype.myDrawImage = (asset, x, y, size = TILE_SIZE) => {
+ctx.myDrawImage = (asset, x, y, size = TILE_SIZE) => {
   graphics.drawImage(asset.sheet, asset.x, asset.y, asset.width, asset.height, x, y, size, size);
 };
 
-CanvasRenderingContext2D.prototype.drawText = (text, x, y, color = 'white', s = '28') => {
+ctx.drawText = (text, x, y, color = 'white', s = '28') => {
   graphics.font = s + 'px Arial';
   graphics.fillStyle = color;
   graphics.fillText(text,  x, y);
 };
 
-CanvasRenderingContext2D.prototype.shakeScreen = () => {
+ctx.shakeScreen = () => {
   let x = rndInt(-15, 15);
   let y = rndInt(-15, 15);
 
   try {
     let imgData = graphics.getImageData(0,0, GAME_SIZE, GAME_SIZE);
 
-    graphics.fillStyle = 'black';
-    graphics.fillRect(0, 0, GAME_SIZE, GAME_SIZE);
+    // graphics.fillStyle = 'black';
+    // graphics.fillRect(0, 0, GAME_SIZE, GAME_SIZE);
 
     graphics.putImageData(imgData, x, y);
   } catch(e) {
-    console.error(e);
+    // console.error(e);
   }
 }
