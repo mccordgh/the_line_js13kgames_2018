@@ -158,7 +158,6 @@ export class Creature extends Entity {
   speak(n = 'Worker: ') {
     return n + rndIndex([
       'You did it!',
-      'What... What happened?!',
       "Noice!",
     ]);
   }

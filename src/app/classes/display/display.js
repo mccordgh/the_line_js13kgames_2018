@@ -1,4 +1,4 @@
-let graphics, canvas = null;
+let graphics, canvas;
 
 export class Display {
   constructor() {

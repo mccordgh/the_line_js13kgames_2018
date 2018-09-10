@@ -1,4 +1,3 @@
-import { Menu } from './menu';
 import { StartMenu } from './start-menu';
 
 let offset = 200;
@@ -20,12 +19,11 @@ export class Info {
     let i = 0;
 
     [
-      'Wake up, sleepy head.',
       'You\'ve been under their control for a long time.',
-      'You must find the four keys!',
-      'Use them to take THE CORE offline!',
+      'Find the four keys!',
+      'Use them on the machine!',
       '',
-      'press [spacebar] to accept this mission.',
+      'press [spacebar]',
     ].forEach(t => {
       g.drawText(t, 100, 100 + (i * 90));
       i++;
