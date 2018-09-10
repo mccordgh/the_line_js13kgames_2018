@@ -1,7 +1,7 @@
 import { Creature } from './creature';
 // import { GameOver } from '../../menus/game-over';
 
-let gA = 1, deathCount = 0, sirenCount = 0, spaceInput = 0;
+let gA = 1, deathCount = 0, sirenCount = 0;
 
 export class Player extends Creature {
   constructor(handler, x, y){
@@ -9,8 +9,8 @@ export class Player extends Creature {
     this.item = null;
     this.lastAnim = 'pright';
     this.type = 'p';
-    // this.speed = 900;
-    this.speed = 190;
+    this.speed = 900;
+    // this.speed = 190;
     this.moveThrough = false;
     this.state = 1;
     this.sm = this.handler.getSoundManager();
@@ -45,11 +45,12 @@ export class Player extends Creature {
       case 1:
         g.myDrawImage(this.frame('p'), this.x, this.y, TILE_SIZE, TILE_SIZE);
 
-        if (this.sirenHat) {
+        if (this.item && this.item.type == 'siren') {
           g.myDrawImage(this.a.anim['sright'].getCurrentFrame(), this.x, this.y - 16, TILE_SIZE, TILE_SIZE);
 
           if (sirenCount++ > 20) {
             this.sm.play('siren');
+            sirenCount = 0;
           }
         }
         break;
@@ -77,7 +78,6 @@ export class Player extends Creature {
 
   getInput(dt) {
     let manager = this.handler.getKeyManager();
-    let hasSiren = this.item && this.item.type == 'siren';
 
     if(manager.up || manager.w || manager.z) {
       this.yMove = -this.speed * dt;
@@ -92,13 +92,13 @@ export class Player extends Creature {
       this.xMove = this.speed * dt;
     }
 
-    if (hasSiren) {
-      spaceInput = spaceInput > 30 ? 30 : spaceInput += 1;
+    // if (hasSiren) {
+    //   spaceInput = spaceInput > 30 ? 30 : spaceInput += 1;
 
-      if (manager.space && spaceInput == 30) {
-          this.sirenHat = !this.sirenHat;
-          spaceInput = 0;
-      }
-    }
+    //   if (manager.space && spaceInput == 30) {
+    //       this.sirenHat = !this.sirenHat;
+    //       spaceInput = 0;
+    //   }
+    // }
   }
 }

@@ -116,8 +116,7 @@ export class Entity {
       let text = ['Guard: Thank you for saving us!']
 
       if (!player.item || player.item.type != 'siren') {
-        text.push('Please take this siren hat.');
-        text.push('To use it, just hit [spacebar]!');
+        text.push('Please take this siren hat!');
         player.setItem({type: 'siren'});
       }
 
