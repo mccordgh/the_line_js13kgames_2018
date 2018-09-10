@@ -75,7 +75,7 @@ export class WorldStart {
         // g.drawText('ENTER', 187, 538, '#00e436')
         // g.drawText('REVOLUTION !', 465, 555, '#ff77a8')
         g.drawText('GRAB THE KEYS !', 264, 680, '#ffec27')
-        g.drawText('KEYS', 414, 680, '#29adff')
+        // g.drawText('KEYS', 414, 680, '#29adff'
 
     }
 

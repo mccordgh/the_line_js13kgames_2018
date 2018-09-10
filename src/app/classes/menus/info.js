@@ -19,10 +19,9 @@ export class Info {
     let i = 0;
 
     [
-      'Break free of their control!',
       'Find the four keys!',
       'Use them on the machine!',
-      'Press [w] to accept this mission.'
+      'Press [w] to resist!'
     ].forEach(t => {
       g.drawText(t, 100, 100 + (i * 90));
       i++;
