@@ -4,7 +4,6 @@ import { Assets } from '../../gfx/assets';
 export class Grass extends Tile {
   constructor(id) {
     super(id);
-    this.isSolid = false;
     this.assets = Assets.getAssets('all').anim['grassright'];
   }
 

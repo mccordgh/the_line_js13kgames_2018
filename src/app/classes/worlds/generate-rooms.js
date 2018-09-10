@@ -177,6 +177,18 @@ let finalRoom = (rooms) => {
   return rooms;
 }
 
+let addFloors = (rooms) => {
+  for (let r = 0; r < 16; r++) {
+    for (let y = 1; y < 11; y++) {
+      for (let x = 1; x < 11; x++) {
+        if (Math.random() < .3) rooms[r].tileSet[x][y] = 4;
+      }
+    }
+  }
+
+  return rooms;
+}
+
 export default function(_handler, start) {
   handler = _handler;
 
@@ -209,6 +221,7 @@ export default function(_handler, start) {
   rooms = addProps(rooms);
   rooms = addManagers(rooms);
   rooms = finalRoom(rooms);
+  rooms = addFloors(rooms);
 
   return rooms;
 };
