@@ -15,7 +15,7 @@ export class StaticEntity extends Entity {
   tick() {}
 
   render(g) {
-    let frame = this.myFrame();
+    // let frame = this.myFrame();
 
     g.myDrawImage(this.assets[this.myFrame()](), this.x, this.y, TILE_SIZE, TILE_SIZE);
 

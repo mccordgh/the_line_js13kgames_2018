@@ -11,6 +11,9 @@ export default class Key extends StaticEntity {
         this.locked = false;
         this.assets = Assets.getAssets('all').anim[`${this.color}_${this.type}right`];
         this.prop = prop;
+        this.moveR = true;
+        this.moveL = false;
+        this.moveCnt = 0;
 
         this.typePos = {
             p: { x: 4, y: -64 },
@@ -35,6 +38,21 @@ export default class Key extends StaticEntity {
         if (t) {
             this.x = this.target.x + this.xOffset(t, tp);
             this.y = this.target.y + this.yOffset(t, tp);
+        } else {
+           if (this.moveR) this.moveCnt++;
+           if (this.moveL) this.moveCnt--;
+
+           if (this.moveCnt > 5) {
+               this.moveR = false;
+               this.moveL = true;
+           }
+
+           if (this.moveCnt < -5) {
+               this.moveR = true;
+               this.moveL = false;
+           }
+
+           if (this.moveCnt % 2 == 0) this.y += this.moveCnt;
         }
     }
 
@@ -63,4 +81,11 @@ export default class Key extends StaticEntity {
     // getType() {
         // return this.type;
     // }
+    resetMe() {
+        this.x = this.start.x;
+        this.y = this.start.y;
+        this.b.x = 0;
+        this.b.y = 0;
+        this.b.s = TILE_SIZE;
+    }
 }

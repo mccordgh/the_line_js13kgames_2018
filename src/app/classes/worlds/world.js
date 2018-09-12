@@ -96,13 +96,12 @@ export class World {
     this.machineFilled = false;
     p.setBox();
     // console.log(p.item);
-    if (p.item.type) {
+    if (p.item && p.item.type) {
       // console.log('move back', this.room);
       this.room.removeEntity(p.item);
       p.item.target = null;
       this.rooms[p.item.start.room].addEntity(p.item);
-      p.item.x = p.item.start.x;
-      p.item.y = p.item.start.y;
+      p.item.resetMe();
       p.item = null;
       // console.log(p.item);
     }

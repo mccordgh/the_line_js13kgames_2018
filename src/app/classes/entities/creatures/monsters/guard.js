@@ -39,7 +39,7 @@ export class Guard extends Creature {
         this.patrolState(dt);
         break;
       case 2: // 2 = chase
-        this.speed = 140;
+        this.speed = 120;
         this.persue();
         this.checkStuck();
         this.patrol(dt);
@@ -68,7 +68,9 @@ export class Guard extends Creature {
       g.myDrawImage(this.a.anim['sright'].getCurrentFrame(), this.x, this.y - 16, TILE_SIZE, TILE_SIZE);
 
       if (sirenCount++ > 20) {
+        // console.log('guard siren');
         this.sm.play('siren');
+        sirenCount = 0;
       }
     }
 

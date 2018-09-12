@@ -9,8 +9,8 @@ export class Player extends Creature {
     this.item = null;
     this.lastAnim = 'pright';
     this.type = 'p';
-    this.speed = 900;
-    // this.speed = 190;
+    // this.speed = 900;
+    this.speed = 200;
     this.moveThrough = false;
     this.state = 1;
     this.sm = this.handler.getSoundManager();
@@ -49,6 +49,7 @@ export class Player extends Creature {
           g.myDrawImage(this.a.anim['sright'].getCurrentFrame(), this.x, this.y - 16, TILE_SIZE, TILE_SIZE);
 
           if (sirenCount++ > 20) {
+            // console.log('player siren');
             this.sm.play('siren');
             sirenCount = 0;
           }

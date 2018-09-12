@@ -35,7 +35,7 @@ export class Entity {
 
   checkEntityCollisions(xOffset, yOffset) {
     let candidates =  this.handler.getWorld().getSpatialGrid().retrieve(new Rectangle(this.x + this.b.x, this.y + this.b.y, this.b.s, this.b.s), this);
-    // console.log(candidates);
+    // if (candidates.length) console.log(candidates);
     for(let i = 0; i < candidates.length; i++) {
       let e = candidates[i];
 
