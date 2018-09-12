@@ -68,13 +68,13 @@ export class WorldStart {
             blue = #29adff
         */
 
-        g.drawText('Move with WASD or ZQSD !', 126, 538, '#ffec27')
-        g.drawText('WASD', 261, 538, '#ff77a8')
-        g.drawText('ZQSD', 385, 538, '#00e436')
+        g.drawText('Move with WASD or ZQSD !', 210, 548)
+        // g.drawText('WASD', 261, 538, '#ff77a8')
+        // g.drawText('ZQSD', 385, 538, '#00e436')
         // g.drawText('PRESS [ENTER] TO START THE REVOLUTION!', 76, 538, '#ffec27')
         // g.drawText('ENTER', 187, 538, '#00e436')
         // g.drawText('REVOLUTION !', 465, 555, '#ff77a8')
-        g.drawText('GRAB THE KEYS !', 264, 680, '#ffec27')
+        g.drawText('GRAB THE KEYS !', 264, 600)
         // g.drawText('KEYS', 414, 680, '#29adff'
 
     }
