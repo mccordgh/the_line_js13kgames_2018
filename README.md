@@ -1,6 +1,6 @@
 # [The Core](https://mccordgh.github.io/the_line_js13kgames_2018/)
 
-<img src="/the_core_title_screen.mp4" alt="The Core title screen gif">
+<img src="https://media.giphy.com/media/28g04nWnyycn0OkOkf/giphy.gif" alt="The Core title screen gif">
 
 * Written in JavaScript
 
@@ -10,16 +10,18 @@
 
 For a fun surprise, make sure to speak to a guard after you have taken the machine offline :)
 
-## Play The Core:
+## Play The Core now:
 
 * https://mccordgh.github.io/the_line_js13kgames_2018/
 
 ## Download and run locally:
 
-* ```
+```
 1. $ git clone git@github.com:mccordgh/the_line_js13kgames_2018.git
 2. $ npm install
 3. $ npm run start
 4. Navigate to / click the url displayed in the console.
 ```
+
+# Post Mortem
 
